@@ -1,0 +1,619 @@
+\chapter{Preliminares}
+
+En este capítulo se revisarán aspectos básicos del análisis armónico en 
+$\R^n$ y $\T^n$. 
+Se recuerda que $\R^n$ es un grupo aditivo respecto a la suma usual de vectores
+con subgrupo aditivo $\Z^n$. Entonces, se define al toro $n$-dimensional
+como el grupo cociente $\T^n := \R^n/\Z^n = (\R/\Z)^n$. Además, 
+el toro puede ser identificado con el conjunto $[0, 1)^n$ y se le puede considerar
+con la topología cociente. A lo largo de este trabajo, se fijará la
+medida de Lebesgue en $\R^n$. Para cualquier punto 
+$x := (x_1, \ldots, x_n) \in \R^n$, se denotará la norma
+euclideana como 
+\begin{equation*}
+    |x| := \sqrt{x_1^2 + \cdot + x_n^2}.
+\end{equation*}
+Sin embargo, podría ser problemático considerar potencias negativas
+de la norma euclideana, debido a que se desvanece en cero. Por lo que
+se considerará una función que se comporta asintóticamente similar, 
+pero no presenta el mismo problema
+\begin{equation*}
+    \angles{x} := \sqrt{1 + |x|^2}.
+\end{equation*}
+
+\section{Espacios de Lebesgue en $\R^n$ y $\T^n$ }
+
+Sea $\Omega$ un subconjunto medible de $\R^n$. Por simplicidad, se supondrá
+que $\Omega$ es abierto o cerrado.
+
+\begin{definition}
+    Dado $1\leq p < \infty$. Se dice que una función medible $f:\Omega\subset\R^n\rightarrow\C$ se encuentra en $L^p(\Omega)$ si su norma 
+    \begin{equation*}
+        \|f\|_{L^p(\Omega)} := \left( \int_\Omega |f(x)|^p \diff x
+        \right)^{1/p}
+    \end{equation*}
+    es finita. Para el caso $p=\infty$, se dice que $f\in L^\infty(\Omega)$
+    si es esencialmente acotada. Es decir, si
+    \begin{equation*}
+        \|f\|_{L^\infty(\Omega)} := \esssup_{x\in\Omega}|f(x)| < \infty,
+    \end{equation*}
+    donde $\esssup_{x\in\Omega}|f(x)|$ se define como el menor número real $M$
+    tal que es mayor que $|f(x)|$ casi para todo $x\in\Omega$, i.e. excepto fuera de
+    un conjunto de medida cero.
+\end{definition}
+Cabe destacar que en realidad los elementos de los espacios $L^p(\Omega)$
+son clases de equivalencias de funciones iguales casi en todo $x\in\Omega$.
+Sin embargo, es un detalle técnico menor y se acostumbra a tratarles como funciones.
+Además, cuando $\Omega$ sea claro por el contexto, simplemente se denotará
+$\|\cdot\|_{L^p(\Omega)}$ como $\|\cdot\|_{L^p}$. Ahora, se discutirán propiedades 
+importantes de los espacios de Lebesgue.
+
+\begin{proposition}[Desigualdad de Young]
+    Sean $1< p, q< \infty$, tales que $\frac{1}{p} + \frac{1}{q} = 1$.
+    Entonces para todos $a, b > 0$, se tiene que 
+    \begin{equation*}
+        ab \leq \frac{a^p}{p} + \frac{b^q}{q}.
+    \end{equation*}
+    Como consecuencia, para $f\in L^p(\Omega)$ y $g \in L^q(\Omega)$,
+    se tiene que $fg \in L^1(\Omega)$ y 
+    \begin{equation*}
+        \|fg\|_{L^1} \leq \frac{1}{p}\|f\|^p_{L^p} + \frac{1}{q}
+        \|g\|_{L^q}^q.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Esto es consecuencia del hecho que $x\mapsto e^x$ es una función
+    convexa. Entonces
+    \begin{equation*}
+        ab = e^{\ln a + \ln b} = e^{\frac{1}{p}\ln a^p + 
+        \frac{1}{q}\ln b^q} \leq \frac{1}{p}e^{\ln a^p} +
+        \frac{1}{q}e^{\ln b^q} = \frac{a^p}{p} + \frac{b^q}{q}.
+    \end{equation*}
+    Completando así la prueba.
+\end{proof}
+Particularmente cuando $p=2=q$, se tiene la conocida como desigualdad de
+Cauchy. 
+\begin{proposition}[Desigualdad de H\"older]
+    Sean $1\leq p, q\leq \infty$, tales que $\frac{1}{p} + \frac{1}{q} = 1$.
+    Entonces, para $f\in L^p(\Omega)$ y $g\in L^p(\Omega)$, se tiene
+    que $fg \in L^1(\Omega)$ y 
+    \begin{equation*}
+        \|fg\|_{L^1} \leq \|f\|_{L^p}\|g\|_
+        {L^q}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Para el caso $p=1$ o $p=\infty$, el resultado es trivial. Así que 
+    se considerará el caso $1<p<\infty$, que es una aplicación 
+    de la proposición anterior. Primero, se supone
+    que $\|f\|_{L^p} = \|g\|_{L^q} = 1$. Entonces, 
+    se tiene que
+    \begin{equation*}
+        \|fg\|_{L^1} \leq \frac{1}{p}\|f\|_{L^p} + \frac{1}{q}\|g\|_{L^q} 
+        = 1.
+    \end{equation*}
+    Ahora, se nota que si $\|f\|_{L^p}$ o $\|g\|_{L^q}$ se anulan, 
+    entonces se trivializa la desigualdad. 
+    Por lo que se puede considerar el caso más general en el que ninguna de las
+    normas se anula de la siguiente manera
+    \begin{equation*}
+        \left\| \frac{f}{\|f\|_{L^p}} \frac{g}{\|g\|_{L^q}}
+        \right\|_{L^1} \leq 1.
+    \end{equation*}
+    El resultado sigue de la linealidad de la norma $L^1$.
+\end{proof}
+En el caso $p=2=q$ se obtiene la desigualdad de Cauchy-Schwarz.
+
+\begin{proposition}[Desigualdad de Minkowski]
+    Dado $1\leq p\leq\infty$, sean $f,g\in L^p(\Omega)$. Entonces se tiene que
+    \begin{equation*}
+        \|f+g\|_{L^p} \leq \|f\|_{L^p} +
+        \|g\|_{L^p}.
+    \end{equation*}
+    Particularmente, $\|\cdot\|_{L^p}$ satisface la desigualdad triangular
+    y $L^p(\Omega)$ es un espacio normado.
+\end{proposition}
+\begin{proof}
+    Para $p=1$ o $p=\infty$ el resultado se obtiene gracias a la desigualdad
+    triangular del módulo en los números complejos. Ahora, para $1<p<\infty$ 
+    se tiene que
+    \begin{align*}
+        \|f+g\|_{L^p}^p & \leq \int_\Omega |f+g|^{p-1}(|f|+|g|)\diff x\\
+        & = \int_\Omega |f+g|^{p-1}|f| \diff x + 
+        \int_\Omega |f+g|^{p-1}|g| \diff x \\
+        & \leq \left( 
+            \int_\Omega |f+g|^{(p-1) \frac{p}{p-1}} \diff x 
+        \right)^{\frac{p-1}{p}} \left[
+            \left(\int_\Omega |f|^p\diff x\right)^{1/p} +
+            \left(\int_\Omega |g|^p\diff x\right)^{1/p}
+        \right] \\ 
+        & = \|f+g\|_{L^p}^{p-1}(\|f\|_{L^p} + \|g\|_{L^p}).
+    \end{align*}
+    Aquí, la primera desigualdad es la desigualdad triangular de los números
+    complejos y la segunda es la desigualdad de H\"older, por lo que se concluye
+    lo deseado.
+\end{proof}
+
+Ahora se introducen dos resultados importantes y de bastante utilidad. Sin embargo,
+sus demostraciones requieren de herramientas de teoría de la medida o del 
+análisis complejo que se encuentran fuera del alcance de este trabajo. Por lo que
+simplemente se enuncian y se recomienda al lector investigar los detalles.
+
+\begin{proposition}[Monotonía de la norma $L^p$]\label{prop:monotonia-Lp}
+    Sea $f:\Omega_1 \times \Omega_2 \subset\R^n\times\R^n\rightarrow\C$ y 
+    sea $1\leq p\leq\infty$.
+    Se supone que $f(\cdot,y)\in L^p(\Omega_1)$ para casi
+    todo $y$, y que $y\mapsto \|f(\cdot, y)\|_{L^p}$ se encuentra en
+    $L^1(\Omega_2)$. Entonces $f(x, \cdot)\in L^1(\Omega_2)$ para casi
+    todo $x$, la función $x\mapsto \int_{\Omega_2} f(x, y)\diff y$ se encuentra
+    en $L^p(\Omega_1)$, y
+    \begin{equation*}
+        \left\| \int_{\Omega_2} f(\cdot, y)\diff y
+        \right\|_{L^p(\Omega_1)} \leq \int_{\Omega_2} 
+        \|f(\cdot, y)\|_{L^p(\Omega_1)} \diff y.
+    \end{equation*}
+\end{proposition}
+A continuación se presenta un resultado clásico de la interpolación de 
+operadores y espacios de
+funciones. Para una discusión más profunda de estas técnicas, se recomienda 
+revisar Bergh y L\"ofstrom \cite{bergh-lofstrom}.
+\begin{theorem}[Interpolación de Riesz-Thorin]\label{theo:riesz-thorin} 
+    Sea $T:L^{p_0}(\Omega)+L^{p_1}(\Omega) \rightarrow 
+    L^{q_0}(\Omega)+L^{q_1}(\Omega)$ un operador lineal tal que 
+    \begin{equation*}
+        \|Tf\|_{L^{q_0}} \leq M_0 \|f\|_{L^{p_0}}, \quad
+        \|Tf\|_{L^{q_1}} \leq M_1 \|f\|_{L^{p_1}}.
+    \end{equation*}
+    Para cualquier $0<\theta<1$, se definen 
+    \begin{equation*}
+        \frac{1}{p_\theta} = \frac{1-\theta}{p_0} + \frac{\theta}{p_1}, 
+        \quad 
+        \frac{1}{q_\theta} = \frac{1-\theta}{q_0} + \frac{\theta}{q_1}.
+    \end{equation*}
+    Entonces, $T$ extiende a un operador continuo de $L^{p_\theta}(\Omega)$
+    en $L^{q_\theta}(\Omega)$. Además, 
+    \begin{equation*}
+        \|Tf\|_{L^{q_\theta}} \leq M_0^{1-\theta}M_1^\theta \|f\|_{L^{p_\theta}}.
+    \end{equation*}
+\end{theorem}
+Se continúa con el programa de definiciones y propiedades en los espacios 
+de Lebesgue.
+
+\begin{definition}[Convoluciones]
+    Para funciones $f,g\in L^1(\R^n)$ se define su convolución como 
+    \begin{equation*}
+        (f*g)(x) := \int_{\R^n} f(x-y)g(y)\diff y.
+    \end{equation*}
+    Se puede notar que el cambio de variable $y\mapsto x-u$ implica la
+    conmutatividad, es decir $f*g=g*f$.
+\end{definition}
+\begin{remark}
+    En la definición anterior existe la pregunta sobre la convergencia de la
+    integral. Para definir la convolución de forma rigurosa, se podría definir 
+    primero para funciones que cumplan condiciones de regularidad más 
+    fuertes, como las del espacio de Schwartz que se definirá en la siguiente
+    sección, para luego definir el operador $*:L^1\times L^1 \rightarrow L^1$
+    que estaría bien definido gracias a la siguiente propiedad.
+\end{remark}
+
+\begin{proposition}[Desigualdad de Young para convoluciones]
+    Sean $1\leq p,q,r\leq \infty$ tales que $\frac{1}{p} + \frac{1}{q} = 1 + 
+    \frac{1}{r}$, y sean $f \in L^p(\R^n)$, $g\in L^q(\R^n)$. Entonces
+    se tiene que
+    \begin{equation*}
+        \|f*g\|_{L^r} \leq \|f\|_{L^p} \|g\|_{L^q}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Se nota que gracias al teorema~\ref{theo:riesz-thorin} es suficiente 
+    demostrar 
+    \begin{equation}\label{eq:young-convolution-estimates}
+        \|f*g\|_{L^p} \leq \|f\|_{L^p} \|g\|_{L^1}, \quad 
+        \|f*g\|_{L^\infty} \leq \|f\|_{L^p} \|g\|_{L^t},
+    \end{equation}
+    para $\frac{1}{t} + \frac{1}{p} = 1$. En efecto, bastaría con considerar 
+    el operador $f * \cdot$, los parametros
+    \begin{equation*}
+        p_0 = 1, \quad p_1 = t, \quad q_0 = p, \quad q_1 = \infty.
+    \end{equation*}
+    y $\|f\|_{L^p}$ como ambas constantes de estimación.
+    Al aplicar la interpolación
+    \begin{equation*}
+        \frac{1}{r} = \frac{1-\theta}{p} + \frac{\theta}{\infty}, \quad 
+        \frac{1}{q} = \frac{1-\theta}{1} + \frac{\theta}{t},
+    \end{equation*}
+    se obtiene la condición indicada para los parametros $p, q, r$. Ahora, 
+    se procede a demostrar el primer estimativo de
+    ~(\ref{eq:young-convolution-estimates}). Este se obtiene como resultado de
+    la monotonia de la norma $L^p$, véase la proposición~\ref{prop:monotonia-Lp}.
+    En efecto,
+    \begin{align*}
+        \|f*g\|_{L^p} & = \left\| \int_{\R^n} f(\cdot-y)g(y)\diff y 
+        \right\|_{L^p} \\
+        & \leq \int_{\R^n} \|f(\cdot-y)\|_{L^p} |g(y)|\diff y \\
+        & \leq \|f\|_{L^p}\|g\|_{L^1}.
+    \end{align*}
+    Por otra parte, el segundo estimativo es resultado de la desigualdad de 
+    H\"older 
+    \begin{align*}
+        \|f*g\|_{L^\infty} & \leq \int_{\R^n} |f(x-y)||g(y)| \diff y \\
+        & \leq \|f\|_{L^p}\|g\|_{L^t}.
+    \end{align*}
+    Concluyendo con el resultado deseado.
+\end{proof}
+Se concluye esta sección con un resultado importante sobre convergencia en 
+espacios $L^p$
+\begin{theorem}[Convergencia dominanda de Lebesgue]
+    Sea $(f_k)_{k=1}^\infty$ una secuencia de funciones medibles en $\Omega$ 
+    tales que convergen puntualmente a $f$ para casi todo $x\in\Omega$. Se supone
+    que existe $g\in L^1(\Omega)$ tal que $|f_k|\leq g$ para todo $k$. Entonces
+    $f$ es integrable y 
+    \begin{equation*}
+        \int_\Omega f \diff x = \lim_{k\rightarrow\infty} \int_\Omega 
+        f_k \diff x.
+    \end{equation*}
+\end{theorem}
+
+\begin{remark}
+    Una implicación del resultado anterior es el hecho que los espacios $L^p$ son 
+    completos, y por consecuencia son espacios de Banach. Particularmente, el 
+    espacio $L^2$ es un espacio de Hilbert con producto interno dado por
+    \begin{equation*}
+        \angles{f, g}_{L^2} := \int_\Omega f\overline{g}\diff x,
+    \end{equation*}
+    donde $\overline{z}$ es el conjugado en los números complejos.
+\end{remark}
+
+\section{Transformada de Fourier en $\R^n$}
+Ahora, se procede a definir y mostrar propiedades importantes de la
+transformada de Fourier, una herramienta fundamental para el estudio
+de las ecuaciones diferenciales en general y los operadores
+pseudo-diferenciales en particular. 
+
+\begin{definition}[Transformada de Fourier en $\R^n$]
+    Dada $f\in L^1(\R^n)$, se define su transformada de Fourier como 
+    \begin{equation*}
+        (\mathcal{F}_{\R^n}f)(\xi) = \widehat{f}(\xi) := \int_{\R^n}
+        e^{-2\pi i x \cdot \xi} f(x) \diff x,
+    \end{equation*}
+    para cualquier $\xi \in \R^n$.
+\end{definition}
+
+\begin{proposition}
+    La transformada de Fourier es un operador continuo 
+    $\mathcal{F}_{\R^n} : L^1(\R^n) \rightarrow L^\infty(\R^n)$ con norma uno:
+    \begin{equation*}
+        \|\widehat{f}\|_{L^\infty} \leq \|f\|_{L^1}.
+    \end{equation*}
+    Además, $\widehat{f}$ es continua en todas partes. 
+\end{proposition}
+\begin{proof}
+    El estimativo es resultado de la desigualdad de Minkowski para integrales
+    clásica 
+    \begin{align*}
+        \left|
+            \int_{\R^n} e^{-2\pi i x \cdot \xi} f(x) \diff x
+        \right| & \leq 
+        \int_{\R^n} \left|e^{-2\pi i x \cdot \xi}\right|| f(x)| \diff x\\
+        & \leq \|f\|_{L^1}.
+    \end{align*}
+    Ahora, la continuidad es consecuencia del teorema de convergencia dominada
+    de Lebesgue. Para cualquier $\xi_k \rightarrow \xi$ se define 
+    \begin{equation*}
+        h_k(x) :=  e^{-2\pi i x \cdot \xi_k} f(x)
+    \end{equation*}
+    Entonces, se tiene que $|h_k| \leq |f|$ y se obtiene que 
+    \begin{equation*}
+        \int_{\R^n} e^{-2\pi i x \cdot \xi} f(x) \diff x = 
+        \lim_{k\rightarrow\infty}\int_{\R^n} e^{-2\pi i x \cdot \xi_k} f(x) \diff x.
+    \end{equation*} 
+    Que es exactamente $\widehat{f}(\xi) = \lim \widehat{f}(\xi_k)$, el 
+    resultado deseado.
+\end{proof}
+A pesar de que la transformada de Fourier está bien definida en el espacio
+$L^1(\R^n)$, este presenta ciertas limitaciones técnicas debido a los pocos
+requerimientos de regularidad para las funciones en este espacio. Es muy útil
+tener acceso a otras herramientas resultantes de continuidad, diferenciabilidad,
+y decaimiento.
+Por lo tanto, se introduce notación que será importante a lo largo de este trabajo. 
+\begin{definition}[Notación de multi-índice]
+    Para $\alpha:=(\alpha_1, \ldots, \alpha_n), \beta:=(\beta_1, \ldots, \beta_n) 
+    \in \N_0^n$, se define 
+    \begin{equation*}
+        \partial^\alpha := \frac{\partial^{\alpha_1}}{\partial x_1^{\alpha_1}}
+        \cdots \frac{\partial^{\alpha_n}}{\partial x_n^{\alpha_n}}.
+    \end{equation*}
+    De forma similar, $x^\beta := x_1^{\beta_1} \cdots x_n^{\beta_n}$. Se dice 
+    que $\alpha \leq \beta$ si $\alpha_i \leq \beta_i$ para todo $i$. Además, 
+    se denota la longitud del multi-índice como
+    $|\alpha| := \alpha_1 + \cdots \alpha_n$ y su factorial como
+    $\alpha! := \alpha_1! \cdots \alpha_n!$.
+\end{definition}
+
+\begin{definition}[Espacio de Schwartz $\mathcal{S}(\R^n)$]
+    Se dice que una función suave (infinitamente diferenciable) 
+    $\varphi:\R^n\rightarrow\C$ se encuentra en $\mathcal{S}(\R^n)$ si se 
+    cumple que
+    \begin{equation*}
+        \sup_{x\in\R^n}|x^\beta \partial^\alpha \varphi(x)| < \infty, 
+    \end{equation*}
+    para cualesquiera multi-índices $\alpha, \beta \in \N_0^n$. Ahora,
+    se dice que $\varphi_j\rightarrow\varphi$ en $\mathcal{S}(\R^n)$ si
+    \begin{equation*}
+        \sup_{x\in\R^n}|x^\beta \partial^\alpha (\varphi_j-
+        \varphi)(x)| \rightarrow 0, 
+    \end{equation*}
+    cuando $j\rightarrow\infty$ para cualesquiera multi-índices 
+    $\alpha, \beta \in \N_0^n$.
+\end{definition}
+\begin{proposition}
+    Para cualquier $1\leq p\leq\infty$ se tiene que 
+    $\mathcal{S}(\R^n)\subset L^p(\R^n)$ con encaje continuo.
+\end{proposition}
+\begin{proof}
+    El caso $p=\infty$ es trivial, pues las funciones en el espacio de Schwartz
+    son acotadas por definición.
+    Sea $\varphi_j\rightarrow0$ en $\mathcal{S}(\R^n)$, entonces
+    \begin{align*}
+        \int_{\R^n} |\varphi_j(x)|^p \diff x & = 
+        \int_{\R^n} \angles{x}^{pN} |\varphi_j(x)|^p \angles{x}^{-pN} \diff x \\ 
+        & \lesssim \max_{|\beta|\leq N} \sup_{x\in\R^n} 
+        |x^\beta\varphi_j(x)|^p \int_{\R^n}\angles{x}^{-pN} \diff x \\
+        & \rightarrow 0,
+    \end{align*}
+    donde $N\in\N$ se escoge de manera que la última integral converga. 
+\end{proof}
+
+\begin{theorem}
+    Sea $\varphi\in\mathcal{S}(\R^n)$. Entonces $2\pi i\xi_j\widehat{\varphi}(\xi)
+    = \widehat{\partial_j\varphi}(\xi)$ y 
+    $ 2\pi i \widehat{x_j\varphi}(\xi) = - \partial_j\widehat{\varphi}(\xi)$
+\end{theorem}
+\begin{proof}
+    Para la primera expresión se procede por integración por partes
+    \begin{align*}
+        \widehat{\partial_j\varphi}(\xi) & = \int_{\R^n} e^{-2\pi i x\cdot \xi} 
+        \partial_{x_j}\varphi(x) \diff x \\
+        & = - \int_{\R^n} (\partial_{\xi_j} e^{-2\pi i x\cdot \xi}) 
+        \varphi(x) \diff x\\
+        & = 2\pi i \xi_j \int_{\R^n} e^{-2\pi i x\cdot \xi} 
+        \varphi(x) \diff x.
+    \end{align*}
+    Se nota que no aparece el término con la frontera debido a que $\varphi$ 
+    se desvanece en el infinito. Ahora, para la segunda expresión 
+    \begin{equation*}
+        \partial_{\xi_j} \widehat{\varphi}(\xi) = 
+        \int_{\R^n}  e^{-2\pi i x\cdot \xi} (-2\pi i x_j)
+        \varphi(x) \diff x.
+    \end{equation*}
+    Concluyendo la prueba.
+\end{proof}
+Por lo que se puede concluir lo siguiente 
+\begin{corollary}
+    Sea $\varphi\in\mathcal{S}(\R^n)$. Entonces, 
+    \begin{equation*}
+        \xi^\beta \partial^\alpha \widehat{\varphi}(\xi) = 
+        (2\pi i)^{|\alpha|-|\beta|} (-1)^{|\alpha|} \widehat{\partial^\beta 
+        [x^\alpha \varphi]}(\xi).
+    \end{equation*}
+    Por lo que 
+    \begin{align*}
+        |\xi^\beta \partial^\alpha \widehat{\varphi}(\xi)| & \leq 
+        |2\pi i|^{|\alpha|-|\beta|} \int_{\R^n} |\partial^\beta 
+        [x^\alpha \varphi(x)]| \diff x \\
+        & \leq |2\pi i|^{|\alpha|-|\beta|} \sup_{x\in\R^n} 
+        \left|(1+|x|)^{n+1} \partial^\beta 
+        [x^\alpha \varphi(x)]\right| \int_{\R^n} (1+|x|)^{-n-1}\diff x \\
+        & = C \sup_{x\in\R^n} \left|(1+|x|)^{n+1} \partial^\beta 
+        [x^\alpha \varphi(x)]\right| \\
+        & < \infty.
+    \end{align*}
+    Particularmente, $\mathcal{F}_{\R^n}$ mapea $\mathcal{S}(\R^n)$ en sí 
+    mismo. Además, por el teorema de convergencia dominada de Lebesgue, 
+    la transformada de Fourier es un operador continuo.
+\end{corollary}
+En realidad, es un isomorfismo en $\mathcal{S}(\R^n)$. Para ello se demostrarán 
+algunos lemas útiles.
+
+\begin{lemma}[Fórmula de multiplicación para la transformada de Fourier]
+    Sean $f, g \in L^1(\R^n)$. Entonces, $\int_{\R^n}\widehat{f} g \diff x 
+    = \int_{\R^n} f \widehat{g} \diff x$.
+\end{lemma}
+\begin{proof}
+    Aplicando el teorema de Fubini 
+    \begin{align*}
+        \int_{\R^n}\widehat{f} g \diff x & = \int_{\R^n} \left[
+            \int_{\R^n} e^{-2\pi i x\cdot y} f(y) \diff y
+        \right] g(x) \diff x \\
+        & = \int_{\R^n} \left[
+            \int_{\R^n} e^{-2\pi i x\cdot y} g(x) \diff x
+        \right] f(y) \diff y \\ 
+        & = \int_{\R^n} f \widehat{g} \diff y
+    \end{align*}
+    Concluyendo la prueba.
+\end{proof}
+\begin{lemma}[Transformada de Fourier para Gaussiana]
+    Se tiene que
+    \begin{equation*}
+       \int_{\R^n} e^{-2\pi i x \cdot \xi} e^{-\varepsilon\pi^2|x|^2}
+        \diff x = (\pi\varepsilon)^{-n/2} e^{-|\xi|^2/\varepsilon},  
+    \end{equation*}
+    para todo $\varepsilon > 0$. Gracias al cambio de variable 
+    $x \mapsto 2\pi x$ y $\varepsilon \mapsto 2\varepsilon$, esto equivale a
+    \begin{equation*}
+       \int_{\R^n} e^{- i x \cdot \xi} e^{-\varepsilon^2|x|^2/2}
+        \diff x = (2\pi/\varepsilon)^{-n/2} e^{-|\xi|^2/(2\varepsilon)}. 
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    La segunda expresión sigue del caso unidimensional
+    \begin{align*}
+        \int_{-\infty}^{\infty} e^{-it\tau}e^{-t^2/2} \diff t & = 
+        e^{-\tau^2/2} \int_{-\infty}^{\infty} e^{-(t+i\tau)^2/2} \diff t \\
+        & = e^{-\tau^2/2} \int_{-\infty}^{\infty} e^{-t^2/2} \diff t \\
+        & = \sqrt{2\pi} e^{-\tau^2/2}.
+    \end{align*}
+    Con el cambio de variable $t\mapsto\sqrt{\varepsilon}t$ y 
+    $\tau\mapsto\tau/\sqrt{\tau}$ se tiene que 
+    \begin{equation*}
+        \sqrt{\varepsilon}\int_{-\infty}^{\infty} e^{-it\tau}e^{-\varepsilon t^2/2} 
+        \diff t = 
+        \sqrt{2\pi} e^{-\tau^2/(2\varepsilon)}.
+    \end{equation*}
+    El caso multidimensional sigue del producto de las integrales unidimensionales.
+\end{proof}
+\begin{theorem}[Fórmula de inversión de Fourier]
+    La transformada de Fourier es un isomorfismo de $\mathcal{S}(\R^n)$ en si 
+    mismo con inverso dado por 
+    \begin{equation*}
+        (\mathcal{F}^{-1}_{\R^n}f)(x) := \int_{\R^n} e^{2\pi i x \cdot \xi} f(\xi)
+        \diff \xi.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    El teorema de convergencia dominada de Lebesgue permite realizar la 
+    sustitución
+    \begin{align*}
+        (\mathcal{F}^{-1}_{\R^n}\widehat{\varphi})(x) &= 
+        \int_{\R^n}e^{2\pi ix \cdot \xi} \widehat{\varphi}(\xi)\diff \xi
+        = \lim_{\varepsilon\rightarrow0} 
+        \int_{\R^n}e^{2\pi ix \cdot \xi} \widehat{\varphi}(\xi)
+        e^{-2\varepsilon\pi^2|\xi|^2} \diff \xi \\
+        &= \lim_{\varepsilon\rightarrow0} \int_{\R^n}
+        \int_{\R^n}e^{2\pi i(x-y) \cdot \xi} \varphi(y)
+        e^{-2\varepsilon\pi^2|\xi|^2} \diff y \diff \xi.
+    \end{align*}
+    Con el cambio de variable $y \mapsto y+x$ se obtiene que
+    \begin{equation*}
+        (\mathcal{F}^{-1}_{\R^n}\widehat{\varphi})(x) = 
+        \lim_{\varepsilon\rightarrow0} \int_{\R^n}
+        \int_{\R^n}e^{-2\pi iy \cdot \xi} \varphi(y+x)
+        e^{-2\varepsilon\pi^2|\xi|^2} \diff y \diff \xi.
+    \end{equation*}
+    Por el teorema de Fubini y la transformada de Fourier para 
+    Gaussianas se tiene que
+    \begin{align*}
+        (\mathcal{F}^{-1}_{\R^n}\widehat{\varphi})(x) &= 
+        \lim_{\varepsilon\rightarrow0} \int_{\R^n} \varphi(y+x) 
+        \int_{\R^n}e^{-2\pi iy \cdot \xi} 
+        e^{-2\varepsilon\pi^2|\xi|^2}  \diff \xi \diff y \\
+        & = \lim_{\varepsilon\rightarrow0} \int_{\R^n} \varphi(y+x) 
+        (2\pi\varepsilon)^{-n/2} e^{-|y|^2/(2\varepsilon)} \diff y
+    \end{align*}
+    Con un último cambio de variable $y\mapsto\sqrt{\varepsilon}z$
+    se concluye 
+    \begin{align*}
+        (\mathcal{F}^{-1}_{\R^n}\widehat{\varphi})(x) &= 
+        \lim_{\varepsilon\rightarrow0} \int_{\R^n} \varphi(\sqrt{\varepsilon}z+x) 
+        (2\pi)^{-n/2} e^{-|z|^2/2} \diff z \\
+        & = (2\pi)^{-n/2} \varphi(x) \int_{\R^n}e^{-|z|^2/2} \diff z = \varphi(x).
+    \end{align*}
+    Finalizando con la prueba.
+\end{proof}
+El siguiente teorema relaciona la transformada de Fourier con las 
+convoluciones 
+\begin{theorem}
+    Sean $\varphi,\psi\in\mathcal{S}(\R^n)$ entonces se cumple que 
+    $\widehat{\varphi*\psi}(\xi) = \widehat{\varphi}(\xi) 
+    \widehat{\psi}(\xi)$ y que 
+    $\widehat{\varphi\psi}(\xi) = (\widehat{\varphi} * 
+    \widehat{\psi})(\xi)$.
+\end{theorem}
+\begin{proof}
+    Para la primera expresión se tiene que 
+    \begin{align*}
+        \widehat{\varphi*\psi}(\xi) &= 
+        \int_{\R^n} e^{-2\pi i x\cdot\xi} (\varphi*\psi)(x)\diff x \\
+        & = \int_{\R^n} \int_{\R^n} e^{-2\pi i (x-y)\cdot\xi} 
+        \varphi(x-y)e^{-2\pi i y\cdot\xi} \psi(y) \diff y \diff x \\
+        & = \int_{\R^n} \int_{\R^n} e^{-2\pi i z\cdot\xi} 
+        \varphi(z)e^{-2\pi i y\cdot\xi} \psi(y) \diff y \diff z \\
+        & = \widehat{\varphi}(\xi)\widehat{\psi}(\xi).
+    \end{align*}
+    Ahora, para la segunda expresión 
+    \begin{align*}
+        (\widehat{\varphi} * \widehat{\psi})(\xi) & = 
+        \int_{\R^n} \widehat{\varphi}(\xi - y) \widehat{\psi}(y) \diff y \\
+        & = \int_{\R^n} \int_{\R^n} e^{-2\pi i x\cdot(\xi - y)} \varphi(x)
+        \widehat{\psi}(y) \diff x \diff y \\ 
+        & = \int_{\R^n} \left[\int_{\R^n}  e^{2\pi i x\cdot y}\widehat{\psi}(y) 
+        \diff y\right] e^{-2\pi i x\cdot\xi} \varphi(x) \diff x \\
+        &= \int_{\R^n} e^{-2\pi i x\cdot\xi} \varphi(x) \psi(x) \diff x = 
+        \widehat{\varphi\psi}(\xi).
+    \end{align*}
+    Completando la prueba.
+\end{proof}
+
+\section{Transformada de Fourier en $\T^n$}
+TODO TODO
+
+\section{Distribuciones y espacios de Sobolev en $\R^n$}
+En esta sección se inicia introduciendo el espacio de distribuciones templadas
+que permite extender la transformada de Fourier a un espacio más general 
+que $L^1(\R^n)$.
+\begin{definition}[Distribuciones templadas $\mathcal{S}'(\R^n)$]
+    Se define el \textit{espacio de distribuciones templadas} como 
+    el espacio de funcionales lineales continuos 
+    $u:\mathcal{S}(\R^n)\rightarrow\C$. 
+    En este caso, se entiende la continuidad en el sentido que si 
+    $\varphi_j\rightarrow\varphi$ en $\mathcal{S}(\R^n)$, entonces se tiene
+    que $u(\varphi_j) \rightarrow u(\varphi)$ en $\C$. Además, se dice que 
+    $u_j\rightarrow u$ en $\mathcal{S}'(\R^n)$ si 
+    $u_j(\varphi)\rightarrow u(\varphi)$ para todo $\varphi\in \mathcal{S}(\R^n)$.
+\end{definition}
+Las funciones en $\mathcal{S}(\R^n)$ se les conoce como las funciones de prueba
+del espacio de distribuciones templadas. Otra notación usual para $u(\varphi)$
+es $\angles{u,\varphi}$.
+\begin{remark}[Funciones como distribuciones]
+    Se puede considerar a $f\in L^p(\R^n)$ como una distribución templada. Se 
+    define el funcional $u_f$ de la siguiente manera
+    \begin{equation*}
+        \angles{u_f, \varphi} := \int_{\R^n} f\varphi \diff x.
+    \end{equation*}
+    Claramente es un funcional lineal. La continuidad es resultado de la
+    desigualdad de H\"older y el encaje continuo de las funciones de prueba
+    en el espacio $L^q$. En efecto, para $\varphi_j\rightarrow\varphi$ en 
+    $\mathcal{S}(\R^n)$ se tiene que
+    \begin{equation*}
+        |\angles{u_f, \varphi_j} - \angles{u_f, \varphi}| \leq 
+        \|f\|_{L^p}\|\varphi_j - \varphi\|_{L^q}.
+    \end{equation*}
+    Por simplicidad se denota $\angles{u_f, \varphi} = \angles{f, \varphi}$.
+\end{remark}
+Particularmente, para $\varphi\in\mathcal{S}(\R^n)$, se puede motivar la 
+definición de distintas propiedades de distribuciones mediante la manipulación 
+del funcional $u_\varphi$ mencionado anteriormente. Por ejemplo, en vista de
+la integración por partes tenemos que 
+\begin{equation*}
+    \angles{\partial_j\varphi, \psi} = \int_{\R^n} (\partial_j\varphi) \psi\diff x
+    = - \int_{\R^n} \varphi(\partial_j \psi)\diff x = - \angles{\varphi,\partial_j
+    \psi}.
+\end{equation*}
+Por lo que definimos la derivada en el sentido de distribuciones de la 
+siguiente manera
+\begin{definition}[Derivada distribucional]
+    
+\end{definition}
+
+\section{Distribuciones y espacios de Sobolev en $\R^n$}
+TODO TODO
+
+\section{Espacios de Hardy en $\R^n$ y $\T^n$}
+TODO TODO
+
+
+\chapter{Operadores pseudo-diferenciales}
+
+\section{Definición y propiedades básicas en $\R^n$}
+TODO TODO
+
+\section{Definición y propiedades básicas en $\T^n$}
+TODO TODO
+
+\chapter{Continuidad de operadores pseudo-diferenciales}
+
+\section{Continuidad en espacios de Lebesgue}
+TODO TODO
+
+\section{Continuidad en espacios de Sobolev}
+TODO TODO
