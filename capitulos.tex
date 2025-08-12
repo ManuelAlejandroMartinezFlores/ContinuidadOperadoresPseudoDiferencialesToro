@@ -241,7 +241,7 @@ de Lebesgue.
     \end{align*}
     Concluyendo con el resultado deseado.
 \end{proof}
-Se concluye esta sección con un resultado importante sobre convergencia en 
+Se continua con un resultado importante sobre convergencia en 
 espacios $L^p$
 \begin{theorem}[Convergencia dominanda de Lebesgue]
     Sea $(f_k)_{k=1}^\infty$ una secuencia de funciones medibles en $\Omega$ 
@@ -263,7 +263,21 @@ espacios $L^p$
     \end{equation*}
     donde $\overline{z}$ es el conjugado en los números complejos.
 \end{remark}
-
+Se concluye esta sección con la definición de la versión local de los espacios de Lebesgue. Para ello se necesita el siguiente espacio de funciones.
+\begin{definition}[Funciones suaves de soporte compacto]
+		Se dice que $\varphi:\Omega\subset\R^n\rightarrow\C$ es suave si es de clase $C^\infty$, o infinitamente diferenciable.  Se define su soporte como 
+		\begin{equation*}
+			\supp \varphi = \overline{\{x\in\Omega:\varphi(x)\neq 0\}}.
+		\end{equation*}
+		Si $\supp \varphi$ es compacto, se dice que $f\in\C^\infty_0(\Omega)$.
+\end{definition}
+\begin{definition}[Localización de espacios de Lebesgue]
+	Se dice que una función medible $f:\Omega\subset\R^n\rightarrow\C$ es localmente integrable o pertenece a $L^{p}_{loc}(\Omega)$, con $1\leq p\leq\infty$ si 
+	\begin{equation*}
+		\|f\varphi\|_{L^p} < \infty,
+	\end{equation*} 
+	para todo $\varphi\in C^\infty_0(\Omega)$.
+\end{definition}
 \section{Transformada de Fourier en $\R^n$}
 Ahora, se procede a definir y mostrar propiedades importantes de la
 transformada de Fourier, una herramienta fundamental para el estudio
@@ -592,10 +606,96 @@ la integración por partes tenemos que
 Por lo que definimos la derivada en el sentido de distribuciones de la 
 siguiente manera
 \begin{definition}[Derivada distribucional]
-    
+    Para $u\in\mathcal{S}'(\R^n)$ se define
+    \begin{equation*}
+    	\angles{\partial^\alpha u, \varphi} := (-1)^{|\alpha|} \angles{u, \partial^\alpha\varphi},
+    \end{equation*}
+    para cualquier función de prueba $\varphi$ y cualquier multi-índice $\alpha\in\N_0^n$. 
 \end{definition}
+\begin{example}
+	Considere la función Heaviside, o escalón, dada por
+	\begin{equation*}
+		H(x) := \begin{cases} 0, &  x <0 \\
+			1,  &x \geq 0\end{cases}.
+	\end{equation*}
+	Es claro que representa una distribución templada, así que se calcula su derivada distribucional
+	\begin{align*}
+		\angles{\partial H, \varphi} = - \int_\R H\partial\varphi\diff x  = -\int_0^\infty \partial\varphi\diff x \ = -\varphi|_0^\infty  = \varphi(0) =: \angles{\delta, \varphi}.
+	\end{align*}
+	Donde $\delta$ es el funcional conocido como la delta de Dirac. Por lo que se tiene que en el sentido de distribuciónes que $\partial H = \delta$.
+\end{example}
+Por otra parte, la fórmula de multiplicación de Fourier motiva la definición de la transformada de Fourier para distribuciones.
+\begin{definition}[Transformada de Fourier para distribuciones]
+	Para $u\in\mathcal{S}'(\R^n)$ se define 
+	\begin{equation*}
+		\angles{\mathcal{F}u, \varphi} := \angles{u, \mathcal{F}\varphi}, \quad 
+		\angles{\mathcal{F}^{-1}u, \varphi} := \angles{u, \mathcal{F}^{-1}\varphi},
+	\end{equation*}
+	para cualquier función de prueba $\varphi$.
+\end{definition}
+\begin{example}
+	Considere la distribución de la delta de Dirac dada por $\angles{\delta, \varphi} := \varphi(0)$.  Se calcula su transformada de Fourier de la siguiente manera
+	\begin{equation*}
+		\angles{\mathcal{F}\delta, \varphi} = \angles{\delta, \widehat{\varphi}} = \widehat{\varphi}(0) = \int_\R \varphi\diff x = \angles{1, \varphi}.
+	\end{equation*}
+	Por lo que en el sentido de distribuiciones se tiene que $\widehat{\delta} = 1$ la función constante, que es acotada y por tanto una distribución. También se puede demostrar que $\widehat{1}  = \delta$. En efecto 
+	\begin{equation*}
+		\angles{\mathcal{F}(1), \varphi} = \int_\R \widehat{\varphi} \diff x = 
+		\mathcal{F}^{-1}(\widehat{\varphi})(0) = \varphi(0)  = \angles{\delta, \varphi}.
+	\end{equation*}
+\end{example}
+\begin{definition}[Espacios de Sobolev]
+	Sea $1\leq p \leq\infty$ y sea $k\in\N_0$. El \textit{espacio de Sobolev} $W^k_p(\Omega)$ consiste de todas las funciones $f\in L^p(\Omega)$ tales que para cualquier multi-índice $|\alpha|\leq k$ se tiene que $\partial^\alpha f$ existe (en el sentido de distribuciones) y pertenece a $L^p(\Omega)$. Para tales funciones se define 
+	\begin{equation*}
+		\|f\|_{W^k_p(\Omega)} := \left( \sum_{|\alpha|\leq k} \|\partial^\alpha f\|_{L^p}^p
+		\right)^{1/p},
+	\end{equation*}
+	para $1\leq p <\infty$. Para $p=\infty$ se define como 
+	\begin{equation*}
+		\|f\|_{W^k_\infty(\Omega)} := \max_{|\alpha|\leq k} \|\partial^\alpha f\|_{L^\infty}.
+	\end{equation*}
+\end{definition}
+\begin{remark}
+	Se advierte al lector que existen otras notaciones disponibles en la literatura.  Por ejemplo $L^p_k$, o $W^{p,k}$. Además, cuando $p=2$, se suele denotar como $H^k$.
+\end{remark}
+\begin{theorem} 
+	Sea $f, g \in W^k_p(\Omega)$ y sea $\alpha$ un multi-índice con $|\alpha|\leq k$, entonces se tiene que 
+	\begin{enumerate}
+		\item $\partial^\alpha f \in W^{k-|\alpha|}_p$ y que $\partial^{\alpha}(\partial^{\beta}f) = \partial^{\alpha+\beta} f = \partial^{\beta}(\partial^{\alpha}f)$, para todos multi-índices que satisfacen  $|\alpha|+|\beta| \leq k$,
+		\item $\lambda f + \mu g \in W^k_p$ y $\partial^\alpha(\lambda f + \mu g) = \lambda\partial^\alpha f + \mu\partial^\alpha g$, para cualesquiera $\lambda, \mu\in \C$,
+		\item $\|\cdot\|_{W^k_p}$ es una norma,
+		\item $W^k_p(\Omega)$ es un espacio de Banach.
+	\end{enumerate}  
+\end{theorem}
+\begin{proof}
+	Los primeros dos incisos son resultado de la definición de derivada en el sentido de distribuciones. En efecto, para $(1)$ se tiene que 
+	\begin{equation*}
+		\angles{\partial^\alpha(\partial^\beta f), \varphi} = 
+		(-1)^{|\alpha|} = \angles{\partial^\beta f, \partial^\alpha\varphi} =
+		(-1)^{|\alpha| + |\beta|} \angles{f, \partial^{\alpha+\beta}\varphi}. 
+	\end{equation*}
+	El otro caso es análogo. El inciso $(2)$ es resultado de la linealidad de $\angles{\cdot, \varphi}$.  Para el inciso $(3)$ es claro que $\|\lambda f\|_{W^k_p} = |\lambda|\|f\|_{W^k_p}$ por lo anterior, y que $|f\|_{W^k_p} = 0$ si y solo si $f$ se anula en casi todas partes. La desigualdad triangular para $p=\infty$ es trivial, para el caso $1\leq p<\infty$ se tiene que 
+	\begin{align*}
+		\|f+g\|_{W^k_p} &= \left(\sum_{|\alpha|\leq k} \|\partial^\alpha f + \partial^\alpha g\|_{L^p}^p
+		\right)^{1/p} \\ 
+		& \leq \left(\sum_{|\alpha|\leq k} (\|\partial^\alpha f\|_{L^p} +  \|\partial^\alpha g\|_{L^p})^p
+		\right)^{1/p} \\
+		& \leq \left(\sum_{|\alpha|\leq k} \|\partial^\alpha f\|_{L^p}^p
+		\right)^{1/p} + \left(\sum_{|\alpha|\leq k} \|\partial^\alpha g\|_{L^p}^p
+		\right)^{1/p} \\
+		& = \|f\|_{W^k_p} + \|g\|_{W^k_p}.
+	\end{align*}
+	Para el inciso $(4)$ se toma una sucesión de Cauchy $f_j$ en $W^k_p$. Entonces, $\partial^\alpha f_j$ es una sucesión de Cauchy en $L^p$ para todo $|\alpha|\leq k$. Como $L^p$ es completo, se tiene que $\partial^\alpha f_j$ converge a algún $g_\alpha$ en $L^p$. Entonces, se tiene que
+	\begin{align*}
+		\angles{\partial^\alpha g_0, \varphi}& = (-1)^{|\alpha|}  \angles{g_0, \partial^\alpha \varphi} \\
+		& = \lim_{j\rightarrow\infty}(-1)^{|\alpha|} \angles{f_j, \partial^\alpha \varphi} \\
+		& =  \lim_{j\rightarrow\infty}\angles{\partial^\alpha f_j, \varphi} \\
+		& = \angles{g_\alpha, \varphi}.
+	\end{align*} 
+	Por lo que $\partial^\alpha g_0 = g_\alpha$ y $f_j \rightarrow g_0$ en $W^k_p$.
+\end{proof}
 
-\section{Distribuciones y espacios de Sobolev en $\R^n$}
+\section{Distribuciones y espacios de Sobolev en $\T^n$}
 TODO TODO
 
 \section{Espacios de Hardy en $\R^n$ y $\T^n$}
@@ -605,8 +705,26 @@ TODO TODO
 \chapter{Operadores pseudo-diferenciales}
 
 \section{Definición y propiedades básicas en $\R^n$}
-TODO TODO
-
+\begin{definition}[Clases de símbolos de Hörmander $S^m_{\rho,\delta}(\R^n\times\R^n)$]
+	Sean $0\leq\delta,\rho\leq1$. Se dice que $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$ si $a:=(x,\xi)$ es suave en $\R^n\times\R^n$ y cumple que
+	\begin{equation*}
+		|\partial^\beta_x\partial^\alpha_\xi a(x, \xi)| \leq C_{\alpha\beta}\angles{\xi}^{m-\rho|\alpha|+\delta|\beta|},
+	\end{equation*}
+	para cualesquiera multi-índices $\alpha,\beta$. Se dice que estos símbolos tienen orden $m\in\R$.
+\end{definition}
+\begin{definition}
+	Sean $0\leq\delta,\rho\leq1$ y sea $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$. El operador pseudo-diferencial con símbolo $a:=a(x,\xi)$ se define como
+	\begin{equation*}
+		T_af(x):= \int_{\R^n} e^{2\pi ix\cdot\xi} a(x, \xi)\widehat{f}(\xi)\diff \xi,
+	\end{equation*}
+	donde $f\in\mathcal{S}(\R^n)$. La clase de operadores pseudo-diferenciales con símbolos en $S^m_{\rho,\delta}(\R^n\times\R^n)$ se denotan por $\Psi^m_{\rho,\delta}(\R^n\times\R^n)$.
+\end{definition}
+\begin{example}[Operadores diferenciales]
+	Sea $P:=\sum_{|\alpha|\leq m} a_\alpha(x)\partial^\alpha_x$ un operador de derivadas parciales. Entonces, al considerarle como un operador pseudo-diferencial se tiene que su símbolo es simplemente su polinomio característico $p(x,\xi) = \sum_{|\alpha|\leq m} a_\alpha(x)(2\pi i\xi)^\alpha$. Si las funciones coeficientes $a_\alpha$ son continuas, este símbolo pertenece a la clase de Hörmander de orden $m$.
+\end{example}
+\begin{remark}[Kernel de un operador pseudo-diferencial]
+		
+\end{remark}
 \section{Definición y propiedades básicas en $\T^n$}
 TODO TODO
 
