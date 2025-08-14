@@ -20,7 +20,7 @@ pero no presenta el mismo problema
 \begin{equation*}
     \angles{x} := \sqrt{1 + |x|^2}.
 \end{equation*}
-
+Si se tiene que existe una constante $C>0$ tal que $A\leq CB$, se dice que $A\lesssim B$. Si además, $C$ depende de algún parámetro $\alpha$, se denota $A\lesssim_\alpha B$.
 \section{Espacios de Lebesgue en $\R^n$ y $\T^n$ }
 
 Sea $\Omega$ un subconjunto medible de $\R^n$. Por simplicidad, se supondrá
@@ -708,7 +708,7 @@ TODO TODO
 \begin{definition}[Clases de símbolos de Hörmander $S^m_{\rho,\delta}(\R^n\times\R^n)$]
 	Sean $0\leq\delta,\rho\leq1$. Se dice que $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$ si $a:=(x,\xi)$ es suave en $\R^n\times\R^n$ y cumple que
 	\begin{equation*}
-		|\partial^\beta_x\partial^\alpha_\xi a(x, \xi)| \leq C_{\alpha\beta}\angles{\xi}^{m-\rho|\alpha|+\delta|\beta|},
+		|\partial^\beta_x\partial^\alpha_\xi a(x, \xi)| \lesssim_{\alpha\beta}\angles{\xi}^{m-\rho|\alpha|+\delta|\beta|},
 	\end{equation*}
 	para cualesquiera multi-índices $\alpha,\beta$. Se dice que estos símbolos tienen orden $m\in\R$.
 \end{definition}
@@ -719,11 +719,142 @@ TODO TODO
 	\end{equation*}
 	donde $f\in\mathcal{S}(\R^n)$. La clase de operadores pseudo-diferenciales con símbolos en $S^m_{\rho,\delta}(\R^n\times\R^n)$ se denotan por $\Psi^m_{\rho,\delta}(\R^n\times\R^n)$.
 \end{definition}
+\begin{proposition}
+	Para $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$ y $f\in\mathcal{S}(\R^n)$ se tiene que $T_af\in\mathcal{S}(\R^n)$.
+\end{proposition}
+\begin{proof}
+	Note que como $\widehat{f}\in\mathcal{S}(\R^n)$, se tiene que 
+	\[|\partial^\beta_xa(x, \xi)\widehat{f}(\xi)|\lesssim \angles{\xi}^{m+\delta|\beta|}\angles{\xi}^{-N} ,\]
+	para algún $N>0$ apropiado, por lo que todas sus derivadas respecto a $x$ son absolutamente convergentes y se tiene que $T_af\in C^\infty(\R^n)$. Ahora, se define el operador 
+	\begin{equation*}
+		L_\xi := (1 + 4\pi^2|x|^2)^{-1}(I-\mathcal{L}_\xi),
+	\end{equation*}
+	donde $\mathcal{L}_\xi$ es el laplaciano. Note que $ L_\xi(e^{2\pi ix\cdot\xi}) = e^{2\pi ix\cdot \xi} $ y por integracion por partes se tiene que
+	\begin{equation*}
+		T_af(x) = \int_{\R^n} e^{2\pi ix\cdot \xi}L_\xi^N [a(x,\xi)\widehat{f}(\xi)] \diff \xi.
+	\end{equation*}
+	Por lo que $|T_af(x)| \lesssim_N \angles{x}^{-2N}$ para cualquier $N$ y se concluye que $T_af$ decae rapidamente. Este argumento se puede aplicar para cualquiera de sus derivadas y se obtiene que $T_af\in\mathcal{S}(\R^n)$.
+\end{proof}
 \begin{example}[Operadores diferenciales]
 	Sea $P:=\sum_{|\alpha|\leq m} a_\alpha(x)\partial^\alpha_x$ un operador de derivadas parciales. Entonces, al considerarle como un operador pseudo-diferencial se tiene que su símbolo es simplemente su polinomio característico $p(x,\xi) = \sum_{|\alpha|\leq m} a_\alpha(x)(2\pi i\xi)^\alpha$. Si las funciones coeficientes $a_\alpha$ son continuas, este símbolo pertenece a la clase de Hörmander de orden $m$.
 \end{example}
 \begin{remark}[Kernel de un operador pseudo-diferencial]
-		
+		Se puede reescribir la definición de operador pseudo-diferencial de la siguiente manera
+		\begin{align*}
+			T_af(x) & = \int_{\R^n} e^{2\pi ix\cdot\xi} a(x, \xi)\widehat{f}(\xi)\diff \xi\\
+			& = \int_{\R^n} \int_{\R^n} e^{2\pi i (x-y)\cdot\xi}a(x, \xi)f(y) \diff y \diff \xi\\
+			& =\int_{\R^n} k(x, y) f(y)\diff y,
+		\end{align*}
+		donde se define en el sentido de distribuciones al kernel de Schwartz del operador pseudo-diferencial como
+		\begin{equation*}
+			k(x, y) := \int_{\R^n} e^{2\pi i (x-y)\cdot\xi}a(x, \xi) \diff \xi 
+		\end{equation*}
+\end{remark}
+\begin{theorem}[Composición de operadores pseudo-diferenciales]
+	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, sea $a \in S^{m_1}_{\rho,\delta}(\R^n\times\R^n) $ y sea $ b\in S^{m_2}_{\rho,\delta}(\R^n\times\R^n) $. Entonces, existe un símbolo $ c\in S^{m_1+m_2}_{\rho,\delta}(\R^n\times\R^n)$ tal que 
+	$T_c = T_a \circ T_b$. Además, se tiene la fórmula asimptótica 
+	\begin{equation*}
+		c \sim \sum_\alpha \frac{(2\pi i)^{-|\alpha|}}{\alpha!}(\partial^\alpha_\xi a)(\partial^\alpha_x b).
+	\end{equation*}
+	Es decir, para cualquier $N>0$, se tiene que 
+	\begin{equation*}
+		c - \sum_{|\alpha|<N} \frac{(2\pi i)^{-|\alpha|}}{\alpha!}(\partial^\alpha_\xi a)(\partial^\alpha_x b) \in S^{m_1+m_2-\rho N}_{\rho,\delta}(\R^n\times\R^n).
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Fije un $x_0\in\R^n$ y sea $\chi\in C^\infty_0(\R^n)$ tal que $\supp \chi\subset\{x\in\R^n:|x-x_0|\leq 2\}$ y tal que $\chi(x) = 1$ para $|x-x_0|\leq 1$. Realice la descomposición 
+	\begin{equation*}
+		b = \chi b + (1-\chi)b := b_1 + b_2.
+	\end{equation*}
+	Entonces, se tiene que 
+	\begin{align*}
+		(T_a\circ T_{b_1})f(x) &= \int_{\R^n}\int_{\R^n} e^{2\pi i (x-y)\cdot\eta} a(x, \eta)
+		\int_{\R^n}\int_{\R^n} e^{2\pi i(y-z)\cdot\xi}b_1(y, \xi)f(z)\diff z \diff \xi \diff y \diff \eta\\
+		& = \int_{\R^n}\int_{\R^n}  e^{2\pi i (x-z)\cdot\xi} \int_{\R^n}\int_{\R^n} 
+		e^{2\pi i(x-y)\cdot(\eta-\xi)} a(x, \eta)b_1(y, \xi)\diff y \diff \eta f(z) \diff z \diff \xi,
+	\end{align*}
+	donde se aprovecho que $(x-y)\cdot(\eta-\xi) + (x-z)\cdot \xi= (x-y)\cdot\eta + (y-z)\cdot\xi$. Por lo que se define 
+	\begin{align*}
+		c(x, \xi) & :=  \int_{\R^n}\int_{\R^n} 
+		e^{2\pi i(x-y)\cdot(\eta-\xi)} a(x, \eta)b_1(y, \xi)\diff y \diff \eta \\ 
+		&=  \int_{\R^n}\
+		e^{2\pi ix\cdot(\eta-\xi)} a(x, \eta)\widehat{b_1}(\eta-\xi, \xi) \diff \eta \\
+		&=  \int_{\R^n}\
+		e^{2\pi ix\cdot\eta} a(x, \eta+\xi)\widehat{b_1}(\eta, \xi) \diff \eta.
+	\end{align*}
+	Como $b_1$ tiene soporte compacto en $x$, se tiene que $\widehat{b_1}$ es de decaimiento rápido uniformemente en $\xi$ y que 
+	\begin{equation*}
+		|\widehat{b_1}(\eta,\xi)| \lesssim_M \angles{\eta}^{-M}\angles{\xi}^{m_2},
+	\end{equation*}
+	para todo $M\leq0$. La expansión de Taylor en la segunda variable de $a(x,\xi+\eta)$ resulta en 
+	\begin{equation*}
+		a(x, \xi + \eta) = \sum_{|\alpha|<N} \frac{1}{\alpha!} \partial^\alpha_\xi a(x, \xi)\eta^\alpha + R_N(x, \xi, \eta),
+	\end{equation*}
+	donde $R_N$ es un residuo que se discutirá más adelante. Al sustituir esta expresión en la fórmula para $c(x, \xi)$ se obtiene que 
+	\begin{equation*}
+		\int_{\R^n} e^{2\pi i x\cdot\eta}[\partial^\alpha_\xi a(x, \xi)\eta^\alpha]\widehat{b_1}(\eta, \xi) \diff \eta = (2\pi i)^{-|\alpha|} 
+		\partial^\alpha_\xi a(x, \xi) \partial^\alpha_x b_1(x, \xi),
+	\end{equation*}
+	que corresponden a los términos de la expansión asimptótica. Ahora, el símbolo resultante del residuo es 
+	\begin{equation*}
+		\int_{\R^n} e^{2\pi i x\cdot\eta} R_N(x, \xi, \eta) \widehat{b_1}(\eta, \xi) \diff \eta.
+	\end{equation*}
+	Pero, se puede estimar mediante 
+	\begin{equation*}
+		|R_N(x, \xi, \eta)| \lesssim_N |\eta|^N \max\{|\partial^\alpha_\xi a(x, \zeta)| : |\alpha|=N,\, \zeta \text{ interpolación de } \eta \text{ y }\eta+\xi\}.
+	\end{equation*}
+	Note que si $|\eta|\leq|\xi|/2$, entonces cualquier $\zeta$ de la expresión anterior es proporcional a $\xi$, por lo que para este caso se puede estimar
+	\begin{equation*}
+		|R_N(x, \xi, \eta)| \lesssim_N |\eta|^N\angles{\xi}^{m_1-\rho N}.
+	\end{equation*}
+	Por otra parte, si $\rho N\geq m_1$, se tiene la siguiente cota para cualquier caso
+	\begin{equation*}
+		|R_N(x, \xi, \eta)| \lesssim_N |\eta|^N.
+	\end{equation*}
+	Combinando los estimativos y la expresión del residuo del símbolo se obtiene que 
+	\begin{align*}
+		&\left| \int_{\R^n} e^{2\pi i x\cdot\eta} R_N(x, \xi, \eta) \widehat{b_1}(\eta, \xi) \diff \eta \right| \\
+		&\lesssim_{M,N} \angles{\xi}^{m_1+m_2-\rho N} \int_{|\eta|<|\xi|/2} \angles{\eta}^{-M}|\eta|^N\diff\eta + \angles{\xi}^{m_2} \int_{|\eta|\geq|\xi|/2}\angles{\eta}^{-M}|\eta|^N\diff\eta.
+	\end{align*}
+	Al escoger $M$ lo suficientemente grande, se puede estimar el residuo simbólico por $\angles{\xi}^{m_1+m_2-\rho N}$. Ahora, note que $\partial^\alpha_\xi\partial^\beta_x R_N(x, \xi, \eta)$ es el residuo de la expansión de $\partial^\alpha_\xi\partial^\beta_x a(x, \xi+\eta)$. Por lo que un argumento similar resulta en 
+	\begin{equation*}
+		\left|\int_{\R^n} e^{2\pi i x\cdot\eta} [\partial^\alpha_\xi\partial^\beta_x R_N(x, \xi, \eta)]\widehat{b_1}(\eta, \xi) \diff \eta\right| \lesssim_{\alpha\beta} \angles{\xi}^{m_1+m_2- \rho N -\rho|\alpha| + \delta|\beta|}.
+	\end{equation*}
+	Ahora, solo queda demostrar que $T_a\circ T_{b_2}$ tiene símbolo de orden $-\infty$ y no afecta la fórmula asimptótica. Para ello, se utiliza integración por partes para obtener propiedades de regularidad del símbolo restante. Considere el Laplaciano en $\eta$ 
+	\begin{equation*}
+		\Delta_\eta^{N_1} e^{2\pi i(x-y)\cdot(\eta-\xi)} = 
+		(- 4\pi^2|x-y|^2)^{N_1}  e^{2\pi i(x-y)\cdot(\eta-\xi)}.
+	\end{equation*}
+	Y el Laplaciano en $y$,
+	\begin{equation*}
+		(1-\Delta_y)^{N_2} e^{2\pi i(x-y)\cdot(\eta-\xi)}  = 
+		(1+4\pi^2|\xi-\eta|^2)^{N_2} e^{2\pi i(x-y)\cdot(\eta-\xi)}.
+	\end{equation*}
+	Además, se tiene que 
+	\begin{equation*}
+		\angles{\xi-\eta}\angles{\eta} = \sqrt{1 + |\xi-\eta|^2 + |\eta|^2 + |\xi-\eta|^2|\eta|^2} \geq \sqrt{1 + |\xi|^2} = \angles{\xi}.
+	\end{equation*}
+	Combinando estos estimativos y las desigualdades simbólicas se obtiene que
+	\begin{align*}
+		|c_2(x, \xi)| & = \left| \int_{\R^n}\int_{\R^n} 
+		e^{2\pi i(x-y)\cdot(\eta-\xi)} a(x, \eta)b_2(y, \xi)\diff y \diff \eta \right| \\
+		&  = \left| \int_{\R^n}\int_{\R^n} 
+		e^{2\pi i(x-y)\cdot(\eta-\xi)} \frac{\Delta_\xi^{N_1}a(x, \eta)}{(-4\pi^2|x-y|^2)^{N_1}} \frac{(1-\Delta_y)^{N_2}b_2(y, \xi)}{(1+4\pi^2|\xi-\eta|^2)^{N_2}}\diff y \diff \eta \right|  \\
+		& \lesssim \int_{\R^n}\int_{\R^n}  \frac{\angles{\eta}^{m_1-2\rho N_1}}{\angles{x-y}^{2N_1}} \frac{\angles{\xi}^{m_2 + 2\delta N_2}}{\angles{\xi-\eta}^{2N_2}} \diff y \diff \eta \\
+		& \lesssim \int_{\R^n} \angles{\eta}^{m_1-2\rho N_1 + 2N_2} \angles{\xi}^{m_2-2(1-\delta) N_2 } \diff \eta \\
+		& \lesssim \angles{\xi}^{m_2-2(1-\delta) N_2 }, \\
+	\end{align*}
+	donde se escoge $N_1$ tal que $-2\rho N_1 + 2N_2 + m_1 < -n$. Por lo que se puede escoger $N_2$ libremente para obtener la cota deseada. Un argumento análogo funciona para las derivadas de $c_2$, por lo que este pertenece a $S^{-\infty}(\R^n\times\R^n)$.
+\end{proof}
+\begin{definition}[Potencial Bessel]
+	Se define al potencial de Bessel de orden $m\in\R$ al operador pseudo-diferencial con símbolo $\angles{\xi}^m$. Este se denota por $J^m$.
+\end{definition}
+\begin{remark}[Espacios de Sobolev revisitados]
+	Para $s\in\R$ se define el espacio de Sobolev $W^s_p(\Omega)$ como el conjunto de funciones integrables $f$ sobre $\Omega$, tales que 
+	\begin{equation*}
+		\|f\|_{W^s_p} := \|J^s f\|_{L^p} < \infty.
+	\end{equation*}
+	Se tiene que es
 \end{remark}
 \section{Definición y propiedades básicas en $\T^n$}
 TODO TODO
