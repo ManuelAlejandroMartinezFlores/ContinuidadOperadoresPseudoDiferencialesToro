@@ -529,9 +529,10 @@ convoluciones
 \begin{theorem}
     Sean $\varphi,\psi\in\mathcal{S}(\R^n)$ entonces se cumple que 
     $\widehat{\varphi*\psi}(\xi) = \widehat{\varphi}(\xi) 
-    \widehat{\psi}(\xi)$ y que 
+    \widehat{\psi}(\xi)$, que 
     $\widehat{\varphi\psi}(\xi) = (\widehat{\varphi} * 
-    \widehat{\psi})(\xi)$.
+    \widehat{\psi})(\xi)$, y que $\int \varphi\overline{\psi} = \int \widehat{\varphi}\overline{\widehat{\psi}}$.
+    \label{theo:operations-fourier}
 \end{theorem}
 \begin{proof}
     Para la primera expresión se tiene que 
@@ -555,6 +556,10 @@ convoluciones
         &= \int_{\R^n} e^{-2\pi i x\cdot\xi} \varphi(x) \psi(x) \diff x = 
         \widehat{\varphi\psi}(\xi).
     \end{align*}
+    Para la tercera expresión se define $\chi := \overline{\widehat{\psi}}$, entonces
+    \begin{equation*}
+    	\int_{\R^n} \varphi \overline{\psi} = \int_{\R^n} \varphi \widehat{\chi} = \int_{\R^n} \widehat{\varphi}\chi = \int_{\R^n} \widehat{\varphi}\overline{\widehat{\psi}}.
+    \end{equation*}
     Completando la prueba.
 \end{proof}
 
@@ -590,9 +595,12 @@ es $\angles{u,\varphi}$.
     $\mathcal{S}(\R^n)$ se tiene que
     \begin{equation*}
         |\angles{u_f, \varphi_j} - \angles{u_f, \varphi}| \leq 
-        \|f\|_{L^p}\|\varphi_j - \varphi\|_{L^q}.
+        \|f\|_{L^p}\|\varphi_j - \varphi\|_{L^q} \rightarrow 0.
     \end{equation*}
-    Por simplicidad se denota $\angles{u_f, \varphi} = \angles{f, \varphi}$.
+    Por simplicidad se denota $\angles{u_f, \varphi} = \angles{f, \varphi}$. Además, este encaje es continuo, pues si $f_j\rightarrow f$ en $L^p(\R^n)$, se tiene que 
+    \begin{equation*}
+    	|\angles{f_j, \varphi} - \angles{f, \varphi}| \leq \|f_j-f\|_{L^p}\|\varphi\|_{L^q}.
+    \end{equation*}
 \end{remark}
 Particularmente, para $\varphi\in\mathcal{S}(\R^n)$, se puede motivar la 
 definición de distintas propiedades de distribuciones mediante la manipulación 
@@ -644,6 +652,55 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 		\mathcal{F}^{-1}(\widehat{\varphi})(0) = \varphi(0)  = \angles{\delta, \varphi}.
 	\end{equation*}
 \end{example}
+\begin{theorem}
+	La transformada de Fourier $\mathcal{F}$ es continua en $\mathcal{S}'(\R^n)$.
+\end{theorem}
+\begin{proof}
+	Sea $u_j\rightarrow u$ en $\mathcal{S}'(\R^n)$, entonces
+	\begin{equation*}
+		\widehat{u_j}(\varphi) = u_j(\widehat{\varphi}) \rightarrow u(\widehat{\varphi}) = \widehat{u}(\varphi).
+	\end{equation*}
+	Por lo que es un operador continuo.
+\end{proof}
+\begin{lemma}
+	$C^\infty_0(\R^n)$ es secuencialmente denso en $\mathcal{S}(\R^n)$.
+\end{lemma}
+\begin{proof}
+	Sea $\psi\in C^\infty_0(\R^n)$ igual a uno en una vecindad del origen. Entonces se define $\psi_k(x) := \psi(x/k)$ y se puede verificar que $\psi_k\varphi\rightarrow\varphi$ en $\mathcal{S}(\R^n)$.
+\end{proof}
+\begin{theorem}
+	$C^\infty_0(\R^n)$ es secuencialmente denso en $\mathcal{S}'(\R^n)$.
+\end{theorem}
+\begin{proof}
+	Sea $u\in\mathcal{S}'(\R^n)$ y sean $\psi,\psi_k$ como en la demostración anterior. Entonces se define $\angles{\psi u, \varphi} := \angles{u, \psi\varphi}$, y se tiene que $\psi_ku\rightarrow u$ en $\mathcal{S}'(\R^n)$. En efecto, por el lema anterior se tiene que
+	\begin{equation*}
+		\angles{\psi_k u, \varphi} = \angles{u, \psi_k\varphi} \rightarrow \angles{u, \varphi}.
+	\end{equation*}
+	Similarmente, $\psi_k\widehat{u}\rightarrow\widehat{u}$ en $\mathcal{S}'(\R^n)$, lo que implica que $\mathcal{F}^{-1}(\psi_k\widehat{u})\rightarrow u$ en $\mathcal{S}'(\R^n)$ debido a la continuidad de la transformada de Fourier. Entonces, se tiene que 
+	\begin{equation*}
+		u_k := \psi_k [\mathcal{F}^{-1}(\psi_k\widehat{u}) ]\rightarrow u
+	\end{equation*}
+	en $\mathcal{S}'(\R^n)$. Solo queda demostrar $u_k\in\mathcal{S}'(\R^n)$, en el caso general, para cualquier $\chi\in C^\infty_0(\R^n)$, se tiene que 
+	\begin{equation*}
+		\angles{\mathcal{F}^{-1}(\chi \widehat{u}), \varphi}  = 
+		\angles{\widehat{u}, \chi\mathcal{F}^{-1}\varphi} 
+		 = \int_{\R^n} \angles{\widehat{u},\chi(\xi) e^{2\pi i x\cdot\xi}}\varphi(x) \diff x.
+	\end{equation*}
+	Por lo que se puede identificar $\mathcal{F}^{-1}(\chi \widehat{u})(x) = \widehat{u}(\chi(\xi)e^{2\pi ix\cdot\xi})$, que es continua respecto $x$ y que sus derivadas respecto a $x$ tienen soporte compacto respecto a $\xi$, por lo que las derivadas de $\mathcal{F}^{-1}(\chi \widehat{u})(x)$ tienen soporte compacto.
+\end{proof}
+\begin{theorem}[Identidad de Parseval y Plancherel]
+	Para $u,v\in L^2(\R^n) $ se tiene que 
+	\begin{equation*}
+		\int_{\R^n}u\overline{v}\diff x = \int_{\R^n}\widehat{u}\overline{\widehat{v}}\diff \xi.
+	\end{equation*}
+	Particularmente, $\widehat{u}\in L^2(\R^n)$ y 
+	\begin{equation*}
+		\|\widehat{u}\|_{L^2} = \|u\|_{L^2}.
+	\end{equation*} 
+\end{theorem}
+\begin{proof}
+	Sean $u_j, v_j$ secuencias de funciones en $\mathcal{S}(\R^n)$ que convergen respectivamente a $u, v$ en $L^2(\R^n)$. Entonces, se toma el límite en el Teorema \ref{theo:operations-fourier} para obtener el resultado deseado.
+\end{proof}
 \begin{definition}[Espacios de Sobolev]
 	Sea $1\leq p \leq\infty$ y sea $k\in\N_0$. El \textit{espacio de Sobolev} $W^k_p(\Omega)$ consiste de todas las funciones $f\in L^p(\Omega)$ tales que para cualquier multi-índice $|\alpha|\leq k$ se tiene que $\partial^\alpha f$ existe (en el sentido de distribuciones) y pertenece a $L^p(\Omega)$. Para tales funciones se define 
 	\begin{equation*}
@@ -751,14 +808,14 @@ TODO TODO
 		\end{equation*}
 \end{remark}
 \begin{theorem}[Composición de operadores pseudo-diferenciales]
-	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, sea $a \in S^{m_1}_{\rho,\delta}(\R^n\times\R^n) $ y sea $ b\in S^{m_2}_{\rho,\delta}(\R^n\times\R^n) $. Entonces, existe un símbolo $ c\in S^{m_1+m_2}_{\rho,\delta}(\R^n\times\R^n)$ tal que 
+	Sea $0\leq\delta<\rho\leq1$, sea $a \in S^{m_1}_{\rho,\delta}(\R^n\times\R^n) $ y sea $ b\in S^{m_2}_{\rho,\delta}(\R^n\times\R^n) $. Entonces, existe un símbolo $ c\in S^{m_1+m_2}_{\rho,\delta}(\R^n\times\R^n)$ tal que 
 	$T_c = T_a \circ T_b$. Además, se tiene la fórmula asimptótica 
 	\begin{equation*}
 		c \sim \sum_\alpha \frac{(2\pi i)^{-|\alpha|}}{\alpha!}(\partial^\alpha_\xi a)(\partial^\alpha_x b).
 	\end{equation*}
 	Es decir, para cualquier $N>0$, se tiene que 
 	\begin{equation*}
-		c - \sum_{|\alpha|<N} \frac{(2\pi i)^{-|\alpha|}}{\alpha!}(\partial^\alpha_\xi a)(\partial^\alpha_x b) \in S^{m_1+m_2-\rho N}_{\rho,\delta}(\R^n\times\R^n).
+		c - \sum_{|\alpha|<N} \frac{(2\pi i)^{-|\alpha|}}{\alpha!}(\partial^\alpha_\xi a)(\partial^\alpha_x b) \in S^{m_1+m_2-(\rho-\delta) N}_{\rho,\delta}(\R^n\times\R^n).
 	\end{equation*}
 \end{theorem}
 \begin{proof}
@@ -805,7 +862,7 @@ TODO TODO
 	\end{equation*}
 	Note que si $|\eta|\leq|\xi|/2$, entonces cualquier $\zeta$ de la expresión anterior es proporcional a $\xi$, por lo que para este caso se puede estimar
 	\begin{equation*}
-		|R_N(x, \xi, \eta)| \lesssim_N |\eta|^N\angles{\xi}^{m_1-\rho N}.
+		|R_N(x, \xi, \eta)| \lesssim_N |\eta|^N\angles{\xi}^{m_1-(\rho-\delta) N}.
 	\end{equation*}
 	Por otra parte, si $\rho N\geq m_1$, se tiene la siguiente cota para cualquier caso
 	\begin{equation*}
@@ -814,7 +871,7 @@ TODO TODO
 	Combinando los estimativos y la expresión del residuo del símbolo se obtiene que 
 	\begin{align*}
 		&\left| \int_{\R^n} e^{2\pi i x\cdot\eta} R_N(x, \xi, \eta) \widehat{b_1}(\eta, \xi) \diff \eta \right| \\
-		&\lesssim_{M,N} \angles{\xi}^{m_1+m_2-\rho N} \int_{|\eta|<|\xi|/2} \angles{\eta}^{-M}|\eta|^N\diff\eta + \angles{\xi}^{m_2} \int_{|\eta|\geq|\xi|/2}\angles{\eta}^{-M}|\eta|^N\diff\eta.
+		&\lesssim_{M,N} \angles{\xi}^{m_1+m_2-(\rho-\delta) N} \int_{|\eta|<|\xi|/2} \angles{\eta}^{-M}|\eta|^N\diff\eta + \angles{\xi}^{m_2} \int_{|\eta|\geq|\xi|/2}\angles{\eta}^{-M}|\eta|^N\diff\eta.
 	\end{align*}
 	Al escoger $M$ lo suficientemente grande, se puede estimar el residuo simbólico por $\angles{\xi}^{m_1+m_2-\rho N}$. Ahora, note que $\partial^\alpha_\xi\partial^\beta_x R_N(x, \xi, \eta)$ es el residuo de la expansión de $\partial^\alpha_\xi\partial^\beta_x a(x, \xi+\eta)$. Por lo que un argumento similar resulta en 
 	\begin{equation*}
@@ -849,20 +906,33 @@ TODO TODO
 \begin{definition}[Potencial Bessel]
 	Se define al potencial de Bessel de orden $m\in\R$ al operador pseudo-diferencial con símbolo $\angles{\xi}^m$. Este se denota por $J^m$.
 \end{definition}
-\begin{remark}[Espacios de Sobolev revisitados]
-	Para $s\in\R$ se define el espacio de Sobolev $W^s_p(\Omega)$ como el conjunto de funciones integrables $f$ sobre $\Omega$, tales que 
-	\begin{equation*}
-		\|f\|_{W^s_p} := \|J^s f\|_{L^p} < \infty.
-	\end{equation*}
-	Se tiene que es
-\end{remark}
+Se puede ver que la composición con este operador no presenta la restricción $\delta<\rho$.
+\begin{theorem}
+	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, sea $a:=a(x, \xi)\in S^m_{\rho,\delta}(\R^n\times\R^n)$, y sea $b:=b(\xi) \in S^s_{1,\delta}(\R^n\times\R^n)$. Entonces $T_aT_b$ y$T_bT_a$ pertenecen a $S^{m+s}_{\rho,\delta}(\R^n\times\R^n)$. Además, $T_aT_b$ tiene símbolo $a(x, \xi)b(\xi)$.
+\end{theorem}
+\begin{proof}
+	Se tiene que para $T_c = T_aT_b$
+	\begin{align*}
+		c(x, \xi) & :=  \int_{\R^n}\int_{\R^n} 
+		e^{2\pi i(x-y)\cdot(\eta-\xi)} a(x, \eta)b(\xi)\diff y \diff \eta \\ 
+		& =  b(\xi)\int_{\R^n}e^{2\pi i(y-x)\cdot\xi} \widehat{a}(x, y-x)\diff y \\
+		& = b(\xi)a(x, \xi).
+	\end{align*}
+	Para $T_c = T_bT_a$ se puede utilizar la fórmula asintótica de la fórmula de composición. Para manejar el hecho que en este caso se permite $\delta\geq\rho$ para el símbolo $a$, se aprovecha el hecho que 
+	\begin{align*}
+		|\partial^\alpha_\xi b(\xi) \partial^\alpha_x a(x, \xi)| \lesssim \angles{\xi}^{s-|\alpha|} \angles{\xi}^{m+\delta |\alpha|}.
+	\end{align*}
+	Por lo que se tiene el orden deseado en ambos casos.
+\end{proof}
 \section{Definición y propiedades básicas en $\T^n$}
 TODO TODO
 
 \chapter{Continuidad de operadores pseudo-diferenciales}
 
 \section{Continuidad en espacios de Lebesgue}
-TODO TODO
+\begin{theorem}
+	Sea $a\in s^m_{1,0}(\R^n\times\R^n)$, entonces $T_a$ extiende a un operador acotado de $L^2(\R^n)$ en sí mismo.
+\end{theorem}
 
 \section{Continuidad en espacios de Sobolev}
 TODO TODO
