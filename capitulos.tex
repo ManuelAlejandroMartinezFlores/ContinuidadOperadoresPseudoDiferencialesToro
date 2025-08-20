@@ -930,9 +930,119 @@ TODO TODO
 \chapter{Continuidad de operadores pseudo-diferenciales}
 
 \section{Continuidad en espacios de Lebesgue}
-\begin{theorem}
-	Sea $a\in s^m_{1,0}(\R^n\times\R^n)$, entonces $T_a$ extiende a un operador acotado de $L^2(\R^n)$ en sí mismo.
+\begin{theorem}\label{theo:kernel-estimates}
+	Sea $a\in S^m_{\rho,\delta}(\R^n\times\R^n)$, entonces su kernel de Schwartz cumple que 
+	\begin{equation*}
+		|k(x, y)| \lesssim_N |x-y|^{-N},
+	\end{equation*}
+	para $x\neq y$, y para cualquier $N>(m+n)/\rho$. 
 \end{theorem}
+\begin{proof}
+	Con el argumento de integración por partes se tiene que 
+	\begin{align*}
+		(2\pi i)^{|\gamma|} (x-y)^\gamma k(x, y) & = 
+		\int_{\R^n} \partial^\gamma_\xi [e^{2\pi i (x-y)\cdot\xi}]a(x, \xi) \diff \xi \\
+		& = (-1)^{|\gamma|} \int_{\R^n} e^{2\pi i (x-y)\cdot\xi} \partial^\gamma_\xi [a(x, \xi)] \diff \xi.
+	\end{align*}
+	Entonces, si se fija $|\gamma|=N$, se tiene que 
+	\begin{equation*}
+		|x-y|^{-N}|k(x, y)| \lesssim \int_{\R^n} \angles{\xi}^{m-\rho N} \diff \xi,
+	\end{equation*}
+	que es finito cuando $m-\rho N < -n$.
+\end{proof}
+\begin{theorem}\label{theo:L2-boundedness-S0}
+	Sea $a\in S^0_{1,0}(\R^n\times\R^n)$, entonces $T_a$ extiende a un operador acotado de $L^2(\R^n)$ en sí mismo.
+\end{theorem}
+\begin{proof}
+	Primero, suponga que $a:=a(x, \xi)$ tiene soporte compacto respecto a $x$. Además, es suficiente demostrar este enunciado para funciones $f\in\mathcal{S}(\R^n)$ debido a que este es secuencialmente denso en $L^2(\R^n)$ y a un simple argumento analítico. Entonces, se define a la transformada de Fourier de $a$ respecto a $x$ como 
+	\begin{equation*}
+		\widehat{a}(\lambda, \xi) := \mathcal{F}\{a(\cdot, \xi)\}(\lambda).
+	\end{equation*}
+	Ahora, note que para cualquier multi-índice $\alpha\in\N^n_0$ se tiene que 
+	\begin{equation*}
+		(2\pi i\lambda)^\alpha \widehat{a}(\lambda, \xi) = 
+		\int_{\R^n} e^{-2\pi ix\cdot\lambda}\partial^\alpha_x a(x, \xi) \diff x.
+	\end{equation*}
+	Entonces, $|(2\pi i\lambda)^\alpha\widehat{a}(\lambda, \xi)|\leq C_\alpha$ uniformemente en $\xi$. Por otra parte, se tiene que
+	\begin{align*}
+		T_af(x) &= \int_{\R^n} e^{2\pi ix\cdot\xi} \int_{\R^n}e^{2\pi ix\cdot\lambda} 
+		\widehat{a}(\lambda, \xi) \widehat{f}(\xi)\diff \lambda \diff \xi \\
+		& = \int_{\R^n} e^{2\pi ix\cdot\lambda} T_{\widehat{a}} f(x) \diff \lambda.
+	\end{align*}
+	Entonces, gracias a la identidad de Plancherel 
+	\begin{align*}
+		\|T_{\widehat{a}}f\|_{L^2}  &= \|\mathcal{F}(T_{\widehat{a}}f)\|_{L^2} = 
+		\|\widehat{a}(\lambda, \cdot)\widehat{f}\|_{L^2} \\
+		& \leq \sup_{\xi\in\R^n}|\widehat{a}(\lambda, \xi)|\|\widehat{f}\|_{L^2} 
+		\lesssim \angles{\lambda}^{-N}\|f\|_{L^2},
+	\end{align*}
+	para cualquier $N\geq0$. Por lo que
+	\begin{align*}
+		\|T_af\|_{L^2} & \leq \int_{\R^n}\|T_{\widehat{a}}f\|_{L^2} \diff \lambda \\
+		& \lesssim \int_{\R^n}\angles{\lambda}^{-N}\|f\|_{L^2} \diff \lambda \lesssim \|f\|_{L^2},
+	\end{align*}
+	cuando se escoge $N>n$. Ahora, considere el caso en el que el símbolo no necesariamente tiene soporte compacto. Para ello, se fija $x_0=0$ y se descompone $f =f_1+f_2$, donde $f_1$ y $f_2$ son funciones suaves tales que $|f_1|\leq|f|$, $|f_2|\leq|f|$, y que $\supp f_1 \subset \{x\in\R^n:|x|\leq3\}$, $\supp f_2\subset \{x\in\R^n:|x|\geq2\}$. Fije $\eta\in C^\infty_0(\R^n)$ tal que sea igual a uno en la bola unitaria. Entonces 
+	\begin{align*}
+		\int_{\{|x|\leq1\}} |T_af_1(x)|^2 \diff x & = \int_{\R^n} |T_{\eta a}f_1(x)|^2 \diff x \\
+		& \lesssim \int_{\R^n} |f_1(x)|^2 \diff x \\ 
+		& \lesssim \int_{|x|\leq3}|f(x)|^2\diff x. 
+	\end{align*}
+	Ahora, por el Teorema \ref{theo:kernel-estimates}, se tiene que 
+	\begin{equation*}
+		|k(x, y)| \lesssim_N |x-y|^{-N} \lesssim_N |y|^{-N},
+	\end{equation*}
+	dado que $|y|\geq2$ y $|x|\leq1$, que implica que $|x-y|\geq1$. Entonces, se obtiene que
+	\begin{align*}
+		|T_af_2(x)| & \leq \int_{\{|y|\geq2\}} |k(x, y)||f_2(y)|\diff y \\
+		& \lesssim  \int_{\{|y|\geq2\}} \frac{|f_2(y)|}{|y|^N}\diff y \\
+		& \lesssim \int_{\R^n} \frac{|f(y)|}{\angles{y}^N}\diff y \\
+		& \leq \left(\int_{\R^n} \frac{|f(y)|^2}{\angles{y}^N}\diff y\right)^{1/2}
+		\left(\int_{\R^n} \frac{1}{\angles{y}^N}\diff y\right)^{1/2} \\
+		&\lesssim \left(\int_{\R^n} \frac{|f(y)|^2}{\angles{y}^N}\diff y\right)^{1/2},
+	\end{align*}
+	cuando se elige $N>n$. Por lo que se tiene que
+	\begin{equation*}
+		\int_{\{|x|\leq1\}} |T_af_2(x)|^2 \diff x \lesssim \int_{\R^n} \frac{|f(y)|^2}{\angles{y}^N}\diff y.
+	\end{equation*}
+	Note que los estimativos de $f_1$ y $f_2$ solo dependen de la dimensión $n$ y las constantes de las desigualdades simbólicas de $a$. Es decir, no depende de $x_0$, y se puede escribir que 
+	\begin{equation*}
+		\int_{\{|x-x_0|\leq1\}} |T_af(x)|^2 \diff x \lesssim \int_{\R^n} \frac{|f(x)|^2\diff x}{\angles{x-x_0}^N}.
+	\end{equation*}
+	Por lo tanto, si $\chi_A$ es la función característica del conjunto $A$, entonces al integrar respecto a $x_0$ y cambiar el orden de integración se obtiene que
+	\begin{align*}
+		\int_{\R^n} \int_{\R^n} \chi_{\{|x-x_0|\leq1\}} |T_af(x)|^2\diff x \diff x_0 &\lesssim_N \int_{\R^n} \int_{\R^n}  \frac{|f(x)|^2\diff x}{\angles{x-x_0}^N} \diff x_0 \\
+		|B(1)| \int_{\R^n} |T_af(x)|^2\diff x &\lesssim_N \int_{\R^n} |f(x)|^2\diff x.
+	\end{align*}
+	Lo que completa la prueba.
+\end{proof}
+\begin{remark}
+	Los operadores $T\in\Psi^0_{1, 0}(\R^n\times\R^n)$ tienen propiedades que los hacen bastante especiales. En realidad, son ejemplos de los tipos de operadores que dieron inicio a la teoría de operadores integrales singulares de Calderón-Zygmund \cite{calderon-zygmund}. En particular, se puede utilizar esta teoría para concluir que los operadores en $\Psi^0_{1, 0}(\R^n\times\R^n)$ son continuos de $L^p$ en sí mismo, para $1<p<\infty$.
+\end{remark}
 
 \section{Continuidad en espacios de Sobolev}
-TODO TODO
+Primero, se revisita la definición de espacios de Sobolev utilizando los operadores pseudo-diferenciales que han sido definidos en apartados anteriores.
+\begin{definition}[Espacios de Sobolev]
+	Sea $s\in\R$, entonces se dice que $f$ pertenece al \textit{espacio de Sobolev} $W^s_p(\R^n)$, si $J^sf\in L^p(\R^n)$, donde $1\leq p\leq\infty$ y $J^s$ es el potencial de Bessel de orden $s$. Además, se define la norma
+	\begin{equation*}
+		\|f\|_{W^s_p} := \|J^sf\|_{L^p}.
+	\end{equation*} 
+\end{definition}
+Ahora, se extiende el resultado del Teorema \ref{theo:L2-boundedness-S0} para estos espacios. 
+\begin{theorem}
+	Sea $T\in\Psi^m_{1,0}(\R^n\times\R^n)$ sea un operador pesudo-diferencial de orden $m\in\R$. Entonces, el operador $T$ se extiende a un operador continuo desde el espacio de Sobolev $W^{s-m}_2(\R^n)$ hacia $W^s_2(\R^n)$. 
+\end{theorem}
+\begin{proof}
+	Note que $J^{s-m}TJ^{-s}$ es un operador de orden cero, por lo que es continuo en $L^2$, en vista del Teorema \ref{theo:L2-boundedness-S0}. Por lo que se tiene que 
+	\begin{equation*}
+		\|f\|_{W^{s-m}_2} = \|J^{s-m}Tf\|_{L^2} = \|J^{s-m}TJ^{-s}J^sf\|_{L^2} \lesssim \|J^sf\|_{L^2} = \|f\|_{W^s_2}.
+	\end{equation*}
+	Completando la prueba.
+\end{proof}
+Ahora, se demuestra que la definición revisitada de espacios de Sobolev coincide con la definición para regularidad entera que se dio anteriormente. 
+\begin{theorem}
+	El espacio $W^s_p(\R^n)$ coincide con el espacio $W^k_p(\R^n)$ cuando $s=k$ es entero, con equivalencia de normas.
+\end{theorem}
+
+
+
+
