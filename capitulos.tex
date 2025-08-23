@@ -564,7 +564,102 @@ convoluciones
 \end{proof}
 
 \section{Transformada de Fourier en $\T^n$}
-TODO TODO
+Se fija la notación del toro $n$-dimensional como $\T^n:=(\R/\Z)^n = \R^n/\Z^n$. Esta identificación se realiza tanto en el contexto de grupo aditivo cociente como en el de topología cociente. Se suele identificar a $\T^n$ con $[0, 1)^n$ como subconjunto de $\R^n$, y se fija su medida como la restricción de la medida euclideana. Se puede entender una función definida en el toro como una función 1-periodica. Es decir, si $g:\R^n\rightarrow\C$ cumple que $g(x)=g(x+k)$ para cualesquiera $x\in\R^n$ y $k\in\Z^n$, entonces puede identificarse con una función $f:\T^n\rightarrow\C$ definida como $f([x]) = g(x)$, donde $[x]$ es la clase de equivalencia de $x\in\R^n$ en el cociente. No obstante, no es necesario realizar la distinción entre punto y clase de equivalencia y se denotará $x\in\T^n$, de manera similar, se dirá que $f=g$ para los fines de este trabajo. 
+
+\begin{definition}[Espacio de Schwartz $\mathcal{S}(\Z^n)$]
+	Sea $\mathcal{S}(\Z^n)$ el espacio de \textit{funciones de decaimiento rápido} $\varphi:\Z^n\rightarrow\C$ que satisfacen  
+	\begin{equation*}
+		|\varphi(\xi)| \lesssim_M \angles{\xi}^{-M},
+	\end{equation*}
+	en todo $\xi\in\Z^n$, para cualquier $M>0$. La convergencia de este espacio está dada por las seminormas $p_k(\varphi) := \sup_{\xi\in\Z^n}\angles{\xi}^k|\varphi(x)|$.
+\end{definition}  
+\begin{definition}[Transformada de Fourier periodica]\label{def:Fourier-Tn}
+	Sea $\mathcal{F}_{\T^n}:C^\infty(\T^n) \rightarrow\mathcal{S}(\Z^n)$ la \textit{transformada de Fourier periodica} definida por 
+	\begin{equation*}
+		(\mathcal{F}_{\T^n}f)(\xi) = \widehat{f}(\xi) := \int_{\T^n} e^{-i2\pi x\cdot\xi} f(x) \diff x.
+	\end{equation*}
+	Además, se define la transformada de Fourier periodica inversa $\mathcal{F}_{\T^n}^{-1}:\mathcal{S}(\Z^n)\rightarrow C^\infty(\T^n)$, como
+	\begin{equation*}
+		(\mathcal{F}_{\T^n}^{-1}\varphi)(x)  := \sum_{\xi\in\Z^n} e^{i2\pi x\cdot\xi} \varphi(\xi).
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	La definición \ref{def:Fourier-Tn} es válida. Es decir, 
+	\begin{enumerate}
+		\item $\mathcal{F}_{\T^n}C^\infty(\T^n) \subset \mathcal{S}(\Z^n)$,
+		\item $\mathcal{F}_{\T^n}^{-1} \mathcal{S}(\Z^n) \subset C^\infty(\T^n)$,
+		\item $\mathcal{F}_{\T^n} \circ \mathcal{F}_{\T^n}^{-1}$ y $\mathcal{F}_{\T^n}^{-1} \circ \mathcal{F}_{\T^n}$ son la función identidad en $\mathcal{S}(\Z^n)$ y $C^\infty(\T^n)$ respectivamente.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Para la primera parte, se toma $f\in C^\infty(\T^n)$ y $\alpha\in\N_0^n$. Entonces 
+	\begin{align*}
+		(-i2\pi\xi)^\alpha \widehat{f}(\xi) & =  \int_{\T^n}(-i2\pi\xi)^\alpha e^{-i2\pi x\cdot\xi} f(x) \diff x \\ 
+		& =  \int_{\T^n} [\partial^\alpha_xe^{-i2\pi x\cdot\xi} ]f(x) \diff x\\
+		& = (-1)^{|\alpha|}  \int_{\T^n} e^{-i2\pi x\cdot\xi} [\partial^\alpha_xf(x)] \diff x < \infty.
+	\end{align*}
+	Por lo que $|\angles{\xi}^M\widehat{f}(\xi)| < \infty$ para cualquier $M<\infty$, y $\widehat{f}\in\mathcal{S}(\Z^n)$. Para la segunda parte, se toma $\varphi\in\mathcal{S}(\Z^n)$ y se tiene que 
+	\begin{equation*}
+		|\partial^\alpha_x[\mathcal{F}_{\T^n}^{-1}\varphi(x)]| \leq \sum_{\xi\in\Z^n}	\left|   	\partial^\alpha_xe^{i2\pi x\cdot\xi} \varphi(\xi)
+		\right| \lesssim_M \sum_{\xi\in\Z^n} |\xi^\alpha| \angles{\xi}^{-M} < \infty,
+	\end{equation*}
+	 para $M$ lo suficientemente grande. Por lo que $\mathcal{F}_{\T^n}^{-1}\varphi$ es suave. Para la tercera parte, primero se aprovecha la convergencia uniforme para tener que 
+	\begin{align*}
+		[\mathcal{F}_{\T^n} (\mathcal{F}_{\T^n}^{-1}\varphi)](\xi) &=  \int_{\T^n} e^{-i2\pi x\cdot\xi} \sum_{\eta\in\Z^n} e^{i2\pi x\cdot\eta}\varphi(\eta) \diff x \\
+		& =  \sum_{\eta\in\Z^n}\varphi(\eta) \int_{\T^n} e^{i2\pi x\cdot(\eta-\xi)} \diff x \\
+		& = \sum_{\eta\in\Z^n}\varphi(\eta) \delta_{\eta,\xi} = \varphi(\xi).
+	\end{align*}
+	Por otra parte, se tiene que 
+	\begin{align*}
+		[\mathcal{F}_{\T^n}^{-1} (\mathcal{F}_{\T^n}f)](x)  & = \sum_{\xi\in\Z^n} e^{i2\pi x\cdot\xi} \int_{\T^n} e^{-i2\pi y\cdot\xi} f(y)\diff y \\
+		& =  \int_{\T^n} \sum_{\xi\in\Z^n}e^{i2\pi (x-y)\cdot\xi} f(y)\diff y \\
+		& = \lim_{\alpha\to\infty}  \int_{\T^n} \sum_{\xi\leq\alpha} e^{i2\pi y\cdot\xi} f(x-y)\diff y\\
+		& =: \lim_{\alpha\to\infty}  \int_{\T^n} D_\alpha(y)f(x-y)\diff y \\
+		&=: \lim_{\alpha\to\infty}  S_\alpha f(x).
+	\end{align*}
+	A $D_\alpha$ se le conoce como el kernel de Dirichlet y a $S_\alpha$ como el operador de sumas parciales. Se puede trabajar el kernel de Dirichlet para obtener que 
+	\begin{align*}
+		D_\alpha(y) & =  \sum_{\xi\leq\alpha} e^{i2\pi y\cdot\xi}  \\
+		& = \prod_{j=1}^n \sum_{\xi_j=- \alpha_j}^{\alpha_j} e^{i2\pi y_j\xi_j} \\
+		& = \prod_{j=1}^n e^{-i2\pi \alpha_jy_j}\left(\frac{e^{i2\pi(2\alpha_j+1)y_j} - 1}{e^{i2\pi y_j}-1}
+		\right) \\
+		& = \prod_{j=1}^n \frac{\sin(\pi(2\alpha_j+1)y_j)}{\sin(\pi y_j)}.
+	\end{align*}
+	Ahora, se utiliza el método de sumabilidad de Césaro, que indica que el promedio de una sucesión converge al mismo límite que el límite de la sucesión, para definir el kernel de Fejér como
+	 \begin{align*}
+	 	\sigma_Nf(x) & := \frac{1}{(N+1)^n}\sum_{\|\alpha\|_\infty\leq N} S_\alpha f(x)\\
+	 	& = \int_{\T^n} \frac{1}{(N+1)^n}\sum_{\|\alpha\|_\infty\leq N}D_\alpha(y) f(x-y)\diff y \\
+	 	& =: \int_{\T^n} F_N(y) f(x-y)\diff y.
+	 \end{align*}
+	 El kernel de Fejér se puede reescribir notando que $e^{i2\pi y_j\xi_j}$ aparece exactamente $N+1-|\xi_j|$ veces en la sumatoria, obteniendo que
+	 \begin{align*}
+	 	F_N(y) &= \frac{1}{(N+1)^n} \prod_{j=1}^n \sum_{\xi_j=-N}^N (N+1-|\xi_j|)e^{i2\pi y_j\xi_j}\\
+	 	& =  \frac{1}{(N+1)^n} \prod_{j=1}^n \sum_{k=0}^N \sum_{\xi_j=-k}^k e^{i2\pi y_j\xi_j}.
+	 \end{align*}
+	 Ahora, note que tiene una forma similar al kernel de Dirichlet para obtener que
+	 \begin{align*}
+	 	F_N(y) 
+	 	& =\frac{1}{(N+1)^n}  \prod_{j=1}^n \sum_{k=0}^N \frac{\sin(\pi(2k+1)y_j)}{\sin(\pi y_j)} \\
+	 	& = \frac{1}{(N+1)^n}  \prod_{j=1}^n \sum_{k=0}^N \frac{\sin(\pi(2k+1)y_j)\sin(\pi y_j)}{\sin^2(\pi y_j)} \\ 
+	 	& = \frac{1}{2(N+1)^n}  \prod_{j=1}^n\sum_{k=0}^N \frac{\cos(2k\pi y_j) - \cos(2(k+1)\pi y_j)}{\sin^2(\pi y_j)} \\
+	 	& = \frac{1}{2(N+1)^n}  \prod_{j=1}^n \frac{1-\cos(\pi(N+1)y_j)}{\sin^2(\pi y_j)} \\
+	 	& = \frac{1}{(N+1)^n}  \prod_{j=1}^n \left[ \frac{\sin(\pi(N+1)y_j)}{\sin(\pi y_j)}
+	 	\right]^2.
+	 \end{align*}
+	 Este kernel tiene las propiedades que $F_N \geq 0$, que $\int_{\T^n}F_N(y)\diff y=1$, y que para $\delta>0$ se tiene que
+	 \begin{equation*}
+	 	\lim_{N\to\infty}\int_{\delta<|y|} F_N(y) \diff y \leq \lim_{N\to\infty} \frac{1}{(N+1)^n\sin^{2n}(\pi \delta)} =0.
+	 \end{equation*}
+	 Entonces, se puede concluir que 
+	 \begin{align*}
+	 	|\sigma_Nf(x) - f(x)| & \leq \int_{\T^n} |f(y - x) - f(x)| F_N(y) \diff y \\
+	 	& \leq \int_{|y|<\delta} |f(y - x) - f(x)| \diff y +2\|f\|_\infty \int_{\T^n} F_N(y) \diff y \to 0,
+	 \end{align*}
+	 debido a que el primer término puede ser controlado escogiendo $\delta$ lo suficientemente pequeño gracias a la continuidad de $f$, y el segundo termino puede controlarse al escoger $N$ una vez fijado $\delta$. Esta convergencia es uniforme respecto a $x$ debido a la compacidad de $\T^n$. Por lo que se justifica la definición de la transformada de Fourier y su inversa.
+\end{proof}
+\begin{remark}
+	En la demostración anterior se utilizan técnicas de sumabilidad que son frecuentes en el análisis de Fourier. Para mayor detalle sobre estas técnicas y el análisis de Fourier se recomienda al lector revisar Duoandikoetxea \cite{duoandikoetxea}.
+\end{remark}
 
 \section{Distribuciones y espacios de Sobolev en $\R^n$}
 En esta sección se inicia introduciendo el espacio de distribuciones templadas
@@ -573,7 +668,7 @@ que $L^1(\R^n)$.
 \begin{definition}[Distribuciones templadas $\mathcal{S}'(\R^n)$]
     Se define el \textit{espacio de distribuciones templadas} como 
     el espacio de funcionales lineales continuos 
-    $u:\mathcal{S}(\R^n)\rightarrow\C$. 
+    $u:\mathcal{S}(\R^n)\to\C$. 
     En este caso, se entiende la continuidad en el sentido que si 
     $\varphi_j\rightarrow\varphi$ en $\mathcal{S}(\R^n)$, entonces se tiene
     que $u(\varphi_j) \rightarrow u(\varphi)$ en $\C$. Además, se dice que 
@@ -753,7 +848,56 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 \end{proof}
 
 \section{Distribuciones y espacios de Sobolev en $\T^n$}
-TODO TODO
+\begin{theorem}[Distribuciones templadas $\mathcal{S}'(\Z^n)$]
+	Los elementos $u$ del espacio de distribuciones templadas $\mathcal{S}'(\Z^n)$, que consiste de funcionales lineales continuos en $\mathcal{S}(\Z^n)$,  tienen la forma 
+	\begin{equation*}
+		\varphi \mapsto \angles{u, \varphi} := \sum_{\xi\in\Z^n} u(\xi)\varphi(\xi),
+	\end{equation*}
+	y crecen a lo más de forma polinomial.
+\end{theorem} 
+\begin{proof}
+	Note que se puede definir 
+	\begin{equation*}
+		u(\eta) := \angles{u, \delta_\eta},
+	\end{equation*}
+	y como cada $\varphi\in\mathcal{S}'(\Z^n)$ puede ser escrito como 
+	\begin{equation*}
+		\varphi(\xi) = \sum_{\eta\in\Z^n} \varphi(\eta)\delta_\eta(\xi),
+	\end{equation*}
+	entonces se concluye que 
+	\begin{equation*}
+		\angles{u, \varphi} = \left\langle u, \sum_{\eta\in\Z^n}  \varphi(\eta)\delta_\eta \right\rangle = \sum_{\eta\in\Z^n}  \varphi(\eta)\angles{u, \delta_\eta} = \sum_{\eta\in\Z^n}  \varphi(\eta)u(\eta).
+	\end{equation*}
+	Por otra parte, un funcional es continuo en un espacio con contables seminormas si se tiene que 
+	\begin{equation*}
+		|\angles{u, \delta_\xi}| \lesssim p_M(\delta_\xi) \lesssim \angles{\xi}^M,
+	\end{equation*}
+	para algún $M>0$.
+\end{proof}
+\begin{definition}
+	El espacio de \textit{distribuciones periódicas} $\mathcal{D}'(\T^n)$ consiste de los funcionales lineales continuos definidos en $C^\infty(\T^n)$. Note que esto incluye a las funciones $f\in L^p(\T^n)$ con $1\leq p\leq\infty$ definiendo su funcional correspondiente de la siguiente manera
+	\begin{equation*}
+		\angles{f, \varphi} := \int_{\T^n} f\varphi\diff x.
+	\end{equation*}
+	Además, similarmente al caso euclideano, se define la derivada distribucional como a continuación 
+	\begin{equation*}
+		\angles{\partial^\alpha u, \varphi} := (-1)^{|\alpha|}\angles{u, \partial^\alpha\varphi}.
+	\end{equation*}
+\end{definition}
+\begin{definition}
+	Se define la transformada de Fourier periodica en el sentido de distribuciones como un operador $\mathcal{F}_{\T^n}:\mathcal{D}'(\T^n)\to\mathcal{S}'(\Z^n)$ de la siguiente manera
+	\begin{equation*}
+		\angles{\mathcal{F}_{\T^n}u, \varphi} := \angles{u, \imath \circ \mathcal{F}_{\T^n}^{-1}\varphi},
+	\end{equation*}
+	donde $(\imath\circ\psi)(x) = \psi(-x)$. Esta definición es consistente cuando $u\in C^\infty(\T^n)$. En efecto, 
+	\begin{align*}
+		\angles{\widehat{u}, \varphi} &= \sum_{\xi\in\Z^n}\widehat{u}(\xi)\varphi(\xi)\\
+		& = \sum_{\xi\in\Z^n} \varphi(\xi) \int_{\T^n}e^{-i2\pi x\cdot\xi}  u(x) \diff x \\
+		& =\int_{\T^n}  \sum_{\xi\in\Z^n} \varphi(\xi) e^{i2\pi (-x)\cdot\xi}u(x)\diff x \\
+		& = \int_{\T^n} (\mathcal{F}_{\T^n}^{-1}\varphi)(-x) u(x) \diff x = \angles{u, \imath\circ \mathcal{F}_{\T^n}^{-1}\varphi}.
+	\end{align*}
+	Lo que genera el resultado deseado.
+\end{definition}
 
 \section{Espacios de Hardy en $\R^n$ y $\T^n$}
 TODO TODO
@@ -1016,8 +1160,11 @@ TODO TODO
 	Lo que completa la prueba.
 \end{proof}
 \begin{remark}
-	Los operadores $T\in\Psi^0_{1, 0}(\R^n\times\R^n)$ tienen propiedades que los hacen bastante especiales. En realidad, son ejemplos de los tipos de operadores que dieron inicio a la teoría de operadores integrales singulares de Calderón-Zygmund \cite{calderon-zygmund}. En particular, se puede utilizar esta teoría para concluir que los operadores en $\Psi^0_{1, 0}(\R^n\times\R^n)$ son continuos de $L^p$ en sí mismo, para $1<p<\infty$.
+	Los operadores $T\in\Psi^0_{1, 0}(\R^n\times\R^n)$ tienen propiedades que los hacen bastante especiales. En realidad, son ejemplos de los tipos de operadores que dieron inicio a la teoría de operadores integrales singulares de Calderón-Zygmund \cite{calderon-zygmund}. En particular, se puede utilizar esta teoría para concluir que los operadores en $\Psi^0_{1, 0}(\R^n\times\R^n)$ son continuos de $L^p$ en sí mismo, para $1<p<\infty$. Por lo que se enuncia este resultado sin demostración.
 \end{remark}
+\begin{theorem}\label{theo:Lp-boundedness-S0}
+	Sea $T\in\Psi^0_{1, 0}(\R^n\times\R^n)$, entonces $T$ se extiende a un operador acotado de $L^p(\R^n)$ en sí mismo.
+\end{theorem}
 
 \section{Continuidad en espacios de Sobolev}
 Primero, se revisita la definición de espacios de Sobolev utilizando los operadores pseudo-diferenciales que han sido definidos en apartados anteriores.
@@ -1027,14 +1174,14 @@ Primero, se revisita la definición de espacios de Sobolev utilizando los operad
 		\|f\|_{W^s_p} := \|J^sf\|_{L^p}.
 	\end{equation*} 
 \end{definition}
-Ahora, se extiende el resultado del Teorema \ref{theo:L2-boundedness-S0} para estos espacios. 
-\begin{theorem}
-	Sea $T\in\Psi^m_{1,0}(\R^n\times\R^n)$ sea un operador pesudo-diferencial de orden $m\in\R$. Entonces, el operador $T$ se extiende a un operador continuo desde el espacio de Sobolev $W^{s-m}_2(\R^n)$ hacia $W^s_2(\R^n)$. 
+Ahora, se extiende el resultado del Teorema \ref{theo:Lp-boundedness-S0} para estos espacios. 
+\begin{theorem}\label{theo:Sobolev-S0}
+	Sea $T\in\Psi^m_{1,0}(\R^n\times\R^n)$ sea un operador pesudo-diferencial de orden $m\in\R$. Entonces, el operador $T$ se extiende a un operador continuo desde el espacio de Sobolev $W^{s-m}_p(\R^n)$ hacia $W^s_p(\R^n)$. 
 \end{theorem}
 \begin{proof}
-	Note que $J^{s-m}TJ^{-s}$ es un operador de orden cero, por lo que es continuo en $L^2$, en vista del Teorema \ref{theo:L2-boundedness-S0}. Por lo que se tiene que 
+	Note que $J^{s-m}TJ^{-s}$ es un operador de orden cero, por lo que es continuo en $L^p$, en vista del Teorema \ref{theo:Lp-boundedness-S0}. Por lo que se tiene que 
 	\begin{equation*}
-		\|f\|_{W^{s-m}_2} = \|J^{s-m}Tf\|_{L^2} = \|J^{s-m}TJ^{-s}J^sf\|_{L^2} \lesssim \|J^sf\|_{L^2} = \|f\|_{W^s_2}.
+		\|f\|_{W^{s-m}_p} = \|J^{s-m}Tf\|_{L^p} = \|J^{s-m}TJ^{-s}J^sf\|_{L^p} \lesssim \|J^sf\|_{L^p} = \|f\|_{W^s_p}.
 	\end{equation*}
 	Completando la prueba.
 \end{proof}
@@ -1042,6 +1189,26 @@ Ahora, se demuestra que la definición revisitada de espacios de Sobolev coincid
 \begin{theorem}
 	El espacio $W^s_p(\R^n)$ coincide con el espacio $W^k_p(\R^n)$ cuando $s=k$ es entero, con equivalencia de normas.
 \end{theorem}
+\begin{proof}
+	Se utilizará $k$ para simplificar la notación. Para $|\alpha|\leq k$, se tiene que $\partial^\alpha_xJ^{-k}$ es un operador pseudo-diferencial con símbolo $(2\pi i\xi)^\alpha\angles{\xi}^{-k},$ y orden $|\alpha|-k\leq0$. Entonces, por el Teorema \ref{theo:Lp-boundedness-S0} se puede concluir que son acotados en $L^p$, y que
+	\begin{equation*}
+		\sum_{|\alpha|\leq k} \|\partial^\alpha_xf\|_{L^p} = \sum_{|\alpha|\leq k} \|\partial^\alpha_xJ^{-k}J^kf\|_{L^p} \lesssim \|J^kf\|_{L^p} = \|f\|_{W^k_p}.
+	\end{equation*}
+	Por otra parte, se tiene que el operador con símbolo
+	\begin{equation*}
+		\frac{\angles{\xi}^k}{p_k(\xi)}:= \angles{\xi}^k \left(\sum_{|\alpha|\leq k} \xi^\alpha
+		\right)^{-1} \leq C <\infty,
+	\end{equation*}
+	es acotado en $L^p$. Por lo que  
+	\begin{align*}
+		\|f\|_{W^k_p} =\|J^kf\|_{L^p} & = \|J^kT_{p_k}^{-1}T_{p_k} f\|_{L^p} \\
+		& \lesssim \|T_{p_k} f\|_{L^p} \\ 
+		& = \left\|\mathcal{F}^{-1}\left(\sum\xi^\alpha \widehat{f}(\xi)\right)\right\|_{L^p}  \\
+		& \leq \sum \|\mathcal{F}^{-1}(\xi^\alpha\widehat{f}(\xi))\|_{L^p} \\
+		& \lesssim \sum_{|\alpha|\leq k} \|\partial^\alpha_xf\|_{L^p}
+	\end{align*}
+	Lo que completa la prueba de equivalencia de definiciones.
+\end{proof}
 
 
 
