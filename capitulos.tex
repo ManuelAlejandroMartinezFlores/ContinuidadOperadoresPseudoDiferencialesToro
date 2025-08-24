@@ -652,14 +652,52 @@ Se fija la notación del toro $n$-dimensional como $\T^n:=(\R/\Z)^n = \R^n/\Z^n$
 	 \end{equation*}
 	 Entonces, se puede concluir que 
 	 \begin{align*}
-	 	|\sigma_Nf(x) - f(x)| & \leq \int_{\T^n} |f(y - x) - f(x)| F_N(y) \diff y \\
-	 	& \leq \int_{|y|<\delta} |f(y - x) - f(x)| \diff y +2\|f\|_\infty \int_{\T^n} F_N(y) \diff y \to 0,
+	 	|\sigma_Nf(x) - f(x)| & \leq \int_{\T^n} |f(x-y) - f(x)| F_N(y) \diff y \\
+	 	& \leq \int_{|y|<\delta} |f(x-y) - f(x)|F_N(y) \diff y +2\|f\|_\infty \int_{\T^n} F_N(y) \diff y \to 0,
 	 \end{align*}
 	 debido a que el primer término puede ser controlado escogiendo $\delta$ lo suficientemente pequeño gracias a la continuidad de $f$, y el segundo termino puede controlarse al escoger $N$ una vez fijado $\delta$. Esta convergencia es uniforme respecto a $x$ debido a la compacidad de $\T^n$. Por lo que se justifica la definición de la transformada de Fourier y su inversa.
 \end{proof}
 \begin{remark}
-	En la demostración anterior se utilizan técnicas de sumabilidad que son frecuentes en el análisis de Fourier. Para mayor detalle sobre estas técnicas y el análisis de Fourier se recomienda al lector revisar Duoandikoetxea \cite{duoandikoetxea}.
+	En la demostración anterior se utilizan técnicas de sumabilidad que son frecuentes en el análisis de Fourier. Para mayor detalle sobre estas técnicas y el análisis de Fourier se recomienda al lector revisar Duoandikoetxea \cite{duoandikoetxea}. Por otra parte, estas técnicas pueden ser utilizadas para demostrar la convergencia de estas series en la norma $L^p$.
 \end{remark}
+\begin{theorem}
+	La serie de Fourier de $f$ converge a $f$ en la norma $L^p(\T^n)$.
+\end{theorem}
+\begin{proof}
+	Para el operador de Césaro $\sigma_N$ y el kernel de Fejér se tiene que 
+	\begin{align*}
+		\|\sigma_Nf -f\|_{L^p}  & \leq \int_{\T^n} \|f(\cdot-y) - f(\cdot)\|_{L^p} F_N(y) \diff y \\
+		& \leq \int_{|y|<\delta} \|f(\cdot-y) - f(\cdot)\|_{L^p}F_N(y) \diff y +2\|f\|_{L^p} \int_{\T^n} F_N(y) \diff y \to 0,
+	\end{align*}
+	donde, de nuevo, se puede controlar el primer término con $\delta$ y el segundo escogiendo un $N$ apropiado. 
+\end{proof}
+\begin{definition}[Espacios de sucesiones $\ell^p(\mathcal{C})$]
+	El espacio de sucesiones $\ell^p(\mathcal{C})$, para $\mathcal{C}$ un conjunto enumerable, consiste de las funciones $a:\mathcal{C}:\to\C$, tales que 
+	\begin{equation*}
+		\|a\|_{\ell^p} := \left( \sum_{k\in\mathcal{C}}|a_k|^p \right)^{1/p} <\infty.
+	\end{equation*}
+	Generalmente, $\mathcal{C}=\Z^n$.
+\end{definition}
+\begin{theorem}[Identidad de Plancherel]
+	Si $u\in L^2(\T^n)$, entonces $\widehat{u}\in\ell^2(\Z^n)$, y se cumple que 
+	\begin{equation*}
+		\|\widehat{u}\|_{\ell^2} = \|u\|_{L^2}.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Primero, note que 
+	\begin{align*}
+		(u, S_Nu)_{L^2} &= \int_{\T^n} u(x) \overline{\sum_{|\xi|\leq N}\widehat{u}(\xi)e^{i2\pi x\cdot\xi}}\diff x \\
+		& = \sum_{|\xi|\leq N} \overline{\widehat{u}(\xi)} \int_{\T^n} u(x)e^{-i2\pi x\cdot\xi} \diff x \\
+		& = \sum_{|\xi|\leq N} \overline{\widehat{u}(\xi)} \widehat{u}(\xi) = \|\widehat{u}_N\|_{\ell^2}^2.
+	\end{align*}
+	Entonces, se tiene que 
+	\begin{align*}
+		\|u-S_Nu\|_{L^2}^2 & = \|u\|_{L^2}^2 - (u, S_Nu)_{L^2} - (S_Nu, u)_{L^2} + \|S_Nu\|_{L^2}^2 \\
+		& = 2\|u\|_{L^2}^2 - 2\|\widehat{u}_N\|_{\ell^2}^2.
+	\end{align*}
+	Por continuidad de las normas, se obtiene la identidad deseada al hacer $N\to\infty$. 
+\end{proof}
 
 \section{Distribuciones y espacios de Sobolev en $\R^n$}
 En esta sección se inicia introduciendo el espacio de distribuciones templadas
