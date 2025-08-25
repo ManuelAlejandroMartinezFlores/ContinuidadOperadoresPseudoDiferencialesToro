@@ -1121,15 +1121,21 @@ Se puede ver que la composición con este operador no presenta la restricción $
 \section{Definición y propiedades básicas en $\T^n$}
 El cálculo simbólico en el toro $\T^n$ presenta ciertas diferencias respecto al caso euclideano. Gran parte de ellas surgen del hecho que el dominio de frecuencias correspondiente es el retículo $\Z^n$. Por lo que es necesario definir herramientas análogas que funcionen en el caso discreto. 
 \begin{definition}
-	Sea $\varphi:\Z^n\to\C$, entonces se define el operador de diferencia como 
+	Sea $\varphi:\Z^n\to\C$, entonces se definen los operadores de diferencia como 
 	\begin{equation*}
-		\Delta_{\xi_j} \varphi(\xi) := \varphi(\xi + \delta_j) - \varphi(\xi). 
+		\Delta_{\xi_j} \varphi(\xi) := \varphi(\xi + \delta_j) - \varphi(\xi),
+	\end{equation*}
+	\begin{equation*}
+		\overline{\Delta}_{\xi_j} \varphi(\xi) := \varphi(\xi) - \varphi(\xi - \delta_j).
 	\end{equation*}
 	Además, para un multi-índice $\alpha\in\N^n_0$, se define 
 	\begin{equation*}
-		\Delta^\alpha_\xi := \Delta^{\alpha_1}_{\xi_1} \cdots \Delta^{\alpha_n}_{\xi_n} 
+		\Delta^\alpha_\xi := \Delta^{\alpha_1}_{\xi_1} \cdots \Delta^{\alpha_n}_{\xi_n},
 	\end{equation*}
 \end{definition}
+\begin{equation*}
+	\overline{\Delta}^\alpha_\xi := \overline{\Delta}^{\alpha_1}_{\xi_1} \cdots \overline{\Delta}^{\alpha_n}_{\xi_n}.
+\end{equation*}
 \begin{proposition}
 	Sea $\varphi:\Z^n\to\C$, entonces 
 	\begin{equation*}
@@ -1182,6 +1188,24 @@ Note que este operador tiene propiedades análogas a las de la derivada en el ca
 	\end{align*}
 	Lo que concluye la prueba.
 \end{proof}
+\begin{proposition}[Suma por partes]
+	Sean $\varphi,\psi:\Z^n\to\C$. Entonces, se tiene que 
+	\begin{equation*}
+		\sum_{\xi\in\Z^n}\varphi(\xi) [\Delta^\alpha_\xi\psi(\xi)] = (-1)^{|\alpha|}\sum_{\xi\in\Z^n} [\overline{\Delta}^\alpha_\xi\varphi(\xi)]\psi(\xi),
+	\end{equation*}
+	dado que ambas series sean absolutamente convergentes.
+\end{proposition}
+\begin{proof}
+	Para probarlo para un multi-índice arbitrario basta con demostrarlo para los casos base y luego el resultado se obtiene por recursividad. Entonces, se tiene que 
+	\begin{align*}
+		\sum_{\xi\in\Z^n}\varphi(\xi) [\Delta_{\xi_j}\psi(\xi)] & = \sum_{\xi\in\Z^n}\varphi(\xi) [\psi(\xi+\delta_j) - \psi(\xi)] \\
+		& = \sum_{\xi\in\Z^n}\varphi(\xi) \psi(\xi+\delta_j) - \sum_{\xi\in\Z^n}\varphi(\xi) \psi(\xi) \\
+		& = \sum_{\xi\in\Z^n}\varphi(\xi-\delta_j) \psi(\xi) - \sum_{\xi\in\Z^n}\varphi(\xi) \psi(\xi) \\
+		& = \sum_{\xi\in\Z^n}[\varphi(\xi-\delta_j) - \varphi(\xi)]\psi(\xi) \\
+		& = -\sum_{\xi\in\Z^n} [\overline{\Delta}_{\xi_j}\varphi(\xi)]\psi(\xi)
+	\end{align*}
+	Lo que concluye la prueba.
+\end{proof}
 \begin{definition}[Clase de símbolos toroidales $S^m_{\rho, \delta}(\T^n\times\Z^n)$]
 	Sea $m\in\R$, sean $0\leq\delta,\rho\leq1$. Entonces, la \textit{clase de símbolos toroidales} $S^m_{\rho, \delta}(\T^n\times\Z^n)$ consiste de las funciones $a:=a(x, \xi):\T^n\times\Z^n\to\C$ que son suaves en $x$ para todo $\xi$, y que satisfacen las desigualdades simbólicas
 	\begin{equation*}
@@ -1211,15 +1235,126 @@ Note que este operador tiene propiedades análogas a las de la derivada en el ca
 \begin{remark}[Kernel de Schwartz para operadores pseudo-diferenciales toroidales]
 	La definición de $T_af$ para un símbolo toroidal sugiere que puede ser reescrito (ignorando preguntas acerca de convergencia) como 
 	\begin{equation*}
-		T_af(x) = \int_{\T^n} \sum_{\xi\in\Z^n} e^{i2\pi (x-y)\cdot\xi} a(x, \xi) f(y) \diff y =\int_{\T^n} K(x, y)f(y)\diff y,
+		T_af(x) = \int_{\T^n} \sum_{\xi\in\Z^n} e^{i2\pi (x-y)\cdot\xi} a(x, \xi) f(y) \diff y =\int_{\T^n} k(x, y)f(y)\diff y,
 	\end{equation*}
-	donde $K(x, y)$ es el \textit{kernel de Schwartz} que se expresa como 
+	donde $k(x, y)$ es el \textit{kernel de Schwartz} que se expresa como 
 	\begin{equation*}
-		K(x, y) := \sum_{\xi\in\Z^n} e^{i2\pi (x-y)\cdot\xi} a(x, \xi),
+		k(x, y) := \sum_{\xi\in\Z^n} e^{i2\pi (x-y)\cdot\xi} a(x, \xi),
 	\end{equation*}
 	y se entiende en el sentido de distribuciones. 
 \end{remark}
 Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el espacio de frecuencias de símbolos toroidales es el cálculo de diferencias discretas. Sin embargo, puede ser de interés extender las técnicas utilizadas en el análisis de símbolos euclideanos para obtener resultados similares. Para ello, se realiza un proceso conocido como la \textit{extensión del símbolo toroidal}, que consiste en una interpolación suave de un símbolo definido en $\T^n\times\Z^n$ para obtener uno definido en $\T^n\times\R^n$. A continuación se presetnan los detalles de dicho proceso. 
+\begin{lemma}\label{lem:aux-extension}
+	Existen funciones $\phi_\alpha\in\mathcal{S}(\R^n)$, para cada $\alpha\in\N_0^n$, y una función $\theta\in\mathcal{S}(\R^n)$, tales que 
+	\begin{equation*}
+		\mathcal{P}\theta(x) := \sum_{k\in\Z^n}\theta(x+k) = 1,
+	\end{equation*}
+	\begin{equation*}
+		(\mathcal{F}_{\R^n}\theta)|_{\Z^n}(\xi) = \delta_0(\xi) \quad \text{ y } \quad \partial^\alpha_\xi (\mathcal{F}_{\R^n}\theta)(\xi) = \overline{\Delta}^\alpha_\xi \phi_\alpha(\xi),
+	\end{equation*}
+	para todo $\xi\in\Z^n$.
+\end{lemma}
+\begin{proof}
+	Primero, considere el caso unidimensional. Sea $\theta\in C^\infty(\R)$, tal que 
+	\begin{equation*}
+		\supp\theta \subset (-1, 1), \quad \theta(-x) = \theta(x), \theta(1-y) + \theta(y) = 1,
+	\end{equation*}
+	para $x\in\R$ y $0\leq y\leq1$. Note entonces que $\theta\in\mathcal{S}(\R)$, y por lo tanto $\mathcal{F}_{\R}\theta\in\mathcal{S}(\R)$ también. En particular, para $\xi\in\Z$, se tiene que
+	\begin{align*}
+		(\mathcal{F}_{\R}\theta)(\xi) & = \int_\R \theta(x)e^{-i2\pi x\cdot\xi} \diff x\\
+		& = \int_0^1 [\theta(x-1)+\theta(x)]e^{-i2\pi x\cdot\xi} \diff x\\
+		& = \delta_0(\xi).
+	\end{align*}
+	Ahora, si la $\phi_\alpha\in\mathcal{S}(\R)$ deseada existe, entonces debe satisfacer que 
+	\begin{align*}
+		\int_\R e^{i2\pi x\cdot\xi} (\mathcal{F}_\R\theta)(\xi)  \diff \xi & = 
+		\int_\R e^{i2\pi x\cdot\xi} \overline{\Delta}^\alpha_\xi \phi_\alpha(\xi) \diff \xi \\
+		& = (1-e^{i2\pi x})^\alpha  \int_\R e^{i2\pi x\cdot\xi} 
+		\phi_\alpha(\xi) \diff \xi.
+	\end{align*}
+	Por lo que se obtiene la formula 
+	\begin{equation*}
+		(-i2\pi x)^\alpha \theta(x) = (1-e^{i2\pi x})^\alpha (\mathcal{F}_\R^{-1}\phi_\alpha)(x).
+	\end{equation*}
+	Entonces, se puede definir $\phi_\alpha$ como 
+	\begin{equation*}
+		\mathcal{F}_\R^{-1}\phi_\alpha)(x) := \begin{cases}
+			\left(\frac{-i2\pi x}{1-e^{i2\pi x}}\right)^\alpha\theta(x), & 0<|x|<1, \\
+			1, & x=0,\\
+			0, & |x| \geq 1.
+		\end{cases}
+	\end{equation*}
+	Para el caso $n$-dimensional se puede definir el mapa $x\mapsto \theta(x_1)\cdots\theta(x_n)$, que cumple las mismas propiedades. 
+\end{proof}
+\begin{remark}
+	La clase de símbolos $S^m_{\rho,\delta}(\T^n\times\R^n)$ se puede definir como el conjunto de símbolos en la clase $S^m_{\rho,\delta}(\R^n\times\R^n)$ que son 1-periódicos respecto a $x$. 
+\end{remark}
+\begin{theorem}
+	Sea $0\leq\delta\leq1$ y sea $0<\rho\leq1$. El símbolo $\tilde{a}\in S^m_{\rho,\delta}(\T^n\times\Z^n)$ es un símbolo toroidal si y solo si existe un símbolo euclideano $a\in S^m_{\rho,\delta}(\T^n\times\R^n)$ tal que $\tilde{a} = a|_{\T^n\times\Z^n}$. Además, esta extensión es única modulo $S^{-\infty}(\T^n\times\R^n)$.
+\end{theorem}
+\begin{proof}
+	($\Leftarrow$) Por el Teorema de Valor Medio se tiene que para cualquier multi-índice $\alpha\in\N_0^n$ 
+	\begin{align*}
+		\Delta^\alpha_\xi \partial^\beta_x \tilde{a}(x, \xi) &= \Delta^\alpha_\xi \partial^\beta_x {a}(x, \xi) \\
+		& = \partial^\alpha_\xi \partial^\beta_x {a}(x, \xi)|_{\xi=\eta},
+	\end{align*}
+	para algún $\eta\in Q:= [\xi_1, \xi_1 + \alpha_1] \times \cdots\times[\xi_n, \xi_n+\alpha_n]$. Por lo que, se obtiene que 
+	\begin{align*}
+		|\Delta^\alpha_\xi \partial^\beta_x \tilde{a}(x, \xi)| & = |\partial^\alpha_\xi \partial^\beta_x {a}(x, \xi)|_{\xi=\eta}| \\
+		& \lesssim_{\alpha\beta} \angles{\eta}^{m-\rho|\alpha|+\delta|\beta|} \\
+		& \lesssim_\alpha \angles{\xi}^{m-\rho|\alpha|+\delta|\beta|}.
+	\end{align*}
+	($\Rightarrow$)  Sea $\theta\in\mathcal{S}(\R^n)$ como en el Lema \ref{lem:aux-extension}, y se define 
+	\begin{equation*}
+		a(x, \xi) := \sum_{\eta\in\Z^n} (\mathcal{F}_{\R^n}\theta)(\xi - \eta)\tilde{a}(x, \eta).
+	\end{equation*}
+	Se puede ver que cuando $\xi\in\Z^n$, entonces $a(x, \xi) = \tilde{a}(x, \xi)$. Además, se tiene que
+	\begin{align*}
+		|\partial^\alpha_\xi\partial^\beta_x a(x, \xi) | & = \left| \sum_{\eta\in\Z^n} \partial^\alpha_\xi(\mathcal{F}_{\R^n}\theta)(\xi - \eta)\partial^\beta_x\tilde{a}(x, \eta) \right| \\
+		& = \left| \sum_{\eta\in\Z^n} \overline{\Delta}^\alpha_\xi\phi_\alpha(\xi-\eta)\partial^\beta_x\tilde{a}(x, \eta) \right|  \\
+		& = \left| \sum_{\eta\in\Z^n} \phi_\alpha(\xi-\eta)\Delta^\alpha_\eta\partial^\beta_x\tilde{a}(x, \eta) \right|\\
+		& \lesssim_{\alpha\beta} \sum_{\eta\in\Z^n} |\phi_\alpha(\xi-\eta)| \angles{\eta}^{m-\rho|\alpha|+\delta|\beta|} \\
+		& \lesssim_{\alpha} \sum_{\eta\in\Z^n} \angles{\eta}^{-M}  \angles{\xi-\eta}^{m-\rho|\alpha|+\delta|\beta|}  \\
+		& \leq \angles{\xi}^{m-\rho|\alpha|+\delta|\beta|} \sum_{\eta\in\Z^n} \angles{\eta}^{|m-\rho|\alpha|+\delta|\beta|| - M} \\
+		& \lesssim_{\alpha\beta} \angles{\xi}^{m-\rho|\alpha|+\delta|\beta|}.
+	\end{align*}
+	Aquí se utilizó el hecho que $\phi_\alpha\in\mathcal{S}(\Z^n)$ y que $\angles{\xi-\eta}^q \leq \angles{\xi}^q \angles{\eta}^{|q|}$. Lo que completa la prueba de la existencia del símbolo. Para demostrar la unicidad, sean $a,b\in S^m_{\rho,\delta}(\T^n\times\R^n)$, tales que $a|_{\T^n\times\Z^n} = b|_{\T^n\times\Z^n}$. Entonces, se define $c:=a-b$, y para $\xi\in\R^n\setminus\Z^n$ se escoge $\eta\in\Z^n$ uno de sus puntos más cercanos. Por lo que se tiene la siguiente expansión de Taylor de primer orden
+	\begin{align*}
+		c(x, \xi) & = c(x, \eta) + \sum_{|\alpha|=1} r_\alpha(x, \xi, \xi-\eta)(\xi-\eta)^\alpha \\
+		& = \sum_{|\alpha|=1} r_\alpha(x, \xi, \xi-\eta)(\xi-\eta)^\alpha,
+	\end{align*}
+	donde
+	\begin{equation*}
+		r_\alpha(x, \xi, \theta) = \int_0^1(1-t)\partial^\alpha_\xi c(x, \xi+t\theta)\diff t.
+	\end{equation*}
+	Entonces, se tiene que $|c(x, \xi)| \lesssim \angles{\xi}^{m-\rho}$, y este proceso puede aplicarse recursivamente a $c$ y a sus derivadas para concluir que $c\in S^{-\infty}(\T^n\times\R^n)$.
+\end{proof}
+\begin{definition}[Periodización]
+	La \textit{peoridización} de una función $f\in\mathcal{S}(\R^n)$ se define como
+	\begin{equation*}
+		\mathcal{P}f(x):= \sum_{k\in\Z^n} f(x + k).
+	\end{equation*}
+\end{definition}
+\begin{theorem}[Periodización de operadores]
+	Sea $a:=a(x, \xi)\in S^m_{\rho, \delta}(\R^n\times\R^n)$, una función 1-periodica en $x$ para todo $\xi$. Sea $\tilde{a}=a|_{\T^n\times\Z^n}$, entonces 
+	\begin{equation*}
+		(\mathcal{P}\circ T_a) f = (T_{\tilde{a}}\circ \mathcal{P})f,
+	\end{equation*}
+	para toda $f\in\mathcal{S}(\R^n)$.
+\end{theorem}
+\begin{proof}
+	Se tiene que 
+	\begin{align*}
+		\mathcal{P}(T_af)(x) & = \sum_{k\in\Z^n}(T_af)(x+k)\\
+		& = \sum_{k\in\Z^n}\int_{\R^n} e^{i2\pi(x+k)\cdot\xi}a(x+k, \xi)(\mathcal{F}_{\R^n}f)(\xi) \diff \xi \\
+		& = \int_{\R^n}\left(\sum_{k\in\Z^n}e^{i2\pi k\cdot\xi}\right) e^{i2\pi x\cdot\xi}a(x, \xi)(\mathcal{F}_{\R^n}f)(\xi) \diff \xi \\
+		& = \int_{\R^n}\delta_{\Z^n}(\xi) e^{i2\pi x\cdot\xi}a(x, \xi)(\mathcal{F}_{\R^n}f)(\xi) \diff \xi \\
+		& = \sum_{\xi\in\Z^n}e^{i2\pi x\cdot\xi}a(x, \xi)(\mathcal{F}_{\R^n}f)(\xi) \\
+		& = \sum_{\xi\in\Z^n}e^{i2\pi x\cdot\xi}a(x, \xi)\mathcal{F}_{\T^n}(\mathcal{P}f)(\xi)  \\
+		& = (T_{\tilde{a}}f)(x).
+	\end{align*}
+\end{proof}
+
 \chapter{Continuidad de operadores pseudo-diferenciales}
 
 \section{Continuidad en espacios de Lebesgue}
