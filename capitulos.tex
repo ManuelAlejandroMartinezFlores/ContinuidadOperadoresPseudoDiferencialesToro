@@ -848,7 +848,7 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 \begin{remark}
 	Se advierte al lector que existen otras notaciones disponibles en la literatura.  Por ejemplo $L^p_k$, o $W^{p,k}$. Además, cuando $p=2$, se suele denotar como $H^k$.
 \end{remark}
-\begin{theorem} 
+\begin{theorem} \label{theo:Sobolev-Banach}
 	Sea $f, g \in W^k_p(\Omega)$ y sea $\alpha$ un multi-índice con $|\alpha|\leq k$, entonces se tiene que 
 	\begin{enumerate}
 		\item $\partial^\alpha f \in W^{k-|\alpha|}_p$ y que $\partial^{\alpha}(\partial^{\beta}f) = \partial^{\alpha+\beta} f = \partial^{\beta}(\partial^{\alpha}f)$, para todos multi-índices que satisfacen  $|\alpha|+|\beta| \leq k$,
@@ -936,7 +936,19 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 	\end{align*}
 	Lo que genera el resultado deseado.
 \end{definition}
-
+Al identificar $\T^n$ con $[0,1)^n\subset\R^n$, se puede utilizar la definición de espacios de Sobolev euclideana para el caso periodico.
+\begin{definition}[Espacios de Sobolev]
+	Sea $1\leq p \leq\infty$ y sea $k\in\N_0$. El \textit{espacio de Sobolev} $W^k_p(\Omega)$ consiste de todas las funciones $f\in L^p(\Omega)$ tales que para cualquier multi-índice $|\alpha|\leq k$ se tiene que $\partial^\alpha f$ existe (en el sentido de distribuciones) y pertenece a $L^p(\Omega)$. Para tales funciones se define 
+	\begin{equation*}
+		\|f\|_{W^k_p(\Omega)} := \left( \sum_{|\alpha|\leq k} \|\partial^\alpha f\|_{L^p}^p
+		\right)^{1/p},
+	\end{equation*}
+	para $1\leq p <\infty$. Para $p=\infty$ se define como 
+	\begin{equation*}
+		\|f\|_{W^k_\infty(\Omega)} := \max_{|\alpha|\leq k} \|\partial^\alpha f\|_{L^\infty}.
+	\end{equation*}
+\end{definition}
+La demostración del hecho que los espacios de Sobolev son espacios de Banach es la realizada para el Teorema \ref{theo:Sobolev-Banach}.
 \section{Espacios de Hardy en $\R^n$ y $\T^n$}
 TODO TODO
 
@@ -1085,7 +1097,7 @@ TODO TODO
 	\end{align*}
 	donde se escoge $N_1$ tal que $-2\rho N_1 + 2N_2 + m_1 < -n$. Por lo que se puede escoger $N_2$ libremente para obtener la cota deseada. Un argumento análogo funciona para las derivadas de $c_2$, por lo que este pertenece a $S^{-\infty}(\R^n\times\R^n)$.
 \end{proof}
-\begin{definition}[Potencial Bessel]
+\begin{definition}[Potencial de Bessel]
 	Se define al potencial de Bessel de orden $m\in\R$ al operador pseudo-diferencial con símbolo $\angles{\xi}^m$. Este se denota por $J^m$.
 \end{definition}
 Se puede ver que la composición con este operador no presenta la restricción $\delta<\rho$.
@@ -1107,8 +1119,107 @@ Se puede ver que la composición con este operador no presenta la restricción $
 	Por lo que se tiene el orden deseado en ambos casos.
 \end{proof}
 \section{Definición y propiedades básicas en $\T^n$}
-TODO TODO
-
+El cálculo simbólico en el toro $\T^n$ presenta ciertas diferencias respecto al caso euclideano. Gran parte de ellas surgen del hecho que el dominio de frecuencias correspondiente es el retículo $\Z^n$. Por lo que es necesario definir herramientas análogas que funcionen en el caso discreto. 
+\begin{definition}
+	Sea $\varphi:\Z^n\to\C$, entonces se define el operador de diferencia como 
+	\begin{equation*}
+		\Delta_{\xi_j} \varphi(\xi) := \varphi(\xi + \delta_j) - \varphi(\xi). 
+	\end{equation*}
+	Además, para un multi-índice $\alpha\in\N^n_0$, se define 
+	\begin{equation*}
+		\Delta^\alpha_\xi := \Delta^{\alpha_1}_{\xi_1} \cdots \Delta^{\alpha_n}_{\xi_n} 
+	\end{equation*}
+\end{definition}
+\begin{proposition}
+	Sea $\varphi:\Z^n\to\C$, entonces 
+	\begin{equation*}
+		\Delta^\alpha_\xi \varphi(\xi) = \sum_{\beta\leq\alpha}(-1)^{|\alpha-\beta|} \binom{\alpha}{\beta}\varphi(\xi+\beta).
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	Se define el operador de traslación $E_j := (I+\Delta_{\xi_j})$, que actua de la siguiente manera
+	\begin{equation*}
+		E_j\varphi(\xi) = (I+\Delta_{\xi_j})\varphi(\xi) = \varphi(\xi +\delta_j).
+	\end{equation*}
+	Entonces, por el teorema del binomio se tiene que 
+	\begin{align*}
+		\Delta^\alpha_\xi\varphi(\xi) & = (E - I)^\alpha\varphi(\xi)\\
+		& = \sum_{\beta\leq\alpha}(-1)^{|\alpha-\beta|}\binom{\alpha}{\beta}E^\beta\varphi(\xi) \\
+		&  = \sum_{\beta\leq\alpha}(-1)^{|\alpha-\beta|} \binom{\alpha}{\beta}\varphi(\xi+\beta).
+	\end{align*}
+	Lo que completa la prueba.
+\end{proof}
+Note que este operador tiene propiedades análogas a las de la derivada en el caso continuo
+\begin{proposition}
+	Sean $\varphi, \psi:\Z^n\to\C$, sean $\alpha, \beta\in\N^n_0$, entonces
+	\begin{enumerate}
+		\item $\Delta^\alpha_\xi(s\varphi+t\psi)(\xi) = s\Delta^\alpha_\xi\varphi(\xi) + t\Delta^\alpha_\xi\psi(\xi)$,
+		\item $\Delta^\alpha_\xi\Delta^\beta_\xi = \Delta^{\alpha+\beta}_\xi = \Delta^\beta_\xi\Delta^\alpha_\xi$, 
+		\item $\Delta^\alpha_\xi(\varphi\psi)(\xi) = \sum_{\beta\leq\alpha}\binom{\alpha}{\beta}[\Delta^\beta_\xi\varphi(\xi)][\Delta^{\alpha-\beta}_\xi\psi(\xi+\beta)]$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Todas estas propiedades pueden ser demostradas mediante inducción, por lo que solo se demostrarán los casos base. La primera propiedad es equivalente a decir que los operadores de diferencia son lineales. Entonces, se tiene que 
+	\begin{align*}
+		\Delta_{\xi_j}(s\varphi+t\psi)(\xi) & = (s\varphi+t\psi)(\xi+\delta_j) - (s\varphi+t\psi)(\xi) \\
+		& = s\varphi(\xi+\delta_j) + t\psi(\xi+\delta_j) - s\varphi(\xi)- t\psi(\xi) \\
+		& = s\Delta_{\xi_j}\varphi(\xi) + t\Delta_{\xi_j}\psi(\xi).
+	\end{align*}
+	La segunda propiedad quiere decir que los operadores de diferencia conmutan, es decir
+	\begin{align*}
+		\Delta_{\xi_i}\Delta_{\xi_j}\varphi(\xi) &= \Delta_{\xi_i}[\varphi(\cdot +\delta_j) - \varphi(\cdot)](\xi) \\
+		& =  \Delta_{\xi_i}[\varphi(\cdot+\delta_j)] (\xi)- \Delta_{\xi_i}\varphi(\xi) \\
+		& = \varphi(\xi+\delta_j+\delta_i) - \varphi(\xi+\delta_j) - \varphi(\xi+\delta_i) + \varphi(\xi)\\
+		& = \Delta_{\xi_j}[\varphi(\cdot+\delta_i)-\varphi(\cdot)](\xi) \\
+		& = \Delta_{\xi_j}\Delta_{\xi_i}\varphi(\xi).
+	\end{align*}
+	La tercera propiedad es análoga a la regla de Leibniz, o regla del producto. En efecto, 
+	\begin{align*}
+		\Delta_{\xi_j}(\varphi\psi)(\xi) & = \varphi(\xi+\delta_j)\psi(\xi+\delta_j) - \varphi(\xi)\psi(\xi) \\
+		& = \varphi(\xi+\delta_j)\psi(\xi+\delta_j) + \varphi(\xi)\psi(\xi+\delta_j) - \varphi(\xi)\psi(\xi+\delta_j) - \varphi(\xi)\psi(\xi)\\
+		& = \varphi(\xi)[\psi(\xi+\delta_j) - \psi(\xi)] + [\varphi(\xi+\delta_j)-\varphi(\xi)]\psi(\xi+\delta_j)\\ 
+		& = \varphi(\xi)[\Delta_{\xi_j}\psi(\xi)] + [\Delta_{\xi_j}\varphi(\xi)]\psi(\xi+\delta_j).
+	\end{align*}
+	Lo que concluye la prueba.
+\end{proof}
+\begin{definition}[Clase de símbolos toroidales $S^m_{\rho, \delta}(\T^n\times\Z^n)$]
+	Sea $m\in\R$, sean $0\leq\delta,\rho\leq1$. Entonces, la \textit{clase de símbolos toroidales} $S^m_{\rho, \delta}(\T^n\times\Z^n)$ consiste de las funciones $a:=a(x, \xi):\T^n\times\Z^n\to\C$ que son suaves en $x$ para todo $\xi$, y que satisfacen las desigualdades simbólicas
+	\begin{equation*}
+		|\Delta^\alpha_\xi\partial^\beta_x a(x, \xi)| \lesssim_{\alpha\beta} \angles{\xi}^{m-\rho|\alpha|+\delta|\beta|}, 
+	\end{equation*}
+	para cualesquiera multi-índices $\alpha,\beta\in\N_0^n$. 
+\end{definition}
+\begin{definition}[Operadores pseudo-diferenciales toroidales]
+	Para $a\in S^m_{\rho, \delta}(\T^n\times\Z^n)$, se denota $T_a$ a su \textit{operador pseudo-diferencial toroidal} correspondiente, que se define como 
+	\begin{equation*}
+		T_af(x) := \sum_{\xi\in\Z^n} e^{i2\pi x\cdot\xi} a(x, \xi)\widehat{f}(\xi).
+	\end{equation*}
+	Además, se dice que $T_a\in\Psi^m_{\rho, \delta}(\T^n\times\Z^n)$
+\end{definition}
+\begin{proposition}
+	Sea $f\in C^\infty(\T^n)$, entonces $T_af$ está bien definido y $T_af\in C^\infty(\T^n)$. Además, $T_a$ es un operador continuo de $C^\infty(\T^n)$ en sí mismo.
+\end{proposition}
+\begin{proof}
+	Se tiene que $\widehat{f}\in\mathcal{S}(\Z^n)$, entonces la serie en la definición de $T_af$ converge absolutamente y $T_af\in C^\infty(\T^n)$. Por otra parte, se tiene que
+	\begin{align*}
+		T_af(x) &= \sum_{\xi\in\Z^n}e^{i2\pi x\cdot\xi} a(x, \xi) \widehat{f}(\xi) \\
+		& = \sum_{\xi\in\Z^n}a(x, \xi) \int_{\T^n} e^{i2\pi (x-y)\cdot\xi} f(y) \diff y\\
+		& = \sum_{\xi\in\Z^n}a(x, \xi)\angles{\xi}^{-2M} \int_{\T^n} e^{i2\pi (x-y)\cdot\xi} \left(I-\frac{\mathcal{L}_y}{4\pi^2}\right)^M f(y) \diff y,
+	\end{align*}
+	donde $\mathcal{L}_y$ es el Laplaciano respecto a $y$. Entonces, basta escoger $M$ lo suficientemente grande para obtener convergencia absoluta de la serie. Por lo que, para $f_j\to f$ en $C^\infty(\T^n)$, se puede intercambiar el límite con la serie y la integral mediante la convergencia dominada de Lebesgue para obtener $T_af_j\to T_af$ en $C^\infty(\T^n)$.
+\end{proof}
+\begin{remark}[Kernel de Schwartz para operadores pseudo-diferenciales toroidales]
+	La definición de $T_af$ para un símbolo toroidal sugiere que puede ser reescrito (ignorando preguntas acerca de convergencia) como 
+	\begin{equation*}
+		T_af(x) = \int_{\T^n} \sum_{\xi\in\Z^n} e^{i2\pi (x-y)\cdot\xi} a(x, \xi) f(y) \diff y =\int_{\T^n} K(x, y)f(y)\diff y,
+	\end{equation*}
+	donde $K(x, y)$ es el \textit{kernel de Schwartz} que se expresa como 
+	\begin{equation*}
+		K(x, y) := \sum_{\xi\in\Z^n} e^{i2\pi (x-y)\cdot\xi} a(x, \xi),
+	\end{equation*}
+	y se entiende en el sentido de distribuciones. 
+\end{remark}
+Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el espacio de frecuencias de símbolos toroidales es el cálculo de diferencias discretas. Sin embargo, puede ser de interés extender las técnicas utilizadas en el análisis de símbolos euclideanos para obtener resultados similares. Para ello, se realiza un proceso conocido como la \textit{extensión del símbolo toroidal}, que consiste en una interpolación suave de un símbolo definido en $\T^n\times\Z^n$ para obtener uno definido en $\T^n\times\R^n$. A continuación se presetnan los detalles de dicho proceso. 
 \chapter{Continuidad de operadores pseudo-diferenciales}
 
 \section{Continuidad en espacios de Lebesgue}
