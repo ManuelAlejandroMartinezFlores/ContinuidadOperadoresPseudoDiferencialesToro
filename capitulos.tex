@@ -1257,7 +1257,7 @@ Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el esp
 \begin{proof}
 	Primero, considere el caso unidimensional. Sea $\theta\in C^\infty(\R)$, tal que 
 	\begin{equation*}
-		\supp\theta \subset (-1, 1), \quad \theta(-x) = \theta(x), \theta(1-y) + \theta(y) = 1,
+		\supp\theta \subset (-1, 1), \quad \theta(-x) = \theta(x), \quad \theta(1-y) + \theta(y) = 1,
 	\end{equation*}
 	para $x\in\R$ y $0\leq y\leq1$. Note entonces que $\theta\in\mathcal{S}(\R)$, y por lo tanto $\mathcal{F}_{\R}\theta\in\mathcal{S}(\R)$ también. En particular, para $\xi\in\Z$, se tiene que
 	\begin{align*}
@@ -1289,7 +1289,7 @@ Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el esp
 \begin{remark}
 	La clase de símbolos $S^m_{\rho,\delta}(\T^n\times\R^n)$ se puede definir como el conjunto de símbolos en la clase $S^m_{\rho,\delta}(\R^n\times\R^n)$ que son 1-periódicos respecto a $x$. 
 \end{remark}
-\begin{theorem}
+\begin{theorem}\label{theo:equivalence-symbols}
 	Sea $0\leq\delta\leq1$ y sea $0<\rho\leq1$. El símbolo $\tilde{a}\in S^m_{\rho,\delta}(\T^n\times\Z^n)$ es un símbolo toroidal si y solo si existe un símbolo euclideano $a\in S^m_{\rho,\delta}(\T^n\times\R^n)$ tal que $\tilde{a} = a|_{\T^n\times\Z^n}$. Además, esta extensión es única modulo $S^{-\infty}(\T^n\times\R^n)$.
 \end{theorem}
 \begin{proof}
@@ -1351,9 +1351,34 @@ Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el esp
 		& = \int_{\R^n}\delta_{\Z^n}(\xi) e^{i2\pi x\cdot\xi}a(x, \xi)(\mathcal{F}_{\R^n}f)(\xi) \diff \xi \\
 		& = \sum_{\xi\in\Z^n}e^{i2\pi x\cdot\xi}a(x, \xi)(\mathcal{F}_{\R^n}f)(\xi) \\
 		& = \sum_{\xi\in\Z^n}e^{i2\pi x\cdot\xi}a(x, \xi)\mathcal{F}_{\T^n}(\mathcal{P}f)(\xi)  \\
-		& = (T_{\tilde{a}}f)(x).
+		& = (T_{\tilde{a}}\circ\mathcal{P})f(x).
 	\end{align*}
+	Lo que completa la prueba.
 \end{proof}
+Al combinar este resultado con el Teorema \ref{theo:equivalence-symbols}, se obtiene que 
+\begin{corollary}
+	Sea $0\leq\delta\leq1$, y sea $0<\rho\leq1$. Entonces, se tiene que 
+	\begin{equation*}
+		\Psi^m_{\rho,\delta}(\T^n\times\R^n) = \Psi^m_{\rho,\delta}(\T^n\times\Z^n).
+	\end{equation*}
+\end{corollary}
+Ahora, para discutir las fórmulas de composición simbólicas para operadores pseudo-diferenciales toroidales es conveniente definir un operador de derivada especial.
+\begin{definition}
+	Se define $D_{y_j}^{(0)} := I$, y 
+	\begin{equation*}
+		D_{y_j}^{(k+1)} := D_{y_j}^{(k)} \left(\frac{\partial_{y_j}}{i2\pi}-kI\right).
+	\end{equation*}
+	Además, para cualquier multi-índice $\alpha\in\N_0^n$ se define
+	\begin{equation*}
+		D^{(\alpha)}_y := D^{(\alpha_1)}_{y_1} \cdots D^{(\alpha_n)}_{y_n}.
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	Sean $0\leq\delta<\rho\leq1$, sea $a\in S^m_{\rho, \delta}(\T^n\times\Z^n)$ y sea $b\in S^l_{\rho, \delta}(\R^n\times\Z^n)$. Entonces, el símbolo del operador $T_bT_a$ pertenece a $S^{m+l}_{\rho, \delta}(\R^n\times\Z^n)$, y sigue la siguiente expansión asimptótica
+	\begin{equation*}
+		\sum_{\gamma\geq0} \frac{1}{\gamma!}[\Delta^\gamma_\xi b(x, \xi)][D^{(\gamma)}_xa(x, \xi)]
+	\end{equation*}
+\end{theorem}
 
 \chapter{Continuidad de operadores pseudo-diferenciales}
 
