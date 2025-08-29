@@ -884,7 +884,15 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 	\end{align*} 
 	Por lo que $\partial^\alpha g_0 = g_\alpha$ y $f_j \rightarrow g_0$ en $W^k_p$.
 \end{proof}
-
+\begin{theorem}[Encaje de Sobolev]
+	Sea $s\in\N$, tal que $s>k+n/2$. Entonces se tiene que el espacio de Sobolev $W^s_2(\R^n)$ está contenido en el espacio de H\"older $C^k(\R^n)$ y la inclusión es continua.
+\end{theorem}
+\begin{proof}
+	Sea $u\in W^s_2(\R^n)$, entonces se tiene que 
+	\begin{equation*}
+		\|u\|_{W^s_2} = \sum_{|\alpha|\leq s} \|\partial^\alpha u\|_{L^2}  \sim  \sum_{|\alpha|\leq s} \int_{\R^n} |\xi^\alpha|^2|\widehat{u}(\xi)|^2 \diff \xi 
+	\end{equation*}
+\end{proof}
 \section{Distribuciones y espacios de Sobolev en $\T^n$}
 \begin{theorem}[Distribuciones templadas $\mathcal{S}'(\Z^n)$]
 	Los elementos $u$ del espacio de distribuciones templadas $\mathcal{S}'(\Z^n)$, que consiste de funcionales lineales continuos en $\mathcal{S}(\Z^n)$,  tienen la forma 
@@ -1206,6 +1214,133 @@ Note que este operador tiene propiedades análogas a las de la derivada en el ca
 	\end{align*}
 	Lo que concluye la prueba.
 \end{proof}
+En el caso discreto, los polinomios tradicionales y los operadores de diferencia no se comportan exactamente como sus contrapartes continuas. Lo que inspira definiciones alternativas que se presentan a continuación.
+\begin{definition}
+	Para $\theta\in\Z^n$, se define $\theta^{(0)}_j := 1$, y
+	\begin{equation*}
+		\theta^{(k+1)}_j := \theta^{(k)}_j(\theta_j-k).
+	\end{equation*}
+	Además, para cualquier multi-índice $\alpha\in\N_0^n$, se define
+	\begin{equation*}
+		\theta^{(\alpha)} := \theta^{(\alpha_1)}_1 \cdots \theta^{(\alpha_n)}_n.
+	\end{equation*}
+	Similarmente, se define $D_{y_j}^{(0)} := I$, y 
+	\begin{equation*}
+		D_{y_j}^{(k+1)} := D_{y_j}^{(k)} \left(\frac{\partial_{y_j}}{i2\pi}-kI\right),
+	\end{equation*}
+	\begin{equation*}
+		D^{(\alpha)}_y := D^{(\alpha_1)}_{y_1} \cdots D^{(\alpha_n)}_{y_n}.
+	\end{equation*}
+\end{definition}
+\begin{proposition}
+	Para $\alpha,\beta\in\N_0^n$, se tiene que 
+	\begin{equation*}
+		\Delta^\beta_\theta \theta^{(\alpha)} = \alpha^{(\beta)}\theta^{(\alpha-\beta)},
+	\end{equation*}
+	lo que concuerda con el caso continuo $\partial^\beta_\theta \theta^\alpha = \alpha^{(\gamma)}\theta^{\alpha-\beta}$.
+\end{proposition}
+\begin{proof}
+	Basta con ver que 
+	\begin{align*}
+		\Delta_{\theta_j} \theta_j^{(\alpha_j)} &= (\theta_j+1)^{(\alpha_j)} - \theta_j^{(\alpha_j)} \\
+		& = (\theta_j+1)\theta_j \cdots(\theta_j - \alpha_j+2) - \theta_j^{(\alpha_j)} \\
+		& = (\theta_j+1)\theta_j^{(\alpha_j-1)} - \theta_j^{(\alpha_j-1)}(\theta_j - \alpha_j + 1) \\
+		& = \alpha_j \theta_j^{(\alpha_j-1)}.
+	\end{align*}
+	El resultado sigue de recursividad.
+\end{proof}
+\begin{definition}[Integración discreta]
+	Para $b\geq0$, se definen
+	\begin{equation*}
+		I^b_k := \sum_{0\leq k<b}, \quad \text{ y } \quad I^{-b}_k := -\sum_{-b\leq k < 0}.
+	\end{equation*}
+\end{definition}
+\begin{theorem}["Teorema fundamental del cálculo" discreto 1D]
+	Sea $\theta\in\Z$, y sea $\alpha\in\N_0$. Entonces, se tiene que
+	\begin{equation*}
+		I^\theta_{k_1}I^{k_1}_{k_2} \cdots I^{k_{\alpha-1}}_{k_\alpha} 1 = \frac{1}{\alpha!} \theta^{(\alpha)}.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Note que en general se tiene que
+	\begin{equation*}
+		I^b_k\Delta_k f(k) = \sum_{0\leq k<b} [f(k+1)- f(k)] = f(b) - f(0).
+	\end{equation*}
+	Particularmente, $I^b_k\Delta_k k^{(i)} = b^{(i)}$, que se puede combinar con el hecho que $\Delta_kk^{(i)}=ik^{(i)}$, y el resultado deseado sigue de una inducción.
+\end{proof}
+La extensión al caso multi-dimensional es inmediata. 
+\begin{corollary}["Teorema fundamental del cálculo" discreto]
+	Sea $\theta\in\Z^n$, y sea $\alpha\in\N_0^n$. Entonces, se tiene que
+	\begin{equation*}
+		\prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \alpha_j-1)}_{k(j, \alpha_j)} 1 = \frac{1}{\alpha!}\theta^{(\alpha)}.
+	\end{equation*}
+\end{corollary}
+Ahora, se presenta el análogo discreto de la expansión de Taylor.
+\begin{theorem}[Expansión de Taylor discreta]
+	Sea $p:\Z^n\to\C$. Entonces, se puede escribir como 
+	\begin{equation*}
+		p(\xi + \theta) = \sum_{|\alpha|<M} \frac{1}{\alpha!} \theta^{(\alpha)} \Delta^\alpha_\xi p(\xi) + r_M(\xi, \theta),
+	\end{equation*}
+	donde el residuo satisface
+	\begin{equation*}
+		|\Delta^\omega_\xi r_M(\xi, \theta)| \lesssim_M \max_{|\alpha|=M,\, \nu \in Q(\theta)} |\theta^{(\alpha)}\Delta^{\alpha+\omega}_\xi p(\xi+\nu)|,
+	\end{equation*}
+	donde $Q(\theta) := \{\nu\in\Z^n :|\nu_j|\leq|\theta_j|\,\, \text{ para todo } j=1,\ldots,n\}$.
+\end{theorem}
+\begin{proof}
+	Primero, para $0\neq\alpha\in\N^n_0$, se denota $m_\alpha := \min\{j:\alpha_j\neq0\}$. Para $\theta\in\Z^n$, e $i\in\{1,\ldots,n\}$, se define $\nu(\theta,i,k)\in\Z^n$ como
+	\begin{equation*}
+		\nu(\theta,i,k)_j :=\begin{cases}
+			\theta_j, & 1\leq j<i,\\
+			k, & j=i,\\
+			0, &i<j\leq n.
+		\end{cases}
+	\end{equation*}
+	Se afirma que el residuo puede ser escrito como 
+	\begin{equation*}
+		r_M(\xi, \theta) = \sum_{|\alpha|=M}r_\alpha(\xi, \theta),
+	\end{equation*}
+	donde 
+	\begin{equation*}
+		r_\alpha(\xi, \theta) := \prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \alpha_j-1)}_{k(j, \alpha_j)} \Delta^\alpha_\xi p(\xi + \nu(\theta, m_\alpha, k(m_\alpha, \alpha_{m_\alpha}))).
+	\end{equation*}
+	Se realiza una prueba por inducción, para $M=1$, se tiene que
+	\begin{equation*}
+		r_{\delta_i}(\xi, \theta) = I^{\theta_i}_k\Delta_{\xi_i} p(\xi + \nu(\theta, i, k)) = p(\xi + \nu(\theta, i, \theta_i)) - p(\xi + \nu(\theta, i, 0)).
+	\end{equation*}
+	Por lo que se cumple el resultado deseado
+	\begin{equation*}
+		\sum_{i=1}^n r_{\delta_i}(\xi, \theta)  = \sum_{i=1}^n [p(\xi + \nu(\theta, i+1, 0)) - p(\xi + \nu(\theta, i, 0))] = p(\xi+\theta) - p(\xi) = r_1(\xi, \theta).
+	\end{equation*}
+	Ahora, suponga el resultado es verdadero para $|\alpha|=M$, entonces se tiene que
+	\begin{align*}
+		r_{M+1}(\xi,\theta) & = r_M(\xi,\theta) - \sum_{|\alpha|=M}\frac{1}{\alpha!} \theta^{(\alpha)}\Delta^\alpha_\xi p(\xi) \\
+		& = \sum_{|\alpha|=M} \left( r_\alpha(\xi,\theta) - \frac{1}{\alpha!} \theta^{(\alpha)}\Delta^\alpha_\xi p(\xi) 
+		\right) \\
+		& = \sum_{|\alpha|=M} \prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \alpha_j-1)}_{k(j, \alpha_j)} \Delta^\alpha_\xi [p(\xi + \nu(\theta, m_\alpha, k(m_\alpha, \alpha_{m_\alpha}))) - p(\xi)].
+	\end{align*}
+	Por otra parte, se tiene la igualdad 
+	\begin{align*}
+		\sum_{i=1}^{m_\alpha} I^{\nu(\theta, m_\alpha, k)_i}_l \Delta_{\xi_i}p(\xi+\nu(\theta, i, l)) &=  \sum_{i=1}^{m_\alpha} [p(\xi+\nu(\theta, i, \nu(\theta, m_\alpha, k)_i)) - p(\xi+\nu(\theta, i, 0))]\\
+		&=  \sum_{i=1}^{m_\alpha} [p(\xi+\nu(\nu(\theta, m_\alpha, k), i+1, 0)) - p(\xi+\nu(\theta, i, 0))]\\
+		& =p(\xi+\nu(\theta,m_\alpha,k)) - p(\xi) .
+	\end{align*}
+	Por lo que se obtiene que
+	\begin{align*}
+		r_{M+1}(\xi, \theta) & = \sum_{|\alpha|=M} \prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \alpha_j-1)}_{k(j, \alpha_j)} \sum_{i=1}^{m_\alpha} I^{\nu(\theta, m_\alpha, \alpha_{m_\alpha})_i}_{l_i} \Delta_{\xi}^{\alpha+\delta_i}p(\xi+\nu(\theta, i, l_i))\\
+		& = \sum_{|\beta|=M+1} \prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \beta_j-1)}_{k(j, \beta_j)} \Delta^\beta_\xi p(\xi + \nu(\theta, m_\beta, k(m_\beta, \beta_{m_\beta}))).
+	\end{align*}
+	Lo que completa la inducción. Para obtener los estimativos del residuo, se considera que 
+	\begin{align*}
+		|\Delta^\omega_\xi r_M(\xi, \theta)| & = \left|\sum_{|\alpha|=M}\Delta^{\omega}_\xi r_\alpha(\xi, \theta), 
+		\right| \\
+		& = \left| \sum_{|\alpha|=M}\prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \alpha_j-1)}_{k(j, \alpha_j)} \Delta^{\alpha+\omega}_\xi p(\xi + \nu(\theta, m_\alpha, k(m_\alpha, \alpha_{m_\alpha})))
+		\right| \\
+		& \leq \sum_{|\alpha|=M} \frac{1}{\alpha!} |\theta|^{(\alpha)}  \max_{\nu\in Q(\theta)} |\Delta^{\alpha+\omega} p(\xi+\nu)|.
+	\end{align*}
+	Lo que completa la prueba.
+\end{proof}
+A continuación se presentan las definiciones toroidales para símbolos de clases de H\"ormander y sus respectivos operadores pseudo-diferenciales.
 \begin{definition}[Clase de símbolos toroidales $S^m_{\rho, \delta}(\T^n\times\Z^n)$]
 	Sea $m\in\R$, sean $0\leq\delta,\rho\leq1$. Entonces, la \textit{clase de símbolos toroidales} $S^m_{\rho, \delta}(\T^n\times\Z^n)$ consiste de las funciones $a:=a(x, \xi):\T^n\times\Z^n\to\C$ que son suaves en $x$ para todo $\xi$, y que satisfacen las desigualdades simbólicas
 	\begin{equation*}
@@ -1243,6 +1378,62 @@ Note que este operador tiene propiedades análogas a las de la derivada en el ca
 	\end{equation*}
 	y se entiende en el sentido de distribuciones. 
 \end{remark}
+\begin{theorem}
+	Sean $0\leq\delta<\rho\leq1$, sea $a\in S^m_{\rho, \delta}(\T^n\times\Z^n)$, y sea $b\in S^l_{\rho, \delta}(\R^n\times\Z^n)$. Entonces, el símbolo del operador $T_aT_b$ pertenece a $S^{m+l}_{\rho, \delta}(\R^n\times\Z^n)$, y sigue la siguiente expansión asimptótica
+	\begin{equation*}
+		\sum_{\gamma\geq0} \frac{1}{\gamma!}[\Delta^\gamma_\xi a(x, \xi)][D^{(\gamma)}_xb(x, \xi)].
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Se tiene que el símbolo de la composición esta dado por
+	\begin{align*}
+		c(x, \xi) & :=  \sum_{\eta\in\Z^n}\int_{\T^n} 
+		e^{i2\pi (x-y)\cdot(\eta-\xi)} a(x, \eta)b(y, \xi)\diff y \\ 
+		& = \sum_{\eta\in\Z^n} e^{i2\pi x\cdot(\eta-\xi)}  a(x, \eta) \widehat{b}(\eta-\xi, \xi)\\ 
+		& = \sum_{\eta\in\Z^n} e^{i2\pi x\cdot\eta}  a(x, \eta+\xi) \widehat{b}(\eta, \xi).
+	\end{align*}
+	Ahora, se utiliza la expansión de Taylor discreta para obtener que
+	\begin{align*}
+		c(x, \xi) &=  \sum_{\eta\in\Z^n} e^{i2\pi x\cdot\eta} \left[\sum_{|\gamma|<N}\frac{1}{\gamma!}\Delta^\gamma_\xi a(x, \xi)\eta^{(\gamma)} + R_N(x, \xi, \eta)
+		\right] \widehat{b}(\eta, \xi)\\
+		& = \sum_{|\gamma|<N}\frac{1}{\gamma!}\left[ \Delta^\gamma_\xi a(x, \xi) \right] \sum_{\eta\in\Z^n} e^{i2\pi x\cdot\eta}\widehat{b}(\eta, \xi)\eta^{(\gamma)}  + \sum_{\eta\in\Z^n} e^{i2\pi x\cdot\eta}R_N(x, \xi, \eta)  \widehat{b}(\eta, \xi) \\
+		& = \sum_{|\gamma|<N}\frac{1}{\gamma!}\left[ \Delta^\gamma_\xi a(x, \xi) \right] D^{(\gamma)}_x b(x, \xi) + E_N(x, \xi).
+	\end{align*}
+	Ahora, solo queda estimar el término correspondiente al error. En efecto, se tiene que
+	\begin{align*}
+		|\Delta^{\alpha'}_\xi\partial^{\beta'}_x [e^{i2\pi x\cdot\eta}\widehat{b}(\eta, \xi)]| & =  \left|\Delta^{\alpha'}_\xi\partial^{\beta'}_x  e^{i2\pi x\cdot\eta} \int_{\T^n} e^{-i2\pi y\cdot\eta} b(y, \xi) \diff y
+		\right| \\
+		& =  \left|\Delta^{\alpha'}_\xi\partial^{\beta'}_x  e^{i2\pi x\cdot\eta}\angles{\eta}^{-r} \int_{\T^n}\angles{\eta}^r e^{-i2\pi y\cdot\eta} b(y, \xi) \diff y
+		\right|\\
+		& =  \left|\partial^{\beta'}_x  e^{i2\pi x\cdot\eta}\angles{\eta}^{-r}  \int_{\T^n} e^{-i2\pi y\cdot\eta}\Delta^{\alpha'}_\xi\left(1-\frac{\mathcal{L}_y}{4\pi^2}\right)^{r/2} b(y, \xi) \diff y
+		\right|\\
+		& \lesssim \angles{\eta}^{|\beta'|-r} \angles{\xi}^{l-\rho|\alpha'|+\delta r}.
+	\end{align*}
+	Para el residuo de la serie de Taylor discreta se tiene que 
+	\begin{align*}
+		|\Delta^{\alpha''}_\xi\partial^{\beta''}_x R_N(x, \xi, \eta)| & \lesssim 
+		\angles{\eta}^N \max_{|\omega|=N,\, \nu\in Q(\eta)} | \Delta^{\omega+\alpha''}_\xi\partial^{\beta''}_x a(x, \xi+\nu)|\\
+		& \lesssim \angles{\eta}^N \max_{|\omega|=N,\, \nu\in Q(\eta)} \angles{\xi+\nu}^{m-\rho(N + |\alpha''|) + \delta|\beta''|}.
+	\end{align*}
+	Entonces, por la fórmula de Leibniz discreta y tomando $\alpha' + \alpha''=\alpha$, $\beta'+\beta''=\beta$, el término del error puede ser acotado por
+	\begin{equation*}
+		|\Delta^{\alpha}_\xi\partial^{\beta}_x E_N(x, \xi)| \lesssim 
+		\angles{\xi}^{l-\rho|\alpha'|+\delta r} \sum_{\eta\in\Z^n} \angles{\eta}^{N+|\beta'|-r} \max_{\nu\in Q(\eta)}  \angles{\xi+\nu}^{m-\rho(N + |\alpha''|) + \delta|\beta''|}.
+	\end{equation*}
+	Ahora, suponga que $|\eta|\leq|\xi|/2$, entonces el término de error puede ser acotado por
+	\begin{equation*}
+		\angles{\xi}^{l-\rho|\alpha'|+\delta r+m-\rho(N + |\alpha''|) + \delta|\beta''|+n} \max_{|\eta|\leq|\xi|/2}\angles{\eta}^{N+|\beta'|-r},
+	\end{equation*}
+	y al escoger $r = N + |\beta'|$, se obtiene que
+	\begin{equation*}
+		\angles{\xi}^{m + l -(\rho-\delta)N -\rho|\alpha| + \delta|\beta| + n}.
+	\end{equation*}
+	Por lo que este término puede ser aproximado por cualquier $\angles{\xi}^{-M}$ escogiendo el $N$ apropiado en vista que $\rho>\delta$. Por otra parte, si $|\eta|>|\xi|/2$, entonces para $N$ lo suficientemente grande se puede estimar el término del error por 
+	\begin{align*}
+		\angles{\xi}^{l-\rho|\alpha'| + \delta r} \sum_{|\eta|>|\xi|/2} \angles{\eta}^{N+|\beta'|-r} \lesssim \angles{\xi}^{l-\rho|\alpha'| + \delta r+N+|\beta'|-r-1},
+	\end{align*}
+	cuando $r$ es más grande que $N$. Además, dado que $\delta<1$, se puede escoger $r$ para estimar este término por cualquier $\angles{\xi}^{-M}$ . Lo que completa la prueba.
+\end{proof}
 Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el espacio de frecuencias de símbolos toroidales es el cálculo de diferencias discretas. Sin embargo, puede ser de interés extender las técnicas utilizadas en el análisis de símbolos euclideanos para obtener resultados similares. Para ello, se realiza un proceso conocido como la \textit{extensión del símbolo toroidal}, que consiste en una interpolación suave de un símbolo definido en $\T^n\times\Z^n$ para obtener uno definido en $\T^n\times\R^n$. A continuación se presetnan los detalles de dicho proceso. 
 \begin{lemma}\label{lem:aux-extension}
 	Existen funciones $\phi_\alpha\in\mathcal{S}(\R^n)$, para cada $\alpha\in\N_0^n$, y una función $\theta\in\mathcal{S}(\R^n)$, tales que 
@@ -1362,23 +1553,6 @@ Al combinar este resultado con el Teorema \ref{theo:equivalence-symbols}, se obt
 		\Psi^m_{\rho,\delta}(\T^n\times\R^n) = \Psi^m_{\rho,\delta}(\T^n\times\Z^n).
 	\end{equation*}
 \end{corollary}
-Ahora, para discutir las fórmulas de composición simbólicas para operadores pseudo-diferenciales toroidales es conveniente definir un operador de derivada especial.
-\begin{definition}
-	Se define $D_{y_j}^{(0)} := I$, y 
-	\begin{equation*}
-		D_{y_j}^{(k+1)} := D_{y_j}^{(k)} \left(\frac{\partial_{y_j}}{i2\pi}-kI\right).
-	\end{equation*}
-	Además, para cualquier multi-índice $\alpha\in\N_0^n$ se define
-	\begin{equation*}
-		D^{(\alpha)}_y := D^{(\alpha_1)}_{y_1} \cdots D^{(\alpha_n)}_{y_n}.
-	\end{equation*}
-\end{definition}
-\begin{theorem}
-	Sean $0\leq\delta<\rho\leq1$, sea $a\in S^m_{\rho, \delta}(\T^n\times\Z^n)$ y sea $b\in S^l_{\rho, \delta}(\R^n\times\Z^n)$. Entonces, el símbolo del operador $T_bT_a$ pertenece a $S^{m+l}_{\rho, \delta}(\R^n\times\Z^n)$, y sigue la siguiente expansión asimptótica
-	\begin{equation*}
-		\sum_{\gamma\geq0} \frac{1}{\gamma!}[\Delta^\gamma_\xi b(x, \xi)][D^{(\gamma)}_xa(x, \xi)]
-	\end{equation*}
-\end{theorem}
 
 \chapter{Continuidad de operadores pseudo-diferenciales}
 
