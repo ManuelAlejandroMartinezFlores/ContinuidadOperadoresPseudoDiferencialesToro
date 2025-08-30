@@ -884,14 +884,26 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 	\end{align*} 
 	Por lo que $\partial^\alpha g_0 = g_\alpha$ y $f_j \rightarrow g_0$ en $W^k_p$.
 \end{proof}
-\begin{theorem}[Encaje de Sobolev]
+\begin{theorem}[Encaje de Sobolev]\label{theo:Sobolev-embedding-R}
 	Sea $s\in\N$, tal que $s>k+n/2$. Entonces se tiene que el espacio de Sobolev $W^s_2(\R^n)$ está contenido en el espacio de H\"older $C^k(\R^n)$ y la inclusión es continua.
 \end{theorem}
 \begin{proof}
-	Sea $u\in W^s_2(\R^n)$, entonces se tiene que 
+	Sea $u\in W^s_2(\R^n)$, entonces por la identidad de Plancherel se tiene que 
 	\begin{equation*}
-		\|u\|_{W^s_2} = \sum_{|\alpha|\leq s} \|\partial^\alpha u\|_{L^2}  \sim  \sum_{|\alpha|\leq s} \int_{\R^n} |\xi^\alpha|^2|\widehat{u}(\xi)|^2 \diff \xi 
+		\|u\|_{W^s_2}^2 = \sum_{|\alpha|\leq s} \|\partial^\alpha u\|_{L^2}^2  \sim  \sum_{|\alpha|\leq s} \int_{\R^n} |\xi^\alpha|^2|\widehat{u}(\xi)|^2 \diff \xi \sim  \int_{\R^n} (1+|\xi|^2)^s |\widehat{u}(\xi)|^2 \diff \xi.
 	\end{equation*}
+	Ahora, basta demostrar que $\widehat{\partial^\alpha u} \in L^1(\R^n)$ para $|\alpha|\leq k$, porque esto implicaría que su transformada inversa es continua y acotada. Utilizando Cauchy-Schwarz, se obtiene que 
+	\begin{align*}
+		 \int_{\R^n} |\xi^\alpha||\widehat{u}(\xi)| \diff \xi & \leq 
+		 \left( \int_{\R^n} (1+|\xi|^2)^s |\widehat{u}(\xi)|^2 \diff \xi \right)^{1/2}
+		 \left( \int_{\R^n} \frac{|\xi|^{2|\alpha|}}{(1+|\xi|^2)^s}  \diff \xi \right)^{1/2} \\
+		 & \lesssim \|u\|_{W^s_2}.
+	\end{align*}
+	Donde la segunda integral es finita dado que $2|\alpha| - 2s \leq 2k -2s < -n$. Además, se tiene que 
+	\begin{equation*}
+		\sup|\partial^\alpha u| \leq \|\widehat{\partial^\alpha u} \|_{L^1} \lesssim  \|u\|_{W^s_2},
+	\end{equation*}
+	por lo que la inclusión es continua y se completa la prueba.
 \end{proof}
 \section{Distribuciones y espacios de Sobolev en $\T^n$}
 \begin{theorem}[Distribuciones templadas $\mathcal{S}'(\Z^n)$]
@@ -956,7 +968,10 @@ Al identificar $\T^n$ con $[0,1)^n\subset\R^n$, se puede utilizar la definición
 		\|f\|_{W^k_\infty(\Omega)} := \max_{|\alpha|\leq k} \|\partial^\alpha f\|_{L^\infty}.
 	\end{equation*}
 \end{definition}
-La demostración del hecho que los espacios de Sobolev son espacios de Banach es la realizada para el Teorema \ref{theo:Sobolev-Banach}.
+La demostración del hecho que los espacios de Sobolev son espacios de Banach es la realizada para el Teorema \ref{theo:Sobolev-Banach}. Además, se presenta el encaje de Sobolev para el caso toroidal, cuya prueba es analoga a la del Teorema \ref{theo:Sobolev-embedding-R}.
+\begin{theorem}[Encaje de Sobolev]\label{theo:Sobolev-embedding-T}
+	Sea $s\in\N$, tal que $s>k+n/2$. Entonces se tiene que el espacio de Sobolev $W^s_2(\T^n)$ está contenido en el espacio de H\"older $C^k(\T^n)$ y la inclusión es continua.
+\end{theorem}
 \section{Espacios de Hardy en $\R^n$ y $\T^n$}
 TODO TODO
 
@@ -1648,6 +1663,32 @@ Al combinar este resultado con el Teorema \ref{theo:equivalence-symbols}, se obt
 \begin{theorem}\label{theo:Lp-boundedness-S0}
 	Sea $T\in\Psi^0_{1, 0}(\R^n\times\R^n)$, entonces $T$ se extiende a un operador acotado de $L^p(\R^n)$ en sí mismo.
 \end{theorem}
+Ahora, se presenta un resultado de continuidad $L^2$ para el caso del toro. En este caso se relajanlos requerimientos de regularidad del símbolo.
+\begin{theorem}
+	Sea $k\in\N$, tal que $k>n/2$, y sea $a:=a(x,\xi):\T^n\times\Z^n\to\C$, tal que
+	\begin{equation*}
+		|\partial^\beta_x a(x, \xi)| \leq C,
+	\end{equation*}
+	para todo $x, \xi$, y $|\beta|\leq k$. Entonces $T_a$ extiende a un operador acotado en $L^2(\T^n)$.
+\end{theorem}
+\begin{proof}
+	Primero, se define 
+	\begin{equation*}
+		A_yf(x) := \sum_{\xi\in\Z^n} \int_{\T^n} e^{i2\pi (x-z)\cdot\xi} a(y, \xi) f(z) \diff z, 
+	\end{equation*}
+	de tal manera que $A_xf(x) = T_af(x)$. Entonces se tiene que
+	\begin{equation*}
+		\|T_af\|_{L^2}^2 = \int_{\T^n} |T_af(x)|^2 \diff x \leq \int_{\T^n} \sup_{y\in\T^n} |A_yf(x)|^2 \diff x.
+	\end{equation*}
+	Al aplicar el Teorema de encaje de Sobolev, se obtiene que
+	\begin{align*}
+		\|T_af\|_{L^2}^2 & \lesssim \int_{\T^n} \sum_{|\alpha|\leq k} \int_{\T^n} |\partial^\alpha_yA_yf(x)|^2 \diff y \diff x \\
+		& \leq \sum_{|\alpha|\leq k} \sup_{y\in\T^n}  \int_{\T^n} |\partial^\alpha_yA_yf(x)|^2 \diff x\\
+		& =  \sum_{|\alpha|\leq k} \sup_{y\in\T^n} \|\partial^\alpha_yA_yf(x)\|_{L^2}^2 \\
+		& \leq \sum_{|\alpha|\leq k} \sup_{y\in\T^n}  \sup_{\xi\in\Z^n} |\partial^\alpha_y a(y, \xi)|^2 \|f\|_{L^2}^2.
+	\end{align*}
+	Lo que completa la prueba.
+\end{proof}
 
 \section{Continuidad en espacios de Sobolev}
 Primero, se revisita la definición de espacios de Sobolev utilizando los operadores pseudo-diferenciales que han sido definidos en apartados anteriores.
@@ -1659,7 +1700,7 @@ Primero, se revisita la definición de espacios de Sobolev utilizando los operad
 \end{definition}
 Ahora, se extiende el resultado del Teorema \ref{theo:Lp-boundedness-S0} para estos espacios. 
 \begin{theorem}\label{theo:Sobolev-S0}
-	Sea $T\in\Psi^m_{1,0}(\R^n\times\R^n)$ sea un operador pesudo-diferencial de orden $m\in\R$. Entonces, el operador $T$ se extiende a un operador continuo desde el espacio de Sobolev $W^{s-m}_p(\R^n)$ hacia $W^s_p(\R^n)$. 
+	Sea $T\in\Psi^m_{1,0}(\R^n\times\R^n)$ sea un operador pesudo-diferencial de orden $m\in\R$. Entonces, el operador $T$ se extiende a un operador continuo desde el espacio de Sobolev $W^{s-m}_p(\R^n)$ hacia $W^s_p(\R^n)$, con $1<p<\infty$.
 \end{theorem}
 \begin{proof}
 	Note que $J^{s-m}TJ^{-s}$ es un operador de orden cero, por lo que es continuo en $L^p$, en vista del Teorema \ref{theo:Lp-boundedness-S0}. Por lo que se tiene que 
@@ -1670,7 +1711,7 @@ Ahora, se extiende el resultado del Teorema \ref{theo:Lp-boundedness-S0} para es
 \end{proof}
 Ahora, se demuestra que la definición revisitada de espacios de Sobolev coincide con la definición para regularidad entera que se dio anteriormente. 
 \begin{theorem}
-	El espacio $W^s_p(\R^n)$ coincide con el espacio $W^k_p(\R^n)$ cuando $s=k$ es entero, con equivalencia de normas.
+	El espacio $W^s_p(\R^n)$ coincide con el espacio $W^k_p(\R^n)$, para $1<p<\infty$, cuando $s=k$ es entero, con equivalencia de normas.
 \end{theorem}
 \begin{proof}
 	Se utilizará $k$ para simplificar la notación. Para $|\alpha|\leq k$, se tiene que $\partial^\alpha_xJ^{-k}$ es un operador pseudo-diferencial con símbolo $(2\pi i\xi)^\alpha\angles{\xi}^{-k},$ y orden $|\alpha|-k\leq0$. Entonces, por el Teorema \ref{theo:Lp-boundedness-S0} se puede concluir que son acotados en $L^p$, y que
