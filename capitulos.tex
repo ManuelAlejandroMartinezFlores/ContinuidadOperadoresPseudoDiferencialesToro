@@ -1663,8 +1663,8 @@ Al combinar este resultado con el Teorema \ref{theo:equivalence-symbols}, se obt
 \begin{theorem}\label{theo:Lp-boundedness-S0}
 	Sea $T\in\Psi^0_{1, 0}(\R^n\times\R^n)$, entonces $T$ se extiende a un operador acotado de $L^p(\R^n)$ en sí mismo.
 \end{theorem}
-Ahora, se presenta un resultado de continuidad $L^2$ para el caso del toro. En este caso se relajanlos requerimientos de regularidad del símbolo.
-\begin{theorem}
+Ahora, se presenta un resultado de continuidad $L^2$ para el caso del toro. En este caso se relajan los requerimientos de regularidad del símbolo, en vista de la compacidad del toro.
+\begin{theorem}\label{theo:L2-boundedness-T-C}
 	Sea $k\in\N$, tal que $k>n/2$, y sea $a:=a(x,\xi):\T^n\times\Z^n\to\C$, tal que
 	\begin{equation*}
 		|\partial^\beta_x a(x, \xi)| \leq C,
@@ -1689,7 +1689,426 @@ Ahora, se presenta un resultado de continuidad $L^2$ para el caso del toro. En e
 	\end{align*}
 	Lo que completa la prueba.
 \end{proof}
+A continuación se presentan una serie de resultados de continuidad $L^p$ tanto en $\R^n$ como en $\T^n$. Como el enfoque de este trabajo es en el estudio de continuidad de operadores pseudo-diferenciales en el toro, entonces no se incluirán las demostraciones de los resultados en el caso euclideano. Sin embargo, las técnicas que se utilizarán en este caso pueden ser modificadas para recuperar las demostraciones de los casos euclideanos. El primer resultado que se presenta es uno clásico, demostrado por Fefferman \cite{fefferman-Lp} en el contexto euclideano. 
+\begin{theorem}[Fefferman]
+	Sean $0\leq\delta<1-\varepsilon<1$, y sea $T\in \Psi^m_{1-\varepsilon, \delta}(\R^n\times\R^n)$. Suponga que 
+	\begin{equation*}
+		m \leq - n\varepsilon\left|\frac{1}{p} - \frac{1}{2}\right|,
+	\end{equation*}
+	entonces el operador $T$ extiende a un operador continuo de $L^p(\R^n)$ en sí mismo para $1<p<\infty$.
+\end{theorem} 
+Este resultado fue extendido al caso toroidal para el rango $2\leq p<\infty$ por Delgado \cite{delgado}. Sin embargo, se relajan los requerimientos del símbolo como fue el caso en el Teorema \ref{theo:L2-boundedness-T-C}.
+\begin{theorem}[Delgado]
+	Sea $0<\varepsilon<1$, y sea $k\in\N$ tal que $k>n/2$. Sea $a:\T^n\times\Z^n\to\C$ un símbolo tal que 
+	\begin{equation*}
+		|\Delta^\alpha_\xi a(x, \xi)| \lesssim \angles{\xi}^{-n\varepsilon/2-(1-\varepsilon)|\alpha|}, \quad \quad |\partial^\beta_x a(x, \xi)| \lesssim \angles{\xi}^{-n\varepsilon/2},
+	\end{equation*}
+	para $|\alpha|,|\beta|\leq k$. Entonces el operador $T_a$ extiende a un operador acotado de $L^p(\T^n)$ en sí mismo para $2\leq p<\infty$.
+\end{theorem}
+\begin{remark}
+	En el resultado de Delgado se puede entender a $a(x, \xi)$ como un símbolo con regularidad limitada, pero se puede considerar informalmente como un símbolo en una clase de H\"ormander con $\rho=1-\varepsilon$ y $\delta=0$.
+\end{remark}
+Note que en ambos casos se requiere $\delta < \rho$. Esta restricción puede ser salvada gracias al trabajao de \'Alvarez y Hounie \cite{alvarez-hounie}. A partir de este momento, se denota $\lambda := \max\{(\delta - \rho)/2, 0\}$.
+\begin{theorem}[\'Alvarez y Hounie]\label{theo:Alvarez-Hounie}
+	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, y sea $T\in\Psi^m_{\rho, \delta}(\R^n\times\R^n)$. Suponga 
+	\begin{equation*}
+		m \leq -n \left[(1-\rho)\left|\frac{1}{p} - \frac{1}{2}\right|+\lambda\right],
+	\end{equation*}
+	entonces el operador $T$ extiende a un operador continuo de $L^p(\R^n)$ en sí mismo. 
+\end{theorem}
+El análogo toroidal de este resultado fue demostrado con Cardona en 
+\cite{Cardona:Martinez}. Aquí se presenta la prueba del mismo siguiendo el mismo esquema que \'Alvarez y Hounie. Primero, se demuestran unos estimativos del kernel de Schwarz de operadores pseudo-diferenciales toroidales bastante útiles.
+\begin{theorem}
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, con símbolo $p(x, \xi)$ y con kernel
+	\begin{equation}
+		k(x, y) := \sum_{\xi \in \mathbb{Z}^n} e^{i2\pi(x - y) \cdot \xi} p(x, \xi).
+	\end{equation}
+	\begin{enumerate}
+		\item[(a)] (Propiedad pseudo-local) $k$ es suave fuera de la diagonal. Además, dados $\alpha, \beta \in \mathbb{N}^n_0$, entonces para cualquier $N > (m + n + |\alpha + \beta|)/\rho$ se tiene
+		\begin{equation}
+			\sup_{x \neq y} |x - y|^N |\partial^\alpha_x \partial^\beta_y k(x, y)| = C_{\alpha\beta N} < \infty.
+			\label{eq:teo3-1a}
+		\end{equation}
+		\item[(b)] Suponiendo que $p$ tiene soporte compacto en $\xi$ uniformemente en $x$, entonces $k$ es suave y dados $\alpha, \beta \in \mathbb{N}^n_0$, se tiene que 
+		\begin{equation}
+			|\partial^\alpha_x \partial^\beta_y k(x, y)| \lesssim_{\alpha\beta} \langle x - y \rangle^{-N}.
+		\end{equation}
+		\item[(c)] Suponiendo $m + M + n < 0$ para algún $M \in \mathbb{Z}^+$, entonces $k$ es una función continua acotada con derivadas continuas acotadas hasta el orden $M$.\\
+		\item[(d)] Suponiendo $m + M + n = 0$ para algún $M \in \mathbb{Z}^+$, entonces existe $ C >0$ tal que 
+		\begin{equation}
+			\sup_{|\alpha + \beta| = M} |\partial^\alpha_x \partial^\beta_y k(x, y)| \leq C | \log |x-y| | \; , \quad x \neq y.
+		\end{equation} 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Primero, se observa que existe $\tilde{p} \in S^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{R}^n)$ tal que $\tilde{p}|_{\mathbb{T}^n \times \mathbb{Z}^n} = p$ y con $T_{\tilde{p}} = T$. En consecuencia, el kernel de Schwarz puede considerarse como $k(x, y) = \int_{\mathbb{R}^n} e^{i2\pi(x-y)\cdot \xi} \tilde{p}(x, \xi)\diff\xi $. Ahora, las derivadas del kernel se ven de la siguiente manera:
+	\begin{equation}
+		\partial^\alpha_x \partial^\beta_y k(x, y) = \int_{\mathbb{R}^n} (-i2\pi\xi)^\beta e^{i2\pi(x-y)\cdot \xi} \sum_{\omega \leq \alpha} C_\omega (i2\pi\xi)^{\alpha - \omega} \partial^\omega_x \tilde{p}(x, \xi) \diff\xi,
+		\label{eq:derivada-nucleo}
+	\end{equation}
+	que es el núcleo de un operador con símbolo de orden $m + |\alpha + \beta|$. Entonces, es suficiente probar los resultados cuando $|\alpha + \beta| = 0$.
+	\begin{itemize}
+		\item[(a)] La continuidad del kernel $k(x, y)$ se prueba en \cite[Teorema~4.3.6]{ruzhansky-turunen}. Por integración por partes se tiene que
+		\begin{align*}
+			(i2\pi)^{|\gamma|}(x - y)^\gamma k(x, y) =& \int_{\mathbb{R}^n} \partial^\gamma_\xi \left[e^{i2\pi(x-y)\cdot \xi} \right]  \tilde{p}(x, \xi) \diff\xi \\
+			= & (-1)^{|\gamma|} \int_{\mathbb{R}^n} e^{i2\pi(x-y)\cdot \xi} \partial^\gamma_\xi \left[\tilde{p}(x, \xi) \right] \diff\xi .
+		\end{align*}
+		
+		Por lo tanto, si se fija $|\gamma| = N$, se obtiene
+		\begin{align*}
+			|i2\pi|^N|x-y|^N| k(x, y)| \leq & \int_{\mathbb{R}^n} \langle\xi\rangle^{m-\rho N} \diff \xi.
+		\end{align*}
+		La última integral es finita cuando $N > (m + n)/\rho$, probando el resultado.\\
+		\item[(b)] Se observa que el núcleo sería una suma finita de funciones continuas, probando la continuidad de $k(x, y)$. Además, $\tilde{p}$ tendría el mismo soporte de $p$. Por lo tanto, la última integral anterior sería finita sin ninguna restricción sobre $N$.\\
+		\item[(c)] Sea $ m < -n$. Entonces, se tiene la serie finita
+		\begin{align*}
+			| k(x, y)| \leq &  \sum_{\xi \in \mathbb{Z}^n}\langle\xi\rangle^m,
+		\end{align*}
+		probando la acotación de $k(x, y)$.\\
+		\item[(d)] Primero se observa que por (a), (b) es suficiente probar la estimación cuando $|x-y|<1$ y si $\tilde{p}(x, \xi)$ se anula para $|\xi|<1$ uniformemente en $x$. Sea $m + n = 0$ y sea $\varphi \in C_0^\infty(\mathbb{R})$ con soporte en $[0, 1]$, tal que $\int \varphi=1$, y se define 
+		\begin{equation*}
+			k(x, y, t) := \int_{\mathbb{R}^n} e^{i2\pi(x-y)\cdot \xi} \tilde{p}(x, \xi) \varphi(\langle\xi\rangle-t) \diff\xi,
+		\end{equation*}
+		de modo que
+		\begin{equation*}
+			k(x, y) = \int_1^\infty k(x, y, t)\diff t.
+		\end{equation*}
+		Luego, usando integración por partes, se tiene que
+		\begin{align*}
+			(i2\pi)^{|\gamma|}(x - y)^\gamma k(x, y, t) = & \int_{\mathbb{R}^n} \partial^\gamma_\xi\left[ e^{i2\pi(x-y)\cdot \xi} \right] \tilde{p}(x, \xi)\varphi(\langle\xi\rangle - t) \diff \xi \\
+			= & (-1)^{|\gamma|} \int_{\mathbb{R}^n} e^{i2\pi(x-y)\cdot \xi} \sum_{\omega \leq \gamma}C_\omega \partial^\omega_\xi \tilde{p}(x, \xi) \partial^{\gamma - \omega}\varphi(\langle\xi\rangle-t) \diff \xi.
+		\end{align*}
+		Dado que $\langle\xi\rangle \sim t$ en el soporte de $\varphi(\cdot-t)$, que tiene volumen estimado por $Ct^{n-1}$, se obtiene para $|\gamma|=N$
+		\begin{align*}
+			|x-y|^N|k(x, y, t)| \leq & \;C \int_{\supp \varphi(\cdot - t)} \langle\xi\rangle^{m - \rho N} \diff \xi \\
+			\leq & \; C\int_{\supp \varphi(\cdot - t)} t^{m-\rho N}\diff\xi \leq Ct^{m+n - \rho N-1}.
+		\end{align*}
+		Sumando las estimaciones para $N = 0, 1$, se obtiene 
+		\begin{equation*}
+			|k(x, y, t)| \leq C \frac{t^{ -\rho - 1}}{t^{-\rho } + |x - y|}.
+		\end{equation*}           
+	\end{itemize} Entonces, el resultado de evaluar la integral anterior es la estimación deseada $|k(x, y)| \leq  C|\log |x-y|| $ para $x \neq y$.
+\end{proof}
+Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración es muy similar a la realizada por Hounie en \cite{hounie}.
+\begin{theorem}\label{theo:22boundT}
+	Sea $\tilde{p}:\mathbb{T}^n \times \mathbb{R}^n \rightarrow \mathbb{C}$ un símbolo tal que para $0<\rho\leq1$, $0\leq \delta < 1$, $m\leq -n \lambda$ y $|\alpha|,|\beta| \leq \lceil n/2\rceil$ satisface: 
+	\begin{equation}
+		\left|\partial^\alpha_\xi \partial^\beta_x \tilde{p}(x, \xi)\right| \leq C_{\alpha\beta}\langle\xi\rangle^{m-\rho|\alpha| + \delta|\beta|}.
+	\end{equation}
+	Entonces $T_{\tilde{p}}$ es acotado de $L^2(\mathbb{T}^n)$ en sí mismo con  norma proporcional al las mejores cotas $C_{\alpha\beta}$.
+\end{theorem}
+\begin{theorem}
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, $m \leq - n [(1-\rho)/2 + \lambda] $, entonces $T$ es una aplicación continua
+	\begin{itemize}
+		\item[(a)]  de $L^2(\mathbb{T}^n)$ en $L^{2/\rho}(\mathbb{T}^n)$,
+		\item[(b)] de $L^{2/(2-\rho)}(\mathbb{T}^n)$ en $L^{2}(\mathbb{T}^n)$.
+	\end{itemize}
+	\label{teo:cotas-L}
+\end{theorem}
 
+\begin{proof}
+	Primero se observa que $J^{n(1-\rho)/2}T$ y $TJ^{n(1-\rho)/2}$ tienen orden $\leq -n\lambda$, por lo que son acotados en $L^2(\mathbb{T}^n)$ por \cref{theo:22boundT}. Además, por la desigualdad de Hardy-Littlewood-Sobolev, se tiene que $J^{-n(1-\rho)/2}$ es una aplicación continua de $L^2(\mathbb{T}^n)$ en $L^{2/\rho}(\mathbb{T}^n)$ y de $L^{2/(2-\rho)}(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$. Por lo tanto, 
+	\begin{equation*}
+		\| Tf \|_{L^{2/\rho}} = \| J^{-n(1-\rho)/2}J^{n(1-\rho)/2}Tf\|_{L^{2/\rho}} \lesssim \| J^{n(1-\rho)/2}Tf \|_{L^2} \lesssim \| f \|_{L^2},
+	\end{equation*}
+	y 
+	\begin{equation*}
+		\| Tf \|_{L^2} = \| TJ^{n(1-\rho)/2}J^{-n(1-\rho)/2}f\|_{L^2} \lesssim \| J^{-n(1-\rho)/2}f \|_{L^2} \lesssim \|f\|_{L^{2/(2-\rho)}}.
+	\end{equation*}
+	Por lo tanto, se prueba el resultado deseado.
+\end{proof}
+\begin{theorem}	\label{theo:kernel-estimate-sigma}
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, con símbolo $p:=p(x, \xi)$ y con núcleo $k:=k(x, y)$. 
+	\begin{itemize}
+		\item[(a)] Para cualquier $z \in \mathbb{T}^n$ fijo, y $\sigma \geq \varepsilon > 0$, se tienen las desigualdades para el kernel:
+		\begin{equation}
+			\sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma}|k(x, y) - k(x, z)|\diff x \leq C_\varepsilon,
+		\end{equation}
+		\begin{equation}
+			\sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma}|k(y, x) - k(z, x)|\diff x \leq C_\varepsilon.
+		\end{equation}
+		\item[(b)] Si $m \leq -n [(1-\rho)/2 + \lambda] $, y $\sigma < 1$, se tiene para cualquier $z \in \mathbb{T}^n$ fijo, 
+		\begin{equation}
+			\sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma^\rho}|k(x, y) - k(x, z)|\diff x \leq C.
+		\end{equation}
+		\item[(c)] Si $m \leq -n (1 - \rho) / 2$, y $\sigma < 1$, se tiene para cualquier $z \in \mathbb{T}^n$ fijo,
+		\begin{equation}
+			\sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma^\rho}|k(y, x) - k(z, x)|\diff x \leq C.
+		\end{equation} 
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item[(a)] Primero, se observa que $|x-y| \geq |x - z| - |z - y| > \sigma$ en el dominio de evaluación. Luego, por la desigualdad triangular y \cref{eq:teo3-1a} se tiene
+		\begin{equation*}
+			\sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma}|k(x, y) - k(x, z)|\diff x  
+		\end{equation*}
+		\begin{equation*}
+			\leq \sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma}|k(x, y)|\diff x + \sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma}|k(x, z)|\diff x
+		\end{equation*}
+		\begin{equation*}
+			\lesssim  \int_{|x-y|>\sigma} |x-y|^{-N} \diff x + \int_{|x-z|>\sigma} |x-z|^{-N} \diff x
+		\end{equation*}
+		\begin{equation*}
+			\leq  \int_{\mathbb{T}^n} \sigma^{-N} \diff x + \int_{\mathbb{T}^n} \sigma^{-N} \diff x \leq C_\varepsilon.
+		\end{equation*}
+		
+		\item[(b)] Como antes, sea $\tilde{p}$ el símbolo correspondiente en $\mathbb{T}^n \times \mathbb{R}^n$.  Sea $\varphi \in C_0^\infty(\mathbb{R})$ con soporte contenido en $[1/2, 1]$, tal que 
+		\begin{equation*}
+			\int_0^\infty\varphi(1/t)/t \diff t =\int_1^2\varphi(1/t)/t \diff t = 1.
+		\end{equation*} 
+		Se define 
+		\begin{equation*}
+			k(x, y, t) := \int_{\mathbb{R}^n} e^{i2\pi(x - y) \cdot \xi} \tilde{p}(x, \xi) \varphi(\langle\xi\rangle/t) \diff \xi,
+		\end{equation*}
+		de modo que  
+		\begin{equation*}
+			k(x, y) = \int_0^\infty k(x, y, t) \diff t = \int_1^\infty k(x, y, t) \diff t.
+		\end{equation*}
+		Sea $N > n/2$ un entero, entonces se obtienen las estimaciones por Cauchy-Schwarz
+		\begin{equation*}
+			\int_{|x-z|>2\sigma^\rho} |k(x, y, t) - k(x, z, t)| \diff x
+		\end{equation*}
+		\begin{equation*}
+			\leq  \left[ \int_{\mathbb{T}^n} (1+t^{2\rho}|x-z|^2)^N |k(x, y, t) - k(x, z, t)| \diff x  \right]^{1/2} \left[ \int_{\mathbb{T}^n} (1+t^{2\rho}|x-z|^2)^{-N} \diff x \right]^{1/2} 
+		\end{equation*}
+		\begin{equation}
+			\lesssim \left[ \int_{\mathbb{T}^n} (1+t^{2\rho}|x-z|^2)^N |k(x, y, t) - k(x, z, t)| \diff x  \right]^{1/2}t^{-\rho n/2}.
+			\label{eq:primera-cota-b}
+		\end{equation}
+		Así, para $|\alpha| \leq N$ se tiene que
+		\begin{equation*}
+			t^{\rho|\alpha|}(x-z)^\alpha \int_{\mathbb{R}^n} \left[ e^{i2\pi(x - y) \cdot \xi} - e^{i2\pi(x - z) \cdot \xi} \right]\tilde{p}(x, \xi)\varphi(\langle\xi\rangle/t)\diff \xi 
+		\end{equation*}
+		\begin{equation*}
+			=t^{\rho|\alpha|}(x-z)^\alpha \int_{\mathbb{R}^n} e^{i2\pi(x - z) \cdot \xi} \left[ e^{i2\pi(z - y) \cdot \xi} - 1 \right]\tilde{p}(x, \xi)\varphi(\langle\xi\rangle/t)\diff \xi 
+		\end{equation*}
+		\begin{equation*}
+			=\sum_{\beta\leq\alpha} C_{\alpha\beta} t^{\rho|\alpha|} \int_{\mathbb{R}^n} e^{i2\pi(x - z) \cdot \xi} \partial^\beta_\xi \left[ 
+			\left(e^{i2\pi(z - y) \cdot \xi} - 1 \right) \tilde{p}(x, \xi) \right] \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi.
+		\end{equation*}
+		Ahora, $|e^{i2\pi(x - z) \cdot \xi}-1| \leq |x-z||\xi|\leq t\sigma$ en el soporte de $\varphi(\langle\xi\rangle/t)$. Por otro lado, 
+		\begin{equation*}
+			|\partial^\gamma_\xi e^{i2\pi(x - z) \cdot \xi}| \lesssim_\gamma|y-z|^{|\gamma|} \lesssim_\gamma \sigma ^{|\gamma|} \lesssim C\langle\xi\rangle^{-|\gamma|}(t\sigma)^{|\gamma|}.
+		\end{equation*}
+		Asuma que $t\sigma < 1$, entonces para cualquier $\chi \in C_0^\infty(\mathbb{R}^n)$, que es igual a uno en el soporte de $\varphi(\langle\xi\rangle/t)$ el conjunto
+		\begin{equation*}
+			\Sigma_{\alpha\beta}=\left\{ \langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} \partial^\beta_\xi \left[\left( e^{i2\pi(x - z) \cdot \xi}-1 \right) 
+			\tilde{p}(x, \xi) \right] \chi(\langle\xi\rangle/t) : |y-z| < \sigma,\; z \in \mathbb{T}^n \right\}
+		\end{equation*}
+		tiene medida acotada por $C\langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} (t\sigma)\langle\xi\rangle^{m-\rho |\beta|} \leq Ct\sigma \langle\xi\rangle^{-n\lambda} $. Así, se puede considerar $\tilde{p}(x, \xi)$ como un símbolo en $\mathbb{R}^n\times\mathbb{R}^n$ y por \cref{theo:Alvarez-Hounie} cada uno de los operadores correspondientes con símbolos $$\langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} \partial^\beta_\xi \left[\left( e^{i2\pi(x - z) \cdot \xi}-1 \right) 
+		\tilde{p}(x, \xi) \right] \chi(\langle\xi\rangle/t),$$ en el conjunto $\Sigma_{\alpha\beta}$ son acotados en $L^2(\mathbb{R}^n)$ con norma estimada por $Ct\sigma$.
+		Por lo tanto, \cref{eq:primera-cota-b} puede estimarse usando la identidad de Plancherel mediante 
+		\begin{equation*}
+			Ct\sigma\sum_{\beta\leq\alpha,\;|\alpha|\leq N} C_{\alpha\beta}t^{\rho|\alpha|}\left\|  
+			\langle\xi\rangle^{-n(1-\rho)/2 - \rho|\beta|} t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t) \right\|_{L^2(\mathbb{R}^n)}t^{-\rho n/2} 
+		\end{equation*}
+		\begin{equation}
+			\leq Ct\sigma t^{\rho|\alpha|} t^{-n(1-\rho)/2 - \rho|\beta|}t^{-|\alpha-\beta|}t^{-\rho n/2} \leq Ct\sigma, 
+			\label{eq:tsigma<1-b}
+		\end{equation}
+		como $\angles{\xi}\sim t$ en el soporte de la función. Ahora, se elimina la restricción $t\sigma < 1$. Para $|\alpha| = N$ se tiene que
+		\begin{equation*}
+			\int_{|x-z|>2\sigma^\rho} |k(x, y, t)| \diff x 
+		\end{equation*}
+		\begin{equation*}
+			\leq \left[ \int_{\mathbb{T}^n} \left( t^{2\rho} |x-y|^2 \right)^N |k(x, y, t)|^2 \diff x \right]^{1/2} \left[ \int_{|x-y|>\sigma^\rho} \left(|t^{2\rho}|x-y|^2\right)^{-N}\diff x \right]^{1/2}
+		\end{equation*}
+		\begin{equation}
+			\leq C \left[ \int_{\mathbb{T}^n} \left( t^{2\rho}|x-y|^2 \right)^N|k(x,y,t)|^2 \diff x \right]^{1/2}t^{-\rho N}\sigma^{\rho(n/2 - N)}.
+			\label{eq:segunda-cota-b}
+		\end{equation} 
+		Sea $|\alpha|=N$, entonces 
+		\begin{equation*}
+			t^{\rho|\alpha|} (x-y)^\alpha \int_{\mathbb{R}^n} e^{i2\pi(x - y) \cdot \xi} \tilde{p}(x, \xi)\varphi(\langle\xi\rangle/t)\diff\xi 
+		\end{equation*}
+		\begin{equation*}
+			= \sum_{\beta\leq\alpha} C_{\alpha\beta}t^{\rho|\alpha|} \int_{\mathbb{R}^n} e^{i2\pi(x - y) \cdot \xi} \partial^\beta_\xi \tilde{p}(x, \xi)t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi,
+		\end{equation*}
+		y para cada $\beta\leq\alpha$ la norma $L^2(\mathbb{T}^n)$ como función de $x$ de 
+		\begin{equation*}
+			\int_{\mathbb{R}^n} e^{i2\pi(x - y) \cdot \xi} \partial^\beta_\xi \tilde{p}(x, \xi)t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi
+		\end{equation*}
+		es igual a la norma $L^2(\mathbb{T}^n)$ como función de $x$ de 
+		\begin{equation*}
+			\int_{\mathbb{R}^n} e^{i2\pi x \cdot \xi} \partial^\beta_\xi \tilde{p}(x+y, \xi)t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi.
+		\end{equation*}
+		Por otro lado, el conjunto $\{ \langle\xi\rangle^{n(1-\rho)/2 + \rho|\beta|} \partial^\beta_\xi\tilde{p}(x + y, \xi) : y \in \mathbb{T}^n  \}$ tiene medida acotada por $C\langle\xi\rangle^{n(1-\rho)/2 + \rho|\beta|} \langle\xi\rangle^{m- \rho|\beta|} = C\langle\xi\rangle^{n(1-\rho)/2 +m}   $, así que sus respectivos operadores son acotados en $L^2(\mathbb{R}^n)$ por \cref{theo:Alvarez-Hounie}. Por lo tanto, \cref{eq:segunda-cota-b} puede estimarse mediante  
+		\begin{equation*}
+			C\sum_{\beta\leq\alpha,\; |\alpha|=N} t^{\rho|\alpha|}t^{-n(1-\rho)/2 - \rho|\beta|}t^{-\rho|\alpha-\beta|}t^{n/2}t^{\rho N} \sigma^{\rho(n/2 - N)} \leq C(t\sigma)^{\rho (n/2 - N)}.
+		\end{equation*}
+		De manera similar, se puede estimar 
+		\begin{equation*}
+			\int_{|x-z|>2\sigma^\rho} |k(x, z, t)| \diff x \leq C(t\sigma)^{\rho(n/2 - N)}.
+		\end{equation*}
+		Usando estas estimaciones y \cref{eq:tsigma<1-b} se obtiene el resultado de la siguiente expresión:
+		\begin{equation}
+			\int_{|x-z| > 2\sigma^\rho}|k(x, y) - k(x, z)|\diff x \lesssim \int_1^{1/\sigma} t\sigma/t \diff t + \int_{1/\sigma}^\infty(t\sigma)^{\rho(n/2-N)}/t\diff t \leq C
+			\label{eq:ultima-cota-b}.
+		\end{equation} 
+		Completando la demostración.\\
+		
+		\item[(c)] Primero, se observa que
+		\begin{equation*}
+			k(y, x, t) - k(z, x, t) 
+		\end{equation*}
+		\begin{equation*}
+			=\int_{\mathbb{R}^n} e^{-i2\pi (x-y) \cdot \xi}[\tilde{p}(y, \xi) - \tilde{p}(z, \xi)]\varphi(\langle\xi\rangle/t) \diff \xi
+		\end{equation*}
+		\begin{equation*}
+			+  
+			\int_{\mathbb{R}^n} e^{-i2\pi x \cdot \xi} \left[ e^{i2\pi y \cdot \xi} -e^{i2\pi z \cdot \xi}  \right]\tilde{p}(z, \xi)\varphi(\langle\xi\rangle/t) \diff \xi
+		\end{equation*}
+		\begin{equation*}
+			=f(x-y, y, z, t) + g(x, y, z, t).
+		\end{equation*}
+		Entonces, se obtiene 
+		\begin{align*}
+			\int_{\mathbb{T}^n}|g(x, y, z, t)|\diff x  & \lesssim t^{-\rho n/2} \left[ \int_{\mathbb{T}^n} |g(x, y, z, t)|^2(1 + t^{2\rho}|x|^2)^N \diff x  \right]^{1/2}\\
+			 & \lesssim t^{-\rho n/2} \sum_{|\alpha|\leq N}  \left[ \int_{\mathbb{T}^n} |(t^\rho x)^\alpha g(x, y, z, t)|^2\diff x  \right]^{1/2}.
+		\end{align*}
+		Se observa que $g$ es la transformada de Fourier en $\mathbb{R}^n$ en la primera variable de la función $G(\xi, y, z, t) = \left[ e^{i2\pi y \cdot \xi} -e^{i2\pi z \cdot \xi}  \right]\tilde{p}(z, \xi)\varphi(\langle\xi\rangle/t)$. Además, como antes, $|\partial^\gamma_\xi( e^{i2\pi y \cdot \xi} -e^{i2\pi z \cdot \xi}  )| \leq Ct\sigma$ cuando $t\sigma<1$. Por lo tanto, asumiendo $t\sigma < 1$ y usando la identidad de Plancherel, se obtiene
+		\begin{align*}
+			\int_{\mathbb{T}^n}|g(x, y, z, t)|\diff x  &\lesssim t^{-\rho n/2} \sum_{|\alpha|\leq N} \left\| \partial^\alpha_\xi G(\xi, y, z ,t) \right\|_{L^2(\mathbb{R}^n)}\\ 
+			 & \leq t^{-\rho n/2} \sum_{\beta\leq\alpha,\;|\alpha|\leq N} \left\| \partial^\beta\xi \left[ (e^{i2\pi y \cdot \xi} -e^{i2\pi z \cdot \xi})  \tilde{p}(z, \xi)\right]  \partial^{\alpha-\beta}_\xi\varphi(\langle\xi\rangle/t)  \right\|_{L^2(\mathbb{R}^n)} \\
+			 & \lesssim t^{-\rho n/2} \sum_{\beta\leq\alpha,\;|\alpha|\leq N} t\sigma t^{m-\rho|\beta|}t^{-|\alpha-\beta|}t^{n/2} \\
+			& \leq t\sigma t^{n(1-\rho)/2 + m} \leq t\sigma.
+		\end{align*}
+		Ahora, se elimina la restricción $t\sigma<1$ y se observa que
+		\begin{equation*}
+			g(x, y, z, t) = \int_{\mathbb{R}^n} e^{-i2\pi (x-z) \cdot \xi} \left[ e^{i2\pi (y-z) \cdot \xi} -1 \right]\tilde{p}(z, \xi)\varphi(\langle\xi\rangle/t) \diff \xi.
+		\end{equation*}
+		Así, se tiene que
+		\begin{equation*}
+			\int_{\mathbb{T}^n} |g(x, y, z, t)|\diff x \leq Ct^{-\rho N}\sigma^{\rho(n/2 - N)} \left[ \int_{\mathbb{T}^n} (t^{2\rho}|x-z|^2)^N|g(x, y, z, t)|^2\diff x \right].
+		\end{equation*}
+		Se puede usar la identidad de Plancherel como antes, para obtener
+		\begin{align*}
+			\int_{\mathbb{T}^n} |g(x, y, z, t)|\diff x \leq & Ct^{-\rho N}\sigma^{\rho(n/2 - N)} \sum_{\beta\leq\alpha,\;|\alpha|=N} \left\| \partial^\beta_\xi \left[ (e^{i2\pi (y-z) \cdot \xi} -1)\tilde{p}(z, \xi) \right] \partial^{\alpha-\beta}_\xi\varphi(\langle\xi\rangle/t) \right\|_{L^2(\mathbb{R}^n)} \\
+			\leq& Ct^{-\rho N}\sigma^{\rho(n/2 - N)} \sum_{\beta\leq\alpha,\;|\alpha|=N}t^{-|\alpha-\beta|}t^{n/2} \\
+			\leq & C(t\sigma)^{\rho(n/2-N)}.
+		\end{align*}
+	\end{itemize}
+	Se pueden usar los mismos procedimientos para encontrar estas cotas para $f(x-y, y,z, t)$ al observar que $\int_{|x-z|>2\sigma^\rho} |f(x-y, y,z, t)|\diff x \leq \int_{|x|>\sigma^\rho} |f(x, y,z, t)|\diff x$. Entonces la cota deseada proviene del cálculo en \cref{eq:ultima-cota-b}.
+\end{proof}
+\begin{theorem}
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, $m \leq - n [(1-\rho)/2 + \lambda] $, entonces $T$ y su adjunto $T^*$ son aplicaciones continuas
+	\begin{itemize}
+		\item[(a)] del espacio de Hardy $H^1(\mathbb{T}^n)$ en $L^1(\mathbb{T}^n)$,
+		\item[(b)] de $L^\infty(\mathbb{T}^n)$ en $\text{BMO}(\mathbb{T}^n)$.
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item[(a)] Sea $a$ un átomo de $H^1(\mathbb{T}^n)$ con soporte en $B(z, \sigma)$, que satisface $\|a\|_{L^\infty}\leq |B|^{-1}$ y la condición de cancelación. Si $\sigma < 1$, se define $B'=B(z, 2\sigma^\rho)$ y $A = \mathbb{T}^n\setminus B'$. Entonces 
+		\begin{equation*}
+			\int_{\mathbb{T}^n}|Ta(x)|\diff x \leq \int_{B'}|Ta(x)|\diff x  + \int_{A}|Ta(x)|\diff x =: I_1 + I_2.
+		\end{equation*}
+		Ahora, usando la desigualdad de Cauchy-Schwarz y el \cref{teo:cotas-L} (b) se obtiene 
+		\begin{align*}
+			I_1  &\leq \|\chi_{B'}\|_{L^2}\|Ta\|_{{L^2}}\lesssim \sigma^{\rho n/2}\|a\|_{L^{2/(2-\rho)}} \\ 
+			 &\leq  \sigma^{\rho n/2} \left[ \int_B |B|^{-2/(2-\rho)}\diff x\right]^{(2-\rho)/2} 
+			\leq  \sigma^{\rho n/2}|B|^{-\rho/2} \leq C,
+		\end{align*}
+		y usando el \cref{theo:kernel-estimate-sigma} (b) se tiene la estimación,
+		\begin{equation*}
+			I_2 \leq \int_A\int_B |k(x, y) - k(x, z)||a(y)|\diff y \diff x \leq \sup_{|y-z|<\sigma}\int_A|k(x,y)-k(x, z)|\diff x \leq C.
+		\end{equation*}
+		Cuando $\sigma \geq 1$, se define $B'=B(z, 2\sigma)$ y $A = \mathbb{T}^n\setminus B'$. Entonces se divide la norma $L^1(\mathbb{T}^n)$ en $I_1 + I_2$ como anteriormente. Ahora se usa el \cref{teo:cotas-L} (a) para obtener
+		\begin{align*}
+			I_1  &\leq \|\chi_{B'}\|_{L^2}\|Ta\|_{{L^2}}\lesssim\sigma^{ n/2}\|a\|_{L^{2}} \\ 
+			 & \lesssim \sigma^{ n/2} \left[ \int_B |B|^{-2}\diff x\right]^{1/2}  \leq \sigma^{n/2}|B|^{-1/2}\leq C,
+		\end{align*}
+		y se usa el \cref{theo:kernel-estimate-sigma} (a) para estimar $I_2$.\\
+		
+		\item[(b)] Sea $B = B(z, \sigma)$. Si $\sigma < 1$, se define $B'=B(z, 2\sigma^\rho)$ y $A = \mathbb{T}^n\setminus B'$ de modo que se obtiene $f = f\chi_{B'} + f\chi_A =: f_1 + f_2$. Ahora, se define $b = Tf_2(z)$, que está bien definido, ya que $Tf_2$ es suave en $B'$. Entonces 
+		\begin{equation*}
+			\frac{1}{|B|}\int_B|Tf(x) - b| \diff x \leq \frac{1}{|B|}\int_B|Tf_1(x)|\diff x + \frac{1}{|B|}\int_B|Tf_2(x) -b|\diff x =: I_1 + I_2.
+		\end{equation*}
+		Por la desigualdad de H\"older y el \cref{teo:cotas-L} (a) se tienen las desigualdades
+		\begin{equation*}
+			I_1 \leq \frac{1}{|B|}\left\|\chi_{B'}\right\|_{L^{2/(2-\rho)}}\|Tf_1\|_{L^{2/\rho}}
+			\lesssim |B|^{-\rho/2}\|f_1\|_{L^2} \leq |B|^{-\rho/2}\left[\int_{B'}\|f\|^2_{L^\infty}\diff x\right]^{1/2} \lesssim  \|f\|_{L^\infty},
+		\end{equation*}
+		y usando el \cref{theo:kernel-estimate-sigma} (c) se obtiene 
+		\begin{equation*}
+			I_2 \leq \frac{1}{|B|}\int_B\int_A|k(x, y) - k(z, y)||f(y)|\diff y \diff x \leq \sup_{|y-z|<\sigma}\int_A|k(x, y) - k(z, y)|\|f\|_{L^\infty} \diff y \lesssim \|f\|_{L^\infty}.
+		\end{equation*}
+		Cuando $\sigma \geq 1$, se define $B'=B(z, 2\sigma)$ y $A = \mathbb{T}^n\setminus B'$. Entonces se divide la norma BMO en $I_1 + I_2$ como anteriormente. Ahora se usa la desigualdad de Cauchy-Schwarz y el \cref{teo:cotas-L} (b) para obtener
+		\begin{equation*}
+			I_1 \leq\frac{1}{|B|} \left\|\chi_B\right\|_{L^2}\left\|Tf_1\right\|_{L^2} = |B|^{-1/2}\|Tf_1\|_{L^2} \lesssim |B|^{-1/2}\left[\int_{B'}\|f\|^2_{L^\infty}\diff x\right]^{1/2} \lesssim  \|f\|_{L^\infty},
+		\end{equation*}
+		y se usa \cref{theo:kernel-estimate-sigma} (a) para estimar $I_2$. Así, se obtiene la desigualdad
+		\begin{equation*}
+			\|Tf\|_{\mathrm{BMO}(\mathbb{T}^n)} = \sup_B \inf_{b\in \mathbb{C}} \frac{1}{|B|} \int_B |Tf(x) - b|\diff x \lesssim \|f\|_{L^\infty(\mathbb{T}^n)}.
+		\end{equation*}
+		Por lo tanto, se completa la demostración para $T$. 
+	\end{itemize}  
+	Ahora, se observa que las únicas propiedades de $T$ que se usaron en esta demostración son el orden del operador y el hecho de que su núcleo satisface \cref{theo:kernel-estimate-sigma}, propiedades que también aplican a $T^*$. Por lo tanto, el resultado también es válido para $T^*$.
+\end{proof}
+\begin{theorem}
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$ y  
+	\begin{equation}
+		m \leq - n \left[(1-\rho)\left|\frac{1}{p} - \frac{1}{2}\right| + \lambda\right] .
+		\label{eq:restriccion-Lp}
+	\end{equation} 
+	Entonces $T$ es una aplicación continua de $L^p(\mathbb{T}^n)$ en sí mismo.
+	\label{teo:cotas-Lp}
+\end{theorem}
+\begin{proof}
+	Se puede usar el argumento de interpolación compleja entre $(H^1(\mathbb{T}^n),\; L^1(\mathbb{T}^n))$ y  $(L^2(\mathbb{T}^n),\; L^2(\mathbb{T}^n))$ para $1 < p < 2$, y entre $(L^2(\mathbb{T}^n),\; L^2(\mathbb{T}^n))$ y el par $(L^1(\mathbb{T}^n),\; \mathrm{BMO}(\mathbb{T}^n))$ para $2 < p<\infty$. De hecho, $T$ es acotado en $L^2(\mathbb{T}^n)$ si $m\leq -n\lambda$ por \cref{theo:22boundT}. Por otro lado, si $m\leq -n[(1-\rho)/2 + \lambda]$, entonces $T$ será acotado de $H^1(\mathbb{T}^n)$ en $L^1(\mathbb{T}^n)$ y de $L^\infty(\mathbb{T}^n)$ en $\mathrm{BMO}(\mathbb{T}^n)$. Entonces $T$ será acotado en $L^p(\mathbb{T}^n)$, por el argumento de interpolación de Fefferman-Stein, para
+	\begin{equation*}
+		\frac{1}{p} = \frac{1-\theta}{q} + \frac{\theta}{2},
+	\end{equation*}
+	y $0<\theta<1$, con $q=1$ o $q=\infty$. Lo cual es equivalente a la restricción 
+	\begin{equation*}
+		m \leq -n\lambda\theta - n\left[(1-\rho)/2 +\lambda\right](1 - \theta).
+	\end{equation*}
+	Es decir, que $m$ satisface \cref{eq:restriccion-Lp}, completando la demostración.
+\end{proof}
+Se pueden usar las propiedades de los operadores de potencial de Bessel para extender el resultado de acotación en $L^p(\mathbb{T}^n)$ al caso $L^p(\mathbb{T}^n)$-$L^q(\mathbb{T}^n)$. En el caso del toro, el siguiente teorema extiende el resultado de acotación $L^p(\mathbb{T}^n)$-$L^q(\mathbb{T}^n)$ en  \cite{cardona-delgado-kumar} al rango completo $0 < \rho \leq 1$, $0 \leq \delta < 1$.
+\begin{theorem}
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, entonces $T$ es una aplicación continua de $L^p(\mathbb{T}^n)$ en $L^q(\mathbb{T}^n)$ para $1<p\leq q<\infty,$ si 
+	\begin{itemize}
+		\item[(a)]  $1<p\leq 2\leq q$ y 
+		\begin{equation}
+			m\leq -n \left( \frac{1}{p} - \frac{1}{q} + \lambda \right),
+			\label{eq:cotas-Lp-Lq-a}
+		\end{equation}
+		\item[(b)]  $2\leq p \leq q$ y 
+		\begin{equation}
+			m \leq -n \left[ \frac{1}{p} - \frac{1}{q} + (1-\rho)\left(\frac{1}{2} - \frac{1}{p}\right) + \lambda \right],
+			\label{eq:cotas-Lp-Lq-b}
+		\end{equation}
+		\item[(c)]  $p\leq q\leq 2$ y  
+		\begin{equation}
+			m \leq -n \left[ \frac{1}{p} - \frac{1}{q} + (1-\rho)\left(\frac{1}{q} - \frac{1}{2}\right) + \lambda \right].
+			\label{eq:cotas-Lp-Lq-c}
+		\end{equation}
+	\end{itemize}
+	\label{teo:cotas-Lp-Lq}
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item[(a)] Sean $m_1 = -n(1/p - 1/2)$ y $m_2=-n(1/2 - 1/q)$. Entonces $m\leq m_1+m_2-n\lambda$ y $J^{-m_2}TJ^{-m_1}$ es acotado en $L^2(\mathbb{T}^n)$ por \cref{theo:22boundT}. Además, por la desigualdad de Hardy-Littlewood-Sobolev, se obtiene que $J^{m_1}$ es acotado de $L^p(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ y $J^{m_2}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$. Por lo tanto, 
+		\begin{equation*}
+			\| J^{m_2}(J^{-m_2}TJ^{-m_1})J^{m_1}f \|_{L^q} \lesssim \|(J^{-m_2}TJ^{-m_1})J^{m_1}f  \|_{L^2} \lesssim \| J^{m_1}f \|_{L^2} \lesssim  \| f\|_{L^p}.
+		\end{equation*}
+		Así, se prueba el resultado.\\
+		
+		\item[(b)] Sea $m' = -n(1/p - 1/q)$, de modo que $J^{m'}$ es continuo de  $L^p(\mathbb{T}^n)$ en $L^q(\mathbb{T}^n)$ y $J^{-m'}T$ tiene orden $m-m' \leq -n[(1-\rho)(1/2 - 1/q) + \lambda]$ y es una aplicación continua de $L^p(\mathbb{T}^n)$ en sí mismo. Así, se tiene que
+		\begin{equation*}
+			\| J^{m'}(J^{-m'}T)f \|_{L^q} \lesssim \|(J^{-m'}T)f\|_{L^p} \lesssim \|f\|_{L^p}.
+		\end{equation*}
+		Por lo tanto, se obtiene la estimación deseada.\\
+		
+		\item[(c)] Como anteriormente, se define  $m' = -n(1/p - 1/q)$ de modo que $TJ^{-m'}$ aplica continuamente  $L^q(\mathbb{T}^n)$ en sí mismo y
+		\begin{equation*}
+			\|(TJ^{-m'})J^{m'}f\|_{L^q} \lesssim \|J^{m'}f\|_{L^q} \lesssim \|f\|_{L^p}.
+		\end{equation*}
+		Por lo tanto, se completa la demostración.
+	\end{itemize}
+\end{proof}
 \section{Continuidad en espacios de Sobolev}
 Primero, se revisita la definición de espacios de Sobolev utilizando los operadores pseudo-diferenciales que han sido definidos en apartados anteriores.
 \begin{definition}[Espacios de Sobolev]
@@ -1732,6 +2151,48 @@ Ahora, se demuestra que la definición revisitada de espacios de Sobolev coincid
 		& \lesssim \sum_{|\alpha|\leq k} \|\partial^\alpha_xf\|_{L^p}
 	\end{align*}
 	Lo que completa la prueba de equivalencia de definiciones.
+\end{proof}
+La definición de espacios de Sobolev también puede realizarse mediante el potencial de Bessel en el caso del toro.
+\begin{definition}[Espacios de Sobolev]
+Sea $s\in\R$, entonces se dice que $f$ pertenece al \textit{espacio de Sobolev} $W^s_p(\T^n)$, si $J^sf\in L^p(\T^n)$, donde $1\leq p\leq\infty$ y $J^s$ es el potencial de Bessel de orden $s$. Además, se define la norma
+\begin{equation*}
+	\|f\|_{W^s_p} := \|J^sf\|_{L^p}.
+\end{equation*} 
+\end{definition}
+Ahora, se extiende el \cref{teo:cotas-Lp-Lq} a espacios de Sobolev.
+\begin{theorem}
+	Sean $0\leq\delta<1$, $0<\rho\leq 1$, $m\in\mathbb{R}$, y $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$. Entonces, $T$ se extiende a un operador acotado de $W^{s}_p(\mathbb{T}^n)$ en $W^{s-\mu}_q (\mathbb{T}^n)$ donde $1<p\leq q<\infty$, para cualquier $s\in\mathbb{R}$, cuando 
+	\begin{enumerate}
+		\item $1<p\leq 2 \leq q$ y 
+		\begin{equation*}
+			\mu \geq m + n \left( \frac{1}{p} - \frac{1}{q} + \lambda
+			\right),
+		\end{equation*}
+		\item si $2 \leq p \leq q$ y 
+		\begin{equation*}
+			\mu \geq m + n \left[ \frac{1}{p} - \frac{1}{q} + (1-\rho) \left( \frac{1}{2} - \frac{1}{p}
+			\right)
+			+ \lambda
+			\right],
+		\end{equation*}
+		\item si $p\leq q \leq 2$ y 
+		\begin{equation*}
+			\mu \geq m + n \left[ \frac{1}{p} - \frac{1}{q} + (1-\rho) \left( \frac{1}{q} - \frac{1}{2}
+			\right)
+			+ \lambda
+			\right],
+		\end{equation*}
+	\end{enumerate}
+	donde $\lambda := \max\{ 0, (\delta-\rho)/2 \}$. 
+\end{theorem}
+\begin{proof}
+	Se observa que $J^{s-\mu}T J^{-s}$ tiene orden $m-\mu$, que satisface los requisitos del \cref{teo:cotas-Lp-Lq}, implicando su continuidad $L^p$-$L^q$. Por lo tanto, se obtiene que
+	\begin{equation*}
+		\|T f\|_{W^{s-\mu}_q} = \|T J^{-s}J^sf\|_{W^{s-\mu}_q} 
+		= \|J^{s-\mu}T J^{-s}J^sf\|_{L^q}
+		\lesssim \|J^sf\|_{L^p} = \|f\|_{W^s_p}. 
+	\end{equation*}
+	Así, se completa la demostración.
 \end{proof}
 
 
