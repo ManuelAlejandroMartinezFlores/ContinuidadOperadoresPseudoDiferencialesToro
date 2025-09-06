@@ -1015,7 +1015,22 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 		\Delta|F|^q = q|F|^{q-4} \left[ (q-2)\sum (\partial_jF\cdot F)^2 + |F|^2\sum |\partial_jF|^2
 		\right].
 	\end{equation*}
-	Ahora, si $q\geq2$, por la desigualdad de Schwarz se tiene que $\sum(\partial_jF\cdot F)^2 \leq |F|^2\sum|\partial_jF|^2$ y es claro que $\Delta(|F|^q)\geq 0$.
+	Ahora, si $q\geq2$, por la desigualdad de Schwarz se tiene que $\sum(\partial_jF\cdot F)^2 \leq |F|^2\sum|\partial_jF|^2$ y es claro que $\Delta(|F|^q)\geq 0$. Cuando $q<2$, tome la matriz $M=(m_{jk}) := \partial_ju_k$, que es simétrica y por lo tanto diagonalizable a una matriz con diagonal $\lambda_0\geq\ldots\geq\lambda_n$. Como la traza es invariante respecto a conjugados, se tiene que
+	\begin{equation*}
+		\lambda_0 = -\sum_{j>0}\lambda_j,
+	\end{equation*}
+	y por la desigualdad de Schwarz,
+	\begin{equation*}
+		\lambda_0^2 \leq n \sum_{j>0} \lambda_j^2.
+	\end{equation*}
+	Ahora, la norma operador y la norma Frobenius de la matriz también son invariantes y se obtiene que 
+	\begin{equation*}
+		\|M\|_{op}^2 = \lambda_0^2 \leq \frac{n}{n+1} \sum_{j}\lambda_j^2 = \frac{n}{n+1} \|M\|_{F}^2.
+	\end{equation*}
+	Esto implica que 
+	\begin{equation*}
+		\sum_j(\partial_jF\cdot F)^2 \leq \frac{n}{n+1}  |F|^2\sum_j|\partial_jF|^2
+	\end{equation*}
 \end{proof}
 \begin{theorem}[Definición equivalente del espacio de Hardy $H^1(\R^n)$]\label{theo:H1-F}
 	Sea $F:=(u_0, \ldots, u_n)$ tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$. Entonces el espacio de dichas funciones que satisfacen que su norma 
