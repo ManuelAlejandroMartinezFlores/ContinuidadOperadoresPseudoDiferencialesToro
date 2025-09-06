@@ -973,9 +973,287 @@ La demostración del hecho que los espacios de Sobolev son espacios de Banach es
 	Sea $s\in\N$, tal que $s>k+n/2$. Entonces se tiene que el espacio de Sobolev $W^s_2(\T^n)$ está contenido en el espacio de H\"older $C^k(\T^n)$ y la inclusión es continua.
 \end{theorem}
 \section{Espacios de Hardy en $\R^n$ y $\T^n$}
-TODO TODO
-
-
+En este apartado se presentan las bases de la teoría de interpolación compleja que permite extender propiedades de continuidad a espacios $L^p$ con $1<p<\infty$. Esto es posible gracias al clásico resultado de Fefferman \cite{fefferman-BMO}, que indica que el espacio de funciones de oscilación media acotada $\mathrm{BMO}$ es el dual del espacio de Hardy $H^1$.
+\begin{definition}[Espacio de Hardy $H^1(\R^n)$]
+	Se dice que $f\in L^1(\R^n)$ se encuentra en el\textit{espacio de Hardy} $H^1(\R^n)$ si existen $f_1,\ldots,f_n\in L^1(\R^n)$ que satisfacen
+	\begin{equation*}
+		\widehat{f_j} (\xi)= \frac{i\xi_j}{|\xi|}\widehat{f}(\xi).
+	\end{equation*}
+	Se escribe $f_j=:R_jf$, y se le conoce como la transformada de Riesz, y se define la norma 
+	\begin{equation*}
+		\|f\|_{H^1} := \|f\|_{L^1} + \sum_{1\leq j\leq n} \|R_jf\|_{L^1}.
+	\end{equation*}
+\end{definition}
+\begin{proposition}[Principio maximal]
+	Sea $u$ una función real de clase $C^2$ en una región acotada $\Omega\subset\R^n$ y continua en $\overline{\Omega}$. Suponga que $\Delta u \geq 0$ en $\Omega$ y que $u\leq0$ en su frontera, entonces se tiene que $u\leq 0$ en todo $\Omega$.
+\end{proposition}
+\begin{proof}
+	Sin pérdida de generalidad, se puede suponer que $\nabla^2 u > 0$, en caso contrario se puede tomar $u+\varepsilon|x|^2 - \delta$ para $\varepsilon,\delta>0$ pequeños. Suponga que no vale $u\leq 0$ para todo $\Omega$, entonces existe algún máximo positivo en algún $x_0\in\Omega$. Como $\nabla u(x_0) >0$, se tiene que al menos algún $\partial^2_j u(x_0) > 0$. Además, como es máximo, se cumple $\partial_j u(x_0) = 0$. Usando el teorema de Taylor,
+	\begin{equation*}
+		u(x_0+he_j) - u(x_0) = \frac{1}{2} h^2\partial^2_j u(x_0) + o(h^3).
+	\end{equation*}
+	Por lo que no es un máximo y se obtiene la contradicción.
+\end{proof}
+\begin{lemma}
+	Sea $F:=(u_0,\ldots,u_n)$, tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$, es decir 
+	\begin{equation*}
+		\sum_{j=0}^n \partial_{x_j}u_j = 0, \quad \text{ y } \quad \partial_{x_j}u_k = \partial_{x_k}u_j,
+	\end{equation*}
+	con $x_0=t$.  Suponga que $|F|>0$ en algún punto y sea $q\geq(n-1)/n$, entonces se tiene que $\Delta(|F|^q) \geq 0$.
+\end{lemma}
+\begin{proof}
+	Primero, note que por las ecuaciones de Cauchy-Riemann
+	\begin{equation*}
+		\sum_{j=0}^n \partial_j^2 u_k = \partial_k\sum_{j=0}^n \partial_ju_j = 0,
+	\end{equation*}
+	y que $\Delta F=0$. Por la regla de Leibniz se tiene que
+	\begin{equation*}
+		\partial_j^2 |F|^q = q(q-2)|F|^{q-4}(\partial_j F\cdot F)^2 + q|F|^{q-2}[|\partial_jF]^2 + (\partial^2_jF\cdot F).
+	\end{equation*}
+	Al sumar respecto a $j$, se obtiene que
+	\begin{equation*}
+		\Delta|F|^q = q|F|^{q-4} \left[ (q-2)\sum (\partial_jF\cdot F)^2 + |F|^2\sum |\partial_jF|^2
+		\right].
+	\end{equation*}
+	Ahora, si $q\geq2$, por la desigualdad de Schwarz se tiene que $\sum(\partial_jF\cdot F)^2 \leq |F|^2\sum|\partial_jF|^2$ y es claro que $\Delta(|F|^q)\geq 0$.
+\end{proof}
+\begin{theorem}[Definición equivalente del espacio de Hardy $H^1(\R^n)$]\label{theo:H1-F}
+	Sea $F:=(u_0, \ldots, u_n)$ tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$. Entonces el espacio de dichas funciones que satisfacen que su norma 
+	\begin{equation*}
+		\|F\|_{H^1} := \sup_{t>0} \int_{\R^n} |F(x, t)| \diff x < \infty,
+	\end{equation*}
+	es isométrico a $H^1(\R^n)$, mediante el mapa $F \mapsto \lim_{t\to0}u_0(x, t)$.
+\end{theorem}
+\begin{proof}
+	TODO\\
+	TODO\\
+	TODO\\
+	TODO\\
+\end{proof}
+\begin{definition}[Descomposición atómica $H^1_{at}(\R^n)$]
+	Se le llama \textit{átomo} a una función $a:\R^n\to\C$ soportada en una bola $B$, que cumple que 
+	\begin{equation*}
+		\|a\|_{L^\infty} \leq |B|^{-1}, \quad \text{ y } \quad \int_{\R^n} a(x) \diff x = 0.
+	\end{equation*}
+	Además, se dice que $f\in H^1_{at}(\R^n)$ si existe una \textit{descomposición atómica}, es decir una secuencia de átomos $(a_j)$ que satisfaga
+	\begin{equation*}
+		f = \sum_j \lambda_j a_j, \quad \sum_j |\lambda_j| < \infty.
+	\end{equation*}
+	También se define la norma 
+	\begin{equation*}
+		\|f\|_{H^1_{at}} := \inf \left\{\sum_j |\lambda_j| : f=\sum_j\lambda_j a_j \right\}
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	Se tiene que $H^1(\R^n) = H^1_{at}(\R^n)$, con equivalencia de norma.
+\end{theorem}
+\begin{definition}[Espacio de funciones de oscilación media acotada $\mathrm{BMO}(\R^n)$]
+	Para $f\in L^1_{loc}(\R^n)$, se define el \textit{operador maximal sharp} como
+	\begin{equation*}
+		M^\# f(x) := \sup_{Q\ni x} \frac{1}{|Q|}\int_Q |f(y)-f_Q| \diff y,
+	\end{equation*}
+	donde $f_Q$ es el valor promedio de $f$ sobre el cubo $Q$. Se dice que $f$ pertenece al \textit{espacio de funciones de oscilación media acotada} $\mathrm{BMO}(\R^n)$ si se tiene que $\|M^\# f\|_{L^\infty} <\infty$. En ese caso se define la norma
+	\begin{equation*}
+		\|f\|_{\mathrm{BMO}} := \|M^\# f\|_{L^\infty}.
+	\end{equation*}
+\end{definition}
+Ahora, se presenta una norma alternativa que no requiere del cálculo del valor promedio $f_Q$.
+\begin{proposition}[Norma alternativa $\mathrm{BMO}(\R^n)$]
+	Para $f\in mathrm{BMO}(\R^n)$, se tiene que 
+	\begin{equation*}
+		\frac{1}{2}\|f\|_{\mathrm{BMO}} \leq \sup_Q \inf_{b\in\C} \int_Q |f(x)-b|\diff x \leq \|f\|_{\mathrm{BMO}} . 
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	Para la cota superior basta tomar $b=f_Q$. Para la cota inferior, se tiene que
+	\begin{align*}
+		\int_Q |f(x) - f_Q|\diff x & \leq \int_Q |f(x) - b| \diff x + \int_Q |b- f_Q|\diff x \\
+		& =  \int_Q |f(x) - b| \diff x + |Q||b-f_Q| \\
+		& \leq 2 \int_Q |f(x) - b|\diff x.
+	\end{align*}
+	Lo que completa la prueba.
+\end{proof}
+\begin{definition}
+	Se define el kernel de Poisson  $n$-dimensional como 
+	\begin{equation*}
+		P_t(x) := \frac{c_nt}{(t^2+|x|^2)^{n+1}},
+	\end{equation*}
+	donde $c_n$ es una constante para que su integral sea uno, y para $f\in L^1(\R^n)$, se define su integral de Poisson como 
+	\begin{equation*}
+		(Pf)(x, t) := (P_t * f)(x).
+	\end{equation*}
+\end{definition}
+Este kernel tiene una propiedad muy útil relacionada con la transformada de Fourier. Puede ser obtenida utilizando corrdenadas polares y propiedades de las funciones de Besel, pero queda fuera del alcance de este trabajo.
+\begin{proposition}
+	El kernel de Poisson puede ser expresado como
+	\begin{equation*}
+		P_t(x) = \int_{\R^n} e^{-2\pi t|\xi|} e^{2\pi i x\cdot\xi} \diff \xi.
+	\end{equation*}
+\end{proposition}
+Esto permite demostrar propiedades útiles de las extensiones de Poisson.
+\begin{theorem}\label{theo:prop-Poisson}
+	Sea $f,g\in L^1(\R^n)$, entonces su integral de Poisson cumple que
+	\begin{enumerate}
+		\item $Pf$ es armónica, 
+		\item cumple la condición de frontera $\lim_{t\to0}(Pf)(x, t) = f(x)$,
+		\item tiene propiedad de decaimiento $\lim_{t\to\infty}(Pf)(x, t) = 0$,
+		\item se tiene que 
+		\begin{equation*}
+			\int_{\R^n} f(x)g(x)\diff x =2 \int_0^\infty\int_{\R^n} t[\nabla(Pf)(x, t)][\nabla(Pg)(x, t)]\diff x \diff t.
+		\end{equation*}
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Para el primer inciso, se aprovecha su transformada de Fourier, para obtener que 
+		\begin{equation*}
+		\partial_t (P\varphi)(x, t) = - \int_{\R^n} 2\pi|\xi| \widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi,
+	\end{equation*}
+	\begin{equation*}
+		\partial_{x_j} (P\varphi)(x, t) = \int_{\R^n} 2\pi i\xi_j\widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi.
+	\end{equation*}
+	Entonces, se tiene que 
+	\begin{equation*}
+		\nabla^2(Pf)(x, t) = \int_{\R^n} 4\pi^2|\xi|^2 \widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi - \sum_{j=1}^n \int_{\R^n} 4\pi^2 \xi_j^2\widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi = 0.
+	\end{equation*}
+	Para el segundo y tercer inciso, se realiza algo similar, aprovechando la transformada de Fourier
+	\begin{equation*}
+		\lim_{t\to0} (Pf)(x, t) = \lim_{t\to0} \int_{\R^n} \widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi = \int_{\R^n} \widehat{f}(\xi)  e^{2\pi ix \cdot \xi} \diff \xi = f(x),
+	\end{equation*}
+	\begin{equation*}
+		\lim_{t\to\infty} (Pf)(x, t) = \lim_{t\to\infty} \int_{\R^n} \widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi =0.
+	\end{equation*}
+	Para el cuarto inciso, se procede descomponiendo
+	\begin{equation*}
+		 \int_0^\infty\int_{\R^n} t[\nabla(Pf)][\nabla(Pg)]\diff x \diff t = \int_0^\infty\int_{\R^n} t[\nabla_x(Pf)][\nabla_x(Pg)] + t\partial_t(Pf)\partial_t(Pg)\diff x \diff t =: I_1+I_2.
+	\end{equation*}
+	Por integración por partes en $I_2$, se tiene que
+	\begin{align*}
+		I_2& = \int_{\R^n} \left[ t(Pf)\partial_t(Pg) 
+		\right]_{t=0}^\infty - \int_0^\infty (Pf)\partial_t(Pg) + t(Pf)\partial^2_t(Pg)\diff t \diff x \\  
+		& =- \int_{\R^n}  \int_0^\infty (Pf)\partial_t(Pg) + t(Pf)\partial^2_t(Pg)\diff t \diff x\\
+		&= \int_{\R^n}  \int_0^\infty   t(Pf)\nabla^2_x(Pg)-(Pf)\partial_t(Pg)\diff t \diff x,
+	\end{align*}
+	como $Pg$ es armónica. Ahora, integrando por partes respecto a $x$, y luego respecto a $t$, se tiene que
+	\begin{align*}
+		I_2 & = - \int_0^\infty \int_{\R^n}   t [\nabla_x(Pf)][\nabla_x(Pg)]+(Pf)\partial_t(Pg)\diff x \diff t \\
+		& = -I_1 - \int_0^\infty \int_{\R^n} (Pf)\partial_t(Pg)\diff x \diff t 
+	\end{align*}
+	Por la simetría de $f$ y $g$, se puede reescribir como 
+	\begin{align*}
+		I_2 & =  - I_1 -\frac{1}{2}\int_{\R^n}  \int_0^\infty [\partial_t(Pf)](Pg) + (Pf)[\partial_t(Pg)]\diff t \diff x \\
+		& =  - I_1 -\frac{1}{2}\int_{\R^n} [(Pf)(Pg)]_{t=0}^\infty \diff x \\
+		&= -I_1 + \frac{1}{2}\int_{\R^n}fg\diff x.
+	\end{align*}
+	Lo que concluye la prueba.
+\end{proof}
+A continuación se presenta el resultado clásico de Fefferman \cite{fefferman-BMO}, y la demostración se guía de la presentada en su trabajo con Stein \cite{fefferman-stein}.
+\begin{theorem}[Fefferman]\label{theo:H1-BMO}
+	El dual de $H^1(\R^n)$ es $\mathrm{BMO}(\R^n)$. Esto puede entenderse de la siguiente manera 
+	\begin{enumerate}
+		\item Para $\varphi \in \mathrm{BMO}$, el funcional $f\mapsto\int_{\R^n}\varphi(x) f(x)\diff x$ es acotado en $H^1$.
+		\item Para cualquier funcional continuo en $H^1$, se comporta como el funcional en (1) para una única función $\varphi \in \mathrm{BMO}$.
+	\end{enumerate}
+\end{theorem}
+Para ello, se enuncia este teorema auxiliar.
+\begin{theorem}\label{theo:BMO-aux}
+	Para $\varphi$, los siguientes enunciados son equivalentes
+	\begin{enumerate}
+		\item $\varphi$ pertenece a $\mathrm{BMO}(\R^n)$,
+		\item $\varphi = \varphi_0 + \sum_{j=1}^n R_j\varphi_j$, donde $\varphi_0,\ldots,\varphi_n \in L^\infty(\R^n)$,
+		\item se tiene que
+		\begin{equation*}
+			\int_{\R^n}\frac{|\varphi(x)|\diff x}{1+|x|^{n+1}} < \infty, 
+		\end{equation*}
+		y que 
+		\begin{equation*}
+			\sup_{x_0\in\R^n}\int_{T(x_0, h)} t|\nabla (P\varphi)(x, t)|^2\diff x \diff t \lesssim h^n,
+		\end{equation*}
+		donde $0<h<\infty$, $T(x_0, h) := \{(x, t): 0<t<h, \, |x-x_0| < h\}$, y $P\varphi$ su integral de Poisson.
+	\end{enumerate}
+\end{theorem}
+Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \cref{theo:H1-BMO} $\Rightarrow$ \cref{theo:BMO-aux}(2) $\Rightarrow$ (1) $\Rightarrow$ (3) $\Rightarrow$ \cref{theo:H1-BMO}.
+\begin{proof}
+	(\cref{theo:H1-BMO} $\Rightarrow$ 2) Sea $B:=\bigoplus^{n+1} L^1$ el espacio de Banach con la norma dada por $\|(f_0,\ldots,f_n)\| := \sum\|f_j\|_{L^1}$. Entonces, sea $S$ el subespacio en el que $f_j = R_jf_0$, que claramente es cerrado y que es isométrico a $H^1$ mediante el mapa $f_0\mapsto(f_0, R_1f_0, \ldots, R_nf_0 )$. Entonces, por el Teorema Hahn-Banach, cada funcional continuo definido en $H^1$, puede ser extendido a un funcional continuo en $B$, cuyo dual es $\bigoplus^{n+1}L^\infty$. Es decir, para cada funcional $T$ continuo en $H^1$, existen $\varphi_0,\ldots,\varphi_n\in L^\infty$, tales que
+	\begin{equation*}
+		T(f)  = \int_{\R^n} f\varphi_0\diff x + \sum_{j=1}^n \int_{\R^n} (R_jf)\varphi_j\diff x.
+	\end{equation*}
+	Por otra parte, se tiene que por la transformada de Fourier
+	\begin{align*}
+		\int_{\R^n}(R_jf)\varphi_j \diff x & = \int_{\R^n} \left[\int_{\R^n} \int_{\R^n} e^{2\pi i (x-y)\cdot\xi} \frac{i\xi_j}{|\xi|} f(y) \diff y \diff \xi
+		\right]  \varphi_j(x) \diff x \\
+		& = \int_{\R^n} f(y) \left[\int_{\R^n} \int_{\R^n} e^{2\pi i (x-y)\cdot\xi} \frac{i\xi_j}{|\xi|}  \varphi_j(x) \diff x  \diff \xi
+		\right]  \diff y \\
+		& = - \int_{\R^n} f(y) (R_j\varphi_j)(y) \diff y.
+	\end{align*}
+	Por lo que cada funcional continuo $T$ se puede escribir como 
+	\begin{equation*}
+		T(f) = \int_{\R^n} f \left[ \varphi_0 - \sum_{j=1}^n R_j\varphi_j
+		\right] \diff x.
+	\end{equation*}
+	(2 $\Rightarrow$ 1) En vista del inciso anterior, basta con demostrar que para cualquier $\varphi\in L^\infty$, se tiene que $R_j\varphi \in \mathrm{BMO}$.\\
+	TODO \\
+	TODO \\
+	TODO \\
+	(1 $\Rightarrow$ 3) Sea $Q$ el cubo de lado uno centrado en el origen, y $Q_k$ el cubo de lado $2^k$ con el mismo centro. Entonces, se tiene que
+	\begin{equation*}
+		\left| \int_{Q_{k-1}}[\varphi(x) - \varphi_{Q_k}] \diff x
+		\right| \leq \int_{Q_k} |\varphi(x) - \varphi_{Q_k}| \diff x \leq 2^{nk}\|\varphi\|_{\mathrm{BMO}}.
+	\end{equation*}
+	Por lo que $|\varphi_{Q_{k-1}} - \varphi_{Q_k}| \leq 2^n\|\varphi\|_{\mathrm{BMO}}$, y se tiene que
+	\begin{equation*}
+		\int_{Q_k} |\varphi(x)-\varphi_Q| \diff x \leq 2^{nk}[1+2^nk] \|\varphi\|_{\mathrm{BMO}}.
+	\end{equation*}
+	Particularmente, se obtiene que
+	\begin{align*}
+		\int_{Q_{k+1}\setminus Q_k} \frac{|\varphi(x)-\varphi_Q|}{1+|x|^{n+1}} \diff x & \lesssim \int_{Q_{k+1}\setminus Q_k} \frac{|\varphi(x)-\varphi_Q|}{1+2^{k(n+1)}} \diff x \\
+		& \leq \frac{2^{nk+n} [1+2^n(k+1)]}{1+2^{kn+k}}\|\varphi\|_{\mathrm{BMO}}.
+	\end{align*}
+	Por lo que sumar todas las expresiones de este estilo resulta en 
+	\begin{equation*}
+		\int_{\R^n} \frac{|\varphi(x)-\varphi_Q|}{1+|x|^{n+1}} \diff x \lesssim \|\varphi\|_{\mathrm{BMO}} < \infty.
+	\end{equation*}
+	Para el segundo estimativo, fije $x_0=0$, y sea $Q$ el cubo centrado en el origen, de lado $4h$. Sea $\chi$ su función característica y $\tilde{\chi}$ la de su complemento. Entonces, se descompone a $\varphi$ de la siguiente manera
+	\begin{equation*}
+		\varphi = \varphi_Q + (\varphi - \varphi_Q)\chi + (\varphi - \varphi_Q)\tilde{\chi} =: \varphi_1 + \varphi_2 + \varphi_3.
+	\end{equation*}
+	Primero, $\varphi_1$ es constante y no aporta a la norma del gradiente. Por la identidad de Plancherel se obtiene que 
+	\begin{align*}
+		\int_{T(0, h)} t|\nabla (P\varphi_2)(x, t)|^2 \diff x \diff t & \leq \int_0^\infty \int_{\R^{n}} t|\nabla (P\varphi_2)(x, t)|^2 \diff x \diff t  \\
+		& = \int_{\R^n} |\widehat{\varphi_2}(\xi)|^2 \left[8\pi^2|\xi|^2 \int_0^\infty te^{-4\pi t|\xi|} \diff t
+		\right] \diff \xi\\
+		& = \frac{1}{2} \|\widehat{\varphi_2}\|_{L^2}^2 \\
+		& = \int_Q |\varphi(x) - \varphi_Q| \diff x \lesssim h^n \|\varphi\|_{\mathrm{BMO}}^2,
+	\end{align*}
+	por los cálculos realizados en el inciso anterior. Por otra parte, sigue que
+	\begin{align*}
+		|\nabla(P\varphi_3)(x, t)| & \leq \int_{\R^n} |\nabla P_t(x-y)||\varphi_3(y)|\diff y \\
+		& \lesssim \int_{\R^n\setminus Q} \left[ \frac{1}{t+|x-y|}
+		\right]^{n+1} |\varphi(y) - \varphi_Q|\diff y.
+	\end{align*}
+	Pero, para $(x, t) \in T(0, h)$, se tiene que
+	\begin{equation*}
+		\left[ \frac{1}{t+|x-y|}
+		\right]^{n+1} \lesssim \frac{1}{h^{n+1} + |y|^{n+1}},
+	\end{equation*}
+	y que $|\nabla (P\varphi_3)(x, t)| \lesssim h^{-1}\|\varphi\|_{\mathrm{BMO}}$. Finalmente se concluye que en realidad
+	\begin{equation*}
+		\sup_{x_0\in\R^n}\int_{T(x_0, h)} t|\nabla (P\varphi)(x, t)|^2\diff x \diff t \lesssim h^n\|\varphi\|_{\mathrm{BMO}}.
+	\end{equation*}
+	(3 $\Rightarrow$ \cref{theo:H1-BMO}) En vista del \cref{theo:prop-Poisson}, basta demostrar que para $f\in H^1$ apropiado se tiene que 
+	\begin{equation*}
+		\left| \int_0^\infty \int_{\R^n} t[\nabla(Pf)][\nabla(P\varphi)]\diff x \diff t
+		\right| \lesssim \|f\|_{H^1}.
+	\end{equation*}
+	Además, en vista del \cref{theo:H1-F} se tiene que existe $F=(u_0,\ldots, u_n)$, que satisfacen las ecuaciones de Cauchy-Riemann generalizadas, tal que $u_0(x, 0)=f(x)$, y que gracias a un argumento de densidad, decae rápidamente en el infinito. Entonces, el lado izquierdo de la expresión anterior puede ser acotado por 
+	\begin{align*}
+		\int_0^\infty \int_{\R^n} t|\nabla(Pf)||\nabla(P\varphi)|\diff x \diff t & \leq\int_0^\infty \int_{\R^n}  |\nabla F||\nabla(P\varphi)|\diff x\diff t
+	\end{align*}
+	\begin{equation*}
+		\leq \left( \int_0^\infty \int_{\R^n} t|\nabla(P\varphi)|^2|F| \diff x \diff t
+		\right)^{1/2}\left(\int_0^\infty \int_{\R^n}  t|F|^{-1}|\nabla F|^2 \diff x \diff t
+		\right)^{1/2}
+	\end{equation*}
+\end{proof} 
 \chapter{Operadores pseudo-diferenciales}
 
 \section{Definición y propiedades básicas en $\R^n$}
