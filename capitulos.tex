@@ -47,7 +47,6 @@ Sin embargo, es un detalle técnico menor y se acostumbra a tratarles como funci
 Además, cuando $\Omega$ sea claro por el contexto, simplemente se denotará
 $\|\cdot\|_{L^p(\Omega)}$ como $\|\cdot\|_{L^p}$. Ahora, se discutirán propiedades 
 importantes de los espacios de Lebesgue.
-
 \begin{proposition}[Desigualdad de Young]
     Sean $1< p, q< \infty$, tales que $\frac{1}{p} + \frac{1}{q} = 1$.
     Entonces para todos $a, b > 0$, se tiene que 
@@ -154,9 +153,7 @@ simplemente se enuncian y se recomienda al lector investigar los detalles.
     \end{equation*}
 \end{proposition}
 A continuación se presenta un resultado clásico de la interpolación de 
-operadores y espacios de
-funciones. Para una discusión más profunda de estas técnicas, se recomienda 
-revisar Bergh y L\"ofstrom \cite{bergh-lofstrom}.
+operadores y espacios de funciones. Para una discusión más profunda de estas técnicas, se recomienda revisar Bergh y L\"ofstrom \cite{bergh-lofstrom}.
 \begin{theorem}[Interpolación de Riesz-Thorin]\label{theo:riesz-thorin} 
     Sea $T:L^{p_0}(\Omega)+L^{p_1}(\Omega) \rightarrow 
     L^{q_0}(\Omega)+L^{q_1}(\Omega)$ un operador lineal tal que 
@@ -180,7 +177,7 @@ Se continúa con el programa de definiciones y propiedades en los espacios
 de Lebesgue.
 
 \begin{definition}[Convoluciones]
-    Para funciones $f,g\in L^1(\R^n)$ se define su convolución como 
+    Para funciones $f,g\in L^1(\Omega)$ se define su convolución como 
     \begin{equation*}
         (f*g)(x) := \int_{\R^n} f(x-y)g(y)\diff y.
     \end{equation*}
@@ -198,7 +195,7 @@ de Lebesgue.
 
 \begin{proposition}[Desigualdad de Young para convoluciones]
     Sean $1\leq p,q,r\leq \infty$ tales que $\frac{1}{p} + \frac{1}{q} = 1 + 
-    \frac{1}{r}$, y sean $f \in L^p(\R^n)$, $g\in L^q(\R^n)$. Entonces
+    \frac{1}{r}$, y sean $f \in L^p(\Omega)$, $g\in L^q(\Omega)$. Entonces
     se tiene que
     \begin{equation*}
         \|f*g\|_{L^r} \leq \|f\|_{L^p} \|g\|_{L^q}.
@@ -228,18 +225,34 @@ de Lebesgue.
     la monotonia de la norma $L^p$, véase la proposición~\ref{prop:monotonia-Lp}.
     En efecto,
     \begin{align*}
-        \|f*g\|_{L^p} & = \left\| \int_{\R^n} f(\cdot-y)g(y)\diff y 
+        \|f*g\|_{L^p} & = \left\| \int_{\Omega} f(\cdot-y)g(y)\diff y 
         \right\|_{L^p} \\
-        & \leq \int_{\R^n} \|f(\cdot-y)\|_{L^p} |g(y)|\diff y \\
+        & \leq \int_{\Omega} \|f(\cdot-y)\|_{L^p} |g(y)|\diff y \\
         & \leq \|f\|_{L^p}\|g\|_{L^1}.
     \end{align*}
     Por otra parte, el segundo estimativo es resultado de la desigualdad de 
     H\"older 
     \begin{align*}
-        \|f*g\|_{L^\infty} & \leq \int_{\R^n} |f(x-y)||g(y)| \diff y \\
+        \|f*g\|_{L^\infty} & \leq \int_{\Omega} |f(x-y)||g(y)| \diff y \\
         & \leq \|f\|_{L^p}\|g\|_{L^t}.
     \end{align*}
     Concluyendo con el resultado deseado.
+\end{proof}
+\begin{proposition}[Definición alternativa de la norma $L^p$]
+	Para $f\in L^p(\Omega)$, se tiene que para $1\leq p<\infty$,
+	\begin{equation*}
+		p\int_0^\infty t^{p-1} a_f(t) \diff t = \int_\Omega |f(x)|^p \diff x.
+	\end{equation*}
+	con $a_f(t) = |\{x\in\Omega: |f(x)|>t\}| $
+\end{proposition}
+\begin{proof}
+	Basta con notar que para cualquier función diferenciable $\phi(t)$ con $\phi(0)=0$, se tiene que
+	\begin{align*}
+		\int_\Omega \phi(|f(x)|) \diff x & = \int_\Omega \int_0^{|f(x)|} \phi'(t) \diff t \diff x \\
+		& = \int_0^\infty \phi'(t) \int_{|f(x)|>t}  \diff x \diff t \\
+		& = \int_0^\infty \phi'(t) |\{x\in\Omega: |f(x)|>t\}| \diff t.
+	\end{align*}
+	Ahora, el resultado se obtiene cuando $\phi(t) = t^p$.
 \end{proof}
 Se continua con un resultado importante sobre convergencia en 
 espacios $L^p$
@@ -253,7 +266,6 @@ espacios $L^p$
         f_k \diff x.
     \end{equation*}
 \end{theorem}
-
 \begin{remark}
     Una implicación del resultado anterior es el hecho que los espacios $L^p$ son 
     completos, y por consecuencia son espacios de Banach. Particularmente, el 
@@ -263,7 +275,18 @@ espacios $L^p$
     \end{equation*}
     donde $\overline{z}$ es el conjugado en los números complejos.
 \end{remark}
-Se concluye esta sección con la definición de la versión local de los espacios de Lebesgue. Para ello se necesita el siguiente espacio de funciones.
+\begin{theorem}
+	Las funciones continuas son densas en el espacio $L^p(\Omega)$.
+\end{theorem}
+\begin{proof}
+	Basta con demostrarlo para una función simple $\chi_E$, donde $E$ es un conjunto medible. Por definición de medida de Lebesgue 
+	$|E| = \inf\{\sum |I_k| : E \subset \bigcup I_k\}$, donde los $I_k$ son cubos abiertos. Entonces, siembre existe un abierto $U$, tal que $|U\setminus E|$. Ahora, se toma una sucesión de funciones suaves $\phi_n$, tal que $\phi_n(0)=1$, que $\phi_n(t)=0$, para $t>1/n$. Entonces, se define $\Phi_n(x) := \phi_n(d(x, U))$, donde se toma la distancia al abierto $U$. Por lo que 
+	\begin{equation*}
+		\|\Phi_n - \chi_E\|_{L^p} \leq \|\chi_{U_n} - \chi_E\|_{L^p} = \|\chi_{U_n\setminus U} - \chi_{U\setminus E}\|_{L^p} \leq \|\chi_{U_n\setminus U} \|_{L^p} +\varepsilon,
+	\end{equation*}
+	donde $U_n$ es el soporte de $\Phi_n$, que se puede ver decrece a $U$. La prueba se completa por convergencia dominada.
+\end{proof}
+Se presenta la versión local de los espacios de Lebesgue. Para ello se necesita el siguiente espacio de funciones.
 \begin{definition}[Funciones suaves de soporte compacto]
 		Se dice que $\varphi:\Omega\subset\R^n\rightarrow\C$ es suave si es de clase $C^\infty$, o infinitamente diferenciable.  Se define su soporte como 
 		\begin{equation*}
@@ -278,6 +301,223 @@ Se concluye esta sección con la definición de la versión local de los espacio
 	\end{equation*} 
 	para todo $\varphi\in C^\infty_0(\Omega)$.
 \end{definition}
+A continuación, se presenta un resultado de interpolación bastante útil. 
+\begin{definition}
+	Sea $T$ un operador desde $L^p(\Omega)$ al espacio de funciones medibles desde $\Sigma$ hacia $\C$. Entonces, se dice que $T$ es de tipo $(p,q)$ débil, con $q<\infty$, si se tiene que 
+	\begin{equation*}
+		|\{x\in\Sigma:|Tf(x)|>\lambda\}| \lesssim \left(\frac{\|f\|_{L^p}}{\lambda}\right)^q.
+	\end{equation*}
+	Además, se dice que es de tipo débil $(p, q=\infty)$ o tipo fuerte $(p, q)$, si es acotado desde $L^p(\Omega)$ hacia $L^q(\Sigma)$.
+\end{definition}
+\begin{theorem}\label{theo:weak-closed}
+	Sea $\{T_t\}$ una familia de operadores en $L^p(\Omega)$, y se define su operador maximal asociado 
+	\begin{equation*}
+		T_*f(x) = \sup_t |T_tf(x)|.
+	\end{equation*}
+	Si $T_*$ es de tipo $(p,q)$ débil, entonces se tiene que los conjuntos
+	\begin{equation*}
+		\left\{f\in L^p: \lim_{t\to t_0} T_tf(x) = f(x)\, \text{ casi en todas partes} \right\},
+	\end{equation*}
+	\begin{equation*}
+		\left\{f\in L^p: \lim_{t\to t_0} T_tf(x) = 0\, \text{ casi en todas partes} \right\},
+	\end{equation*}
+	son cerrados.
+\end{theorem}
+\begin{proof}
+	Sea $(f_n)$ una suseción de funciones que converge a $f\in L^p$. Entonces, se tiene que 
+	\begin{align*}
+		|\{\limsup_{t\to t_0} |T_tf(x) - f(x)| > \lambda \}| \leq & |\{\limsup_{t\to t_0} |T_t(f-f_n)(x) - (f-f_n)(x)| >\lambda \}| \\
+		& \leq |\{T_*(f-f_n)(x)>\lambda/2 \}| +  |\{(f-f_n)(x)| >\lambda/2 \}| \\
+		& \leq \left(\frac{C2}{\lambda}\|f-f_n\|_{L^p}\right)^q + \left(\frac{2}{\lambda}\|f-f_n\|_{L^p}\right)^q \to 0,
+	\end{align*}
+	cuando $n\to\infty$. Lo que completa la prueba del primer conjunto, para el segundo, se utiliza un argumento similar con $\{\limsup_{t\to t_0}|T_tf(x)|>\lambda\}$.
+\end{proof}
+\begin{theorem}[Interpolación de Marcinkiewicz]
+	Sean $1\leq p_0 < p_1 \leq \infty$, y $1\leq q_0 < q_1 \leq \infty$, tales que $p_j<q_j$. Y sea $T$ un operador sublineal desde $L^{p_0}(\Omega)+L^{p_1}(\Omega)$ hacia las funciones medibles en $\Sigma$, es decir 
+	\begin{align*}
+		|T(f+g)(x)| & \leq |Tf(x)| + |Tg(x)|,\\
+		|T(\lambda f)(x)| &= |\lambda||Tf(x)|.
+	\end{align*}
+	Además, suponga que $T$ es de tipo débil $(p_0, q_0)$ y $(p_1, q_1)$. Entonces, se tiene que $T$ es de tipo fuerte $(p, q)$ para $p_0<p<p_1$, $q_0<q<q_1$, y $p\leq q$, con la forma 
+	\begin{equation*}
+		\frac{1}{p} = \frac{1-\theta}{p_0} + \frac{\theta}{p_1}, \quad \frac{1}{q} = \frac{1-\theta}{q_0} + \frac{\theta}{q_1}.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	Sea $f\in L^p$, y sea $\chi$ la función indicadora para puntos que satisfacen $|f|>\sigma\lambda^\gamma$, donde $\sigma$ es una constante que se escoge luego, y \begin{equation*}
+		\gamma = \frac{(q_1-q_0)p_0p_1}{(p_1-p_2)q_0q_1}.
+	\end{equation*}
+	
+	Entonces, se descompone
+	\begin{equation*}
+		f = f\chi + f(1-\chi) =: f_0 + f_1,
+	\end{equation*}
+	donde se puede ver que $f_j \in L^{p_j}$. Además, 
+	\begin{equation*}
+		|Tf(x)|  \leq |Tf_0(x)| + |Tf_1(x)|, 
+	\end{equation*}
+	\begin{equation*}
+		a_{Tf}(\lambda) \leq a_{Tf_0}(\lambda/2) + a_{Tf_1}(\lambda/2).
+	\end{equation*}
+	(Caso: $p_1<\infty$)  Entonces se tienen las desigualdades 
+	\begin{equation*}
+		a_{Tf_j}(\lambda/2) \leq \left(\frac{2A_j}{\lambda}\|f\|_{L^{p_j}}\right)^{q_j}.
+	\end{equation*}
+	Además, se define 
+	Entonces, se tiene que 
+	\begin{align*}
+		\|Tf\|_{L^q}^q & = q\int_0^\infty\lambda^{q-1}a_{Tf}(\lambda) \diff \lambda \\
+		& \leq \sum_j q\int_0^\infty\lambda^{q-1}a_{Tf_j}(\lambda/2) \diff \lambda \\
+		& \leq \sum_j q\int_0^\infty\lambda^{q-1-q_j} (2A_j)^{q_j}\left( \int_\Omega |f_j(x)|^{p_j}\diff x \right)^{q_j/p_j}\diff \lambda\\ 
+		& \leq \sum_j q\int_0^\infty\lambda^{q-1-q_j} (2A_j)^{q_j}\int_\Omega |f_j(x)|^{q_j}\diff x \diff \lambda\\
+		& \leq q\int_0^\infty\lambda^{q-1-q_0} (2A_0)^{q_0}\int_{|f|>\sigma\lambda^\gamma} |f(x)|^{q_0}\diff x \diff \lambda\\
+		& \quad + q\int_0^\infty\lambda^{q-1-q_1} (2A_1)^{q_1} \int_{|f|>\sigma\lambda^\gamma} |f(x)|^{q_1}\diff x \diff \lambda\\
+		& = q(2A_0)^{q_0} \int_\Omega |f(x)|^{q_0} \int_0^{(|f|/\sigma)^{1/\gamma}} \lambda^{q-1-q_0} \diff\lambda \diff x \\
+		& \quad + q(2A_1)^{q_1} \int_\Omega |f(x)|^{q_1} \int_{(|f|/\sigma)^{1/\gamma}}^{\infty} \lambda^{q-1-q_1} \diff\lambda \diff x \\
+		& = \frac{q(2A_0)^{q_0}\sigma^{q_0-p}}{q-q_0} \int_\Omega |f(x)|^q \diff x + \frac{q(2A_1)^{q_1}\sigma^{q_1-p}}{q_1-q} \int_\Omega |f(x)|^p \diff x \\
+		& = \left(\frac{q(2A_0)^{q_0}\sigma^{q_0-p}}{q-q_0} +\frac{q(2A_1)^{q_1}\sigma^{q_1-p}}{q_1-q} \right) \|f\|_{L^p}^p.
+	\end{align*}
+	Ahora, se escoge $\sigma=\frac{1}{2}A_0^{\frac{q_0}{q_1-q_0}}A_1^{\frac{q_1}{q_0-q_1}}$, para obtener una cota que dependa solo de $A_0,A_0$ y $p,q$. Particularmente, cuando $p_j =q_j$
+	\begin{equation}\label{eq:marcinkiewicz-final}
+		\|Tf\|_{L^p} \leq 2p^{1/p}\left(\frac{1}{p-p_0}+\frac{1}{p_1-p}\right)^{1/p}A_0^{1-\theta}A_1^\theta\|f\|_{L^p}, \quad \text{ con }\quad \frac{1}{p} = \frac{1-\theta}{p_0} + \frac{\theta}{p_1}.
+	\end{equation}
+	(Caso $q_1=\infty$) Es similar al caso anterior, pero solo con una desigualdad débil. En efecto 
+	\begin{equation*}
+		\|Tf\|_{L^q}^q \leq \frac{q(2A_0)^{q_0}\sigma^{q_0-p}}{q-q_0} \|f\|_{L^p}^p,
+	\end{equation*}
+	particularmente, si $p_j=q_j$, se escoge $\sigma = (2A_1)^{-1}$, donde $\|Tg\|_{L^\infty}\leq A_1\|g\|_{L^\infty}$, se obtiene (\ref{eq:marcinkiewicz-final}). Lo que completa la prueba.
+\end{proof}
+Ahora, se presenta un resultado de descomposición que fue demostrado por Calderón y Zigmund \cite{calderon-zygmund}.
+\begin{definition}[Cubos diádicos]
+	En $\R^n$, se define a $\mathcal{Q}_k$ como la colección de cubos abiertos por la derecha, cuyos vértices son puntos adyacentes del retículo $(2^{-k}\Z)^n$. Entonces, se les llama \textit{cubos diádicos} a los elementos de $\bigcup_k \mathcal{Q}_k$.
+\end{definition}
+\begin{remark}
+	Esta definición también puede aplicar para $\Omega\subset\R^n$, al tomar la colección $\mathcal{Q}_k' := \{Q\cap\Omega: Q\in\mathcal{Q}_k\}$. Además, se tiene que estos cubos cumplen con:
+	\begin{enumerate}
+		\item Dado $x\in\Omega$, existe un único $Q\in\mathcal{Q}_k$, tal que $x\in Q$, para cada $k$. 
+		\item Para cualesquiera dos cubos diádicos, se tiene que son disjuntos o uno esta contenido en el otro. 
+		\item Cada cubo en $\mathcal{Q}_k$, está contenido en exactamente un cubo de $\mathcal{Q}_j$, para $j<k$. Además, contiene exactamente $2^n$ cubos en $\mathcal{Q}_{k+1}$.
+	\end{enumerate}
+\end{remark}
+\begin{definition}[Operador maximal diádico]
+	Para $f\in L^1_{loc}(\Omega)$, se define el \textit{operador maximal diádico} como 
+	\begin{equation*}
+		M_df(x) := \sup_k |E_kf(x)|, \quad \text{ con } \quad E_kf(x) := \sum_{Q\in\mathcal{Q}_k} \frac{\chi_Q(x)}{|Q|} \int_Q f 
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	El operador maximal diádico es de tipo débil $(1, 1)$. Además, se tiene $\lim_k E_k f(x) = f(x) $, para $f\in L^1_{loc}(\Omega)$.
+\end{theorem}
+\begin{proof}
+	Sin pérdida de generalidad, suponga que $f$ es no-negativo. Entonces se descompone 
+	\begin{equation*}
+		\{x\in\Omega: M_df(x)>\lambda\} = \bigcup_k \Omega_k,
+	\end{equation*}
+	donde $x\in\Omega_k$, si $k = \min\{j: E_jf(x) > \lambda\}$. Este $k$ existe porque $E_kf(x)\to0$ cuando $k\to-\infty$, para $f\in L^1$. Estos $\Omega_k$ son disjuntos y por construcción pueden escribirse como union de cubos en $\mathcal{Q}_k$. Entonces, se tiene que 
+	\begin{align*}
+		| \{x\in\Omega: M_df(x)>\lambda\}  | & = \sum_k |\Omega_k| \\
+		& \leq \sum_k \frac{1}{\lambda} \int_{\Omega_k} Ek f(x)\diff x \\
+		& = \frac{1}{\lambda} \sum_k \sum_{\substack{Q\in\mathcal{Q}_k\\ Q\subset\Omega_k}} \int_Q \frac{\chi_Q(x)}{|Q|}\int_Q f(y) \diff y \diff x \\
+		& = \frac{1}{\lambda} \sum_k \sum_{\substack{Q\in\mathcal{Q}_k\\ Q\subset\Omega_k}} \int_Q f(x) \diff x \\
+		& = \frac{1}{\lambda} \sum_k \int_{\Omega_k} f(x)\diff x
+		\leq \frac{1}{\lambda} \|f\|_{L^1}.
+	\end{align*}
+	Ahora, para la segunda parte, es claro que es válido para una función continua. Entonces, en vista del Teorema \ref{theo:weak-closed}, se puede verificar para cualquier $f\in L^1_{loc}$, por un argumento de densidad.
+\end{proof}
+\begin{theorem}[Calderón-Zygmund]\label{theo:Calderon-Zygmund}
+	Para cualquier $f$ integrable y no-negativa, existe una secuencia $\{Q_j\}$ de cubos diádicos disjuntos, tales que 
+	\begin{enumerate}
+		\item $f(x)\geq \lambda$ casi en todas partes para $x\notin \bigcup_j Q_j$,
+		\item $\left|\bigcup_jQ_j\right| \leq \frac{1}{\lambda}\|f\|_{L^1}$,
+		\item $\lambda < \frac{1}{Q_j}\int_{Q_j}f \leq 2^n\lambda$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	La prueba del segundo inciso se encuentra en la demostración anterior. El primer inciso es consecuencia del hecho que si $x\notin\bigcup_jQ_j$, entonces $E_kf(x) \leq \lambda$ para todo $k$, y solo basta con tomar el límite en vista del resultado anterior. Para el tercer inciso, se ve que  por construcción de los $Q_j$, se tiene que el promedio de $f$ sobre ellos es mayor que $\lambda$, y ningún cubo que lo contenga también lo cumple. Ahora, sea $\tilde{Q}_j$ el cubo diádico más pequeño que contiene estrictamente a $Q_j$. Entonces, se tiene que 
+	\begin{equation*}
+		\frac{1}{|Q_j|}\int_{Q_j} f \leq \frac{|\tilde{Q}_j|}{|Q_j|}\frac{1}{|Q_j|} \int_{\tilde{Q}_j} f \leq 2^n\lambda.
+	\end{equation*}
+	Lo que concluye la prueba.
+\end{proof}
+A continuación se define un operador maximal bastante importante. El operador maximal de Hardy-Littlewood.
+\begin{definition}[Operador maximal de Hardy-Littlewood]
+	Para $f\in L^1_{loc}(\Omega)$, se define al \textit{operador maximal de Hardy-Littlewood} como 
+	\begin{equation*}
+		Mf(x) := \sup_{Q\ni x} \frac{1}{|Q|}\int_Q |f(y)|\diff y,
+	\end{equation*}
+	donde $Q$ son cubos con lados paralelos a los ejes.
+\end{definition}
+Ahora, se presenta un resultado que evidencia la utilidad de este operador maximal
+\begin{theorem}\label{theo:Hardy-Littlewood}
+	El operador maximal de Hardy-Littlewood es continuo en $L^p(\Omega)$, para $1<p\leq\infty$.
+\end{theorem}
+\begin{proof}
+	Es bastante claro que $Mf(x) \leq \|f\|_{L^\infty}$, entonces solo queda demostrar la desigualdad débil de tipo $(1,1)$, para poder aplicar el Teorema de interpolación de Marcinkiewicz. Para esto, se aplica la descomposición de Calderón-Zygmund al operador maximal diádico
+	\begin{equation*}
+		\{x\in\Omega:M_df(x)>\lambda\} = \bigcup_jQ_j.
+	\end{equation*}
+	Para cada $Q_j$, se toma $3Q_j$, un cubo concéntrico tal que $\ell(3Q_j) = 3\ell(Q_j)$. Además, se fija $x \notin \bigcup_j 3Q_j$ y un cubo cualquiera $Q$ que lo contenga. Se escoge $k\in\Z$, tal que $2^{k-1}\leq\ell(Q)<2^k$, entonces existen $m\leq 2^n$ cubos diádicos en $\mathcal{Q}_k$ que se intersectan con $Q$, que se denotan $R_j$. Note que ninguno está contenido en los $Q_j$, de lo contrario $x\in \bigcup_j 3Q_j$. Entonces, se tiene que 
+	\begin{align*}
+		\frac{1}{|Q|} \int_Q f \diff x &= \frac{1}{|Q|}\sum_{j=1}^m \int_{Q\cap R_j} f \diff x \\
+		& \leq \sum_{j=1}^m \frac{2^{kn}}{|Q|}\frac{1}{|R_j|}\int_{R_j} f\diff x \\
+		& \leq 2^nm\lambda \leq 4^n\lambda.
+	\end{align*}
+	En conclusión, se tiene que 
+	\begin{equation*}
+		\{x\in\Omega:Mf(x)>4^n\lambda\} \subset \bigcup_j3Q_j,
+	\end{equation*}
+	\begin{equation*}
+		|\{x\in\Omega:Mf(x)>\lambda\}| \leq \frac{12^n}{\lambda}\|f\|_{L^1},
+	\end{equation*}
+	en vista de la desigualdad débil del operador $M_d$. Lo que completa la prueba.
+\end{proof}
+En vista de la continuidad débil $(1, 1)$, y el hecho que vale para funciones continuas, se obtiene que
+\begin{corollary}[Teorema de diferenciación de Lebesgue]
+	Para $f\in L^1_{loc}(\Omega)$, se tiene que 
+	\begin{equation*}
+		\lim_{r\to0}\frac{1}{|B(x, r)|} \int_{B(x, r)} f(y) \diff y = f(x),
+	\end{equation*}
+	casi para todo $x\in\Omega$.  En particular, $|f|\leq Mf$ casi en todas partes, y
+	\begin{equation*}
+		\lim_{r\to0}\frac{1}{|B(x, r)|} \int_{B(x, r)} |f(y)-f(x)| \diff y = 0,
+	\end{equation*}
+	casi en todas partes. A los puntos que lo satisfacen se les llama puntos de Lebesgue.
+\end{corollary}
+Para concluir, se incluye una desigualdad bastante útil.
+\begin{theorem}[Hardy-Littlewood-Sobolev]
+	Sea $0<\alpha<n$, y sean $1<p<q<\infty$ tales que 
+	\begin{equation*}
+		\frac{1}{q} = \frac{1}{p} - \frac{\alpha}{n}.
+	\end{equation*}
+	Además, si se define el potencial de Riesz como 
+	\begin{equation*}
+		(I_\alpha f)(x) := \int_{\Omega} \frac{f(x)\diff x}{|x-y|^{n-\alpha}},
+	\end{equation*}
+	entonces $\|I_\alpha f\|_{L^r} \lesssim \|f\|_{L^p}$.
+\end{theorem}
+\begin{proof}
+	Note que 
+	\begin{equation*}
+		\int_{\R^n} \frac{f(y)\diff y}{|x-y|^{n-\alpha}} = \int_0^\infty \frac{r^{n-1}}{r^{n-\alpha}}  \int_{S^{n-1}} f(x+rz) \diff \sigma(z) \diff r = \int_0^\infty r^{\alpha-1} f_x(r)\diff r,
+	\end{equation*}
+	donde $f_xr = r^{-n} \int_{S^{n-1}} f(x+rz) \diff \sigma(z) $. Entonces, $|f_x(r)| \leq Mf(x)$, y por la desigualdad de Hölder
+	\begin{equation*}
+		|f_x(r)| \lesssim r^{-n}\int_{B(x, r)}| f(y)|\diff y \lesssim r^{-n}\|f\|_p r^{n(p-1)/p}  = r^{-n/p}.
+	\end{equation*}
+	Por lo que, para algún $r_x$,
+	\begin{equation*}
+		|I_\alpha f(x) |\leq \int_0^{r_x} r^{\alpha-1} Mf(x)\diff r + \int_{r_x}^\infty r^{\alpha-1}r^{-n/p} \|f\|_{L^p}\diff r \lesssim Mf(x)r_x^{\alpha} + \|f\|_{L^p}r_x^{\alpha-n/p}.
+	\end{equation*}
+	Al tomar $r_x := [Mf(x)]^{-p/n}\|f\|_{L^p}^{p/n}$, se tiene que 
+	\begin{equation*}
+		|I_\alpha f(x) |\lesssim [Mf(x)]^{1 -\alpha p/n} \|f\|_{L^p}^{\alpha p/n}.
+	\end{equation*}
+	Además, por la continuidad del operador maximal de Hardy-Littlewood
+	\begin{equation*}
+		\|I_\alpha f(x) \|_{L^q}^q \lesssim \|f\|_{L^p}^{\alpha pq/n} \int_{\R^n}Mf(x)^{(1 -\alpha p/n)q}\diff x \lesssim  \|f\|_{L^p}^{\alpha pq/n} \|f\|_{(1 -\alpha p/n)q}^{(1 -\alpha p/n)q}.
+	\end{equation*}
+	Entonces, el resultado se obtiene cuando $(1 -\alpha p/n)q = p$.
+\end{proof}
 \section{Transformada de Fourier en $\R^n$}
 Ahora, se procede a definir y mostrar propiedades importantes de la
 transformada de Fourier, una herramienta fundamental para el estudio
@@ -973,7 +1213,7 @@ La demostración del hecho que los espacios de Sobolev son espacios de Banach es
 	Sea $s\in\N$, tal que $s>k+n/2$. Entonces se tiene que el espacio de Sobolev $W^s_2(\T^n)$ está contenido en el espacio de H\"older $C^k(\T^n)$ y la inclusión es continua.
 \end{theorem}
 \section{Espacios de Hardy en $\R^n$ y $\T^n$}
-En este apartado se presentan las bases de la teoría de interpolación compleja que permite extender propiedades de continuidad a espacios $L^p$ con $1<p<\infty$. Esto es posible gracias al clásico resultado de Fefferman \cite{fefferman-BMO}, que indica que el espacio de funciones de oscilación media acotada $\mathrm{BMO}$ es el dual del espacio de Hardy $H^1$.
+En este apartado se presentan las bases de la teoría de interpolación compleja que permite extender propiedades de continuidad a espacios $L^p$ con $1<p<\infty$. Esto es posible gracias al clásico resultado de Fefferman \cite{fefferman-BMO}, que indica que el espacio de funciones de oscilación media acotada $\mathrm{BMO}$ es el dual del espacio de Hardy $H^1$. 
 \begin{definition}[Espacio de Hardy $H^1(\R^n)$]
 	Se dice que $f\in L^1(\R^n)$ se encuentra en el\textit{espacio de Hardy} $H^1(\R^n)$ si existen $f_1,\ldots,f_n\in L^1(\R^n)$ que satisfacen
 	\begin{equation*}
@@ -985,7 +1225,7 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 	\end{equation*}
 \end{definition}
 \begin{proposition}[Principio maximal]
-	Sea $u$ una función real de clase $C^2$ en una región acotada $\Omega\subset\R^n$ y continua en $\overline{\Omega}$. Suponga que $\Delta u \geq 0$ en $\Omega$ y que $u\leq0$ en su frontera, entonces se tiene que $u\leq 0$ en todo $\Omega$.
+	Sea $u$ una función real de clase $C^2$ en una región acotada $\Omega\subset\R^n$ y continua en $\overline{\Omega}$. Suponga que $\Delta u \geq 0$ en $\Omega$ y que $u\leq0$ en su frontera, entonces se tiene que $u\leq 0$ en todo $\Omega$. 
 \end{proposition}
 \begin{proof}
 	Sin pérdida de generalidad, se puede suponer que $\nabla^2 u > 0$, en caso contrario se puede tomar $u+\varepsilon|x|^2 - \delta$ para $\varepsilon,\delta>0$ pequeños. Suponga que no vale $u\leq 0$ para todo $\Omega$, entonces existe algún máximo positivo en algún $x_0\in\Omega$. Como $\nabla u(x_0) >0$, se tiene que al menos algún $\partial^2_j u(x_0) > 0$. Además, como es máximo, se cumple $\partial_j u(x_0) = 0$. Usando el teorema de Taylor,
@@ -994,12 +1234,16 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 	\end{equation*}
 	Por lo que no es un máximo y se obtiene la contradicción.
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{lem:subharmonic-gradient}
 	Sea $F:=(u_0,\ldots,u_n)$, tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$, es decir 
 	\begin{equation*}
 		\sum_{j=0}^n \partial_{x_j}u_j = 0, \quad \text{ y } \quad \partial_{x_j}u_k = \partial_{x_k}u_j,
 	\end{equation*}
-	con $x_0=t$.  Suponga que $|F|>0$ en algún punto y sea $q\geq(n-1)/n$, entonces se tiene que $\Delta(|F|^q) \geq 0$.
+	con $x_0=t$.  Suponga que $|F|>0$ en algún punto y sea $q\geq(n-1)/n$, entonces se tiene que $\Delta(|F|^q) \geq 0$. Particularmente, si $q>(n-1)/n$, 
+	\begin{equation*}
+		\Delta(|F|^q) \sim |F|^{q-2}|\nabla F|^2.
+	\end{equation*}
+	Note que las imagenes de las $u_j$ pueden encontrarse en un espacio de Hilbert abstracto.
 \end{lemma}
 \begin{proof}
 	Primero, note que por las ecuaciones de Cauchy-Riemann
@@ -1015,7 +1259,7 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 		\Delta|F|^q = q|F|^{q-4} \left[ (q-2)\sum (\partial_jF\cdot F)^2 + |F|^2\sum |\partial_jF|^2
 		\right].
 	\end{equation*}
-	Ahora, si $q\geq2$, por la desigualdad de Schwarz se tiene que $\sum(\partial_jF\cdot F)^2 \leq |F|^2\sum|\partial_jF|^2$ y es claro que $\Delta(|F|^q)\geq 0$. Cuando $q<2$, tome la matriz $M=(m_{jk}) := \partial_ju_k$, que es simétrica y por lo tanto diagonalizable a una matriz con diagonal $\lambda_0\geq\ldots\geq\lambda_n$. Como la traza es invariante respecto a conjugados, se tiene que
+	Ahora, si $q\geq2$, por la desigualdad de Schwarz se tiene que $\sum(\partial_jF\cdot F)^2 \leq |F|^2\sum|\partial_jF|^2$ y es claro que $\Delta(|F|^q)\geq 0$. Cuando $q<2$, note que se puede descomponer a las imagenes en sus componentes ortogonales y basta demostrarlo para un espacio de dimensión uno. Entonces, tome la matriz $M=(m_{jk}) := \partial_ju_k$, que es simétrica y por lo tanto diagonalizable a una matriz con diagonal $\lambda_0\geq\ldots\geq\lambda_n$. Como la traza es invariante respecto a conjugados, se tiene que
 	\begin{equation*}
 		\lambda_0 = -\sum_{j>0}\lambda_j,
 	\end{equation*}
@@ -1023,75 +1267,25 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 	\begin{equation*}
 		\lambda_0^2 \leq n \sum_{j>0} \lambda_j^2.
 	\end{equation*}
-	Ahora, la norma operador y la norma Frobenius de la matriz también son invariantes y se obtiene que 
+	Ahora, la norma operador y la norma Frobenius de la matriz también son invariantes ortogonales y se obtiene que 
 	\begin{equation*}
-		\|M\|_{op}^2 = \lambda_0^2 \leq \frac{n}{n+1} \sum_{j}\lambda_j^2 = \frac{n}{n+1} \|M\|_{F}^2.
+		\|M\|_{2}^2 = \lambda_0^2 \leq \frac{n}{n+1} \sum_{j}\lambda_j^2 = \frac{n}{n+1} \|M\|_{F}^2.
 	\end{equation*}
 	Esto implica que 
 	\begin{equation*}
-		\sum_j(\partial_jF\cdot F)^2 \leq \frac{n}{n+1}  |F|^2\sum_j|\partial_jF|^2
+		\sum_j(\partial_jF\cdot F)^2 \leq |F|^2\|M\|_{2} \leq |F|^2\|M\|_F \leq  \frac{n}{n+1}  |F|^2\sum_j|\partial_jF|^2.
 	\end{equation*}
-\end{proof}
-\begin{theorem}[Definición equivalente del espacio de Hardy $H^1(\R^n)$]\label{theo:H1-F}
-	Sea $F:=(u_0, \ldots, u_n)$ tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$. Entonces el espacio de dichas funciones que satisfacen que su norma 
+	Lo que implica que $\Delta(|F|^q)$. Para obtener la comparación final deseada, basta con notar que 
 	\begin{equation*}
-		\|F\|_{H^1} := \sup_{t>0} \int_{\R^n} |F(x, t)| \diff x < \infty,
+		|F|^2\sum_j|\partial_jF|^2 = |F|^2|\nabla F|^2.
 	\end{equation*}
-	es isométrico a $H^1(\R^n)$, mediante el mapa $F \mapsto \lim_{t\to0}u_0(x, t)$.
-\end{theorem}
-\begin{proof}
-	TODO\\
-	TODO\\
-	TODO\\
-	TODO\\
-\end{proof}
-\begin{definition}[Descomposición atómica $H^1_{at}(\R^n)$]
-	Se le llama \textit{átomo} a una función $a:\R^n\to\C$ soportada en una bola $B$, que cumple que 
-	\begin{equation*}
-		\|a\|_{L^\infty} \leq |B|^{-1}, \quad \text{ y } \quad \int_{\R^n} a(x) \diff x = 0.
-	\end{equation*}
-	Además, se dice que $f\in H^1_{at}(\R^n)$ si existe una \textit{descomposición atómica}, es decir una secuencia de átomos $(a_j)$ que satisfaga
-	\begin{equation*}
-		f = \sum_j \lambda_j a_j, \quad \sum_j |\lambda_j| < \infty.
-	\end{equation*}
-	También se define la norma 
-	\begin{equation*}
-		\|f\|_{H^1_{at}} := \inf \left\{\sum_j |\lambda_j| : f=\sum_j\lambda_j a_j \right\}
-	\end{equation*}
-\end{definition}
-\begin{theorem}
-	Se tiene que $H^1(\R^n) = H^1_{at}(\R^n)$, con equivalencia de norma.
-\end{theorem}
-\begin{definition}[Espacio de funciones de oscilación media acotada $\mathrm{BMO}(\R^n)$]
-	Para $f\in L^1_{loc}(\R^n)$, se define el \textit{operador maximal sharp} como
-	\begin{equation*}
-		M^\# f(x) := \sup_{Q\ni x} \frac{1}{|Q|}\int_Q |f(y)-f_Q| \diff y,
-	\end{equation*}
-	donde $f_Q$ es el valor promedio de $f$ sobre el cubo $Q$. Se dice que $f$ pertenece al \textit{espacio de funciones de oscilación media acotada} $\mathrm{BMO}(\R^n)$ si se tiene que $\|M^\# f\|_{L^\infty} <\infty$. En ese caso se define la norma
-	\begin{equation*}
-		\|f\|_{\mathrm{BMO}} := \|M^\# f\|_{L^\infty}.
-	\end{equation*}
-\end{definition}
-Ahora, se presenta una norma alternativa que no requiere del cálculo del valor promedio $f_Q$.
-\begin{proposition}[Norma alternativa $\mathrm{BMO}(\R^n)$]
-	Para $f\in mathrm{BMO}(\R^n)$, se tiene que 
-	\begin{equation*}
-		\frac{1}{2}\|f\|_{\mathrm{BMO}} \leq \sup_Q \inf_{b\in\C} \int_Q |f(x)-b|\diff x \leq \|f\|_{\mathrm{BMO}} . 
-	\end{equation*}
-\end{proposition}
-\begin{proof}
-	Para la cota superior basta tomar $b=f_Q$. Para la cota inferior, se tiene que
-	\begin{align*}
-		\int_Q |f(x) - f_Q|\diff x & \leq \int_Q |f(x) - b| \diff x + \int_Q |b- f_Q|\diff x \\
-		& =  \int_Q |f(x) - b| \diff x + |Q||b-f_Q| \\
-		& \leq 2 \int_Q |f(x) - b|\diff x.
-	\end{align*}
 	Lo que completa la prueba.
 \end{proof}
+Ahora, se presenta un operador bastante útil: la integral de Poisson. Para una discusión exhaustiva, vea Stein \cite{stein-singular}.
 \begin{definition}
 	Se define el kernel de Poisson  $n$-dimensional como 
 	\begin{equation*}
-		P_t(x) := \frac{c_nt}{(t^2+|x|^2)^{n+1}},
+		P_t(x) := \frac{c_nt}{(t^2+|x|^2)^{(n+1)/2}},
 	\end{equation*}
 	donde $c_n$ es una constante para que su integral sea uno, y para $f\in L^1(\R^n)$, se define su integral de Poisson como 
 	\begin{equation*}
@@ -1105,12 +1299,31 @@ Este kernel tiene una propiedad muy útil relacionada con la transformada de Fou
 		P_t(x) = \int_{\R^n} e^{-2\pi t|\xi|} e^{2\pi i x\cdot\xi} \diff \xi.
 	\end{equation*}
 \end{proposition}
+ Además, tiene una relación interesante con el operador maximal de Hardy-Littlewood.
+ \begin{theorem}
+ 	Para $f\in L^1$, se tiene que $\sup_{t>0}|Pf(x, t)| \lesssim Mf(x)$.
+ \end{theorem}
+ \begin{proof}
+ 	Note que 
+ 	\begin{equation*}
+ 		\int_{\varepsilon<|x-y|<R} \frac{tf(y)\diff y}{(t^2+|x-y|^2)^{(n+1)/2}} = \int_\varepsilon^R \int_{S^{n-1}}  P_t(r)f(x+rz)r^{n-1}\diff \sigma(z)\diff r.
+ 	\end{equation*}
+ 	Al integrar por partes respecto a $r$, se obtiene que 
+ 	\begin{equation*}
+ 		\left. P_t(r)\int_{B(x, r)}f(y)\diff y\right\vert_{r=\varepsilon}^R - \int_\varepsilon^R \int_{B(x, r)}f(y)\diff y P_t'(r) \diff r,
+ 	\end{equation*} 
+ 	y al hacer $\varepsilon\to0$ y $R\to\infty$, se puede estimar por
+ 	\begin{equation*}
+ 		Mf(x)\int_0^\infty r^n P_t'(r)\diff r .
+ 	\end{equation*}
+ 	La prueba se completa al notar que $P_t'(r) \lesssim r^{-n-2}$.
+ \end{proof}
 Esto permite demostrar propiedades útiles de las extensiones de Poisson.
 \begin{theorem}\label{theo:prop-Poisson}
 	Sea $f,g\in L^1(\R^n)$, entonces su integral de Poisson cumple que
 	\begin{enumerate}
 		\item $Pf$ es armónica, 
-		\item cumple la condición de frontera $\lim_{t\to0}(Pf)(x, t) = f(x)$,
+		\item cumple la condición de frontera $\lim_{t\to0}(Pf)(x, t) = f(x)$, para casi todo $x$,
 		\item tiene propiedad de decaimiento $\lim_{t\to\infty}(Pf)(x, t) = 0$,
 		\item se tiene que 
 		\begin{equation*}
@@ -1130,7 +1343,7 @@ Esto permite demostrar propiedades útiles de las extensiones de Poisson.
 	\begin{equation*}
 		\nabla^2(Pf)(x, t) = \int_{\R^n} 4\pi^2|\xi|^2 \widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi - \sum_{j=1}^n \int_{\R^n} 4\pi^2 \xi_j^2\widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi = 0.
 	\end{equation*}
-	Para el segundo y tercer inciso, se realiza algo similar, aprovechando la transformada de Fourier
+	Para el segundo y tercer inciso, se aprovecha que el operador $\sup_{t>0}|Pf(x, t)|$ es débil $(1, 1)$, entonces el Teorema \ref{theo:weak-closed} implica que basta demostrarlo para funciones en $\mathcal{S}(\R^n)$. En este caso es consecuencia de la convergencia dominada de Lebesgue
 	\begin{equation*}
 		\lim_{t\to0} (Pf)(x, t) = \lim_{t\to0} \int_{\R^n} \widehat{f}(\xi) e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi = \int_{\R^n} \widehat{f}(\xi)  e^{2\pi ix \cdot \xi} \diff \xi = f(x),
 	\end{equation*}
@@ -1160,6 +1373,207 @@ Esto permite demostrar propiedades útiles de las extensiones de Poisson.
 		&= -I_1 + \frac{1}{2}\int_{\R^n}fg\diff x.
 	\end{align*}
 	Lo que concluye la prueba.
+\end{proof}
+\begin{theorem}
+	Para $f \in L^p(\R^n)$, se tiene que $\lim_{t\to0}(P_t*f) \to f$ en norma $L^p$
+\end{theorem}
+\begin{proof}
+	Primero note que por una pequeña manipulación
+	\begin{equation*}
+		P_t(y) = \frac{c_nt^{-n}}{(1+|y/t|^2)^{(n+1)/2}} = t^{-n}P_1(y/t)
+	\end{equation*}
+	Entonces, como $\int P_t \diff y = 1$, y por la desigualdad de Minkowski
+	\begin{equation*}
+		\|P_t*f - f\|_{L^p} \leq \int_{\R^n} \|f(\cdot-y)-f(\cdot)\|_{L^p} t^{-n}P_1(y/t) \diff y = \int_{\R^n} \|f(\cdot-ty)-f(\cdot)\|_{L^p} P_1(y) \diff y \to 0,
+	\end{equation*}
+	cuando $t\to0$. Esto se da como $\|f(\cdot-ty)-f(\cdot)\|_{L^p} \to 0$, por el Teorema de diferenciación de Lebesgue y se culmina argumentando convergencia dominada.
+\end{proof}
+Ahora, se presenta un caso especial de una desigualdad de Carleson para variedades demostrada por Hörmander \cite{hormander1967}.
+\begin{lemma}\label{lem:Carleson}
+	Sea $\mu$ una medida positiva sobre $\R^{n+1}_+$ tal que $\mu(T(x_0, h))\lesssim h^n$, donde $T(x_0, h) := \{(x, t): 0<t<h, \, |x-x_0| < h\}$. Entonces, se tiene que 
+	\begin{equation*}
+		\int_{\R^{n+1}_+} |(Pf)(x, t)|^p \diff \mu \lesssim \int_{\R^n} |f(x)|^p\diff x,
+	\end{equation*}
+	donde $f\in L^p(\R^n)$, y $1<p<\infty$.
+\end{lemma}
+\begin{proof}
+	Primero se nota que 
+	\begin{equation*}
+		(Pf)(x, t) \lesssim \int_{\R^n} \frac{tf(y)\diff y}{(t + |x-y|)^{n+1}}.
+	\end{equation*}
+	Cuando $|x_0-y|<t$, se tiene que
+	\begin{equation*}
+		\int_{B(x_0, t)} \frac{tf(y)\diff y}{(t + |x-y|)^{n+1}} \lesssim t^{-n}  \int_{B(x_0, t)}  f(y)\diff y.
+	\end{equation*}
+	Además, cuando $2^{k-1}t \leq |x_0-y|\leq 2^kt$, se obtiene que
+	\begin{align*}
+		\int_{\{2^{k-1}t \leq |x_0-y|\leq 2^kt\}} \frac{tf(y)\diff y}{(t + |x-y|)^{n+1}}& \lesssim t^{-n}2^{n(k-1)}  \int_{B(x_0, 2^kt)} f(y)\diff y \\
+		& \lesssim t^{-n}2^{n(k-1)} \frac{(2^kt)^{n}}{|B(x_0, 2^kt)|} \int_{B(x_0, 2^kt)}  f(y)\diff y.
+	\end{align*}
+	Sumando todas las partes se obtiene que 
+	\begin{equation*}
+		(Pf)(x, t) \lesssim \sup_{s\geq t}  \frac{1}{|B(x_0, s)|}\int_{B(x_0, s)}f(y) \diff y =: \tilde{f}(x, t).
+	\end{equation*}
+	Ahora, se define 
+	\begin{equation*}
+		E(\varepsilon, M) := \left\{ (x', t) : 0<t<M, \, \int_{B(x', t)} |f|\diff x > r(\varepsilon + t^n) \right\}.
+	\end{equation*}
+	Entonces, si existe una secuencia $(x_j, t_j) \subset E(\varepsilon, M)$, tales que las bolas $B(x_j, t_j)$ son disjuntas, se tiene que
+	\begin{equation*}
+		\sum_j r(\varepsilon + t_j^n) \leq \sum_j \int_{B(x_j, t_j)} |f| \diff x\leq \int_{\R^n} |f| \diff x.
+	\end{equation*} 
+	Por lo que dichas secuencias deben ser finitas. Entonces, sea $M_1 := \sup\{t:(x, t)\in E(\varepsilon, M)\}$ y se escoje $(x_1, t_1)\in E(\varepsilon, M)$, tal que $3t_1 \geq M_1$. Si ya se escogieron $j-1$ puntos, entonces se define $M_j$ como el supremo de los $t$ tales que $(x, t)\in E(\varepsilon, M)$ y que $B(x, t)$ es disjunta a las bolas $B(x_1, t_1),\ldots,B(x_{j-1}, t_{j-1})$. Luego se escoje $(x_j, t_j)$ tal que $3t_j \geq M_j$. Este proceso termina luego de un número de pasos. Entonces, para $(x, t)\in E(\varepsilon, M)$, se tiene que $B(x, t)$ intersecta a algún $B(x_j, t_j)$, particularmente, si $j$ es el menor índice para el que ocurre, se tiene que $t\leq M_j \leq 3t_j$, y que $B(x, t) \subset B(x_j, 3t_j)$. Ahora, se define
+	\begin{equation*}
+		E'(\varepsilon, M) := \{(x, t) : B(x, t) \subset B(x', t'), \, (x', t') \in E(\varepsilon, M)\} \subset \bigcup_j \{(x, t): B(x, t)\subset B(x_j, 3t_j)\}.
+	\end{equation*}
+	Por lo que se tiene que 
+	\begin{align*}
+		\mu (E'(\varepsilon, M) ) & \leq \sum_j \mu \{(x, t): B(x, t)\subset B(x_j, 3t_j)\} \\
+		& \leq \sum_j \mu (T(x_j, 3t_j)) \\
+		& \lesssim \sum_j t_j^n 
+		 \leq \frac{1}{r} \int_{\R^n} |f|\diff x.
+	\end{align*}
+	Además, cuando $\varepsilon\to0$ y $M\to\infty$, se tiene que $E'(\varepsilon, M)$ crece al conjunto $\{|\tilde{f}|>r\} $. Finalmente, sea $\chi$ la función indicadora del conjunto $\{|f|<r\sigma\}$, para descomponer $f=f\chi + f(1-\chi)=:f_1+f_2$. Como $\tilde{f_1} \leq r\sigma$, entonces $\tilde{f_2} \geq r(1-\sigma)$ cuando $\tilde{f}>r$. Por lo que se tiene que
+	\begin{align*}
+		\int_0^\infty r^{p-1} \mu\{|\tilde{f}|>r\} \diff r & \lesssim \frac{1}{1-\sigma} \int_0^\infty \int_{|f|>r\sigma} r^{p-2} |f| \diff x \\
+		& = \frac{1}{1-\sigma}\int_{\R^n}\int_{0<r<|f|/\sigma} r^{p-2}|f|\diff r \diff x \\
+		& = \frac{\sigma^{1-p}}{(1-\sigma)(p-1)} \int_{\R^n}|f|^p \diff x \\
+		\int_{R^{n+1}_+} |\tilde{f}|^p \diff \mu & \lesssim \int_{\R^n}|f|^p \diff x,
+	\end{align*}
+	donde $\sigma<1$ puede ser escogido a conveniencia. Entonces, se concluye que 
+	\begin{equation*}
+		\int_{R^{n+1}_+} |Pf|^p \diff \mu\lesssim \int_{R^{n+1}_+} |\tilde{f}|^p \diff \mu \lesssim \int_{\R^n}|f|^p \diff x.
+	\end{equation*}
+	Lo que concluye la prueba.
+\end{proof}
+\begin{theorem}[Definición equivalente del espacio de Hardy $H^1(\R^n)$]\label{theo:H1-F}
+	Para toda $f\in H^1(\R^n)$, existe una función $F:=(u_0, \ldots, u_n)$ tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$. Además, 
+	\begin{equation*}
+	\int_{\R^n} \sup_{t>0}  |F(x, t)| \diff x \lesssim \|f\|_{H^1},
+	\end{equation*}
+	 y $\lim_{t\to0}u_0(x, t) = f(x)$ casi en todas partes, y  en norma $L^1$.
+\end{theorem}
+\begin{proof}
+	 Definase a $u_0 := Pf$, y $u_j := P(R_jf)$, que están bien definidas como $R_jf\in L^1$. Ahora, recuerde las derivadas de las integrales de Poisson
+			\begin{equation*}
+		\partial_t P(R_jf)(x, t) = - \int_{\R^n} 2\pi|\xi| \widehat{f}(\xi) \frac{i\xi_j}{|\xi|}e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi,
+	\end{equation*}
+	\begin{equation*}
+		\partial_{x_k} P(R_jf)(x, t) = \int_{\R^n} 2\pi i\xi_k\widehat{f}(\xi) \frac{i\xi_j}{|\xi|}e^{-2\pi t |\xi|} e^{2\pi ix \cdot \xi} \diff \xi.
+	\end{equation*}
+	Entonces, $\sum \partial_j u_j = 0$, y $\partial_j u_k = \partial_k u_j$. Además, $\lim_{t\to0}u_j(x, t) = R_jf(x)$ casi en todas partes y en norma $L^1$. La comparación de normas es resultado de esta convergencia.
+\end{proof}
+\begin{remark}
+	En realidad la relación anterior es una doble implicación. Para cada $F$ cuyas componentes satsifagan las ecuaciones de Cauchy-Riemann, y que $\|F\|_{H^1}<\infty$, se puede encontrar una función $f(x):= \lim_{t\to0}u_0(x, t)$ en el espacio $H^1$. Esto implica demostrar que los límites no-tangenciales de estas funciones existen casi en todas partes y que las componentes $u_j$ son integrales de Poisson de medidas finitas. Entonces, se tiene una definición alternativa para el espacio de Hardy $H^1(\R^n)$ con normas equivalentes. Más aún, es posible definir mediante estas funciones $F$, los espacios $H^p$ para $p\leq1$, mediante la cuasi-norma
+	\begin{equation*}
+		\|F\|_{H^p} := \sup_{t>0} \left(\int_{\R^n} |F(x, t)|^p \diff x\right)^{1/p}.
+	\end{equation*}
+	Para un tratamiento más detallado, vea Stein \cite{stein-singular}.
+\end{remark}
+\begin{definition}[Espacio de funciones de oscilación media acotada $\mathrm{BMO}(\R^n)$]
+	Para $f\in L^1_{loc}(\R^n)$, se define el \textit{operador maximal sharp} como
+	\begin{equation*}
+		f^\#(x) := \sup_{Q\ni x} \frac{1}{|Q|}\int_Q |f(y)-f_Q| \diff y,
+	\end{equation*}
+	donde $f_Q$ es el valor promedio de $f$ sobre el cubo $Q$. Se dice que $f$ pertenece al \textit{espacio de funciones de oscilación media acotada} $\mathrm{BMO}(\R^n)$ si se tiene que $f^\# \in{L^\infty}$. En ese caso se define la norma
+	\begin{equation*}
+		\|f\|_{\mathrm{BMO}} := \| f^\#\|_{L^\infty}.
+	\end{equation*}
+	En realidad, se toma el cociente respecto a funciones constantes para que la definición de norma sea adecuada.
+\end{definition}
+Ahora, se presenta una norma alternativa que no requiere del cálculo del valor promedio $f_Q$.
+\begin{proposition}[Norma alternativa $\mathrm{BMO}(\R^n)$]
+	Para $f\in \mathrm{BMO}(\R^n)$, se tiene que 
+	\begin{equation*}
+		\frac{1}{2}\|f\|_{\mathrm{BMO}} \leq \sup_Q \inf_{b\in\C}\frac{1}{|Q|} \int_Q |f(x)-b|\diff x \leq \|f\|_{\mathrm{BMO}} . 
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	Para la cota superior basta tomar $b=f_Q$. Para la cota inferior, se tiene que
+	\begin{align*}
+		\int_Q |f(x) - f_Q|\diff x & \leq \int_Q |f(x) - b| \diff x + \int_Q |b- f_Q|\diff x \\
+		& =  \int_Q |f(x) - b| \diff x + |Q||b-f_Q| \\
+		& \leq 2 \int_Q |f(x) - b|\diff x.
+	\end{align*}
+	Lo que completa la prueba.
+\end{proof}
+El operador maximal sharp, tiene una relación interesante con el operador maximal de Hardy-Littlewood.
+\begin{theorem}
+	Para $f\in L^1_{loc}(\Omega)$, se tiene que $f^\# \leq 2Mf$.
+\end{theorem}
+\begin{proof}
+	Basta con ver que 
+	\begin{equation*}
+		\int_Q|f-f_Q| \diff x \leq \int_Q |f|\diff x + |f_Q| \leq 2|f|_Q.
+	\end{equation*}
+	El resultado se obtiene de dividir por la medida de $Q$ y tomando el supremo.
+\end{proof}
+El resultado converso se tiene en norma y se debe a Fefferman y Stein \cite{fefferman-stein}.
+\begin{theorem}[Fefferman-Stein]\label{theo:sharp-hardy-littlewood}
+	Sea $f^in L^{p_0}(\R^n)$, y sea $1<p<\infty$, donde $1\leq p_0\leq p$. Suponga que $f^\#\in L^p(\R^n)$, entonces se tiene que 
+	\begin{equation*}
+		\|Mf\|_{L^p} \leq A_p \|f^\#\|_{L^p},
+	\end{equation*}
+	donde $M$ es el operador maximal de Hardy-Littlewood, y $A_p$ solo depende de $p$.
+\end{theorem}
+\begin{proof}
+	Se aplica la descomposición de Calderón-Zygmund (vea el Teorema \ref{theo:Calderon-Zygmund}) para obtener una suseción de cubos diádicos $\{Q_j^\lambda\}$ tales que $|f(x)| \leq \lambda$, para $x\notin\bigcup_j Q_j^\lambda$, y que 
+	\begin{equation*}
+		\lambda < \frac{1}{|Q_j^\lambda|} \int_{Q_j^\lambda} |f(x)|\diff x \leq 2^n\lambda.
+	\end{equation*}
+	Ahora, se puede ver que si $a_g(\lambda) := |\{|g|>\lambda\}|$ es la función densidad, entonces $a_{f}(\lambda) = |Q^\lambda| := \left|\bigcup_j Q_j^\lambda \right|$.Entonces, se busca probar
+	\begin{equation}\label{eq:mu-lambda}
+		a_{f}(\lambda) \leq a_{f^\#}(\lambda/A) + \frac{2}{A}a_{f}(2^{-n-1}\lambda),
+	\end{equation}
+	Para ello, se fija $Q_0 = Q_j^{\lambda2^{-n-1}}$. Si se tiene que $Q_0 \subset\{f^\#>\lambda/A\}$, entonces, es trivial que 
+	\begin{equation*}
+		\sum_{Q_j^\lambda \subset Q_0} |Q_j^\lambda| \leq |\{f^\# > \lambda/A\}\cap Q_0|.
+	\end{equation*}
+	En caso contrario, por definición se tiene que 
+	\begin{equation*}
+		\frac{1}{|Q_0|} \int_{Q_0} |f - f_{Q_0}| \diff x \leq \frac{\lambda}{A}.
+	\end{equation*}
+	Por otra parte, $|f_{Q_0}| \leq 2^n(2^{-n-1}\lambda) = \lambda/2$, y $|f|_{Q_j^\lambda} \leq \lambda$. Entonces, se tiene que 
+	\begin{equation*}
+		\int_{Q_j^\lambda} |f - f_{Q_0}| \diff x \geq \frac{\lambda}{2} |Q_j^\lambda|,
+	\end{equation*}
+	donde $Q_j^\lambda\subset Q_0$. Entonces, se tiene que 
+	\begin{equation*}
+		\sum_{Q_j^\lambda\subset Q_0} |Q_j^\lambda| \leq \frac{2}{A}|Q_0|.
+	\end{equation*}
+	Se obtiene (\ref{eq:mu-lambda}) al sumar sobre todos los cubos $Q_0$. Ahora, note que si $x\in Q_j^\lambda$, entonces 
+	\begin{equation*}
+		Mf(x) \geq \frac{1}{|Q_j^\lambda|} \int_{Q_j^\lambda} |f|\diff x > \lambda,
+	\end{equation*}
+	y $a_{f}(\lambda) \leq a_{Mf}(\lambda)$. Además, se define $2Q_j^\lambda$ como el cubo concentrico a $Q_j^\lambda$, tal que $\ell(2Q_j^\lambda) = 2\ell(Q_j^\lambda)$, y se fija $x\notin\bigcup 2Q_j^\lambda$. Sea $Q$ cualquier cubo que contenga a $x$, entonces
+	\begin{equation*}
+		\int_Q|f(y)|\diff y = \int_{Q\cap Q^\lambda} |f(y)|\diff y + \int_{Q\cap (\R^n\setminus Q^\lambda)} |f(y)|\diff y =: I_1 + I_2.
+	\end{equation*}
+	Note que $I_2 \leq \lambda |Q|$. Para $I_1$, vea que si $Q\cap Q_j^\lambda$ es no vacío, entonces $Q_j^\lambda \subset 4Q$, dado que $Q \not\subset 2Q_j^\lambda$ implica $\ell(Q) > \ell(Q_j^\lambda)$. Por lo que 
+	\begin{equation*}
+		I_1 \leq \sum_{Q_j^\lambda\subset4Q} \int_{Q_j^\lambda} |f(y)|\diff y \leq \sum_{Q_j^\lambda\subset4Q} 2^n\lambda |Q_j^\lambda| \leq 2^n4^n\lambda|Q|.
+	\end{equation*}
+	Entonces, se puede concluir que 
+	\begin{equation}\label{eq:mu-density}
+		2^{-n}a_{Mf}[(1+2^n4^n)\lambda] \leq a_{f}(\lambda) \leq a_{Mf}(\lambda).
+	\end{equation}
+	Por otra parte, se define 
+	\begin{equation*}
+		I_N := p\int_0^N\lambda^{p-1}a_{f}(\lambda)\diff \lambda \leq p\int_0^N\lambda^{p-1}a_{Mf}(\lambda)\diff \lambda.
+	\end{equation*}
+	También, se sabe que si $p_0>1$, entonces $I_N\leq \|Mf\|_{L^{p_0}}$, y que si $p_0=1$, entonces $a_{Mf}(\lambda)\lesssim \lambda^{-1}$ (vea el Teorema \ref{theo:Hardy-Littlewood}). En general, se tiene que $I_N<\infty$ como $f\in L^{p_0}$. Por (\ref{eq:mu-lambda}) se tiene que 
+	\begin{align*}
+		I_N & \leq p\int_0^N\lambda^{p-1}a_{f^\#}(\lambda/A)\diff\lambda + \frac{2}{A}p\int_0^N\lambda^{p-1}a_{f}(2^{-n-1}\lambda)\diff \lambda \\
+		& \leq A^p p\int_0^N\lambda^{p-1}a_{f^\#}(\lambda)\diff\lambda +\frac{2}{A} p2^{(n+1)p} \int_0^{N2^{-n-1}}\lambda^{p-1} a_{f}(\lambda)\diff\lambda \\
+		& \leq Ap\|f^\#\|_{L^p} + \frac{2}{A}2^{(n+1)p} I_N.
+	\end{align*}
+	Por lo que, si se escoge $A=4\cdot2^{(n+1)p}$, se tiene que $I_N \leq 4\cdot 2^{(n+1)p}\|f^\#\|_{L^p}$. Finalmente, se concluye que 
+	\begin{align*}
+		\|Mf\|_{L^p} & = p\int_0^N\lambda^{p-1}a_{Mf}(\lambda)\diff \lambda \\
+		& \leq 2^n(1+2^n4^n)^{-p} p\int_0^\infty\lambda^{p-1}a_{f}(\lambda)\diff \lambda \\
+		& =2^n(1+2^n4^n)^{-p}  \lim_{N\to\infty} I_N \leq A_p\|f^\#\|_{L^p},
+	\end{align*}
+	con $A_p = 2^n(1+2^n4^n)^{-p} 4\cdot 2^{(n+1)p}$. Se puede ver que la constante solo depende de $n$ y $p$, concluyendo la prueba
 \end{proof}
 A continuación se presenta el resultado clásico de Fefferman \cite{fefferman-BMO}, y la demostración se guía de la presentada en su trabajo con Stein \cite{fefferman-stein}.
 \begin{theorem}[Fefferman]\label{theo:H1-BMO}
@@ -1205,10 +1619,34 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 		T(f) = \int_{\R^n} f \left[ \varphi_0 - \sum_{j=1}^n R_j\varphi_j
 		\right] \diff x.
 	\end{equation*}
-	(2 $\Rightarrow$ 1) En vista del inciso anterior, basta con demostrar que para cualquier $\varphi\in L^\infty$, se tiene que $R_j\varphi \in \mathrm{BMO}$.\\
-	TODO \\
-	TODO \\
-	TODO \\
+	(2 $\Rightarrow$ 1) En vista del inciso anterior, basta con demostrar que para cualquier $\varphi\in L^\infty$, se tiene que $R_j\varphi \in \mathrm{BMO}$. Para un cubo $Q$ de diametro $\sigma$, sea $\chi$, la función indicadora para puntos $|x-x_Q|\leq2\sigma$, para descomponer 
+	\begin{equation*}
+		\varphi = \varphi\chi + \varphi(1-\chi) =: \varphi_1 + \varphi_2. 
+	\end{equation*}
+	Entonces, se tiene que $\widehat{R_j\varphi_1}(\xi) = i\xi_j\widehat{\varphi_1}(\xi)/|\xi|$ y por la desigualdad de Hölder e identidad de Plancherel
+	\begin{equation}\label{eq:Rj-L-infty}
+		\frac{1}{|Q|}\int_Q |R_j\varphi_1|\diff x \leq |Q|^{-1/2} \|R_j\varphi_1\|_{L^2} \leq|Q|^{-1/2} \|\widehat{\varphi_1}\|_{L^2}  \lesssim \|\varphi\|_{L^\infty}.
+	\end{equation}
+	Por otra parte, se puede verificar que la transformada de Riesz, equivale a la siguiente convolución
+	\begin{equation*}
+		(R_jf)(x) = (K_j*f)(x) := \int_{\R^n} \frac{x_j-y_j}{|x-y|^{n+1}} f(y) \diff y.
+	\end{equation*}
+	Ahora, por el Teorema del valor medio, se tiene que 
+	\begin{equation*}
+		|K_j(x-y)-K_j(x_Q-y)| \leq |x-x_Q| \sup_z |\nabla K_j(z)|,
+	\end{equation*}
+	donde $z$ se encuentra entre $x-y$, y $x_Q - y$. Además, se tiene que $|\nabla K_j(z)| \lesssim |z|^{n+1}$. Ahora, para $y$ en el soporte de $\varphi_2$, y $x\in Q$, se tiene que 
+	\begin{equation*}
+		|y-x| \geq |y-x_Q| - |x_Q-x| \geq |x_Q - x|.
+	\end{equation*}
+	Por lo que $|z| \gtrsim |x_Q - y|$ y se tiene que 
+	\begin{equation}\label{eq:Rj-diff-L-infty}
+		|(R_j\varphi_2)(x) - (R_j\varphi_2)(x_Q)| \lesssim \sigma \int_{|x_Q-y|>2\sigma} \frac{\|\varphi\|_{L^\infty}}{|x_Q - y|^{n+1}}\diff y \lesssim \|\varphi\|_{L^\infty}. 
+	\end{equation}
+	Escogiendo $b=(R_j\varphi_2)(x_Q)$ en la norma equivalente en $\mathrm{BMO}$ se tiene que 
+	\begin{equation*}
+		\|R_j\varphi\|_{\mathrm{BMO}} \lesssim \sup_Q \frac{1}{|Q|} \int_Q |(R_j\varphi_2)(x) - (R_j\varphi_2)(x_Q)| + |R_j\varphi_1(x)| \diff x \lesssim \|\varphi\|_{L^\infty}.
+	\end{equation*}
 	(1 $\Rightarrow$ 3) Sea $Q$ el cubo de lado uno centrado en el origen, y $Q_k$ el cubo de lado $2^k$ con el mismo centro. Entonces, se tiene que
 	\begin{equation*}
 		\left| \int_{Q_{k-1}}[\varphi(x) - \varphi_{Q_k}] \diff x
@@ -1259,7 +1697,7 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 		\left| \int_0^\infty \int_{\R^n} t[\nabla(Pf)][\nabla(P\varphi)]\diff x \diff t
 		\right| \lesssim \|f\|_{H^1}.
 	\end{equation*}
-	Además, en vista del \cref{theo:H1-F} se tiene que existe $F=(u_0,\ldots, u_n)$, que satisfacen las ecuaciones de Cauchy-Riemann generalizadas, tal que $u_0(x, 0)=f(x)$, y que gracias a un argumento de densidad, decae rápidamente en el infinito. Entonces, el lado izquierdo de la expresión anterior puede ser acotado por 
+	Además, en vista del \cref{theo:H1-F} se tiene que existe $F=(u_0,\ldots, u_n)$, que satisfacen las ecuaciones de Cauchy-Riemann generalizadas, tal que $u_0(x, 0)=f(x)$, y que gracias a un argumento de densidad, decae rápidamente en el infinito. También, se puede requerir sin pérdida de generalidad que $|F|>0$, y que $\Delta(|F|) = O(|x|+t+1)^{-n-\delta}$ en su dominio. Entonces, el lado izquierdo de la expresión anterior puede ser acotado por 
 	\begin{align*}
 		\int_0^\infty \int_{\R^n} t|\nabla(Pf)||\nabla(P\varphi)|\diff x \diff t & \leq\int_0^\infty \int_{\R^n}  |\nabla F||\nabla(P\varphi)|\diff x\diff t
 	\end{align*}
@@ -1268,9 +1706,273 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 		\right)^{1/2}\left(\int_0^\infty \int_{\R^n}  t|F|^{-1}|\nabla F|^2 \diff x \diff t
 		\right)^{1/2}
 	\end{equation*}
+	Ahora, por el \cref{lem:subharmonic-gradient} se tiene que
+	\begin{align*}
+		\int_0^\infty\int_{\R^n} t|F|^{-1}|\nabla F|^2 \diff x \diff t & \lesssim
+		\int_0^\infty\int_{\R^n} t\Delta(|F(x, t)|) \diff x \diff t \\
+		& = \int_{\R^n} |F(x, 0)| \diff x \lesssim \|f\|_{H^1},
+	\end{align*}
+	por el Teorema de Green. Por otra parte, se define $g(x):=|F(x, 0)|^q$, con $q=(n-1)/n$. Entonces, por el Lema \ref{lem:subharmonic-gradient}, se tiene que $\Delta(|F|^q - Pg)\geq 0$ y como $Pg = |F|^q$ en la frontera, el principio maximal implica $|F(x, t)| \leq [(Pg)(x, t)]^p$, donde $p=1/q>1$. En particular
+	\begin{equation*}
+		\|g\|_{L^p}^p \leq \int_{\R^n}|F(x, 0)|\diff x \lesssim \|f\|_{H^1}.
+	\end{equation*}
+	Entonces, el término restante puede ser estimado utilizando el Lema \ref{lem:Carleson} con $\diff\mu := t|\nabla(P\varphi)|^2 \diff x \diff t$. En efecto,
+	\begin{equation*}
+		\int_0^\infty \int_{\R^n} t|\nabla(P\varphi)|^2|F| \diff x \diff t \leq \int_0^\infty \int_{\R^n} t|\nabla(P\varphi)|^2|Pg|^p \diff x \diff t \lesssim \|g\|_{L^p}^p \lesssim \|f\|_{H^1}.
+	\end{equation*}
+	Lo que concluye la prueba.
 \end{proof} 
+\begin{remark}
+	En esta demostración se demostró en (1 $\Rightarrow$ 3) una propiedad de la conocidafunción-$g$ de Littlewood-Paley, que se define como 
+	\begin{equation*}
+		g(f)(x) := \left(\int_0^\infty |\nabla Pf(x, t)|^2 \diff t\right)^{1/2}.
+	\end{equation*}
+	En particular, se demostro que $\|g\|_{L^2} \sim \|f\|_{L^2}$.
+\end{remark}
+Ahora, se presenta la teoría de interpolación compleja.
+\begin{definition}[Parejas de espacios]
+	Sean $A_0$, y $A_1$ espacios de Banach. Se dice que estos son \textit{compatibles} si existe un espacio topológico de Hausdorff que los contenga como subespacios, y se denota a la \textit{pareja de espacios} como $\overline{A}:=(A_0, A_1)$. Ahora, se define el \textit{espacio intersección} $\Delta(\overline{A}):=A_0\cap A_1$, con la norma 
+	\begin{equation*}
+		\|a\|_{\Delta(\overline{A})} := \max \{\|a\|_{A_0}, \|a\|_{A_1}\}.
+	\end{equation*} 
+	Además, se define el \textit{espacio suma} $\Sigma(\overline{A}):=A_0+A_1$, con la norma
+	\begin{equation*}
+		\|a\|_{\Sigma(\overline{A})} := \inf_{a=a_0+a_1} (\|a_0\|_{A_0}+\|a_1\|_{A_1}).
+	\end{equation*}
+	No es complicado demostrar que estos espacios también son de Banach. Por otra parte, se define un mapa entre parejas $T:\overline{A}\to\overline{B}$ como un mapa lineal continuo $T:\Sigma(\overline{A})\to\Sigma(\overline{B})$, tales que sus restricciones  $T|_{A_j}:A_j\to B_j$ son mapas lineales continuos para $j=0,1$. En consecuencia se tiene que 
+	\begin{equation*}
+		\|T\|_{\Delta(\overline{A}), \Delta(\overline{B})} \leq \max\{\|T\|_{A_0, B_0}, \|T\|_{A_1, B_1}\},
+	\end{equation*}
+	\begin{equation*}
+		\|T\|_{\Sigma(\overline{A}), \Sigma(\overline{B})} \leq \max\{\|T\|_{A_0, B_0}, \|T\|_{A_1, B_1}\}.
+	\end{equation*}
+\end{definition}
+\begin{definition}[Espacios intermedios y de interpolación]
+	Sea $\overline{A}:=(A_0, A_1)$ una pareja compatible, entonces $A$ es un \textit{espacio intermedio} respecto a $\overline{A}$ si $\Delta(\overline{A}) \subset \Sigma(\overline{A})$. Además, se dice que dos espacios intermedios $A, B$ respecto a $\overline{A},\overline{B}$ respectivamente, son \textit{espacio de interpolación}, si  $T:\overline{A}\to\overline{B}$ implica $T:A\to B$. Si además, se tiene que 
+	\begin{equation*}
+		\|T\|_{A, B} \leq C \max\{\|T\|_{A_0, B_0}, \|T\|_{A_1, B_1}\},
+	\end{equation*}
+	se dice que son \textit{espacios de interpolación uniformes}, y cuando $C=1$ se dice que son \textit{espacios de interpolación exacta}. Sea $0\leq\theta\leq1$, entonces se dice que $A, B$ son de \textit{exponente} $\theta$ si 
+	\begin{equation*}
+		\|T\|_{A, B} \leq C \|T\|_{A_0, B_0}^{1-\theta} \|T\|_{A_1, B_1}^{\theta}.
+	\end{equation*}
+	Además, si $C=1$, se dice que son \textit{de exponente exacto}.
+\end{definition}
+\begin{remark}
+	Se puede ver que lo que en realidad se definió es una categoría cuyos objetos son las parejas compatibles y sus morfismos los mapas definidos anteriormente. A continuación se definen los functores de interpolación.
+\end{remark}
+\begin{definition}[Functor de interpolación]
+	Se dice que $F$ es un \textit{functor de interpolación} si para parejas $\overline{A}, \overline{B}$, entonces $F(\overline{A}), F(\overline{B})$ son espacios de interpolación. Además, se tiene que $F(T)$ para $T:\overline{A}\to\overline{B}$.
+\end{definition}
+Ahora, se presentan las particularidades del método de interpolación compleja.
+\begin{definition}
+	Dada una pareja $\overline{A}$ de espacios de Banach, se define a $\mathfrak{F}(\overline{A})$ como el conjunto de funciones $f:\C\to\Sigma(\overline{A})$, tales que son continuas y acotadas en la banda $S:=\{z\in\C : 0\leq\mathrm{Re} z\leq1\}$, y que son analíticas en el interior de la misma. Además, se requiere que el mapa $t\mapsto f(j+it)$ sea continuo en $A_j$ y se desvanezcan cuando $t\to\infty$, para $j=1,0$. Además, se define la norma 
+	\begin{equation*}
+		\|f\|_{\mathfrak{F}} := \max\{\sup\|f(it)\|_{A_0}, \sup\|f(1+it)\|_{A_1}\}.
+	\end{equation*}
+	Se puede verificar que es un espacio de Banach. Por otra parte, se define el functor de interpolación $\overline{A}_{[\theta]}=C_\theta(\overline{A})$ como el espacio de vectores $a\in\Sigma(\overline{A})$, tales que $a=f(\theta)$ para algún $f\in \mathfrak{F}(\overline{A})$. Además, se define la norma
+	\begin{equation*}
+		\|a\|_{[\theta]} := \inf \{\|f\|_{\mathfrak{F}} : f(\theta) = a\}.
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	El espacio $\overline{A}_{[\theta]}$ es un espacio de Banach y es un espacio de interpolación the exponente exacto $\theta$.
+\end{theorem}
+\begin{proof}
+	Es claro que el mapa $f\mapsto f(\theta)$ es continuo desde $\mathfrak{F}(\overline{A})$ hacia $\Sigma(\overline{A})$, dado que $\|f(\theta)\|_{\Sigma} \leq \|f\|_{\mathfrak{F}}$. El kernel de este mapa es el conjunto $\mathcal{N}_\theta:=\{f: f(\theta)=0\}$. Entonces, $\overline{A}_{[\theta]}$ es isomorfo e isométrico al cociente $\mathfrak{F}/\mathcal{N}_\theta$. Además, como $\mathcal{N}_\theta$ es cerrado, se tiene que es un espacio de Banach. Ahora, se tiene que $\|a\|_\Sigma = \|f(\theta)\|_\Sigma \leq \|f\|_{\mathfrak{F}}$, que implica que $\overline{A}_{[\theta]} \subset \Sigma(\overline{A})$. Asimismo, sea 
+	\begin{equation*}
+		f(z) := e^{(z-\theta)^2}a,
+	\end{equation*}
+	que implica que $\Delta(\overline{A})\subset \overline{A}_{[\theta]}$. Entonces, es un espacio intermedio. Por otra parte, suponga $T_j$ mapea a $A_j$ en $B_j$ con norma $M_j$. Dado $a\in\overline{A}_{[\theta]}$, y dado $\varepsilon>0$, existe $f\in\mathfrak{F}(\overline{A})$ tal que $f(\theta)=a$ y que $\|f\|_{\mathfrak{F}}\leq \|a\|_{[\theta]}+\varepsilon$. Entonces, sea 
+	\begin{equation*}
+		g(z) := M_0^{z-1}M_1^{-z}T(f(z)),
+	\end{equation*}
+	que pertenece a $\mathfrak{F}(\overline{B})$. Además, $\|g\|_{\mathfrak{F}} \leq \|f\|_{\mathfrak{F}}$, pero $g(\theta)=M_0^{\theta-1}M_0^{-\theta} T(a)$ y se concluye que 
+	\begin{equation*}
+		\|Ta\|_{[\theta]} \leq M_0^{1-\theta}M_1^\theta \|g\|_{\mathfrak{F}} \leq M_0^{1-\theta}M_1^\theta \|f\|_{\mathfrak{F}} \leq M_0^{1-\theta}M_1^\theta (\|a\|_{[\theta]} + \varepsilon) .
+	\end{equation*}
+	Lo que concluye la prueba.
+\end{proof}
+Ahora, se puede expresar el Teorema de interpolación de Riesz en el lenguaje que se estableció anteriormente. 
+\begin{theorem}
+	Sean $1\leq p_0,p_1\leq \infty$, entonces para $0<\theta<1$ se tiene que 
+	\begin{equation*}
+		(L^{p_0}, L^{p_1})_{[\theta]} = L^p, \quad \text{ con } \quad \frac{1}{p} = \frac{1-\theta}{p_0} + \frac{\theta}{p_1}.
+	\end{equation*}
+\end{theorem}
+Ahora, se presenta el resultado de dualidad de interpolación compleja que permite explotar el hecho que $\mathrm{BMO}$ es el dual de $H^1$.
+\begin{theorem}
+	Sea $\overline{A}:=(A_0, A_1)$ una pareja compatible de espacios de Banach tales que $\Delta(\overline{A})$ es denso en ambos espacios y al menos uno de los espacios es reflexivo. Entonces
+	\begin{equation*}
+		(A_0, A_1)_{[\theta]}' = (A_0', A_1')_{[\theta]},
+	\end{equation*}
+	con igualdad de normas.
+\end{theorem}
+Este resultado no se demuestra, ya que se encuentra fuera de los alcances de este trabajo, pero se recomienda revisar Bergh y Löfstrom \cite{bergh-lofstrom}. Por otra parte, se presenta el resultado que permite realizar interpolación utilizando el espacio $H^1$ y el espacio $\mathrm{BMO}$.
+\begin{theorem}
+	Sea $1<p\leq\infty$, entonces se tiene que 
+	\begin{equation*}
+		(H^1,L^p)_{[\theta]} = L^q, \quad (\mathrm{BMO}, L^{p'})_{[\theta]} =L^{q'}, \quad \text{ con } \quad \frac{1}{q} = 1-\theta + \frac{\theta}{p}.
+	\end{equation*}
+\end{theorem}
+Sin embargo, para los intereses de este trabajo, se demuestran el siguiente corolario, cuya prueba directa contiene las ideas generales del resultado anterior.
+\begin{corollary}
+	Sea $z\mapsto T_z$ un mapa de la banda cerrada $0\leq\mathrm{Re} z\leq1$ a operadores acotados en $L^2(\R^n)$. Suponga que el mapa es continuo y acotado en la banda, y analítico en su interior. Además, fije $\frac{1}{p} = 1- \frac{\theta}{2}$, para $0<\theta<1$.
+	\begin{enumerate}
+		\item Suponga 
+		\begin{align*}
+			\sup_{y\in\R} \|T_{iy}f\|_{L^1} \leq M_0\|f\|_{H^1}, &\quad f\in L^2\cap H^1\\
+			\sup_{y\in\R} \|T_{1+iy}f\|_{L^2} \leq M_1\|f\|_{L^2}, &\quad f\in L^2.
+		\end{align*}
+		Entonces,  se tiene que 
+		\begin{equation*}
+			\|T_\theta f\|_{L^p} \leq M_\theta \|f\|_{L^p}, \quad f \in L^2\cap L^p.
+		\end{equation*}
+		\item Suponga 
+		\begin{align*}
+			\sup_{y\in\R} \|T_{iy}f\|_{\mathrm{BMO}} \leq M_0\|f\|_{L^\infty}, &\quad f\in L^2\cap L^\infty \\
+			\sup_{y\in\R} \|T_{1+iy}f\|_{L^2} \leq M_1\|f\|_{L^2}, &\quad f\in L^2.
+		\end{align*}
+		Entonces, se tiene que 
+		\begin{equation*}
+			\|T_\theta f\|_{L^{p'}} \leq M_\theta \|f\|_{L^{p'}}, \quad f \in L^2\cap L^{p'}.
+		\end{equation*}
+	\end{enumerate}
+	Donde $M_\theta$ solo depende de $M_0$, $M_1$, y $\theta$.
+\end{corollary}
+\begin{proof}
+	La prueba del primer inciso contiene incluida la prueba del segundo inciso, gracias a la propiedad de dualidad entre $H^1$ y $\mathrm{BMO}$. Así que suponga las hipótesis del inciso (1). Sea $S_z$ el adjunto (en $L^2$) del operador $T_{\overline{z}}$, es decir
+	\begin{equation*}
+		\int_{\R^n} T_z(f)g \diff x = \int_{\R^n} f \overline{S_{\overline{z}}(g)} \diff x,
+	\end{equation*}
+	para $f,g\in L^2$. Entonces, se tiene qu el mapa $z\mapsto S_z$ es continuo y acotado en la banda cerrada, y analítico en su interior. Ahora, para $g\in L^2\cap L^\infty$, y $f \in L^2\cap H^1$, se tiene que 
+	\begin{equation*}
+		\left| \int_{\R^n} f S_{iy}(g) \diff x 
+		\right| = 	\left| \int_{\R^n} \overline{T_{-iy}(f)} g \diff x 
+		\right| \leq \|T_{-iy}f\|_{L^1}\|g\|_{L^\infty} \leq M_0 \|f\|_{H^1}\|g\|_{L^\infty}.
+	\end{equation*}
+	Entonces, se tiene que $S_{iy}g$, es la restricción de un funcional acotado en $H^1$, por lo que en vista del Teorema \ref{theo:H1-BMO}, se tiene que $\|S_{iy}g\|_{\mathrm{BMO}}  \leq  C_0M_0\|g\|_{L^\infty}$. La dualidad de $L^2$ permite un argumento similar para así concluir $\|S_{iy}g\|_{L^2}  \leq  M_1\|g\|_{L^2}$, y que $S_z$ cumple las condiciones del inciso (2). Ahora, sea $x\mapsto Q(x)$ una función medible que mapea puntos a cubos que los contienen, y sea $\eta(x, y)$ una función medible en $\R^n\times\R^n$, tal que  $|\eta(x, y)|=1$. Además, se define el operador 
+	\begin{equation*}
+		(U_zf)(x) := \frac{1}{|Q(x)|} \int_{Q(x)} [F(y) - F_{Q(x)}]\eta(x, y) \diff y, 
+	\end{equation*}
+	con $F=S_zf$. Note que $\sup|U_zf(x)| = F^\#(x)$, si el supremo se toma sobre todas las funciones $Q$ y $\eta$. Además, como $\|F^\#\|_{L^2} \leq 2\|MF\|_{L^2} \leq C_1\|F\|_2$ (vea el Teorema \ref{theo:Hardy-Littlewood}), entonces se tiene que la función $z\mapsto \int U_z(f)g\diff x$ es acotada y continua en la banda cerrada, y analítica en su interior. También cumple que 
+	\begin{equation*}
+		\|U_{iy} f\|_{L^\infty} = \|F^\#\|_{L^\infty} = \|F\|_{\mathrm{BMO}} = \|S_{iy}f\|_{\mathrm{BMO}}  \leq C_0M_0 \|f\|_{L^\infty}, \quad f\in L^2\cap L^\infty,
+	\end{equation*}
+	\begin{equation*}
+		\|U_{1+iy} f\|_{L^2} = \|F^\#\|_{L^2} \leq C_1\|F\|_{L^2}= C_1\|S_{1+iy}f\|_{L^2} \leq C_1M_1 \|f\|_{L^2}, \quad f\in L^2.
+	\end{equation*}
+	Por el Teorema de interpolación de Riesz-Thorin (Teorema \ref{theo:riesz-thorin}), se tiene que 
+	\begin{equation*}
+		\|U_\theta f\|_{L^{p'}} \leq (C_0M_0)^{1-\theta}(C_1M_1)^\theta \|f\|_{L^{p'}}, \quad \frac{1}{p'} = \frac{\theta}{2}.
+	\end{equation*}
+	Como esta cota no depende de las funciones $Q$ o $\eta$, entonces se puede tomar el supremo y obtener que 
+	\begin{equation*}
+		\|F^\#\|_{L^{p'}} =\| (S_\theta f)^\#\|_{L^{p'}} \leq (C_0M_0)^{1-\theta}(C_1M_1)^\theta \|f\|_{L^{p'}}.
+	\end{equation*}
+	Al aplicar el Teorem \ref{theo:sharp-hardy-littlewood}, se obtiene que 
+	\begin{equation*}
+		\|S_\theta f\|_{L^{p'}} \leq \|M(S_\theta f)\|_{L^{p'}} \leq A_{p'} \|(S_\theta f)^\#\|_{L^{p'}} \leq A_{p'} (C_0M_0)^{1-\theta}(C_1M_1)^\theta \|f\|_{L^{p'}}.
+	\end{equation*}
+	Por lo que se obtiene el resultado del inciso (2). El inciso (1) se completa mediante un argumento de dualidad, ambos con $M_\theta = A_{p'} (C_0M_0)^{1-\theta}(C_1M_1)^\theta$.
+\end{proof}
+Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1$. Aquí, se adapta el caso $p$ de la prueba general presentada por Stein \cite{stein}.
+\begin{definition}[Descomposición atómica $H^1_{at}(\R^n)$]
+	Se le llama \textit{átomo} a una función $a:\R^n\to\C$ soportada en una bola $B$, que cumple que 
+	\begin{equation*}
+		\|a\|_{L^\infty} \leq |B|^{-1}, \quad \text{ y } \quad \int_{\R^n} a(x) \diff x = 0.
+	\end{equation*}
+	Además, se dice que $f\in H^1_{at}(\R^n)$ si existe una \textit{descomposición atómica}, es decir una secuencia de átomos $(a_j)$ que satisfaga
+	\begin{equation*}
+		f = \sum_j \lambda_j a_j, \quad \sum_j |\lambda_j| < \infty.
+	\end{equation*}
+	También se define la norma 
+	\begin{equation*}
+		\|f\|_{H^1_{at}} := \inf \left\{\sum_j |\lambda_j| : f=\sum_j\lambda_j a_j \right\}
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	Se tiene que $H^1(\R^n) = H^1_{at}(\R^n)$, con equivalencia de norma.
+\end{theorem}
+\begin{proof}
+	($\|\cdot\|_{H^1} \lesssim \|\cdot\|_{H^1+{at}}$) Para esta dirección, basta con ver que los átomos tienen norma $H^1$ uniforme. Primero, por (\ref{eq:Rj-L-infty}), se tiene que para un átomo $a$ relacionado a una bola $B(z, \sigma)$
+	\begin{equation*}
+		\int_{B(z, 2\sigma)}|R_j a(x) |\diff x \lesssim |B(z, \sigma)|\|a\|_{L^\infty} \leq C.
+	\end{equation*}
+	Ahora, por (\ref{eq:Rj-diff-L-infty}), se tiene que para $|x-z|>2\sigma$, 
+	\begin{equation*}
+		\int_{\R^n\setminus B(z, 2\sigma)} |K_j(y-x) - K(z-x)|\diff x \leq C.
+	\end{equation*}
+	Además, por la propiedad de cancelación
+	\begin{align*}
+		\int_{\R^n\setminus B(z, 2\sigma)} |R_ja|\diff x & = \int_{\R^n\setminus B(z, 2\sigma)} \left| \int_{B(z, \sigma)} a(y)  \left[ K_j(x - y)- K_j(x - z) \right] \diff y
+		\right| \diff x \\
+		& \leq  \int_{B(z, \sigma)}|a(y)| \int_{\R^n\setminus B(z, 2\sigma)} |K_j(x - y)- K_j(x - z)| \diff x \diff y \\
+		& \leq C \int_{B(z, \sigma)}|a(y)| \diff y \leq C.
+	\end{align*}
+	En conclusión $\|R_j a\|_{L^1} \leq C$, y esto permite asegurar la convergencia en $H^1$ de la serie de átomos, y que  para cualquier $\varepsilon>0$
+	\begin{equation*}
+		\|f\|_{H^1}  \leq \sum_j |\lambda_j| \|a_j\|_{H^1} \lesssim \sum_j |\lambda_j| \leq \|f\|_{H^1_{at}} + \varepsilon.
+	\end{equation*}
+	($\|\cdot\|_{H^1_{at}}\lesssim \|\cdot\|_{H^1}$) Para la construcción de los átomos,  se aplica la descomposición de Calderón-Zygmund a $\mathcal{M}f:= |f_0| + \sum |R_jf|$, al nivel $\lambda=2^m$, para obtener una suseción de cubos diádicos $\{Q_k^m\}$ tales que 
+	\begin{equation*}
+		2^m < \frac{1}{|Q_k^m|}\int_{Q_k^m} \mathcal{M}f\diff x \leq 2^{n+m},
+	\end{equation*}
+	\begin{equation*}
+		|Q^m| := \left|\bigcup_k Q_k^m\right| \lesssim 2^{-m}\|\mathcal{M}f\| _{L^1}= 2^{-m}\|f\|_{H^1},
+	\end{equation*}
+	y si $x\notin Q^m$, entonces $\mathcal{M}f(x) \leq 2^m$ casi en todas partes. Entonces, se definen 
+	\begin{equation*}
+		g^m := f(1-\chi_{Q^m}) + \sum_k f_{\frac{1}{2}Q_k^m}\chi_{\frac{1}{2}Q_k^m}, \quad b^m := \sum_k b_k^m := \sum_k (f-f_{\frac{1}{2}Q_k^m})\chi_{\frac{1}{2}Q_k^m}.
+	\end{equation*}
+	Por lo que, para $x\in Q_k^m$, se tiene que 
+	\begin{align*}
+		|R_jb_k^m| & \leq \left| \int_{Q_k^m} K_j(x-y)f(y) \diff y \right| +\left| \int_{Q_k^m} K_j(x-y)f_{\frac{1}{2}Q_k^m} \diff y \right|\\
+		& \leq |R_jf| +\left| \int_{Q_k^m} K_j(x-y)\frac{2^n}{|Q_k^m|}\int_{\frac{1}{2}Q_k^m}f(x)\diff x \diff y \right| \\
+		& \leq |R_jf| +\frac{2^n}{|Q_k^m|} \int_{Q_k^m} |R_jf(y)| \diff y  \\
+		& \lesssim |R_jf|  + |R_jf|_{Q_k^m}| \lesssim |R_jf| + 2^{n+m} \lesssim \mathcal{M}f.
+	\end{align*}
+	Ahora, cuando $x\notin Q_k^m$, se aprovecha el hecho que $\int b_k^m = 0$, para tener que 
+	\begin{align*}
+		R_jb_k^m&=  \int_{\R^n} b_k^m(y)[K_j(x-y) - K_j(x-x_{Q_k^m} )] \diff y
+	\end{align*}
+	Aquí, $x_{Q_k^m}$ es el centro del cubo. Por un argumento similar al de (\ref{eq:Rj-diff-L-infty}), se tiene que 
+	\begin{equation*}
+		| R_jb_k^m |\lesssim \int_{Q_k^m} \frac{\ell(Q_k^m)|f(y) - f_{\frac{1}{2}Q_k^m}|}{|x-x_{Q_k^m}|^{n+1}} \diff y \leq 2|f|_{\frac{1}{2}Q_k^m} \frac{\ell(Q_k^m)}{|x-x_{Q_k^m}|^{n+1}}|Q_k^m| \lesssim 2^{n+m}\frac{\ell(Q_k^m)^{n+1}}{|x-x_{Q_k^m}|^{n+1}}.
+	\end{equation*}
+	Por lo que 
+	\begin{align*}
+		\int_{\R^n}\mathcal{M}{b_k^m} \diff x &= \int_{Q_k^m}\mathcal{M}{b_k^m} \diff x + \int_{\R^n\setminus Q_k^m}\mathcal{M}{b_k^m} \diff x\\
+		& \leq \int_{Q_k^m}\mathcal{M}f \diff x + \int_{|x-x_{Q_k^m}|>\ell(Q_k^m)} 2^{m}\frac{\ell(Q_k^m)^{n+1}}{|x-x_{Q_k^m}|^{n+1}} \diff x \\
+		& \lesssim  \int_{Q_k^m}\mathcal{M}f \diff x + 2^m\ell(Q_k^m)^n\\
+		 & \lesssim  \int_{Q_k^m}\mathcal{M}f \diff x + 2^m|Q_k^m| \lesssim  \int_{Q_k^m}\mathcal{M}f \diff x .
+	\end{align*}
+	Por lo que se tiene que 
+	\begin{align*}
+		\|b^m\|_{H^1} & \leq \sum_k	\int_{\R^n}\mathcal{M}{b_k^m} \diff x \leq \sum_k \int_{Q_k^m} \mathcal{M}f\diff x \leq \int_{Q^m}\mathcal{M}f\diff x \to 0,
+	\end{align*}
+	cuando se hace $m\to\infty$, dado que $Q^m = \{\mathcal{M}f>2^m\}$. Equivalentemente, $\|f-g^m\|_{H^1} \to 0$. Además, como $g^m\to0$ cuando $m\to-\infty$, se tiene que 
+	\begin{equation*}
+		f = \sum_{m\in\Z} (g^{m+1}-g^m). = \sum_{m\in\Z}\sum_k (g^{m+1}-g^m)\chi_{Q_k^m},
+	\end{equation*}
+	como $g^{m+1}-g^m = b^m - b^{m+1}$, que se encuentra soportado en $Q^m$. Ahora, se define $B_k^m$ como la menor bola que contiene al cubo $Q_k^m$, y como $|g^{m+1}-g^{m}| \leq 3\cdot2^{m}$, se definen
+	\begin{equation*}
+		\lambda_k^m := 3\cdot 2^m |B_k^m|, \quad a_k^m := (\lambda_k^m)^{-1} (g^{m+1}-g^m)\chi_{Q_k^m}, 
+	\end{equation*}
+	De tal manera que $\|a_k^m\|_{L^\infty} \leq |B_k^m|^{-1}$. Ahora, note que como son cúbos diádicos, si $Q_k^m \cap Q_\ell^{m+1}$, entonces, uno esta contenido en el otro, particularmente $Q_\ell^{m+1}\subset Q_k^m$. Por lo que 
+	\begin{equation*}
+		\int_{Q_k^m}(g^{m+1}-g^m) \diff x = \int_{Q_k^m}(b^{m}-g^{m+1}) \diff x = \int_{\R^n}(b_k^m - b^{m+1}\chi_{Q_k^m}) \diff x = -\sum_\ell  \int_{\R^n} b^{m+1}_\ell\diff x = 0.
+	\end{equation*}
+	Similarmente, los cubos $Q_k^m$ contienen a todos los cubos $Q_\ell^{m'}$ con $m'>m$. Entonces, se pueden agrupar los átomos para cada nivel $m$
+	\begin{equation*}
+		\sum_{k} |\lambda_k^m|  \lesssim \sum_{k} 2^m|B_k^m| \lesssim 2^m\sum_{k} |Q_k^m| = 2^m|\{\mathcal{M}f>2^m\}|  \lesssim \| \mathcal{M}f\|_{L^1} = \|f\|_{H^1}.
+	\end{equation*}
+	Al tomar el ínfimo de todos los niveles $m$, se obtiene el resultado deseado.
+\end{proof}
+\begin{remark}
+	Todo lo discutido anteriormente, puede ser adaptado al caso del toro $\T^n$, restringiendo lo anterior a funciones 1-periódicas. Además, en todas las demostraciones, se puede restringir el dominio de integración al cubo unitario, y esto no tiene ningún efecto en la convergencia. Además, intercambiar la integral por la sumatoria en la transformada de Fourier inversa no afecta ninguno de los procedimientos realizados. Por ello, no se repiten las definiciones y teoremas para el caso toroidal, pues son bastante naturales.
+\end{remark}
 \chapter{Operadores pseudo-diferenciales}
-
 \section{Definición y propiedades básicas en $\R^n$}
 \begin{definition}[Clases de símbolos de Hörmander $S^m_{\rho,\delta}(\R^n\times\R^n)$]
 	Sean $0\leq\delta,\rho\leq1$. Se dice que $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$ si $a:=(x,\xi)$ es suave en $\R^n\times\R^n$ y cumple que
@@ -2011,6 +2713,9 @@ Note que en ambos casos se requiere $\delta < \rho$. Esta restricción puede ser
 \end{theorem}
 El análogo toroidal de este resultado fue demostrado con Cardona en 
 \cite{Cardona:Martinez}. Aquí se presenta la prueba del mismo siguiendo el mismo esquema que \'Alvarez y Hounie. Primero, se demuestran unos estimativos del kernel de Schwarz de operadores pseudo-diferenciales toroidales bastante útiles.
+\begin{remark}
+	Ahora, vale la pena indicar la razón por la que los resultados en el toro no son consecuencia de los del caso euclideano. Las clases $H^1$ y $\mathrm{BMO}$, no son estables bajo la multiplicación de funciones test, por lo que no es posible tratar al toro como una variedad mediante particiones de la unidad. Además, los operadores pseudo-diferenciales con símbolos en las clases de Hörmander no son estables bajo cambios de coordenadas cuando $\rho>1-\delta$. Esto justifica el hecho de que se considere al toro $\T^n$ como un caso distinto a $\R^n$ y se estudien los resultados por separado.
+\end{remark}
 \begin{theorem}
 	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, con símbolo $p(x, \xi)$ y con kernel
 	\begin{equation}
@@ -2337,7 +3042,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 		\end{equation*}
 		Por lo tanto, se completa la demostración para $T$. 
 	\end{itemize}  
-	Ahora, se observa que las únicas propiedades de $T$ que se usaron en esta demostración son el orden del operador y el hecho de que su núcleo satisface \cref{theo:kernel-estimate-sigma}, propiedades que también aplican a $T^*$. Por lo tanto, el resultado también es válido para $T^*$.
+	Ahora, se observa que por un argumento de dualidad y en vista del Teorema \ref{theo:H1-BMO}, se tiene que también es válido para el adjunto $T^*$.
 \end{proof}
 \begin{theorem}
 	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$ y  
