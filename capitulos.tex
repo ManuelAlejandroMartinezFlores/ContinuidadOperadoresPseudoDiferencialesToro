@@ -27,7 +27,7 @@ Sea $\Omega$ un subconjunto medible de $\R^n$. Por simplicidad, se supondrá
 que $\Omega$ es abierto o cerrado.
 
 \begin{definition}[Espacios de Bochner-Lebesgue]
-    Sea $1\leq p < \infty$ y $X$ un espacio de Banach. Se dice que una función (fuertemente) medible $f:\Omega\subset\R^n\rightarrow X$ se encuentra en $L^p(\Omega;X)$ si su norma 
+    Sea $1\leq p < \infty$, y $X$ un espacio de Banach. Se dice que una función (fuertemente) medible $f:\Omega\subset\R^n\rightarrow X$ se encuentra en $L^p(\Omega;X)$ si su norma 
     \begin{equation*}
         \|f\|_{L^p(\Omega;X)} := \left( \int_\Omega \|f(x)\|_X^p \diff x
         \right)^{1/p}
@@ -74,14 +74,14 @@ Cauchy.
 \begin{proposition}[Desigualdad de H\"older]
     Sean $1\leq p, q\leq \infty$, tales que $\frac{1}{p} + \frac{1}{q} = 1$.
     Entonces, para $g\in L^q(\Omega;X)$ y $f\in L^p(\Omega;\mathcal{B}(X, Y))$, se tiene
-    que $fg \in L^1(\Omega;X)$ y 
+    que $fg \in L^1(\Omega;Y)$ y 
     \begin{equation*}
         \|fg\|_{L^1} \leq \|f\|_{L^p}\|g\|_
         {L^q}.
     \end{equation*}
 \end{proposition}
 \begin{proof}
-    Para el caso $p=1$ o $p=\infty$, el resultado es trivial. Así que 
+    Para el caso $p=1$, o $p=\infty$, el resultado es trivial. Así que 
     se considerará el caso $1<p<\infty$, que es una aplicación 
     de la proposición anterior. Primero, se supone
     que $\|f\|_{L^p} = \|g\|_{L^q} = 1$. Entonces, 
@@ -112,7 +112,7 @@ En el caso $p=2=q$ se obtiene la desigualdad de Cauchy-Schwarz.
     y $L^p(\Omega;X)$ es un espacio normado.
 \end{proposition}
 \begin{proof}
-    Para $p=1$ o $p=\infty$ el resultado se obtiene gracias a la desigualdad
+    Para $p=1$, o $p=\infty$ el resultado se obtiene gracias a la desigualdad
     triangular de la norma en $X$. Ahora, para $1<p<\infty$ 
     se tiene que
     \begin{align*}
@@ -127,12 +127,11 @@ En el caso $p=2=q$ se obtiene la desigualdad de Cauchy-Schwarz.
         \right] \\ 
         & = \|f+g\|_{L^p}^{p-1}(\|f\|_{L^p} + \|g\|_{L^p}).
     \end{align*}
-    Aquí, la primera desigualdad es la desigualdad triangular de los números
-    complejos y la segunda es la desigualdad de H\"older, por lo que se concluye
+    Aquí, la primera desigualdad es la desigualdad triangular de la norma de $X$, y la segunda es la desigualdad de H\"older, por lo que se concluye
     lo deseado.
 \end{proof}
 \begin{theorem}[Desigualdad de Jensen]
-	Sea $\mu$ una medida unitaria en $\Omega$, y sea $\varphi:\Sigma\subset\R\to\R$ una función convexa. Entonces para funciones integrables  $f:\Omega\to\Sigma$, se tiene que 
+	Sea $\mu$ una medida unitaria en $\Omega$, y sea $\varphi:I\subset\R\to\R$ una función convexa, donde $I$ es un intervalo. Entonces para funciones integrables  $f:\Omega\to I$, se tiene que 
 	\begin{equation*}
 		\varphi \left(\int_\Omega f\diff\mu  \right) \leq \int_\Omega \varphi\circ f\diff\mu.
 	\end{equation*}
@@ -140,9 +139,9 @@ En el caso $p=2=q$ se obtiene la desigualdad de Cauchy-Schwarz.
 \begin{proof}
 	Note que la convexidad equivale a para cualquier $y_0\in\Sigma$ existe $\lambda$ tal que $\varphi(y) \geq \varphi(y_0) + \lambda(y-y_0)$. Entonces, tome en particular
 	\begin{equation*}
-		y_0 := \int_\Omega f\diff\mu \in \Sigma.
+		y_0 := \int_\Omega f\diff\mu.
 	\end{equation*}
-	Por lo que 
+	Se tiene que $y_0\in I$ dado que la medida $\mu$ es unitaria. Por lo que 
 	\begin{equation*}
 		\int_\Omega \varphi\circ f\diff \mu \geq \varphi(y_0) + \lambda \int_\Omega (f-y_0)\diff \mu = \varphi(y_0).
 	\end{equation*}
@@ -192,7 +191,7 @@ Se continúa con el programa de definiciones y propiedades en los espacios
 de Lebesgue.
 
 \begin{definition}[Convoluciones]
-    Para funciones $g\in L^1(\Omega;X)$, y $f\in L^1(\Omega; \mathcal{B}(X, Y))$, se define su convolución como 	
+    Para funciones $g\in L^1(\Omega;X)$, y $f\in L^1(\Omega; \mathcal{B}(X, Y))$, se define su \textit{convolución} como 	
     \begin{equation*}
         (f*g)(x) := \int_{\Omega} f(x-y)g(y)\diff y.
     \end{equation*}
@@ -209,13 +208,13 @@ de Lebesgue.
 \end{remark}
 \begin{proposition}[Desigualdad de Young para convoluciones]
     Sean $1\leq p,q,r\leq \infty$ tales que $\frac{1}{p} + \frac{1}{q} = 1 + 
-    \frac{1}{r}$, y sean $g\in L^1(\Omega;X)$, y $f\in L^1(\Omega; \mathcal{B}(X, Y))$. Entonces se tiene que
+    \frac{1}{r}$, y sean $g\in L^q(\Omega;X)$, y $f\in L^p(\Omega; \mathcal{B}(X, Y))$. Entonces se tiene que
     \begin{equation*}
         \|f*g\|_{L^r} \leq \|f\|_{L^p} \|g\|_{L^q}.
     \end{equation*}
 \end{proposition}
 \begin{proof}
-    Se nota que gracias al teorema~\ref{theo:riesz-thorin} es suficiente 
+    Se nota que gracias al Teorema~\ref{theo:riesz-thorin} es suficiente 
     demostrar 
     \begin{equation}\label{eq:young-convolution-estimates}
         \|f*g\|_{L^p} \leq \|f\|_{L^p} \|g\|_{L^1}, \quad 
@@ -234,8 +233,8 @@ de Lebesgue.
     \end{equation*}
     se obtiene la condición indicada para los parametros $p, q, r$. Ahora, 
     se procede a demostrar el primer estimativo de
-    ~(\ref{eq:young-convolution-estimates}). Este se obtiene como resultado de
-    la monotonia de la norma $L^p$, véase la proposición~\ref{prop:monotonia-Lp}.
+    (\ref{eq:young-convolution-estimates}). Este se obtiene como resultado de
+    la monotonia de la norma $L^p$, véase la Proposición \ref{prop:monotonia-Lp}.
     En efecto,
     \begin{align*}
         \|f*g\|_{L^p} & = \left\| \int_{\Omega} f(\cdot-y)g(y)\diff y 
@@ -277,28 +276,27 @@ espacios $L^p$
     completos, y por consecuencia son espacios de Banach. Particularmente, si $\mathcal{H}$ es un espacio de Hilbert, entonces el 
     espacio $L^2(\Omega,\mathcal{H})$ es un espacio de Hilbert con producto interno dado por
     \begin{equation*}
-        (f, g)_{L^2} := \int_\Omega (f(x), g(x))_{\mathcal{H}}\diff x,
+        (f, g)_{L^2} := \int_\Omega (f(x), g(x))_{\mathcal{H}}\diff x.
     \end{equation*}
-    donde $\overline{z}$ es el conjugado en los números complejos.
 \end{remark}
 \begin{theorem}
 	Las funciones continuas son densas en el espacio $L^p(\Omega;X)$.
 \end{theorem}
 \begin{proof}
 	Basta con demostrarlo para una función simple $\chi_E$, donde $E$ es un conjunto medible. Por definición de medida de Lebesgue 
-	$|E| = \inf\{\sum |I_k| : E \subset \bigcup I_k\}$, donde los $I_k$ son cubos abiertos. Entonces, siembre existe un abierto $U$, tal que $|U\setminus E|$. Ahora, se toma una sucesión de funciones suaves $\phi_n$, tal que $\phi_n(0)=1$, que $\phi_n(t)=0$, para $t>1/n$. Entonces, se define $\Phi_n(x) := \phi_n(d(x, U))$, donde se toma la distancia al abierto $U$. Por lo que 
+	$|E| = \inf\{\sum |I_k| : E \subset \bigcup I_k\}$, donde los $I_k$ son cubos abiertos. Entonces, siembre existe un abierto $U$, tal que $|U\setminus E|<\varepsilon$. Ahora, se toma una sucesión de funciones suaves $\phi_n$, tal que $\phi_n(0)=1$, que $\phi_n(t)=0$, para $t>1/n$. Entonces, se define $\Phi_n(x) := \phi_n(d(x, U))$, donde se toma la distancia al abierto $U$. Por lo que 
 	\begin{equation*}
-		\|\Phi_n - \chi_E\|_{L^p} \leq \|\chi_{U_n} - \chi_E\|_{L^p} = \|\chi_{U_n\setminus U} - \chi_{U\setminus E}\|_{L^p} \leq \|\chi_{U_n\setminus U} \|_{L^p} +\varepsilon,
+		\|\Phi_n - \chi_E\|_{L^p} \leq \|\chi_{U_n} - \chi_E\|_{L^p} = \|\chi_{U_n\setminus U} - \chi_{U\setminus E}\|_{L^p} \leq \|\chi_{U_n\setminus U} \|_{L^p} +\varepsilon^{1/p},
 	\end{equation*}
 	donde $U_n$ es el soporte de $\Phi_n$, que se puede ver decrece a $U$. La prueba se completa por convergencia dominada.
 \end{proof}
 Se presenta la versión local de los espacios de Lebesgue. Para ello se necesita el siguiente espacio de funciones.
 \begin{definition}[Funciones suaves de soporte compacto]
-		Se dice que $\varphi:\Omega\subset\R^n\rightarrow X$ es suave si es de clase $C^\infty$, o infinitamente diferenciable.  Se define su soporte como 
+		Se dice que $\varphi:\Omega\subset\R^n\rightarrow X$ es suave si es de clase $C^\infty$, o infinitamente diferenciable.  Se define su \textit{soporte} como 
 		\begin{equation*}
 			\supp \varphi = \overline{\{x\in\Omega:\varphi(x)\neq 0\}}.
 		\end{equation*}
-		Si $\supp \varphi$ es compacto, se dice que $f\in\C^\infty_0(\Omega;X)$.
+		Si $\supp \varphi$ es compacto, se dice que $f\in C^\infty_0(\Omega;X)$.
 \end{definition}
 \begin{definition}[Localización de espacios de Lebesgue]
 	Se dice que una función medible $f:\Omega\subset\R^n\rightarrow X$ es localmente integrable o pertenece a $L^{p}_{loc}(\Omega; X)$, con $1\leq p\leq\infty$ si 
@@ -313,9 +311,9 @@ Ahora, se introducen los espacios de Lebesgue pesados.
 	\begin{equation*}
 		w(E) = \int_E w(x)\diff x.
 	\end{equation*}
-	Por lo que se dice que una función (fuertemente medible) $f:\Omega\to X$, pertenece al \textit{espacio de Lebesgue pesado} $L^p(\Omega;X;w)$ cuando 
+	Por lo que se dice que una función (fuertemente) medible $f:\Omega\to X$, pertenece al \textit{espacio de Lebesgue pesado} $L^p(\Omega;X;w)$ cuando 
 	\begin{equation*}
-		\|f\|_{L^p(w)} := \int_\Omega \|f(x)\|_X \diff w(x) < \infty,
+		\|f\|_{L^p(w)} :=\left( \int_\Omega \|f(x)\|_X^p \diff w(x)\right)^{1/p} < \infty,
 	\end{equation*}
 	para $1\leq p<\infty$. Cuando $p=\infty$, cuando es acotada excepto en un conjunto de $w$-medida cero.
 \end{definition}
@@ -324,50 +322,50 @@ Ahora, se introducen los espacios de Lebesgue pesados.
 	\begin{equation*}
 		p\int_0^\infty t^{p-1} a_f(t) \diff t = \int_\Omega \|f(x)\|_X^p \diff w(x).
 	\end{equation*}
-	con $a_f(t) = w\{x\in\Omega: \|f(x)\|_X>t\}$
+	con $a_f(t) = w\{x\in\Omega: \|f(x)\|_X>t\}$.
 \end{proposition}
 \begin{proof}
 	Basta con notar que para cualquier función diferenciable $\phi(t)$ con $\phi(0)=0$, se tiene que
 	\begin{align*}
 		\int_\Omega \phi(\|f(x)\|_X) \diff w(x) & = \int_\Omega \int_0^{\|f(x)\|_X} \phi'(t) \diff t \diff w(x) \\
 		& = \int_0^\infty \phi'(t) \int_{\|f(x)\|_X>t}  \diff w(x) \diff t \\
-		& = \int_0^\infty \phi'(t) w\{x\in\Omega: \|f(x)\|_X>t\}w \diff t.
+		& = \int_0^\infty \phi'(t) w\{x\in\Omega: \|f(x)\|_X>t\} \diff t.
 	\end{align*}
 	Ahora, el resultado se obtiene cuando $\phi(t) = t^p$.
 \end{proof}
 A continuación, se presenta un resultado de interpolación bastante útil. 
 \begin{definition}
-	Sea $T$ un operador desde $L^p(\Omega;X;w)$ al espacio de funciones medibles desde $\Sigma$ hacia $Y$. Entonces, se dice que $T$ es de tipo $(p,q)$ débil respecto a los pesos $(u,w)$, con $q<\infty$, si se tiene que 
+	Sea $T$ un operador desde $L^p(\Omega;X;w)$ al espacio de funciones medibles desde $\Sigma$ hacia $Y$. Entonces, se dice que $T$ es de \textit{tipo $(p,q)$ débil} respecto a los pesos $(u,w)$, con $q<\infty$, si se tiene que 
 	\begin{equation*}
 		u\{x\in\Sigma:\|Tf(x)\|_Y>\lambda\}\lesssim \left(\frac{\|f\|_{L^p(w)}}{\lambda}\right)^q.
 	\end{equation*}
-	Además, se dice que es de tipo débil $(p, q=\infty)$ o tipo fuerte $(p, q)$, si es acotado desde $L^p(\Omega;X;u)$ hacia $L^q(\Sigma;Y;w)$.
+	Además, se dice que es de tipo débil $(p, q=\infty)$ o tipo fuerte $(p, q)$, si es acotado desde $L^p(\Omega;X;w)$ hacia $L^q(\Sigma;Y;u)$.
 \end{definition}
 \begin{theorem}\label{theo:weak-closed}
 	Sea $\{T_t\}$ una familia de operadores en $L^p(\Omega;X;w)$, y se define su operador maximal asociado 
 	\begin{equation*}
 		T_*f(x) = \sup_t \|T_tf(x)\|_X.
 	\end{equation*}
-	Si $T_*$ es de tipo $(p,q)$ débil, entonces se tiene que los conjuntos
+	Si $T_*$ es de tipo $(p,q)$ débil respecto a $(w, w)$, entonces se tiene que los conjuntos
 	\begin{equation*}
-		\left\{f\in L^p: \lim_{t\to t_0} T_tf(x) = f(x)\, \text{ casi en todas partes} \right\},
+		\left\{f\in L^p(w): \lim_{t\to t_0} T_tf(x) = f(x)\, \text{ casi en todas partes} \right\},
 	\end{equation*}
 	\begin{equation*}
-		\left\{f\in L^p: \lim_{t\to t_0} T_tf(x) = 0\, \text{ casi en todas partes} \right\},
+		\left\{f\in L^p(w): \lim_{t\to t_0} T_tf(x) = 0\, \text{ casi en todas partes} \right\},
 	\end{equation*}
 	son cerrados.
 \end{theorem}
 \begin{proof}
-	Sea $(f_n)$ una suseción de funciones que converge a $f\in L^p$. Entonces, se tiene que 
+	Sea $(f_n)$ una suseción de funciones que converge a $f\in L^p(w)$. Entonces, se tiene que 
 	\begin{align*}
 		w\{\limsup_{t\to t_0} \|T_tf(x) - f(x)\|_X > \lambda \}  &\leq w\{\limsup_{t\to t_0} \|T_t(f-f_n)(x) - (f-f_n)(x)\|_X >\lambda \}\\
 		& \leq w\{T_*(f-f_n)(x)>\lambda/2 \} +  w\{\|(f-f_n)(x)\|_X >\lambda/2 \}\\
-		& \leq \left(\frac{C2}{\lambda}\|f-f_n\|_{L^p}\right)^q + \left(\frac{2}{\lambda}\|f-f_n\|_{L^p}\right)^q \to 0,
+		& \leq \left(\frac{C2}{\lambda}\|f-f_n\|_{L^p(w)}\right)^q + \left(\frac{2}{\lambda}\|f-f_n\|_{L^p(w)}\right)^q \to 0,
 	\end{align*}
 	cuando $n\to\infty$. Lo que completa la prueba del primer conjunto, para el segundo, se utiliza un argumento similar con $\{\limsup_{t\to t_0}\|T_tf(x)\|_X>\lambda\}$.
 \end{proof}
 \begin{theorem}[Interpolación de Marcinkiewicz]
-	Sean $1\leq p_0 < p_1 \leq \infty$, y $1\leq q_0 < q_1 \leq \infty$, tales que $p_j<q_j$. Y sea $T$ un operador sublineal desde $L^{p_0}(\Omega;X, w)+L^{p_1}(\Omega;X, w)$ hacia las funciones medibles de $\Sigma$ en $Y$, es decir 
+	Sean $1\leq p_0 < p_1 \leq \infty$, y $1\leq q_0 < q_1 \leq \infty$, tales que $p_j<q_j$. Y sea $T$ un operador sublineal desde $L^{p_0}(\Omega;X; w)+L^{p_1}(\Omega;X; w)$ hacia las funciones medibles de $\Sigma$ en $Y$, es decir 
 	\begin{align*}
 		\|T(f+g)(x)\|_Y & \leq \|Tf(x)\|_Y + \|Tg(x)\|_Y,\\
 		\|T(\lambda f)(x)\|_Y &= |\lambda|\|Tf(x)\|_Y.
@@ -405,10 +403,10 @@ A continuación, se presenta un resultado de interpolación bastante útil.
 		& \leq \sum_j q\int_0^\infty\lambda^{q-1-q_j} (2A_j)^{q_j}\left( \int_\Omega \|f_j(x)\|_X^{p_j}\diff u(x) \right)^{q_j/p_j}\diff \lambda\\ 
 		& \leq \sum_j q\int_0^\infty\lambda^{q-1-q_j} (2A_j)^{q_j}\int_\Omega \|f_j(x)\|_X^{q_j}\diff u(x) \diff \lambda\\
 		& \leq q\int_0^\infty\lambda^{q-1-q_0} (2A_0)^{q_0}\int_{\|f\|_X>\sigma\lambda^\gamma} \|f(x)\|_X^{q_0}\diff u(x) \diff \lambda\\
-		& \quad + q\int_0^\infty\lambda^{q-1-q_1} (2A_1)^{q_1} \int_{\|f\|_X>\sigma\lambda^\gamma} \|f(x)\|_X^{q_1}\diff u(x) \diff \lambda\\
+		& \quad + q\int_0^\infty\lambda^{q-1-q_1} (2A_1)^{q_1} \int_{\|f\|_X\leq\sigma\lambda^\gamma} \|f(x)\|_X^{q_1}\diff u(x) \diff \lambda\\
 		& = q(2A_0)^{q_0} \int_\Omega \|f(x)\|_X^{q_0} \int_0^{(|f|/\sigma)^{1/\gamma}} \lambda^{q-1-q_0} \diff\lambda \diff u(x) \\
 		& \quad + q(2A_1)^{q_1} \int_\Omega \|f(x)\|_X^{q_1} \int_{(\|f\|_X/\sigma)^{1/\gamma}}^{\infty} \lambda^{q-1-q_1} \diff\lambda \diff u(x) \\
-		& = \frac{q(2A_0)^{q_0}\sigma^{q_0-p}}{q-q_0} \int_\Omega \|f(x)\|_X^q \diff u(x) + \frac{q(2A_1)^{q_1}\sigma^{q_1-p}}{q_1-q} \int_\Omega \|f(x)\|_X^p \diff u(x) \\
+		& = \frac{q(2A_0)^{q_0}\sigma^{q_0-p}}{q-q_0} \int_\Omega \|f(x)\|_X^p \diff u(x) + \frac{q(2A_1)^{q_1}\sigma^{q_1-p}}{q_1-q} \int_\Omega \|f(x)\|_X^p \diff u(x) \\
 		& = \left(\frac{q(2A_0)^{q_0}\sigma^{q_0-p}}{q-q_0} +\frac{q(2A_1)^{q_1}\sigma^{q_1-p}}{q_1-q} \right) \|f\|_{L^p(w)}^p.
 	\end{align*}
 	Entonces, si se utiliza $\|f\|_{L^p(w)}^{-1} f$ en lugar de $f$, se obtiene por homogenidad de $T$ 
@@ -443,7 +441,7 @@ Ahora, se presenta un resultado de descomposición que fue demostrado por Calder
 \begin{definition}[Operador maximal diádico]
 	Para $f\in L^1_{loc}(\Omega;X)$, se define el \textit{operador maximal diádico} como 
 	\begin{equation*}
-		M_df(x) := \sup_k \|E_kf(x)\|_X, \quad \text{ con } \quad E_kf(x) := \sum_{Q\in\mathcal{Q}_k} \frac{\chi_Q(x)}{|Q|} \int_Q f(y) \diff y
+		M_df(x) := \sup_k \|E_kf(x)\|_X, \quad \text{ con } \quad E_kf(x) := \sum_{Q\in\mathcal{Q}_k} \frac{\chi_Q(x)}{|Q|} \int_Q f(y) \diff y.
 	\end{equation*}
 \end{definition}
 \begin{theorem}
@@ -509,7 +507,7 @@ Ahora, se presenta un resultado que evidencia la utilidad de este operador maxim
 	\end{align*}
 	En conclusión, se tiene que 
 	\begin{equation*}
-		\{x\in\Omega:Mf(x)>4^n\lambda\} \subset \bigcup_j3Q_j.
+		\{x\in\Omega:\mathrm{M}f(x)>4^n\lambda\} \subset \bigcup_j3Q_j.
 	\end{equation*}
 	Por lo que, aprovechando la tercera propiedad de la descomposición,
 	\begin{align*}
@@ -523,13 +521,13 @@ Ahora, se presenta un resultado que evidencia la utilidad de este operador maxim
 \end{proof}
 En vista de la continuidad débil $(1, 1)$, y el hecho que vale para funciones continuas, se obtiene que
 \begin{corollary}[Teorema de diferenciación de Lebesgue]
-	Para $f\in L^1_{loc}(\Omega)$, se tiene que 
+	Para $f\in L^1_{loc}(\Omega;X)$, se tiene que 
 	\begin{equation*}
 		\lim_{r\to0}\frac{1}{|B(x, r)|} \int_{B(x, r)} f(y) \diff y = f(x),
 	\end{equation*}
-	casi para todo $x\in\Omega$.  En particular, $|f|\leq Mf$ casi en todas partes, y
+	casi para todo $x\in\Omega$.  En particular, $\|f\|_X\leq \mathrm{M}f$ casi en todas partes, y
 	\begin{equation*}
-		\lim_{r\to0}\frac{1}{|B(x, r)|} \int_{B(x, r)} |f(y)-f(x)| \diff y = 0,
+		\lim_{r\to0}\frac{1}{|B(x, r)|} \int_{B(x, r)} \|f(y)-f(x)\|_X \diff y = 0,
 	\end{equation*}
 	casi en todas partes. A los puntos que lo satisfacen se les llama puntos de Lebesgue.
 \end{corollary}
@@ -547,7 +545,7 @@ Ahora, se presenta una caracterización de pesos para los cuales el operador max
 	Se tiene que el operador maximal de Hardy-Littlewood es de tipo débil $(p,p)$, respecto a las medidas $(u, w)$ si y solo si $(u, w) \in A_p$.
 \end{theorem}
 \begin{proof}
-	($\Rightarrow$) Primero note que si $f_Q := \frac{1}{|Q|} \int_Q |f|\diff x$, entonces $f_Q\leq \mathrm{M}(f\chi_Q)(x)$ para cualquier $x\in Q$. Por lo que para cualquier $\lambda < f_Q$, se tiene que $Q\subset E_{\lambda, Q} := \{x\in\Omega: \mathrm{M}(f\chi_Q)(x)>\lambda\}$, y 
+	($\Rightarrow$) Primero, suponga que $f$ es no-negativa, note que si $f_Q := \frac{1}{|Q|} \int_Q f\diff x$, entonces $f_Q\leq \mathrm{M}(f\chi_Q)(x)$ para cualquier $x\in Q$. Por lo que para cualquier $\lambda < f_Q$, se tiene que $Q\subset E_{\lambda, Q} := \{x\in\Omega: \mathrm{M}(f\chi_Q)(x)>\lambda\}$, y 
 	\begin{equation*}
 		u(Q) \leq u(E_{\lambda,Q}) \lesssim \lambda^{-p} \int_Q |f(x)|^p\diff w(x),
 	\end{equation*}
@@ -566,7 +564,7 @@ Ahora, se presenta una caracterización de pesos para los cuales el operador max
 	\begin{equation*}
 		\frac{1}{|Q|}\int_Q u(x)\diff x \lesssim \essinf_Q w \leq w(x),
 	\end{equation*}
-	para casi todo $x\in Q$. Es fácil ver que esto implica la condición $A_1$. Cuando $1<p<\infty$, se considera la función $f(x) = w(x)^{-1/(p-1)}$, de tal manera que $f(x) = f(x)^pw(x)$, y con $S_k:=\{x\in Q: w(x) > 1/k\}$ en (\ref{eq:key-muckenhoupt}), se  tiene que 
+	para casi todo $x\in Q$. Es fácil ver que esto implica la condición $A_1$. Cuando $1<p<\infty$, se considera la función $f(x) := w(x)^{-1/(p-1)}$, de tal manera que $f(x) = f(x)^pw(x)$, y con $S_k:=\{x\in Q: w(x) > 1/k\}$ en (\ref{eq:key-muckenhoupt}), se  tiene que 
 	\begin{equation*}
 		\left(\frac{1}{|Q|}\int_{S_k} w(x)^{-1/(p-1)}\diff x \right)^p u(Q) \lesssim \int_{S_k} w(x)^{-1/(p-1)}\diff x.
 	\end{equation*}
@@ -592,7 +590,7 @@ Ahora, se presenta una caracterización de pesos para los cuales el operador max
 	Entonces, se tiene que 
 	\begin{align*}
 		(f_Q)^pu(Q) & \leq \frac{u(Q)}{|Q|}  \left(\int_Q  |f(x)|^pw(x)\diff x \right) \left(\frac{1}{|Q|}\int_Q w(x)^{-1/(p-1)}\diff x \right)^{p-1}\\ 
-		&  \lesssim \int_Q  |f(x)|^pw(x)\diff x 
+		&  \lesssim \int_Q  |f(x)|^pw(x)\diff x .
 	\end{align*}
 	Entonces, se obtiene (\ref{eq:key-muckenhoupt}), que implica la desigualdad débil.
 \end{proof}
@@ -608,13 +606,13 @@ Ahora, se presenta una caracterización de pesos para los cuales el operador max
 	\begin{equation*}
 		\|f\|_{L^\infty} \leq \|f\|_{L^\infty(w)}.
 	\end{equation*}
-	Como además, $\|\mathrm{M}f\|_{L^\infty} \leq \|f\|_{L^\infty}$, se concluye la prueba para este caso. Ahora, como $\mathrm{M}_rf=\mathrm{M}(\|f\|_X^r)^{1/r}$
+	Como además, $\|\mathrm{M}f\|_{L^\infty} \leq \|f\|_{L^\infty}$, se concluye la prueba para este caso. Ahora, como $\mathrm{M}_rf=\mathrm{M}(\|f\|_X^r)^{1/r}$, se tiene que
 	\begin{equation*}
 		\int_\Omega (\mathrm{M}_rf)^q \diff u(x) = \int_\Omega \mathrm{M}(\|f\|_X^r)^{q/r} \diff u(x) \lesssim \int_\Omega \|f\|_X^q \diff w(x),
 	\end{equation*}
 \end{proof}
 \begin{remark}
-	Note que este caso incluye el caso particular para las medidas $(w,\mathrm{M}w)$
+	Note que este caso incluye el caso particular para las medidas $(w,\mathrm{M}w)$.
 \end{remark}
 Además, (\ref{eq:key-muckenhoupt}) brinda otro corolario acerca de las medidas de conjuntos
 \begin{corollary}
@@ -631,7 +629,7 @@ Además, (\ref{eq:key-muckenhoupt}) brinda otro corolario acerca de las medidas 
 	\begin{equation*}
 		w(S) \leq \frac{C-(1-\alpha)^p}{C}w(Q), 
 	\end{equation*}
-	lo que concluye la prueba
+	lo que concluye la prueba.
 \end{proof}
 \begin{theorem}[Desigualdad inversa de Hölder]
 	Sea $w\in A_p$, entonces existe $\varepsilon>0$, tal que se tiene que para cualquier cubo 
@@ -640,7 +638,7 @@ Además, (\ref{eq:key-muckenhoupt}) brinda otro corolario acerca de las medidas 
 	\end{equation*}
 \end{theorem}
 \begin{proof}
-	Tome un cubo $Q$, y un $0<\alpha<1$ fijo,  defina  entonces la sucesión  $\lambda_k := (2^n\alpha^{-1})^kw(Q)/|Q|$, de tal manera que $2^n\lambda_k/\lambda_{k+1} = \alpha$. Entonces tome la descomposición de Calderón-Zygmund de $w$ en el cubo $Q$ para todo $\lambda_k$, para así obtener sucesiones de cubos diádicos $\{Q_j^k\}$ disjuntos tales que $w(x) >\lambda_k$ para casi todo $x\in \Omega_k := \bigcup_jQ_j^k$, y
+	Tome un cubo $Q$, y un $\alpha$ fijo, tal que $0<\alpha<1$,  defina  entonces la sucesión  $\lambda_k := (2^n\alpha^{-1})^kw(Q)/|Q|$, de tal manera que $2^n\lambda_k/\lambda_{k+1} = \alpha$. Entonces tome la descomposición de Calderón-Zygmund de $w$ en el cubo $Q$ para todo $\lambda_k$, para así obtener sucesiones de cubos diádicos $\{Q_j^k\}$ disjuntos tales que $w(x) >\lambda_k$ para casi todo $x\in \Omega_k := \bigcup_jQ_j^k$, y
 	\begin{equation*}
 		\lambda_k < \frac{1}{|Q_j^k|}\int_{Q_j^k} w\diff x \leq 2^n\lambda_k.
 	\end{equation*}
@@ -669,6 +667,7 @@ Además, (\ref{eq:key-muckenhoupt}) brinda otro corolario acerca de las medidas 
 \end{proof}
 Una consecuencia inmediata es que 
 \begin{corollary}\label{cor:inverse-Holder}
+	Se tiene que 
 	\begin{enumerate}
 		\item Si $w\in A_p$, entonces $w^{1-p'}\in A_{p'}$,
 		\item $A_p = \bigcup_{q<p}A_q$, para $1<p<\infty$,
@@ -695,7 +694,7 @@ Una consecuencia inmediata es que
 	Cuando $p>1$, tome $\varepsilon$ tal que la desigualdad inversa de Hölder funciona para $w$ y  $w^{1-p'}$.  Entonces la condición $A_p$ para $w^{1+\varepsilon}$ se vuelve la condición $A_p$ de $w$ elevada a la $1/(1+\varepsilon)$. Lo que concluye la prueba. 
 \end{proof}
 Ahora, se presenta el concepto de dualidad entre espacios de Lebesgue valuados en espacios de Banach
-\begin{definition}[Propiedad Radon-Nikodym]
+\begin{definition}[Propiedad de Radon-Nikodym]
 	Se dice que un espacio de Banach $X$ satisface la \textit{propiedad de Radon-Nikodym} si para cualquier medida valuada en vectores, se puede encontrar una función (fuertemente) medible que sea su densidad.
 \end{definition}
 \begin{theorem}
@@ -720,30 +719,30 @@ Para concluir, se incluye una desigualdad bastante útil.
 	\end{equation*}
 	Además, si se define el potencial de Riesz como 
 	\begin{equation*}
-		(I_\alpha f)(x) := \int_{\Omega} \frac{f(x)\diff x}{|x-y|^{n-\alpha}},
+		I_\alpha f(x) := \int_{\Omega} \frac{f(x)\diff x}{|x-y|^{n-\alpha}},
 	\end{equation*}
-	entonces $\|I_\alpha f\|_{L^r} \lesssim \|f\|_{L^p}$.
+	entonces $\|I_\alpha f\|_{L^q} \lesssim \|f\|_{L^p}$.
 \end{theorem}
 \begin{proof}
 	Note que 
 	\begin{equation*}
 		\int_{\R^n} \frac{f(y)\diff y}{|x-y|^{n-\alpha}} = \int_0^\infty \frac{r^{n-1}}{r^{n-\alpha}}  \int_{S^{n-1}} f(x+rz) \diff \sigma(z) \diff r = \int_0^\infty r^{\alpha-1} f_x(r)\diff r,
 	\end{equation*}
-	donde $f_xr = r^{-n} \int_{S^{n-1}} f(x+rz) \diff \sigma(z) $. Entonces, $|f_x(r)| \leq Mf(x)$, y por la desigualdad de Hölder
+	donde $f_xr = \int_{S^{n-1}} f(x+rz) \diff \sigma(z) $. Entonces, $\|f_x(r)\|_X \leq \mathrm{M}f(x)$, y por la desigualdad de Hölder
 	\begin{equation*}
-		|f_x(r)| \lesssim r^{-n}\int_{B(x, r)}| f(y)|\diff y \lesssim r^{-n}\|f\|_p r^{n(p-1)/p}  = r^{-n/p}.
+		\|f_x(r)\|_X \lesssim r^{-n}\int_{B(x, r)}| f(y)|\diff y \lesssim r^{-n}\|f\|_{L^p} r^{n(p-1)/p}  = r^{-n/p}.
 	\end{equation*}
 	Por lo que, para algún $r_x$,
 	\begin{equation*}
-		|I_\alpha f(x) |\leq \int_0^{r_x} r^{\alpha-1} Mf(x)\diff r + \int_{r_x}^\infty r^{\alpha-1}r^{-n/p} \|f\|_{L^p}\diff r \lesssim Mf(x)r_x^{\alpha} + \|f\|_{L^p}r_x^{\alpha-n/p}.
+		\|I_\alpha f(x) \|_X\leq \int_0^{r_x} r^{\alpha-1} \mathrm{M}f(x)\diff r + \int_{r_x}^\infty r^{\alpha-1}r^{-n/p} \|f\|_{L^p}\diff r \lesssim \mathrm{M}f(x)r_x^{\alpha} + \|f\|_{L^p}r_x^{\alpha-n/p}.
 	\end{equation*}
-	Al tomar $r_x := [Mf(x)]^{-p/n}\|f\|_{L^p}^{p/n}$, se tiene que 
+	Al tomar $r_x := [\mathrm{M}f(x)]^{-p/n}\|f\|_{L^p}^{p/n}$, se tiene que 
 	\begin{equation*}
-		|I_\alpha f(x) |\lesssim [Mf(x)]^{1 -\alpha p/n} \|f\|_{L^p}^{\alpha p/n}.
+		\|I_\alpha f(x) \|_X\lesssim [\mathrm{M}f(x)]^{1 -\alpha p/n} \|f\|_{L^p}^{\alpha p/n}.
 	\end{equation*}
 	Además, por la continuidad del operador maximal de Hardy-Littlewood
 	\begin{equation*}
-		\|I_\alpha f(x) \|_{L^q}^q \lesssim \|f\|_{L^p}^{\alpha pq/n} \int_{\R^n}Mf(x)^{(1 -\alpha p/n)q}\diff x \lesssim  \|f\|_{L^p}^{\alpha pq/n} \|f\|_{(1 -\alpha p/n)q}^{(1 -\alpha p/n)q}.
+		\|I_\alpha f(x) \|_{L^q}^q \lesssim \|f\|_{L^p}^{\alpha pq/n} \int_{\R^n}\mathrm{M}f(x)^{(1 -\alpha p/n)q}\diff x \lesssim  \|f\|_{L^p}^{\alpha pq/n} \|f\|_{L^{(1 -\alpha p/n)q}}^{(1 -\alpha p/n)q}.
 	\end{equation*}
 	Entonces, el resultado se obtiene cuando $(1 -\alpha p/n)q = p$.
 \end{proof}
@@ -754,7 +753,7 @@ de las ecuaciones diferenciales en general y los operadores
 pseudo-diferenciales en particular. 
 
 \begin{definition}[Transformada de Fourier en $\R^n$]
-    Dada $f\in L^1(\R^n;X)$, se define su transformada de Fourier como 
+    Dada $f\in L^1(\R^n;X)$, se define su \textit{transformada de Fourier }como 
     \begin{equation*}
         (\mathcal{F}_{\R^n}f)(\xi) = \widehat{f}(\xi) := \int_{\R^n}
         e^{-2\pi i x \cdot \xi} f(x) \diff x,
@@ -815,7 +814,7 @@ Por lo tanto, se introduce notación que será importante a lo largo de este tra
 
 \begin{definition}[Espacio de Schwartz $\mathcal{S}(\R^n)$]
     Se dice que una función suave (infinitamente diferenciable) 
-    $\varphi:\R^n\rightarrow X$ se encuentra en $\mathcal{S}(\R^n;X)$ si se 
+    $\varphi:\R^n\rightarrow X$ \textit{decae rápidamente}, y se encuentra en $\mathcal{S}(\R^n;X)$ si se 
     cumple que
     \begin{equation*}
         \sup_{x\in\R^n}\|x^\beta \partial^\alpha \varphi(x)\|_X < \infty, 
@@ -841,7 +840,7 @@ Por lo tanto, se introduce notación que será importante a lo largo de este tra
         \int_{\R^n} \|\varphi_j(x)\|_X^p \diff x & = 
         \int_{\R^n} \angles{x}^{pN} \|\varphi_j(x)\|_X^p \angles{x}^{-pN} \diff x \\ 
         & \lesssim \max_{|\beta|\leq N} \sup_{x\in\R^n} 
-        \|x^\beta\varphi_j(x)\|_X^p \int_{\R^n}\angles{x}^{-pN} \diff x \to 0  
+        \|x^\beta\varphi_j(x)\|_X^p \int_{\R^n}\angles{x}^{-pN} \diff x \to 0  ,
     \end{align*}
     donde $N\in\N$ se escoge de manera que la última integral converga. 
 \end{proof}
@@ -920,7 +919,7 @@ algunos lemas útiles.
         & = \int_{\R^n} f(y)\left[
             \int_{\R^n} e^{-2\pi i x\cdot y} g(x) \diff x
         \right] \diff y \\ 
-        & = \int_{\R^n} f \widehat{g} \diff y
+        & = \int_{\R^n} f \widehat{g} \diff y.
     \end{align*}
     Concluyendo la prueba.
 \end{proof}
@@ -1166,7 +1165,7 @@ Se fija la notación del toro $n$-dimensional como $\T^n:=(\R/\Z)^n = \R^n/\Z^n$
 	donde, de nuevo, se puede controlar el primer término con $\delta$ y el segundo escogiendo un $N$ apropiado. 
 \end{proof}
 \begin{definition}[Espacios de sucesiones $\ell^p(\mathcal{C})$]
-	El espacio de sucesiones $\ell^p(\mathcal{C};X)$, para $\mathcal{C}$ un conjunto enumerable, consiste de las funciones $a:\mathcal{C}:\to X$, tales que 
+	El \textit{espacio de sucesiones} $\ell^p(\mathcal{C};X)$, para $\mathcal{C}$ un conjunto enumerable, consiste de las funciones $a:\mathcal{C}:\to X$, tales que 
 	\begin{equation*}
 		\|a\|_{\ell^p} := \left( \sum_{k\in\mathcal{C}}\|a_k\|_X^p \right)^{1/p} <\infty.
 	\end{equation*}
@@ -1263,7 +1262,7 @@ siguiente manera
 	\end{equation*}
 	Es claro que representa una distribución templada, así que se calcula su derivada distribucional
 	\begin{align*}
-		\angles{\partial H, \varphi} = - \int_\R H\partial\varphi\diff x  = -\int_0^\infty \partial\varphi\diff x \ = -\varphi|_0^\infty  = \varphi(0) =: \angles{\delta, \varphi}.
+		\angles{ H', \varphi} = - \int_\R H\varphi'\diff x  = -\int_0^\infty \varphi'\diff x \ = -\varphi\vert_0^\infty  = \varphi(0) =: \angles{\delta, \varphi}.
 	\end{align*}
 	Donde $\delta$ es el funcional conocido como la delta de Dirac. Por lo que se tiene que en el sentido de distribuciónes que $ H' = \delta$.
 \end{example}
@@ -1350,7 +1349,7 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 	Los primeros dos incisos son resultado de la definición de derivada en el sentido de distribuciones. En efecto, para $(1)$ se tiene que 
 	\begin{equation*}
 		\angles{\partial^\alpha(\partial^\beta f), \varphi} = 
-		(-1)^{|\alpha|} = \angles{\partial^\beta f, \partial^\alpha\varphi} =
+		(-1)^{|\alpha|} \angles{\partial^\beta f, \partial^\alpha\varphi} =
 		(-1)^{|\alpha| + |\beta|} \angles{f, \partial^{\alpha+\beta}\varphi}. 
 	\end{equation*}
 	El otro caso es análogo. El inciso $(2)$ es resultado de la linealidad de $\angles{\cdot, \varphi}$.  Para el inciso $(3)$ es claro que $\|\lambda f\|_{W^k_p} = |\lambda|\|f\|_{W^k_p}$ por lo anterior, y que $|f\|_{W^k_p} = 0$ si y solo si $f$ se anula en casi todas partes. La desigualdad triangular para $p=\infty$ es trivial, para el caso $1\leq p<\infty$ se tiene que 
@@ -1398,9 +1397,8 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 \begin{theorem}[Distribuciones templadas $\mathcal{S}'(\Z^n;X)$]
 	Los elementos $u$ del espacio de distribuciones templadas $\mathcal{S}'(\Z^n;X)$, que consiste de operadores lineales continuos de $\mathcal{S}(\Z^n)$ en $X$,  tienen la forma 
 	\begin{equation*}
-		\varphi \mapsto \angles{u, \varphi} := \sum_{\xi\in\Z^n} u(\xi)\varphi(\xi),
+		\varphi \mapsto \angles{u, \varphi} := \sum_{\xi\in\Z^n} u(\xi)\varphi(\xi).
 	\end{equation*}
-	y crecen a lo más de forma polinomial.
 \end{theorem} 
 \begin{proof}
 	Note que se puede definir 
@@ -1415,11 +1413,6 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 	\begin{equation*}
 		\angles{u, \varphi} = \left\langle u, \sum_{\eta\in\Z^n}  \varphi(\eta)\delta_\eta \right\rangle = \sum_{\eta\in\Z^n}  \varphi(\eta)\angles{u, \delta_\eta} = \sum_{\eta\in\Z^n}  \varphi(\eta)u(\eta).
 	\end{equation*}
-	Por otra parte, un funcional es continuo en un espacio con contables seminormas si se tiene que 
-	\begin{equation*}
-		\|\angles{u, \delta_\xi}\|_X \lesssim p_M(\delta_\xi) \lesssim \angles{\xi}^M,
-	\end{equation*}
-	para algún $M>0$.
 \end{proof}
 \begin{definition}
 	El espacio de \textit{distribuciones periódicas} $\mathcal{D}'(\T^n;X)$ consiste de los operadores lineales continuos definidos de $C^\infty(\T^n)$ en $X$. Note que esto incluye a las funciones $f\in L^p(\T^n;X)$ con $1\leq p\leq\infty$ definiendo su operador correspondiente de la siguiente manera
@@ -1432,7 +1425,7 @@ Por otra parte, la fórmula de multiplicación de Fourier motiva la definición 
 	\end{equation*}
 \end{definition}
 \begin{definition}
-	Se define la transformada de Fourier periodica en el sentido de distribuciones como un operador $\mathcal{F}_{\T^n}:\mathcal{D}'(\T^n)\to\mathcal{S}'(\Z^n)$ de la siguiente manera
+	Se define la \textit{transformada de Fourier periodica} en el sentido de distribuciones como un operador $\mathcal{F}_{\T^n}:\mathcal{D}'(\T^n)\to\mathcal{S}'(\Z^n)$ de la siguiente manera
 	\begin{equation*}
 		\angles{\mathcal{F}_{\T^n}u, \varphi} := \angles{u, \imath \circ \mathcal{F}_{\T^n}^{-1}\varphi},
 	\end{equation*}
@@ -1470,7 +1463,7 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 	\end{equation*}
 	Se escribe $f_j=:R_jf$, se le conoce como la transformada de Riesz, y se define la norma 
 	\begin{equation*}
-		\|f\|_{H^1} := \|f\|_{L^1} + \sum_{1\leq j\leq n} \|R_jf\|_{L^1}.
+		\|f\|_{H^1} := \|f\|_{L^1} + \sum_{j=1}^n \|R_jf\|_{L^1}.
 	\end{equation*}
 \end{definition}
 \begin{proposition}[Principio maximal]
@@ -1484,7 +1477,7 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 	Por lo que no es un máximo y se obtiene la contradicción.
 \end{proof}
 \begin{lemma}\label{lem:subharmonic-gradient}
-	Sea $F:=(u_0,\ldots,u_n)$, tal que satisface las ecuaciones de Cauchy-Riemann en $\R^{n+1}_+$, es decir 
+	Sea $F:=(u_0,\ldots,u_n)$, tal que satisface las ecuaciones de Cauchy-Riemann en $\Omega\times\R_+$, es decir 
 	\begin{equation*}
 		\sum_{j=0}^n \partial_{x_j}u_j = 0, \quad \text{ y } \quad \partial_{x_j}u_k = \partial_{x_k}u_j,
 	\end{equation*}
@@ -1532,16 +1525,16 @@ En este apartado se presentan las bases de la teoría de interpolación compleja
 \end{proof}
 Ahora, se presenta un operador bastante útil: la integral de Poisson. Para una discusión exhaustiva, vea Stein \cite{stein-singular}.
 \begin{definition}
-	Se define el kernel de Poisson  $n$-dimensional como 
+	Se define el \textit{kernel de Poisson}  $n$-dimensional como 
 	\begin{equation*}
 		P_t(x) := \frac{c_nt}{(t^2+|x|^2)^{(n+1)/2}},
 	\end{equation*}
-	donde $c_n$ es una constante para que su integral sea uno, y para $f\in L^1(\Omega;X)$, con $\Omega=\R^n,\T^n$, se define su integral de Poisson como 
+	donde $c_n$ es una constante para que su integral sea uno, y para $f\in L^1(\Omega;X)$, con $\Omega=\R^n,\T^n$, se define su \textit{integral o extensión de Poisson} como 
 	\begin{equation*}
 		(Pf)(x, t) := (P_t * f)(x).
 	\end{equation*}
 \end{definition}
-Este kernel tiene una propiedad muy útil relacionada con la transformada de Fourier. Puede ser obtenida utilizando corrdenadas polares y propiedades de las funciones de Besel, pero queda fuera del alcance de este trabajo.
+Este kernel tiene una propiedad muy útil relacionada con la transformada de Fourier. Puede ser obtenida utilizando coordenadas polares y propiedades de las funciones de Besel, pero queda fuera del alcance de este trabajo.
 \begin{proposition}
 	El kernel de Poisson puede ser expresado como
 	\begin{equation*}
@@ -1569,7 +1562,7 @@ Este kernel tiene una propiedad muy útil relacionada con la transformada de Fou
  \end{proof}
 Esto permite demostrar propiedades útiles de las extensiones de Poisson.
 \begin{theorem}\label{theo:prop-Poisson}
-	Sea $f,g\in L^1(\Omega)$, con $\Omega=\R^n,\T^n$, entonces su integral de Poisson cumple que
+	Sea $f\in L^1(\Omega;X)$, $g\in L^1(\Omega;\mathcal{B}(X, Y))$, con $\Omega=\R^n,\T^n$, entonces su integral de Poisson cumple que
 	\begin{enumerate}
 		\item $Pf$ es armónica, 
 		\item cumple la condición de frontera $\lim_{t\to0}(Pf)(x, t) = f(x)$, para casi todo $x$,
@@ -1594,7 +1587,7 @@ Esto permite demostrar propiedades útiles de las extensiones de Poisson.
 		 \mathcal{F}^{-1}\left\{4\pi^2 \xi_j^2\widehat{f}(\xi) e^{-2\pi t |\xi|}\right\}
 		 = 0.
 	\end{equation*}
-	Para el segundo y tercer inciso, se aprovecha que el operador $\sup_{t>0}|Pf(x, t)|$ es débil $(1, 1)$, entonces el Teorema \ref{theo:weak-closed} implica que basta demostrarlo para funciones en $\mathcal{S}(\Omega)$. En este caso es consecuencia de la continuidad de la transformada de Fourier inversa
+	Para el segundo y tercer inciso, se aprovecha que el operador $\sup_{t>0}\|Pf(x, t)\|_X$ es débil $(1, 1)$, entonces el Teorema \ref{theo:weak-closed} implica que basta demostrarlo para funciones en $\mathcal{S}(\Omega;X)$. En este caso es consecuencia de la continuidad de la transformada de Fourier inversa
 	\begin{equation*}
 		\lim_{t\to0} (Pf)(x, t) = \lim_{t\to0} \mathcal{F}^{-1}\left\{\widehat{f}(\xi) e^{-2\pi t |\xi|}\right\} = \mathcal{F}^{-1}\left\{\widehat{f}(\xi) \right\}  = f(x),
 	\end{equation*}
@@ -1626,7 +1619,7 @@ Esto permite demostrar propiedades útiles de las extensiones de Poisson.
 	Lo que concluye la prueba.
 \end{proof}
 \begin{theorem}
-	Para $f \in L^p(\Omega)$, con $\Omega=\R^n, \T^n$, se tiene que $\lim_{t\to0}(P_t*f) \to f$ en norma $L^p$
+	Para $f \in L^p(\Omega;X)$, con $\Omega=\R^n, \T^n$, se tiene que $\lim_{t\to0}(P_t*f) = f$ en norma $L^p$
 \end{theorem}
 \begin{proof}
 	Primero note que por una pequeña manipulación
@@ -1654,7 +1647,7 @@ Ahora, se presenta un caso especial de una desigualdad de Carleson para variedad
 	\end{equation*}
 	Cuando $|x_0-y|<t$, se tiene que
 	\begin{equation*}
-		\int_{B(x_0, t)} \frac{t\|f(y\|_X)\diff y}{(t + |x-y|)^{n+1}} \lesssim t^{-n}  \int_{B(x_0, t)}  \|f(y)\|_X\diff y.
+		\int_{B(x_0, t)} \frac{t\|f(y)\|_X\diff y}{(t + |x-y|)^{n+1}} \lesssim t^{-n}  \int_{B(x_0, t)}  \|f(y)\|_X\diff y.
 	\end{equation*}
 	Además, cuando $2^{k-1}t \leq |x_0-y|\leq 2^kt$, se obtiene que
 	\begin{align*}
@@ -1684,7 +1677,7 @@ Ahora, se presenta un caso especial de una desigualdad de Carleson para variedad
 		& \lesssim \sum_j t_j^n 
 		 \leq \frac{1}{r} \int_{\R^n} \|f\|_X\diff x.
 	\end{align*}
-	Además, cuando $\varepsilon\to0$ y $M\to\infty$, se tiene que $E'(\varepsilon, M)$ crece al conjunto $\{|\tilde{f}|>r\} $. Finalmente, sea $\chi$ la función indicadora del conjunto $\{\|f\|_X<r\sigma\}$, para descomponer $f=f\chi + f(1-\chi)=:f_1+f_2$. Como $\tilde{f_1} \leq r\sigma$, entonces $\tilde{f_2} \geq r(1-\sigma)$ cuando $\tilde{f}>r$. Por lo que se tiene que
+	Además, cuando $\varepsilon\to0$, y $M\to\infty$, se tiene que $E'(\varepsilon, M)$ crece al conjunto $\{|\tilde{f}|>r\} $. Finalmente, sea $\chi$ la función indicadora del conjunto $\{\|f\|_X<r\sigma\}$, para descomponer $f=f\chi + f(1-\chi)=:f_1+f_2$. Como $\tilde{f_1} \leq r\sigma$, entonces $\tilde{f_2} \geq r(1-\sigma)$ cuando $\tilde{f}>r$. Por lo que se tiene que
 	\begin{align*}
 		\int_0^\infty r^{p-1} \mu\{|\tilde{f}|>r\} \diff r & \lesssim \frac{1}{1-\sigma} \int_0^\infty \int_{\|f\|_X>r\sigma} r^{p-2} \|f\|_X \diff x \\
 		& = \frac{1}{1-\sigma}\int_{\R^n}\int_{0<r<\|f\|_X/\sigma} r^{p-2}|f|\diff r \diff x \\
@@ -1707,10 +1700,10 @@ Ahora, se presenta un caso especial de una desigualdad de Carleson para variedad
 \begin{proof}
 	 Definase a $u_0 := Pf$, y $u_j := P(R_jf)$, que están bien definidas como $R_jf\in L^1$. Ahora, recuerde las derivadas de las integrales de Poisson
 			\begin{equation*}
-		\partial_t P(R_jf)(x, t) = -  \mathcal{F}^{-1}\left\{2\pi|\xi| \widehat{f}(\xi) \frac{i\xi_j}{|\xi|}e^{-2\pi t |\xi|} \right\}
+		\partial_t P(R_jf)(x, t) = -  \mathcal{F}^{-1}\left\{2\pi|\xi| \widehat{f}(\xi) \frac{i\xi_j}{|\xi|}e^{-2\pi t |\xi|} \right\},
 	\end{equation*}
 	\begin{equation*}
-		\partial_{x_k} P(R_jf)(x, t) = \mathcal{F}^{-1}\left\{2\pi i\xi_k\widehat{f}(\xi) \frac{i\xi_j}{|\xi|}e^{-2\pi t |\xi|} \right\}
+		\partial_{x_k} P(R_jf)(x, t) = \mathcal{F}^{-1}\left\{2\pi i\xi_k\widehat{f}(\xi) \frac{i\xi_j}{|\xi|}e^{-2\pi t |\xi|} \right\}.
 	\end{equation*}
 	Entonces, $\sum \partial_j u_j = 0$, y $\partial_j u_k = \partial_k u_j$. Además, $\lim_{t\to0}u_j(x, t) = R_jf(x)$ casi en todas partes y en norma $L^1$. La comparación de normas es resultado de esta convergencia.
 \end{proof}
@@ -1744,7 +1737,7 @@ Ahora, se presenta una norma alternativa que no requiere del cálculo del valor 
 	\begin{align*}
 		\left(\int_Q \|f(x) - f_Q\|_X^p\diff x\right)^{1/p} & \leq \left(\int_Q \|f(x) - b\|_X^p \diff x\right)^{1/p} + \left(\int_Q \|b- f_Q\|_X^p\diff x\right)^{1/p} \\
 		& =  \left(\int_Q \|f(x) - b\|_X^p \diff x\right)^{1/p} + |Q|^{1/p}\|b-f_Q\|_X\\
-		& \leq 2 \left(\int_Q \|f(x) - b\|_X^p \diff x\right)^{1/p}
+		& \leq 2 \left(\int_Q \|f(x) - b\|_X^p \diff x\right)^{1/p}.
 	\end{align*}
 	Lo que completa la prueba.
 \end{proof}
@@ -1804,7 +1797,7 @@ El resultado converso se tiene en norma y se debe a Fefferman y Stein \cite{feff
 	\end{equation*}
 	y $a_{f}(\lambda) \leq a_{\mathrm{M}f}(\lambda)$. Además, se define $2Q_j^\lambda$ como el cubo concentrico a $Q_j^\lambda$, tal que $\ell(2Q_j^\lambda) = 2\ell(Q_j^\lambda)$, y se fija $x\notin\bigcup 2Q_j^\lambda$. Sea $Q$ cualquier cubo que contenga a $x$, entonces
 	\begin{equation*}
-		\int_Q\|f(y)\|_X\diff y = \int_{Q\cap Q^\lambda} \|f(y)\|_X\diff y + \int_{Q\cap (\R^n\setminus Q^\lambda)} \|f(y)\|_X\diff y =: I_1 + I_2.
+		\int_Q\|f(y)\|_X\diff y = \int_{Q\cap Q^\lambda} \|f(y)\|_X\diff y + \int_{Q\cap (\Omega\setminus Q^\lambda)} \|f(y)\|_X\diff y =: I_1 + I_2.
 	\end{equation*}
 	Note que $I_2 \leq \lambda |Q|$. Para $I_1$, vea que si $Q\cap Q_j^\lambda$ es no vacío, entonces $Q_j^\lambda \subset 4Q$, dado que $Q \not\subset 2Q_j^\lambda$ implica $\ell(Q) > \ell(Q_j^\lambda)$. Por lo que 
 	\begin{equation*}
@@ -1828,9 +1821,9 @@ El resultado converso se tiene en norma y se debe a Fefferman y Stein \cite{feff
 	\begin{align*}
 		\|Mf\|_{L^p} & = p\int_0^N\lambda^{p-1}a_{Mf}(\lambda)\diff \lambda \\
 		& \leq 2^n(1+2^n4^n)^{-p} p\int_0^\infty\lambda^{p-1}a_{f}(\lambda)\diff \lambda \\
-		& =2^n(1+2^n4^n)^{-p}  \lim_{N\to\infty} I_N \leq A_p\|f^\#\|_{L^p},
+		& =2^n(1+2^n4^n)^{-p}  \lim_{N\to\infty} I_N \leq C_p\|f^\#\|_{L^p},
 	\end{align*}
-	con $C_p = 2^n(1+2^n4^n)^{-p} 4\cdot 2^{(n+1)p}$. Se puede ver que la constante solo depende de $n$ y $p$, concluyendo la prueba
+	con $C_p = 2^n(1+2^n4^n)^{-p} 4\cdot 2^{(n+1)p}$. Se puede ver que la constante solo depende de $n$ y $p$, concluyendo la prueba.
 \end{proof}
 A continuación se presenta el resultado clásico de Fefferman \cite{fefferman-BMO}, y la demostración se guía de la presentada en su trabajo con Stein \cite{fefferman-stein}.
 \begin{theorem}[Fefferman]\label{theo:H1-BMO}
@@ -1848,7 +1841,7 @@ Para ello, se enuncia este teorema auxiliar.
 		\item $\varphi = \varphi_0 + \sum_{j=1}^n R_j\varphi_j$, donde $\varphi_0,\ldots,\varphi_n \in L^\infty(\Omega;X)$,
 		\item se tiene que
 		\begin{equation*}
-			\int_{\R^n}\frac{\|\varphi(x)\|_{X}\diff x}{1+|x|^{n+1}} < \infty, 
+			\int_{\Omega}\frac{\|\varphi(x)\|_{X}\diff x}{1+|x|^{n+1}} < \infty, 
 		\end{equation*}
 		y que 
 		\begin{equation*}
@@ -1857,15 +1850,15 @@ Para ello, se enuncia este teorema auxiliar.
 		donde $0<h<\infty$, $T(x_0, h) := \{(x, t): 0<t<h, \, |x-x_0| < h\}$, y $P\varphi$ su integral de Poisson.
 	\end{enumerate}
 \end{theorem}
-Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \cref{theo:H1-BMO} $\Rightarrow$ \cref{theo:BMO-aux}(2) $\Rightarrow$ (1) $\Rightarrow$ (3) $\Rightarrow$ \cref{theo:H1-BMO}.
+Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: Teorema \ref{theo:H1-BMO} $\Rightarrow$ Teorema \ref{theo:BMO-aux}(2) $\Rightarrow$ (1) $\Rightarrow$ (3) $\Rightarrow$ Teorema \ref{theo:H1-BMO}.
 \begin{proof}
-	(\cref{theo:H1-BMO} $\Rightarrow$ 2) Sea $B:=\bigoplus^{n+1} L^1(X)$ el espacio de Banach con la norma dada por $\|(f_0,\ldots,f_n)\| := \sum\|f_j\|_{L^1}$. Entonces, sea $S$ el subespacio en el que $f_j = R_jf_0$, que claramente es cerrado y que es isométrico a $H^1$ mediante el mapa $f_0\mapsto(f_0, R_1f_0, \ldots, R_nf_0 )$. Entonces, por el Teorema Hahn-Banach, cada funcional continuo definido en $H^1$, puede ser extendido a un funcional continuo en $B$, cuyo dual es $\bigoplus^{n+1}L^\infty(X')$. Es decir, para cada funcional $T$ continuo en $H^1$, existen $\varphi_0,\ldots,\varphi_n\in L^\infty(X')$, tales que
+	(Teorema \ref{theo:H1-BMO} $\Rightarrow$ 2) Sea $B:=\bigoplus^{n+1} L^1(X)$ el espacio de Banach con la norma dada por $\|(f_0,\ldots,f_n)\| := \sum\|f_j\|_{L^1}$. Entonces, sea $S$ el subespacio en el que $f_j = R_jf_0$, que claramente es cerrado y que es isométrico a $H^1$ mediante el mapa $f_0\mapsto(f_0, R_1f_0, \ldots, R_nf_0 )$. Entonces, por el Teorema Hahn-Banach, cada funcional continuo definido en $H^1$, puede ser extendido a un funcional continuo en $B$, cuyo dual es $\bigoplus^{n+1}L^\infty(X')$. Es decir, para cada funcional $T$ continuo en $H^1$, existen $\varphi_0,\ldots,\varphi_n\in L^\infty(X')$, tales que
 	\begin{equation*}
 		T(f)  = \int_{\Omega} {\varphi_0 f}\diff x + \sum_{j=1}^n \int_{\Omega} \varphi_j(R_jf) \diff x.
 	\end{equation*}
 	Por otra parte, se tiene que por la transformada de Fourier cuando $\Omega=\T^n$,
 	\begin{align*}
-		\int_{\T^n}\varphi_j(R_jf)\diff x & = \int_{\T^n}\varphi_j \left[\sum_{\xi\in\Z^n}\int_{\R^n}  \frac{i\xi_j}{|\xi|} f(y)e^{2\pi i (x-y)\cdot\xi} \diff y 
+		\int_{\T^n}\varphi_j(R_jf)\diff x & = \int_{\T^n}\varphi_j \left[\sum_{\xi\in\Z^n}\int_{\T^n}  \frac{i\xi_j}{|\xi|} f(y)e^{2\pi i (x-y)\cdot\xi} \diff y 
 		\right]  \diff x \\
 		& = \int_{\T^n}  \left[\sum_{\xi\in\Z^n}\int_{\T^n}  \frac{i\xi_j}{|\xi|}  \varphi_j(x)e^{2\pi i (x-y)\cdot\xi} \diff x 
 		\right] f(y) \diff y \\
@@ -1886,7 +1879,7 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 	\end{equation}
 	Por otra parte, se puede verificar que la transformada de Riesz, equivale a la siguiente convolución
 	\begin{equation*}
-		(R_jf)(x) = (K_j*f)(x) := \int_{\R^n} \frac{x_j-y_j}{|x-y|^{n+1}} f(y) \diff y.
+		(R_jf)(x) = (K_j*f)(x) := \int_{\Omega} \frac{x_j-y_j}{|x-y|^{n+1}} f(y) \diff y.
 	\end{equation*}
 	Ahora, por el Teorema del valor medio, se tiene que 
 	\begin{equation*}
@@ -1920,7 +1913,7 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 	\end{align*}
 	Por lo que sumar todas las expresiones de este estilo resulta en 
 	\begin{equation*}
-		\int_{\R^n} \frac{\|\varphi(x)-\varphi_Q\|_X}{1+|x|^{n+1}} \diff x \lesssim \|\varphi\|_{\mathrm{BMO}} < \infty.
+		\int_{\Omega} \frac{\|\varphi(x)-\varphi_Q\|_X}{1+|x|^{n+1}} \diff x \lesssim \|\varphi\|_{\mathrm{BMO}} < \infty.
 	\end{equation*}
 	Para el segundo estimativo, fije $x_0=0$, y sea $Q$ el cubo centrado en el origen, de lado $4h$. Sea $\chi$ su función característica y $\tilde{\chi}$ la de su complemento. Entonces, se descompone a $\varphi$ de la siguiente manera
 	\begin{equation*}
@@ -1939,7 +1932,7 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 		& \lesssim \int_{\Omega\setminus Q} \left[ \frac{1}{t+|x-y|}
 		\right]^{n+1} \|\varphi(y) - \varphi_Q\|_X\diff y.
 	\end{align*}
-	Pero, para $(x, t) \in T(0, h)$, se tiene que
+	Pero, para $(x, t) \in T(0, h)$, $y \in \supp \varphi_3$ se tiene que
 	\begin{equation*}
 		\left[ \frac{1}{t+|x-y|}
 		\right]^{n+1} \lesssim \frac{1}{h^{n+1} + |y|^{n+1}},
@@ -1948,12 +1941,12 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 	\begin{equation*}
 		\sup_{x_0\in\Omega}\int_{T(x_0, h)} t\|\nabla (P\varphi)(x, t)\|_X^2\diff x \diff t \lesssim h^n\|\varphi\|_{\mathrm{BMO}}.
 	\end{equation*}
-	(3 $\Rightarrow$ \cref{theo:H1-BMO}) En vista del \cref{theo:prop-Poisson}, basta demostrar que para $f\in H^1(X)$ apropiado se tiene que
+	(3 $\Rightarrow$ Teorema \ref{theo:H1-BMO}) En vista del Teorema \ref{theo:prop-Poisson}, basta demostrar que para $f\in H^1(X)$ apropiado se tiene que
 	\begin{equation*}
 		\left| \int_0^\infty \int_{\Omega} t[\nabla(P\varphi)][\nabla(Pf)]\diff x \diff t
 		\right| \lesssim \|f\|_{H^1}.
 	\end{equation*}
-	Además, en vista del \cref{theo:H1-F} se tiene que existe $F=(u_0,\ldots, u_n)$, que satisfacen las ecuaciones de Cauchy-Riemann generalizadas, tal que $u_0(x, 0)=f(x)$, y que gracias a un argumento de densidad, decae rápidamente en el infinito. También, se puede requerir sin pérdida de generalidad que $|F|>0$, y que $\Delta(|F|) = O(|x|+t+1)^{-n-\delta}$ en su dominio. Entonces, el lado izquierdo de la expresión anterior puede ser acotado por 
+	Además, en vista del Teorema \ref{theo:H1-F} se tiene que existe $F=(u_0,\ldots, u_n)$, que satisfacen las ecuaciones de Cauchy-Riemann generalizadas, tal que $u_0(x, 0)=f(x)$, y que gracias a un argumento de densidad, decae rápidamente en el infinito. También, se puede requerir sin pérdida de generalidad que $|F|>0$, y que $\Delta(|F|) = O(|x|+t+1)^{-n-\delta}$ en su dominio. Entonces, el lado izquierdo de la expresión anterior puede ser acotado por 
 	\begin{align*}
 		\int_0^\infty \int_{\Omega} t\|\nabla(P\varphi)\|_{X'}\|\nabla(Pf)\|_X\diff x \diff t & \leq\int_0^\infty \int_{\Omega}  \|\nabla(P\varphi)\|_{X'}|\nabla F|\diff x\diff t
 	\end{align*}
@@ -1962,7 +1955,7 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 		\right)^{1/2}\left(\int_0^\infty \int_{\Omega}  t|F|^{-1}|\nabla F|^2 \diff x \diff t
 		\right)^{1/2}
 	\end{equation*}
-	Ahora, por el \cref{lem:subharmonic-gradient} se tiene que
+	Ahora, por el Lema \ref{lem:subharmonic-gradient} se tiene que
 	\begin{align*}
 		\int_0^\infty\int_{\Omega} t|F|^{-1}|\nabla F|^2 \diff x \diff t & \lesssim
 		\int_0^\infty\int_{\Omega} t\Delta(|F(x, t)|) \diff x \diff t \\
@@ -1972,7 +1965,7 @@ Los dos teoremas anteriores se demuestran en conjunto de la siguiente manera: \c
 	\begin{equation*}
 		\|g\|_{L^p}^p \leq \int_{\Omega}|F(x, 0)|\diff x \lesssim \|f\|_{H^1}.
 	\end{equation*}
-	Entonces, el término restante puede ser estimado utilizando el Lema \ref{lem:Carleson} con $\diff\mu := t\|\nabla(P\varphi)\|_{X'}^2 \diff x \diff t$. En efecto,
+	Entonces, el término restante puede ser estimado utilizando el Lema  \ref{lem:Carleson} con $\diff\mu := t\|\nabla(P\varphi)\|_{X'}^2 \diff x \diff t$. En efecto,
 	\begin{equation*}
 		\int_0^\infty \int_{\Omega} t\|\nabla(P\varphi)\|_{X'}^2|F| \diff x \diff t \leq \int_0^\infty \int_{\Omega} t\|\nabla(P\varphi)\|_{X'}^2|Pg|^p \diff x \diff t \lesssim \|g\|_{L^p}^p \lesssim \|f\|_{H^1}.
 	\end{equation*}
@@ -1992,7 +1985,7 @@ Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1
 		\|a\|_{L^q} \leq |B|^{1/q-1/p}, \quad \text{ y } \quad \int_{\Omega}x^\beta a(x) \diff x = 0,
 	\end{equation*}
 	con $0\leq|\beta|\leq n(1/p-1)$.
-	Además, se dice que $f\in H^{p,q}_{at}(\Omega;X)$ si existe una \textit{descomposición atómica}, es decir una sucesión de átomos $(a_j)$ que satisfaga
+	Además, se dice que $f\in H^{p,q}_{at}(\Omega;X)$ si existe una \textit{descomposición atómica}, es decir una sucesión de átomos $\{a_j\}$ que satisfaga
 	\begin{equation*}
 		f = \sum_j \lambda_j a_j, \quad \sum_j |\lambda_j|^p < \infty.
 	\end{equation*}
@@ -2005,26 +1998,26 @@ Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1
 	Se tiene que $H^1(\Omega;X) = H^{1,\infty}_{at}(\Omega;X)$, con equivalencia de norma.
 \end{theorem}
 \begin{proof}
-	($\|\cdot\|_{H^1} \lesssim \|\cdot\|_{H^1_{at}}$) Para esta dirección, basta con ver que los átomos tienen norma $H^1$ uniforme. Primero, por (\ref{eq:Rj-L-infty}), se tiene que para un $(1,\infty)$-átomo $a$ relacionado a una bola $B(z, \sigma)$
+	($H^1 \hookrightarrow H^{1,\infty}_{at}$) Para esta dirección, basta con ver que los átomos tienen norma $H^1$ uniforme. Primero, por (\ref{eq:Rj-L-infty}), se tiene que para un $(1,\infty)$-átomo $a$ relacionado a una bola $B(z, \sigma)$
 	\begin{equation*}
 		\int_{B(z, 2\sigma)}\|R_j a(x) \|_X\diff x \lesssim |B(z, \sigma)|\|a\|_{L^\infty} \leq C.
 	\end{equation*}
 	Ahora, por (\ref{eq:Rj-diff-L-infty}), se tiene que para $|x-z|>2\sigma$, 
 	\begin{equation*}
-		\int_{\Omega\setminus B(z, 2\sigma)} |K_j(y-x) - K(z-x)|\diff x \leq C.
+		\int_{\Omega\setminus B(z, 2\sigma)} |K_j(y-x) - K_j(z-x)|\diff x \leq C.
 	\end{equation*}
 	Además, por la propiedad de cancelación
 	\begin{align*}
 		\int_{\Omega\setminus B(z, 2\sigma)} \|R_ja\|_X\diff x & = \int_{\Omega\setminus B(z, 2\sigma)} \left\| \int_{B(z, \sigma)} a(y)  \left[ K_j(x - y)- K_j(x - z) \right] \diff y
 		\right\|_X \diff x \\
 		& \leq  \int_{B(z, \sigma)}\|a(y)\|_X \int_{\Omega\setminus B(z, 2\sigma)} |K_j(x - y)- K_j(x - z)| \diff x \diff y \\
-		& \leq C \int_{B(z, \sigma)}\|a(y)\_X| \diff y \leq C.
+		& \leq C \int_{B(z, \sigma)}\|a(y)\|_X \diff y \leq C.
 	\end{align*}
 	En conclusión $\|R_j a\|_{L^1} \leq C$, y esto permite asegurar la convergencia en $H^1$ de la serie de átomos, y que  para cualquier $\varepsilon>0$
 	\begin{equation*}
 		\|f\|_{H^1}  \leq \sum_j |\lambda_j| \|a_j\|_{H^1} \lesssim \sum_j |\lambda_j| \leq \|f\|_{H^1_{at}} + \varepsilon.
 	\end{equation*}
-	($\|\cdot\|_{H^1_{at}}\lesssim \|\cdot\|_{H^1}$) Para la construcción de los átomos,  se aplica la descomposición de Calderón-Zygmund a $\mathcal{M}f:= \|f\|_X + \sum \|R_jf\|_X$, al nivel $\lambda=2^m$, para obtener una suseción de cubos diádicos $\{Q_k^m\}$ tales que 
+	($H^{1,\infty}_{at}\hookrightarrow H^1$) Para la construcción de los átomos,  se aplica la descomposición de Calderón-Zygmund a $\mathcal{M}f:= \|f\|_X + \sum \|R_jf\|_X$, al nivel $\lambda=2^m$, para obtener una suseción de cubos diádicos $\{Q_k^m\}$ tales que 
 	\begin{equation*}
 		2^m < \frac{1}{|Q_k^m|}\int_{Q_k^m} \mathcal{M}f\diff x \leq 2^{n+m},
 	\end{equation*}
@@ -2037,7 +2030,7 @@ Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1
 	\end{equation*}
 	Por lo que, para $x\in Q_k^m$, se tiene que 
 	\begin{align*}
-		\|R_jb_k^m\|_X & \leq \left\|_X \int_{Q_k^m} K_j(x-y)f(y) \diff y \right\|_X +\left\| \int_{Q_k^m} K_j(x-y)f_{\frac{1}{2}Q_k^m} \diff y \right\|_X\\
+		\|R_jb_k^m\|_X & \leq \left\| \int_{Q_k^m} K_j(x-y)f(y) \diff y \right\|_X +\left\| \int_{Q_k^m} K_j(x-y)f_{\frac{1}{2}Q_k^m} \diff y \right\|_X\\
 		& \leq \|R_jf\|_X +\left\| \int_{Q_k^m} K_j(x-y)\frac{2^n}{|Q_k^m|}\int_{\frac{1}{2}Q_k^m}f(x)\diff x \diff y \right\|_X \\
 		& \leq \|R_jf\|_X +\frac{2^n}{|Q_k^m|} \int_{Q_k^m} \|R_jf(y)\|_X \diff y  \\
 		& \lesssim \|R_jf\|_X  + (\|R_jf\|_X)_{Q_k^m}| \lesssim \|R_jf\|_X + 2^{n+m} \lesssim \mathcal{M}f.
@@ -2087,7 +2080,7 @@ Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1
 	\begin{equation*}
 		\|a\|_{L^q}=\left(\int_B \|a\|_X^q \diff x\right)^{1/q} \leq \left\|\|a\|_X^q\right\|_{L^{r/q}}^{1/q} \|\chi_B\|_{L^{r/(r-q)}}^{1/q} = \|a\|_{L^r} |B|^{1/q-1/r} \leq |B|^{1/q-1/p}. 
 	\end{equation*}
-	Por lo mismo, se tiene que $H^{p,\infty}\subset H^{p,r}\subset H^{p,q}\subset H^{p,1}$, y basta demostrar que $H^{p,1}\subset H^{p,\infty}$. Entonces, tome un $(p,1)$-átomo $a$, soportado en $B$ y apliquele la descomposición de Calderón-Zigmund a $\|a\|_X$, en los niveles $\lambda=2^m$, para obtener, como en la prueba anterior, sucesiones de cubos $\{Q_k^m\}$, y de funciones
+	Por lo mismo, se tiene que $H^{p,\infty}\hookrightarrow H^{p,r}\hookrightarrow H^{p,q}\hookrightarrow H^{p,1}$, y basta demostrar que $H^{p,1}\hookrightarrow H^{p,\infty}$. Entonces, tome un $(p,1)$-átomo $a$, soportado en $B$ y apliquele la descomposición de Calderón-Zigmund a $\|a\|_X$, en los niveles $\lambda=2^m$, para obtener, como en la prueba anterior, sucesiones de cubos $\{Q_k^m\}$, y de funciones
 	\begin{equation*}
 		g^m := a + \sum_k c^m_k\chi_{Q_k^m}, \quad b^m = \sum_k b_k^m := \sum_k [a-c_k^m]\chi_{Q_k^m},
 	\end{equation*}
@@ -2103,7 +2096,7 @@ Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1
 	\begin{equation*}
 		\|I_{k\alpha}^m\|_X \leq  \left\|\int_{B_k^m} \sigma^{|\alpha|} a \diff x\right\|_X \leq 2^n 2^m \sigma^{|\alpha|}|{B_k^m}|.
 	\end{equation*}
-	Ahora, tome la matriz de de momentos para la bola $B_k^m$ con centro,
+	Ahora, tome la matriz de de momentos para la bola $B_k^m$,
 	\begin{equation*}
 		M({B_k^m})_{\alpha\beta} := \int_{B_k^m} (x-z)^\alpha \frac{(x-z)^\beta}{\beta!} \diff x,
 	\end{equation*}
@@ -2142,10 +2135,10 @@ Para concluir, se presenta una definición alternativa del espacio de Hardy $H^1
 	Lo que completa la prueba.
 \end{proof}
 \begin{remark}
-	Por lo tanto, se suele definir el espacio $H^p_{at}(\Omega;X)$ como el espacio $H^{p,q}(\Omega;X)$, para todo $1\leq q \leq \infty$.
+	Por lo tanto, se suele definir el espacio $H^p_{at}(\Omega;X)$ como el espacio $H^{p,q}(\Omega;X)$, para todo $1\leq q \leq \infty$. Generalmente se denotan como el espacio $H^p$, que también puede ser definido en términos de operadores maximales, vea Stein \cite{stein}.
 \end{remark}
 \section{Interpolación entre espacios}
-Ahora, se presenta la teoría de interpolación compleja.
+Anteriormente, se han aprovechado resultados de interpolación, que permiten demostrar las propiedades para un par de espacios y como consecuencia obtener los resultados para los espacios 'intermedios'. Ahora, se considera un caso muy importante para el análisis armónico y se presenta la teoría de interpolación compleja.
 \begin{definition}[Parejas de espacios]
 	Sean $A_0$, y $A_1$ espacios de Banach. Se dice que estos son \textit{compatibles} si existe un espacio topológico de Hausdorff que los contenga como subespacios, y se denota a la \textit{pareja de espacios} como $\overline{A}:=(A_0, A_1)$. Ahora, se define el \textit{espacio intersección} $\Delta(\overline{A}):=A_0\cap A_1$, con la norma 
 	\begin{equation*}
@@ -2164,7 +2157,7 @@ Ahora, se presenta la teoría de interpolación compleja.
 	\end{equation*}
 \end{definition}
 \begin{definition}[Espacios intermedios y de interpolación]
-	Sea $\overline{A}:=(A_0, A_1)$ una pareja compatible, entonces $A$ es un \textit{espacio intermedio} respecto a $\overline{A}$ si $\Delta(\overline{A}) \subset \Sigma(\overline{A})$. Además, se dice que dos espacios intermedios $A, B$ respecto a $\overline{A},\overline{B}$ respectivamente, son \textit{espacio de interpolación}, si  $T:\overline{A}\to\overline{B}$ implica $T:A\to B$. Si además, se tiene que 
+	Sea $\overline{A}:=(A_0, A_1)$ una pareja compatible, entonces $A$ es un \textit{espacio intermedio} respecto a $\overline{A}$ si $\Delta(\overline{A}) \subset A \subset \Sigma(\overline{A})$. Además, se dice que dos espacios intermedios $A, B$ respecto a $\overline{A},\overline{B}$ respectivamente, son \textit{espacio de interpolación}, si  $T:\overline{A}\to\overline{B}$ implica $T:A\to B$. Si además, se tiene que 
 	\begin{equation*}
 		\|T\|_{A, B} \leq C \max\{\|T\|_{A_0, B_0}, \|T\|_{A_1, B_1}\},
 	\end{equation*}
@@ -2178,7 +2171,7 @@ Ahora, se presenta la teoría de interpolación compleja.
 	Se puede ver que lo que en realidad se definió es una categoría cuyos objetos son las parejas compatibles y sus morfismos los mapas definidos anteriormente. A continuación se definen los functores de interpolación.
 \end{remark}
 \begin{definition}[Functor de interpolación]
-	Se dice que $F$ es un \textit{functor de interpolación} si para parejas $\overline{A}, \overline{B}$, entonces $F(\overline{A}), F(\overline{B})$ son espacios de interpolación. Además, se tiene que $F(T)$ para $T:\overline{A}\to\overline{B}$.
+	Se dice que $F$ es un \textit{functor de interpolación} si para parejas $\overline{A}, \overline{B}$, entonces $F(\overline{A}), F(\overline{B})$ son espacios de interpolación. Además, se tiene que $F(T)=T\vert_{F(\overline{A})}$ para $T:\overline{A}\to\overline{B}$.
 \end{definition}
 Ahora, se presentan las particularidades del método de interpolación compleja.
 \begin{definition}
@@ -2186,7 +2179,7 @@ Ahora, se presentan las particularidades del método de interpolación compleja.
 	\begin{equation*}
 		\|f\|_{\mathfrak{F}} := \max\{\sup\|f(it)\|_{A_0}, \sup\|f(1+it)\|_{A_1}\}.
 	\end{equation*}
-	Se puede verificar que es un espacio de Banach. Por otra parte, se define el functor de interpolación $\overline{A}_{[\theta]}=C_\theta(\overline{A})$ como el espacio de vectores $a\in\Sigma(\overline{A})$, tales que $a=f(\theta)$ para algún $f\in \mathfrak{F}(\overline{A})$. Además, se define la norma
+	Se puede verificar que es un espacio de Banach. Por otra parte, se define el \textit{functor de interpolación} $\overline{A}_{[\theta]}=C_\theta(\overline{A})$ como el espacio de vectores $a\in\Sigma(\overline{A})$, tales que $a=f(\theta)$ para algún $f\in \mathfrak{F}(\overline{A})$. Además, se define la norma
 	\begin{equation*}
 		\|a\|_{[\theta]} := \inf \{\|f\|_{\mathfrak{F}} : f(\theta) = a\}.
 	\end{equation*}
@@ -2275,19 +2268,19 @@ Sin embargo, para los intereses de este trabajo, se demuestran el siguiente coro
 \begin{proof}
 	La prueba del primer inciso contiene incluida la prueba del segundo inciso, gracias a la propiedad de dualidad entre $H^1$ y $\mathrm{BMO}$. Así que suponga las hipótesis del inciso (1). Sea $S_z$ el dual (en $L^2$) del operador $T_{\overline{z}}$, es decir
 	\begin{equation*}
-		\int_{\R^n} gT_z(f) \diff x = \int_{\R^n} {S_{\overline{z}}(g)} f\diff x,
+		\int_{\Omega} gT_z(f) \diff x = \int_{\Omega} {S_{\overline{z}}(g)} f\diff x,
 	\end{equation*}
 	para $f\in L^2(\Omega;X)$, $g\in L^2(\Omega;X')$. Entonces, se tiene qu el mapa $z\mapsto S_z$ es continuo y acotado en la banda cerrada, y analítico en su interior. Ahora, para $g\in L^2\cap L^\infty$, y $f \in L^2\cap H^1$, se tiene que 
 	\begin{equation*}
-		\left| \int_{\R^n} S_{iy}(g)f \diff x 
-		\right| = 	\left| \int_{\R^n} g{T_{-iy}(f)}  \diff x 
+		\left| \int_{\Omega} S_{iy}(g)f \diff x 
+		\right| = 	\left| \int_{\Omega} g{T_{-iy}(f)}  \diff x 
 		\right| \leq \|T_{-iy}f\|_{L^1(X)}\|g\|_{L^\infty(X')} \leq M_0 \|f\|_{H^1(X)}\|g\|_{L^\infty(X')}.
 	\end{equation*}
-	Entonces, se tiene que $S_{iy}g$, es la restricción de un funcional acotado en $H^1(X)$, por lo que en vista del Teorema \ref{theo:H1-BMO}, se tiene que $\|S_{iy}g\|_{\mathrm{BMO}(X')}  \leq  C_0M_0\|g\|_{L^\infty(X')}$. La dualidad de $L^2$ permite un argumento similar para así concluir $\|S_{iy}g\|_{L^2(X')}  \leq  M_1\|g\|_{L^2(X')}$, y que $S_z$ cumple las condiciones del inciso (2) para $X'$. Así que se demuestra ese inciso, y las normas a partir de este momento son respecto a $X'$. Ahora, sea $x\mapsto Q(x)$ una función medible que mapea puntos a cubos que los contienen, y sea $\eta(x, y)$ una función medible en $\R^n\times\R^n$, tal que  $|\eta(x, y)|=1$. Además, se define el operador 
+	Entonces, se tiene que $S_{iy}g$, es la restricción de un funcional acotado en $H^1(X)$, por lo que en vista del Teorema \ref{theo:H1-BMO}, se tiene que $\|S_{iy}g\|_{\mathrm{BMO}(X')}  \leq  C_0M_0\|g\|_{L^\infty(X')}$. La dualidad de $L^2$ permite un argumento similar para así concluir $\|S_{iy}g\|_{L^2(X')}  \leq  M_1\|g\|_{L^2(X')}$, y que $S_z$ cumple las condiciones del inciso (2) para $X'$. Así que se demuestra ese inciso, y las normas a partir de este momento son respecto a $X'$. Ahora, sea $x\mapsto Q(x)$ una función medible que mapea puntos a cubos que los contienen, y sea $\eta(x, y)$ una función medible en $\Omega\times\Omega$, tal que  $|\eta(x, y)|=1$. Además, se define el operador 
 	\begin{equation*}
 		(U_zg)(x) := \frac{1}{|Q(x)|} \int_{Q(x)} [F(y) - F_{Q(x)}]\eta(x, y) \diff y, 
 	\end{equation*}
-	con $F=S_zg$. Note que $\sup|U_zf(x)| = F^\#(x)$, si el supremo se toma sobre todas las funciones $Q$ y $\eta$. Además, como $\|F^\#\|_{L^2} \leq 2\|MF\|_{L^2} \leq C_1\|F\|_2$ (vea el Teorema \ref{theo:Hardy-Littlewood}), entonces se tiene que la función $z\mapsto \int U_z(f)g\diff x$ es acotada y continua en la banda cerrada, y analítica en su interior. También cumple que 
+	con $F=S_zg$. Note que $\sup|U_zg(x)| = F^\#(x)$, si el supremo se toma sobre todas las funciones $Q$ y $\eta$. Además, como $\|F^\#\|_{L^2} \leq 2\|MF\|_{L^2} \leq C_1\|F\|_2$ (vea el Teorema \ref{theo:Hardy-Littlewood}), entonces se tiene que la función $z\mapsto \int U_z(g)f\diff x$ es acotada y continua en la banda cerrada, y analítica en su interior. También cumple que 
 	\begin{equation*}
 		\|U_{iy} g\|_{L^\infty} = \|F^\#\|_{L^\infty} = \|F\|_{\mathrm{BMO}} = \|S_{iy}g\|_{\mathrm{BMO}}  \leq C_0M_0 \|g\|_{L^\infty}, \quad g\in L^2\cap L^\infty,
 	\end{equation*}
@@ -2309,20 +2302,21 @@ Sin embargo, para los intereses de este trabajo, se demuestran el siguiente coro
 	Por lo que se obtiene el resultado del inciso (2). El inciso (1) se completa mediante un argumento de dualidad, ambos con $M_\theta = C_{p'} (C_0M_0)^{1-\theta}(C_1M_1)^\theta$.
 \end{proof}
 \chapter{Operadores pseudo-diferenciales}
+En esta sección se presenta la teoría de operadores pseudo-diferenciales con símbolos en las clases de Hörmander, como ha sido desarrollado por Ruzhansky y Turunen \cite{ruzhansky-turunen}.
 \section{Definición y propiedades básicas en $\R^n$}
 \begin{definition}[Clases de símbolos de Hörmander $S^m_{\rho,\delta}(\R^n\times\R^n)$]
 	Sean $0\leq\delta,\rho\leq1$. Se dice que $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$ si $a:=(x,\xi)$ es suave en $\R^n\times\R^n$ y cumple que
 	\begin{equation*}
 		|\partial^\beta_x\partial^\alpha_\xi a(x, \xi)| \lesssim_{\alpha\beta}\angles{\xi}^{m-\rho|\alpha|+\delta|\beta|},
 	\end{equation*}
-	para cualesquiera multi-índices $\alpha,\beta$. Se dice que estos símbolos tienen orden $m\in\R$.
+	para cualesquiera multi-índices $\alpha,\beta$. Se dice que estos \textit{símbolos} tienen orden $m\in\R$.
 \end{definition}
 \begin{definition}
 	Sean $0\leq\delta,\rho\leq1$ y sea $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$. El operador pseudo-diferencial con símbolo $a:=a(x,\xi)$ se define como
 	\begin{equation*}
 		T_af(x):= \int_{\R^n} e^{2\pi ix\cdot\xi} a(x, \xi)\widehat{f}(\xi)\diff \xi,
 	\end{equation*}
-	donde $f\in\mathcal{S}(\R^n)$. La clase de operadores pseudo-diferenciales con símbolos en $S^m_{\rho,\delta}(\R^n\times\R^n)$ se denotan por $\Psi^m_{\rho,\delta}(\R^n\times\R^n)$.
+	donde $f\in\mathcal{S}(\R^n)$. La clase de \textit{operadores pseudo-diferenciales} con símbolos en $S^m_{\rho,\delta}(\R^n\times\R^n)$ se denotan por $\Psi^m_{\rho,\delta}(\R^n\times\R^n)$.
 \end{definition}
 \begin{proposition}
 	Para $a \in S^m_{\rho,\delta}(\R^n\times\R^n)$ y $f\in\mathcal{S}(\R^n)$ se tiene que $T_af\in\mathcal{S}(\R^n)$.
@@ -2452,11 +2446,11 @@ Sin embargo, para los intereses de este trabajo, se demuestran el siguiente coro
 	donde se escoge $N_1$ tal que $-2\rho N_1 + 2N_2 + m_1 < -n$. Por lo que se puede escoger $N_2$ libremente para obtener la cota deseada. Un argumento análogo funciona para las derivadas de $c_2$, por lo que este pertenece a $S^{-\infty}(\R^n\times\R^n)$.
 \end{proof}
 \begin{definition}[Potencial de Bessel]
-	Se define al potencial de Bessel de orden $m\in\R$ al operador pseudo-diferencial con símbolo $\angles{\xi}^m$. Este se denota por $J^m$.
+	Se define al \textit{potencial de Besse}l de orden $m\in\R$ al operador pseudo-diferencial con símbolo $\angles{\xi}^m$. Este se denota por $J^m$.
 \end{definition}
 Se puede ver que la composición con este operador no presenta la restricción $\delta<\rho$.
 \begin{theorem}
-	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, sea $a:=a(x, \xi)\in S^m_{\rho,\delta}(\R^n\times\R^n)$, y sea $b:=b(\xi) \in S^s_{1,\delta}(\R^n\times\R^n)$. Entonces $T_aT_b$ y$T_bT_a$ pertenecen a $S^{m+s}_{\rho,\delta}(\R^n\times\R^n)$. Además, $T_aT_b$ tiene símbolo $a(x, \xi)b(\xi)$.
+	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, sea $a:=a(x, \xi)\in S^m_{\rho,\delta}(\R^n\times\R^n)$, y sea $b:=b(\xi) \in S^s_{1,\delta}(\R^n\times\R^n)$. Entonces $T_aT_b$ y $T_bT_a$ pertenecen a $S^{m+s}_{\rho,\delta}(\R^n\times\R^n)$. Además, $T_aT_b$ tiene símbolo $a(x, \xi)b(\xi)$.
 \end{theorem}
 \begin{proof}
 	Se tiene que para $T_c = T_aT_b$
@@ -2475,7 +2469,7 @@ Se puede ver que la composición con este operador no presenta la restricción $
 \section{Definición y propiedades básicas en $\T^n$}
 El cálculo simbólico en el toro $\T^n$ presenta ciertas diferencias respecto al caso euclideano. Gran parte de ellas surgen del hecho que el dominio de frecuencias correspondiente es el retículo $\Z^n$. Por lo que es necesario definir herramientas análogas que funcionen en el caso discreto. 
 \begin{definition}
-	Sea $\varphi:\Z^n\to\C$, entonces se definen los operadores de diferencia como 
+	Sea $\varphi:\Z^n\to\C$, entonces se definen los \textit{operadores de diferencia }como 
 	\begin{equation*}
 		\Delta_{\xi_j} \varphi(\xi) := \varphi(\xi + \delta_j) - \varphi(\xi),
 	\end{equation*}
@@ -2484,12 +2478,9 @@ El cálculo simbólico en el toro $\T^n$ presenta ciertas diferencias respecto a
 	\end{equation*}
 	Además, para un multi-índice $\alpha\in\N^n_0$, se define 
 	\begin{equation*}
-		\Delta^\alpha_\xi := \Delta^{\alpha_1}_{\xi_1} \cdots \Delta^{\alpha_n}_{\xi_n},
+		\Delta^\alpha_\xi := \Delta^{\alpha_1}_{\xi_1} \cdots \Delta^{\alpha_n}_{\xi_n}, \quad \overline{\Delta}^\alpha_\xi := \overline{\Delta}^{\alpha_1}_{\xi_1} \cdots \overline{\Delta}^{\alpha_n}_{\xi_n}.
 	\end{equation*}
 \end{definition}
-\begin{equation*}
-	\overline{\Delta}^\alpha_\xi := \overline{\Delta}^{\alpha_1}_{\xi_1} \cdots \overline{\Delta}^{\alpha_n}_{\xi_n}.
-\end{equation*}
 \begin{proposition}
 	Sea $\varphi:\Z^n\to\C$, entonces 
 	\begin{equation*}
@@ -2556,13 +2547,13 @@ Note que este operador tiene propiedades análogas a las de la derivada en el ca
 		& = \sum_{\xi\in\Z^n}\varphi(\xi) \psi(\xi+\delta_j) - \sum_{\xi\in\Z^n}\varphi(\xi) \psi(\xi) \\
 		& = \sum_{\xi\in\Z^n}\varphi(\xi-\delta_j) \psi(\xi) - \sum_{\xi\in\Z^n}\varphi(\xi) \psi(\xi) \\
 		& = \sum_{\xi\in\Z^n}[\varphi(\xi-\delta_j) - \varphi(\xi)]\psi(\xi) \\
-		& = -\sum_{\xi\in\Z^n} [\overline{\Delta}_{\xi_j}\varphi(\xi)]\psi(\xi)
+		& = -\sum_{\xi\in\Z^n} [\overline{\Delta}_{\xi_j}\varphi(\xi)]\psi(\xi).
 	\end{align*}
 	Lo que concluye la prueba.
 \end{proof}
 En el caso discreto, los polinomios tradicionales y los operadores de diferencia no se comportan exactamente como sus contrapartes continuas. Lo que inspira definiciones alternativas que se presentan a continuación.
 \begin{definition}
-	Para $\theta\in\Z^n$, se define $\theta^{(0)}_j := 1$, y
+	Para $\theta\in\Z^n$, se define su \textit{polinomio discreto} como $\theta^{(0)}_j := 1$, y
 	\begin{equation*}
 		\theta^{(k+1)}_j := \theta^{(k)}_j(\theta_j-k).
 	\end{equation*}
@@ -2601,7 +2592,7 @@ En el caso discreto, los polinomios tradicionales y los operadores de diferencia
 		I^b_k := \sum_{0\leq k<b}, \quad \text{ y } \quad I^{-b}_k := -\sum_{-b\leq k < 0}.
 	\end{equation*}
 \end{definition}
-\begin{theorem}["Teorema fundamental del cálculo" discreto 1D]
+\begin{theorem}['Teorema fundamental del cálculo' discreto 1D]
 	Sea $\theta\in\Z$, y sea $\alpha\in\N_0$. Entonces, se tiene que
 	\begin{equation*}
 		I^\theta_{k_1}I^{k_1}_{k_2} \cdots I^{k_{\alpha-1}}_{k_\alpha} 1 = \frac{1}{\alpha!} \theta^{(\alpha)}.
@@ -2612,10 +2603,10 @@ En el caso discreto, los polinomios tradicionales y los operadores de diferencia
 	\begin{equation*}
 		I^b_k\Delta_k f(k) = \sum_{0\leq k<b} [f(k+1)- f(k)] = f(b) - f(0).
 	\end{equation*}
-	Particularmente, $I^b_k\Delta_k k^{(i)} = b^{(i)}$, que se puede combinar con el hecho que $\Delta_kk^{(i)}=ik^{(i)}$, y el resultado deseado sigue de una inducción.
+	Particularmente, $I^b_k\Delta_k k^{(j)} = b^{(j)}$, que se puede combinar con el hecho que $\Delta_kk^{(j)}=ik^{(j-1)}$, y el resultado deseado sigue de una inducción.
 \end{proof}
 La extensión al caso multi-dimensional es inmediata. 
-\begin{corollary}["Teorema fundamental del cálculo" discreto]
+\begin{corollary}['Teorema fundamental del cálculo' discreto]
 	Sea $\theta\in\Z^n$, y sea $\alpha\in\N_0^n$. Entonces, se tiene que
 	\begin{equation*}
 		\prod_{j=1}^n I^{\theta_j}_{k(j, 1)} I^{k(j, 1)}_{k(j, 2)} \cdots I^{k(j, \alpha_j-1)}_{k(j, \alpha_j)} 1 = \frac{1}{\alpha!}\theta^{(\alpha)}.
@@ -2867,7 +2858,7 @@ Ahora, ha sido expuesto que la herramienta correspondiente al trabajar en el esp
 	Entonces, se tiene que $|c(x, \xi)| \lesssim \angles{\xi}^{m-\rho}$, y este proceso puede aplicarse recursivamente a $c$ y a sus derivadas para concluir que $c\in S^{-\infty}(\T^n\times\R^n)$.
 \end{proof}
 \begin{definition}[Periodización]
-	La \textit{peoridización} de una función $f\in\mathcal{S}(\R^n)$ se define como
+	La \textit{periodización} de una función $f\in\mathcal{S}(\R^n)$ se define como
 	\begin{equation*}
 		\mathcal{P}f(x):= \sum_{k\in\Z^n} f(x + k).
 	\end{equation*}
@@ -2901,7 +2892,7 @@ Al combinar este resultado con el Teorema \ref{theo:equivalence-symbols}, se obt
 \end{corollary}
 
 \chapter{Continuidad de operadores pseudo-diferenciales}
-
+En este capítulo se presentan resultados clásicos y originales, obtenidos con Cardona \cite{Cardona:Martinez, cardona-martinez-II, cardona-martinez-III}, acerca de la continuidad de los operadores pseudo-diferenciales discutidos anteriormente. Se incluyen ciertos resultados en $\R^n$, pero se presenta un mayor énfasis para los resultados en el caso del toro $\T^n$.
 \section{Continuidad en espacios de Lebesgue}
 \subsection{Continuidad de operadores pseudo-diferenciales en espacios de Lebesgue $L^p$}
 \begin{theorem}\label{theo:kernel-estimates}
@@ -3040,7 +3031,7 @@ Este resultado fue extendido al caso toroidal para el rango $2\leq p<\infty$ por
 \begin{remark}
 	En el resultado de Delgado se puede entender a $a(x, \xi)$ como un símbolo con regularidad limitada, pero se puede considerar informalmente como un símbolo en una clase de H\"ormander con $\rho=1-\varepsilon$ y $\delta=0$.
 \end{remark}
-Note que en ambos casos se requiere $\delta < \rho$. Esta restricción puede ser salvada gracias al trabajao de \'Alvarez y Hounie \cite{alvarez-hounie}. A partir de este momento, se denota $\lambda := \max\{(\delta - \rho)/2, 0\}$.
+Note que en ambos casos se requiere $\delta < \rho$. Esta restricción puede ser salvada gracias al trabajo de \'Alvarez y Hounie \cite{alvarez-hounie}. A partir de este momento, se denota $\lambda := \max\{(\delta - \rho)/2, 0\}$.
 \begin{theorem}[\'Alvarez y Hounie]\label{theo:Alvarez-Hounie}
 	Sea $0\leq\delta<1$, sea $0<\rho\leq1$, y sea $T\in\Psi^m_{\rho, \delta}(\R^n\times\R^n)$. Suponga 
 	\begin{equation*}
@@ -3097,7 +3088,7 @@ El análogo toroidal de este resultado fue demostrado con Cardona en
 		\item[(b)] Se observa que el núcleo sería una suma finita de funciones continuas, probando la continuidad de $k(x, y)$. Además, $\tilde{p}$ tendría el mismo soporte de $p$. Por lo tanto, la última integral anterior sería finita sin ninguna restricción sobre $N$.\\
 		\item[(c)] Sea $ m < -n$. Entonces, se tiene la serie finita
 		\begin{align*}
-			| k(x, y)| \leq &  \sum_{\xi \in \mathbb{Z}^n}\langle\xi\rangle^m,
+			| k(x, y)| \lesssim &  \sum_{\xi \in \mathbb{Z}^n}\langle\xi\rangle^m,
 		\end{align*}
 		probando la acotación de $k(x, y)$.\\
 		\item[(d)] Primero se observa que por (a), (b) es suficiente probar la estimación cuando $|x-y|<1$ y si $\tilde{p}(x, \xi)$ se anula para $|\xi|<1$ uniformemente en $x$. Sea $m + n = 0$ y sea $\varphi \in C_0^\infty(\mathbb{R})$ con soporte en $[0, 1]$, tal que $\int \varphi=1$, y se define 
@@ -3115,12 +3106,12 @@ El análogo toroidal de este resultado fue demostrado con Cardona en
 		\end{align*}
 		Dado que $\langle\xi\rangle \sim t$ en el soporte de $\varphi(\cdot-t)$, que tiene volumen estimado por $Ct^{n-1}$, se obtiene para $|\gamma|=N$
 		\begin{align*}
-			|x-y|^N|k(x, y, t)| \leq & \;C \int_{\supp \varphi(\cdot - t)} \langle\xi\rangle^{m - \rho N} \diff \xi \\
-			\leq & \; C\int_{\supp \varphi(\cdot - t)} t^{m-\rho N}\diff\xi \leq Ct^{m+n - \rho N-1}.
+			|x-y|^N|k(x, y, t)|  & \lesssim \int_{\supp \varphi(\cdot - t)} \langle\xi\rangle^{m - \rho N} \diff \xi \\
+			 & \lesssim \int_{\supp \varphi(\cdot - t)} t^{m-\rho N}\diff\xi \leq Ct^{m+n - \rho N-1}.
 		\end{align*}
 		Sumando las estimaciones para $N = 0, 1$, se obtiene 
 		\begin{equation*}
-			|k(x, y, t)| \leq C \frac{t^{ -\rho - 1}}{t^{-\rho } + |x - y|}.
+			|k(x, y, t)| \lesssim \frac{t^{ -\rho - 1}}{t^{-\rho } + |x - y|}.
 		\end{equation*}           
 	\end{itemize} Entonces, el resultado de evaluar la integral anterior es la estimación deseada $|k(x, y)| \leq  C|\log |x-y|| $ para $x \neq y$.
 \end{proof}
@@ -3142,7 +3133,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 \end{theorem}
 
 \begin{proof}
-	Primero se observa que $J^{n(1-\rho)/2}T$ y $TJ^{n(1-\rho)/2}$ tienen orden $\leq -n\lambda$, por lo que son acotados en $L^2(\mathbb{T}^n)$ por \cref{theo:22boundT}. Además, por la desigualdad de Hardy-Littlewood-Sobolev, se tiene que $J^{-n(1-\rho)/2}$ es una aplicación continua de $L^2(\mathbb{T}^n)$ en $L^{2/\rho}(\mathbb{T}^n)$ y de $L^{2/(2-\rho)}(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$. Por lo tanto, 
+	Primero se observa que $J^{n(1-\rho)/2}T$ y $TJ^{n(1-\rho)/2}$ tienen orden $\leq -n\lambda$, por lo que son acotados en $L^2(\mathbb{T}^n)$ por el Teorema \ref{theo:22boundT}. Además, por la desigualdad de Hardy-Littlewood-Sobolev, se tiene que $J^{-n(1-\rho)/2}$ es una aplicación continua de $L^2(\mathbb{T}^n)$ en $L^{2/\rho}(\mathbb{T}^n)$ y de $L^{2/(2-\rho)}(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$. Por lo tanto, 
 	\begin{equation*}
 		\| Tf \|_{L^{2/\rho}} = \| J^{-n(1-\rho)/2}J^{n(1-\rho)/2}Tf\|_{L^{2/\rho}} \lesssim \| J^{n(1-\rho)/2}Tf \|_{L^2} \lesssim \| f \|_{L^2},
 	\end{equation*}
@@ -3174,7 +3165,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 \end{theorem}
 \begin{proof}
 	\begin{itemize}
-		\item[(a)] Primero, se observa que $|x-y| \geq |x - z| - |z - y| > \sigma$ en el dominio de evaluación. Luego, por la desigualdad triangular y \cref{eq:teo3-1a} se tiene
+		\item[(a)] Primero, se observa que $|x-y| \geq |x - z| - |z - y| > \sigma$ en el dominio de evaluación. Luego, por la desigualdad triangular y (\ref{eq:teo3-1a}) se tiene
 		\begin{equation*}
 			\sup_{|y-z| \leq \sigma} \int_{|x-z| > 2\sigma}|k(x, y) - k(x, z)|\diff x  
 		\end{equation*}
@@ -3224,22 +3215,22 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 		\end{equation*}
 		Ahora, $|e^{i2\pi(x - z) \cdot \xi}-1| \leq |x-z||\xi|\leq t\sigma$ en el soporte de $\varphi(\langle\xi\rangle/t)$. Por otro lado, 
 		\begin{equation*}
-			|\partial^\gamma_\xi e^{i2\pi(x - z) \cdot \xi}| \lesssim_\gamma|y-z|^{|\gamma|} \lesssim_\gamma \sigma ^{|\gamma|} \lesssim C\langle\xi\rangle^{-|\gamma|}(t\sigma)^{|\gamma|}.
+			|\partial^\gamma_\xi e^{i2\pi(x - z) \cdot \xi}| \lesssim_\gamma|y-z|^{|\gamma|} \lesssim_\gamma \sigma ^{|\gamma|} \lesssim \langle\xi\rangle^{-|\gamma|}(t\sigma)^{|\gamma|}.
 		\end{equation*}
 		Asuma que $t\sigma < 1$, entonces para cualquier $\chi \in C_0^\infty(\mathbb{R}^n)$, que es igual a uno en el soporte de $\varphi(\langle\xi\rangle/t)$ el conjunto
 		\begin{equation*}
 			\Sigma_{\alpha\beta}=\left\{ \langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} \partial^\beta_\xi \left[\left( e^{i2\pi(x - z) \cdot \xi}-1 \right) 
 			\tilde{p}(x, \xi) \right] \chi(\langle\xi\rangle/t) : |y-z| < \sigma,\; z \in \mathbb{T}^n \right\}
 		\end{equation*}
-		tiene medida acotada por $C\langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} (t\sigma)\langle\xi\rangle^{m-\rho |\beta|} \leq Ct\sigma \langle\xi\rangle^{-n\lambda} $. Así, se puede considerar $\tilde{p}(x, \xi)$ como un símbolo en $\mathbb{R}^n\times\mathbb{R}^n$ y por \cref{theo:Alvarez-Hounie} cada uno de los operadores correspondientes con símbolos $$\langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} \partial^\beta_\xi \left[\left( e^{i2\pi(x - z) \cdot \xi}-1 \right) 
-		\tilde{p}(x, \xi) \right] \chi(\langle\xi\rangle/t),$$ en el conjunto $\Sigma_{\alpha\beta}$ son acotados en $L^2(\mathbb{R}^n)$ con norma estimada por $Ct\sigma$.
-		Por lo tanto, \cref{eq:primera-cota-b} puede estimarse usando la identidad de Plancherel mediante 
+		tiene medida acotada por $\langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} (t\sigma)\langle\xi\rangle^{m-\rho |\beta|} \leq t\sigma \langle\xi\rangle^{-n\lambda} $. Así, se puede considerar $\tilde{p}(x, \xi)$ como un símbolo en $\mathbb{R}^n\times\mathbb{R}^n$ y por el Teorema \ref{theo:Alvarez-Hounie} cada uno de los operadores correspondientes con símbolos $$\langle\xi\rangle^{n(1 - \rho)/2 + \rho|\beta|} \partial^\beta_\xi \left[\left( e^{i2\pi(x - z) \cdot \xi}-1 \right) 
+		\tilde{p}(x, \xi) \right] \chi(\langle\xi\rangle/t),$$ en el conjunto $\Sigma_{\alpha\beta}$ son acotados en $L^2(\mathbb{R}^n)$ con norma estimada por $t\sigma$.
+		Por lo tanto, (\ref{eq:primera-cota-b}) puede estimarse usando la identidad de Plancherel mediante 
 		\begin{equation*}
-			Ct\sigma\sum_{\beta\leq\alpha,\;|\alpha|\leq N} C_{\alpha\beta}t^{\rho|\alpha|}\left\|  
+			t\sigma\sum_{\beta\leq\alpha,\;|\alpha|\leq N} C_{\alpha\beta}t^{\rho|\alpha|}\left\|  
 			\langle\xi\rangle^{-n(1-\rho)/2 - \rho|\beta|} t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t) \right\|_{L^2(\mathbb{R}^n)}t^{-\rho n/2} 
 		\end{equation*}
 		\begin{equation}
-			\leq Ct\sigma t^{\rho|\alpha|} t^{-n(1-\rho)/2 - \rho|\beta|}t^{-|\alpha-\beta|}t^{-\rho n/2} \leq Ct\sigma, 
+			\leq t\sigma t^{\rho|\alpha|} t^{-n(1-\rho)/2 - \rho|\beta|}t^{-|\alpha-\beta|}t^{-\rho n/2} \leq Ct\sigma, 
 			\label{eq:tsigma<1-b}
 		\end{equation}
 		como $\angles{\xi}\sim t$ en el soporte de la función. Ahora, se elimina la restricción $t\sigma < 1$. Para $|\alpha| = N$ se tiene que
@@ -3250,7 +3241,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 			\leq \left[ \int_{\mathbb{T}^n} \left( t^{2\rho} |x-y|^2 \right)^N |k(x, y, t)|^2 \diff x \right]^{1/2} \left[ \int_{|x-y|>\sigma^\rho} \left(|t^{2\rho}|x-y|^2\right)^{-N}\diff x \right]^{1/2}
 		\end{equation*}
 		\begin{equation}
-			\leq C \left[ \int_{\mathbb{T}^n} \left( t^{2\rho}|x-y|^2 \right)^N|k(x,y,t)|^2 \diff x \right]^{1/2}t^{-\rho N}\sigma^{\rho(n/2 - N)}.
+			\lesssim \left[ \int_{\mathbb{T}^n} \left( t^{2\rho}|x-y|^2 \right)^N|k(x,y,t)|^2 \diff x \right]^{1/2}t^{-\rho N}\sigma^{\rho(n/2 - N)}.
 			\label{eq:segunda-cota-b}
 		\end{equation} 
 		Sea $|\alpha|=N$, entonces 
@@ -3260,7 +3251,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 		\begin{equation*}
 			= \sum_{\beta\leq\alpha} C_{\alpha\beta}t^{\rho|\alpha|} \int_{\mathbb{R}^n} e^{i2\pi(x - y) \cdot \xi} \partial^\beta_\xi \tilde{p}(x, \xi)t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi,
 		\end{equation*}
-		y para cada $\beta\leq\alpha$ la norma $L^2(\mathbb{T}^n)$ como función de $x$ de 
+		y para cada $\beta\leq\alpha$, la norma $L^2(\mathbb{T}^n)$ como función de $x$ de 
 		\begin{equation*}
 			\int_{\mathbb{R}^n} e^{i2\pi(x - y) \cdot \xi} \partial^\beta_\xi \tilde{p}(x, \xi)t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi
 		\end{equation*}
@@ -3268,15 +3259,15 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 		\begin{equation*}
 			\int_{\mathbb{R}^n} e^{i2\pi x \cdot \xi} \partial^\beta_\xi \tilde{p}(x+y, \xi)t^{-|\alpha-\beta|} \partial^{\alpha-\beta}_\xi \varphi(\langle\xi\rangle/t)\diff \xi.
 		\end{equation*}
-		Por otro lado, el conjunto $\{ \langle\xi\rangle^{n(1-\rho)/2 + \rho|\beta|} \partial^\beta_\xi\tilde{p}(x + y, \xi) : y \in \mathbb{T}^n  \}$ tiene medida acotada por $C\langle\xi\rangle^{n(1-\rho)/2 + \rho|\beta|} \langle\xi\rangle^{m- \rho|\beta|} = C\langle\xi\rangle^{n(1-\rho)/2 +m}   $, así que sus respectivos operadores son acotados en $L^2(\mathbb{R}^n)$ por \cref{theo:Alvarez-Hounie}. Por lo tanto, \cref{eq:segunda-cota-b} puede estimarse mediante  
+		Por otro lado, el conjunto $\{ \langle\xi\rangle^{n(1-\rho)/2 + \rho|\beta|} \partial^\beta_\xi\tilde{p}(x + y, \xi) : y \in \mathbb{T}^n  \}$ tiene medida acotada por $\langle\xi\rangle^{n(1-\rho)/2 + \rho|\beta|} \langle\xi\rangle^{m- \rho|\beta|} = \langle\xi\rangle^{n(1-\rho)/2 +m}   $, así que sus respectivos operadores son acotados en $L^2(\mathbb{R}^n)$ por el Teorema \ref{theo:Alvarez-Hounie}. Por lo tanto, (\ref{eq:segunda-cota-b}) puede estimarse mediante  
 		\begin{equation*}
-			C\sum_{\beta\leq\alpha,\; |\alpha|=N} t^{\rho|\alpha|}t^{-n(1-\rho)/2 - \rho|\beta|}t^{-\rho|\alpha-\beta|}t^{n/2}t^{\rho N} \sigma^{\rho(n/2 - N)} \leq C(t\sigma)^{\rho (n/2 - N)}.
+			\sum_{\beta\leq\alpha,\; |\alpha|=N} t^{\rho|\alpha|}t^{-n(1-\rho)/2 - \rho|\beta|}t^{-\rho|\alpha-\beta|}t^{n/2}t^{\rho N} \sigma^{\rho(n/2 - N)} \lesssim (t\sigma)^{\rho (n/2 - N)}.
 		\end{equation*}
 		De manera similar, se puede estimar 
 		\begin{equation*}
-			\int_{|x-z|>2\sigma^\rho} |k(x, z, t)| \diff x \leq C(t\sigma)^{\rho(n/2 - N)}.
+			\int_{|x-z|>2\sigma^\rho} |k(x, z, t)| \diff x \lesssim (t\sigma)^{\rho(n/2 - N)}.
 		\end{equation*}
-		Usando estas estimaciones y \cref{eq:tsigma<1-b} se obtiene el resultado de la siguiente expresión:
+		Usando estas estimaciones y (\ref{eq:tsigma<1-b}) se obtiene el resultado de la siguiente expresión:
 		\begin{equation}
 			\int_{|x-z| > 2\sigma^\rho}|k(x, y) - k(x, z)|\diff x \lesssim \int_1^{1/\sigma} t\sigma/t \diff t + \int_{1/\sigma}^\infty(t\sigma)^{\rho(n/2-N)}/t\diff t \leq C
 			\label{eq:ultima-cota-b}.
@@ -3315,16 +3306,16 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 		\end{equation*}
 		Así, se tiene que
 		\begin{equation*}
-			\int_{\mathbb{T}^n} |g(x, y, z, t)|\diff x \leq Ct^{-\rho N}\sigma^{\rho(n/2 - N)} \left[ \int_{\mathbb{T}^n} (t^{2\rho}|x-z|^2)^N|g(x, y, z, t)|^2\diff x \right].
+			\int_{\mathbb{T}^n} |g(x, y, z, t)|\diff x \lesssim t^{-\rho N}\sigma^{\rho(n/2 - N)} \left[ \int_{\mathbb{T}^n} (t^{2\rho}|x-z|^2)^N|g(x, y, z, t)|^2\diff x \right].
 		\end{equation*}
 		Se puede usar la identidad de Plancherel como antes, para obtener
 		\begin{align*}
-			\int_{\mathbb{T}^n} |g(x, y, z, t)|\diff x \leq & Ct^{-\rho N}\sigma^{\rho(n/2 - N)} \sum_{\beta\leq\alpha,\;|\alpha|=N} \left\| \partial^\beta_\xi \left[ (e^{i2\pi (y-z) \cdot \xi} -1)\tilde{p}(z, \xi) \right] \partial^{\alpha-\beta}_\xi\varphi(\langle\xi\rangle/t) \right\|_{L^2(\mathbb{R}^n)} \\
-			\leq& Ct^{-\rho N}\sigma^{\rho(n/2 - N)} \sum_{\beta\leq\alpha,\;|\alpha|=N}t^{-|\alpha-\beta|}t^{n/2} \\
-			\leq & C(t\sigma)^{\rho(n/2-N)}.
+			\int_{\mathbb{T}^n} |g(x, y, z, t)|\diff x  & \lesssim t^{-\rho N}\sigma^{\rho(n/2 - N)} \sum_{\beta\leq\alpha,\;|\alpha|=N} \left\| \partial^\beta_\xi \left[ (e^{i2\pi (y-z) \cdot \xi} -1)\tilde{p}(z, \xi) \right] \partial^{\alpha-\beta}_\xi\varphi(\langle\xi\rangle/t) \right\|_{L^2(\mathbb{R}^n)} \\
+			&\lesssim t^{-\rho N}\sigma^{\rho(n/2 - N)} \sum_{\beta\leq\alpha,\;|\alpha|=N}t^{-|\alpha-\beta|}t^{n/2} \\
+			 & \lesssim (t\sigma)^{\rho(n/2-N)}.
 		\end{align*}
 	\end{itemize}
-	Se pueden usar los mismos procedimientos para encontrar estas cotas para $f(x-y, y,z, t)$ al observar que $\int_{|x-z|>2\sigma^\rho} |f(x-y, y,z, t)|\diff x \leq \int_{|x|>\sigma^\rho} |f(x, y,z, t)|\diff x$. Entonces la cota deseada proviene del cálculo en \cref{eq:ultima-cota-b}.
+	Se pueden usar los mismos procedimientos para encontrar estas cotas para $f(x-y, y,z, t)$ al observar que $\int_{|x-z|>2\sigma^\rho} |f(x-y, y,z, t)|\diff x \leq \int_{|x|>\sigma^\rho} |f(x, y,z, t)|\diff x$. Entonces la cota deseada proviene del cálculo en (\ref{eq:ultima-cota-b}).
 \end{proof}
 \begin{theorem}\label{theo:L1-H1-L-infty-BMO}
 	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, $m \leq - n [(1-\rho)/2 + \lambda] $, entonces $T$ y su adjunto $T^*$ son aplicaciones continuas
@@ -3339,41 +3330,41 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 		\begin{equation*}
 			\int_{\mathbb{T}^n}|Ta(x)|\diff x \leq \int_{B'}|Ta(x)|\diff x  + \int_{A}|Ta(x)|\diff x =: I_1 + I_2.
 		\end{equation*}
-		Ahora, usando la desigualdad de Cauchy-Schwarz y el \cref{teo:cotas-L} (b) se obtiene 
+		Ahora, usando la desigualdad de Cauchy-Schwarz y el Teorema \ref{teo:cotas-L} (b) se obtiene 
 		\begin{align*}
 			I_1  &\leq \|\chi_{B'}\|_{L^2}\|Ta\|_{{L^2}}\lesssim \sigma^{\rho n/2}\|a\|_{L^{2/(2-\rho)}} \\ 
 			 &\leq  \sigma^{\rho n/2} \left[ \int_B |B|^{-2/(2-\rho)}\diff x\right]^{(2-\rho)/2} 
 			\leq  \sigma^{\rho n/2}|B|^{-\rho/2} \leq C,
 		\end{align*}
-		y usando el \cref{theo:kernel-estimate-sigma} (b) se tiene la estimación,
+		y usando el Teorema \ref{theo:kernel-estimate-sigma} (b) se tiene la estimación,
 		\begin{equation*}
 			I_2 \leq \int_A\int_B |k(x, y) - k(x, z)||a(y)|\diff y \diff x \leq \sup_{|y-z|<\sigma}\int_A|k(x,y)-k(x, z)|\diff x \leq C.
 		\end{equation*}
-		Cuando $\sigma \geq 1$, se define $B'=B(z, 2\sigma)$ y $A = \mathbb{T}^n\setminus B'$. Entonces se divide la norma $L^1(\mathbb{T}^n)$ en $I_1 + I_2$ como anteriormente. Ahora se usa el \cref{teo:cotas-L} (a) para obtener
+		Cuando $\sigma \geq 1$, se define $B'=B(z, 2\sigma)$ y $A = \mathbb{T}^n\setminus B'$. Entonces se divide la norma $L^1(\mathbb{T}^n)$ en $I_1 + I_2$ como anteriormente. Ahora se usa el Teorema \ref{teo:cotas-L} (a) para obtener
 		\begin{align*}
 			I_1  &\leq \|\chi_{B'}\|_{L^2}\|Ta\|_{{L^2}}\lesssim\sigma^{ n/2}\|a\|_{L^{2}} \\ 
 			 & \lesssim \sigma^{ n/2} \left[ \int_B |B|^{-2}\diff x\right]^{1/2}  \leq \sigma^{n/2}|B|^{-1/2}\leq C,
 		\end{align*}
-		y se usa el \cref{theo:kernel-estimate-sigma} (a) para estimar $I_2$.\\
+		y se usa el Teorema \ref{theo:kernel-estimate-sigma} (a) para estimar $I_2$.\\
 		
 		\item[(b)] Sea $B = B(z, \sigma)$. Si $\sigma < 1$, se define $B'=B(z, 2\sigma^\rho)$ y $A = \mathbb{T}^n\setminus B'$ de modo que se obtiene $f = f\chi_{B'} + f\chi_A =: f_1 + f_2$. Ahora, se define $b = Tf_2(z)$, que está bien definido, ya que $Tf_2$ es suave en $B'$. Entonces 
 		\begin{equation*}
 			\frac{1}{|B|}\int_B|Tf(x) - b| \diff x \leq \frac{1}{|B|}\int_B|Tf_1(x)|\diff x + \frac{1}{|B|}\int_B|Tf_2(x) -b|\diff x =: I_1 + I_2.
 		\end{equation*}
-		Por la desigualdad de H\"older y el \cref{teo:cotas-L} (a) se tienen las desigualdades
+		Por la desigualdad de H\"older y el Teorema \ref{teo:cotas-L} (a) se tienen las desigualdades
 		\begin{equation*}
 			I_1 \leq \frac{1}{|B|}\left\|\chi_{B'}\right\|_{L^{2/(2-\rho)}}\|Tf_1\|_{L^{2/\rho}}
 			\lesssim |B|^{-\rho/2}\|f_1\|_{L^2} \leq |B|^{-\rho/2}\left[\int_{B'}\|f\|^2_{L^\infty}\diff x\right]^{1/2} \lesssim  \|f\|_{L^\infty},
 		\end{equation*}
-		y usando el \cref{theo:kernel-estimate-sigma} (c) se obtiene 
+		y usando el Teorema \ref{theo:kernel-estimate-sigma} (c) se obtiene 
 		\begin{equation*}
 			I_2 \leq \frac{1}{|B|}\int_B\int_A|k(x, y) - k(z, y)||f(y)|\diff y \diff x \leq \sup_{|y-z|<\sigma}\int_A|k(x, y) - k(z, y)|\|f\|_{L^\infty} \diff y \lesssim \|f\|_{L^\infty}.
 		\end{equation*}
-		Cuando $\sigma \geq 1$, se define $B'=B(z, 2\sigma)$ y $A = \mathbb{T}^n\setminus B'$. Entonces se divide la norma BMO en $I_1 + I_2$ como anteriormente. Ahora se usa la desigualdad de Cauchy-Schwarz y el \cref{teo:cotas-L} (b) para obtener
+		Cuando $\sigma \geq 1$, se define $B'=B(z, 2\sigma)$ y $A = \mathbb{T}^n\setminus B'$. Entonces se divide la norma BMO en $I_1 + I_2$ como anteriormente. Ahora se usa la desigualdad de Cauchy-Schwarz y el Teorema  \ref{teo:cotas-L} (b) para obtener
 		\begin{equation*}
 			I_1 \leq\frac{1}{|B|} \left\|\chi_B\right\|_{L^2}\left\|Tf_1\right\|_{L^2} = |B|^{-1/2}\|Tf_1\|_{L^2} \lesssim |B|^{-1/2}\left[\int_{B'}\|f\|^2_{L^\infty}\diff x\right]^{1/2} \lesssim  \|f\|_{L^\infty},
 		\end{equation*}
-		y se usa \cref{theo:kernel-estimate-sigma} (a) para estimar $I_2$. Así, se obtiene la desigualdad
+		y se usa el Teorema \ref{theo:kernel-estimate-sigma} (a) para estimar $I_2$. Así, se obtiene la desigualdad
 		\begin{equation*}
 			\|Tf\|_{\mathrm{BMO}(\mathbb{T}^n)} = \sup_B \inf_{b\in \mathbb{C}} \frac{1}{|B|} \int_B |Tf(x) - b|\diff x \lesssim \|f\|_{L^\infty(\mathbb{T}^n)}.
 		\end{equation*}
@@ -3391,7 +3382,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 	\label{teo:cotas-Lp}
 \end{theorem}
 \begin{proof}
-	Se puede usar el argumento de interpolación compleja entre $(H^1(\mathbb{T}^n),\; L^1(\mathbb{T}^n))$ y  $(L^2(\mathbb{T}^n),\; L^2(\mathbb{T}^n))$ para $1 < p < 2$, y entre $(L^2(\mathbb{T}^n),\; L^2(\mathbb{T}^n))$ y el par $(L^1(\mathbb{T}^n),\; \mathrm{BMO}(\mathbb{T}^n))$ para $2 < p<\infty$. De hecho, $T$ es acotado en $L^2(\mathbb{T}^n)$ si $m\leq -n\lambda$ por \cref{theo:22boundT}. Por otro lado, si $m\leq -n[(1-\rho)/2 + \lambda]$, entonces $T$ será acotado de $H^1(\mathbb{T}^n)$ en $L^1(\mathbb{T}^n)$ y de $L^\infty(\mathbb{T}^n)$ en $\mathrm{BMO}(\mathbb{T}^n)$. Entonces $T$ será acotado en $L^p(\mathbb{T}^n)$, por el argumento de interpolación de Fefferman-Stein, para
+	Se puede usar el argumento de interpolación compleja entre $(H^1(\mathbb{T}^n),\; L^1(\mathbb{T}^n))$ y  $(L^2(\mathbb{T}^n),\; L^2(\mathbb{T}^n))$ para $1 < p < 2$, y entre $(L^2(\mathbb{T}^n),\; L^2(\mathbb{T}^n))$ y el par $(L^1(\mathbb{T}^n),\; \mathrm{BMO}(\mathbb{T}^n))$ para $2 < p<\infty$. De hecho, $T$ es acotado en $L^2(\mathbb{T}^n)$ si $m\leq -n\lambda$ por el Teorema \ref{theo:22boundT}. Por otro lado, si $m\leq -n[(1-\rho)/2 + \lambda]$, entonces $T$ será acotado de $H^1(\mathbb{T}^n)$ en $L^1(\mathbb{T}^n)$ y de $L^\infty(\mathbb{T}^n)$ en $\mathrm{BMO}(\mathbb{T}^n)$. Entonces $T$ será acotado en $L^p(\mathbb{T}^n)$, por el argumento de interpolación de Fefferman-Stein, para
 	\begin{equation*}
 		\frac{1}{p} = \frac{1-\theta}{q} + \frac{\theta}{2},
 	\end{equation*}
@@ -3399,7 +3390,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 	\begin{equation*}
 		m \leq -n\lambda\theta - n\left[(1-\rho)/2 +\lambda\right](1 - \theta).
 	\end{equation*}
-	Es decir, que $m$ satisface \cref{eq:restriccion-Lp}, completando la demostración.
+	Es decir, que $m$ satisface (\ref{eq:restriccion-Lp}), completando la demostración.
 \end{proof}
 Se pueden usar las propiedades de los operadores de potencial de Bessel para extender el resultado de acotación en $L^p(\mathbb{T}^n)$ al caso $L^p(\mathbb{T}^n)$-$L^q(\mathbb{T}^n)$. En el caso del toro, el siguiente teorema extiende el resultado de acotación $L^p(\mathbb{T}^n)$-$L^q(\mathbb{T}^n)$ en  \cite{cardona-delgado-kumar} al rango completo $0 < \rho \leq 1$, $0 \leq \delta < 1$.
 \begin{theorem}
@@ -3425,18 +3416,17 @@ Se pueden usar las propiedades de los operadores de potencial de Bessel para ext
 \end{theorem}
 \begin{proof}
 	\begin{itemize}
-		\item[(a)] Sean $m_1 = -n(1/p - 1/2)$ y $m_2=-n(1/2 - 1/q)$. Entonces $m\leq m_1+m_2-n\lambda$ y $J^{-m_2}TJ^{-m_1}$ es acotado en $L^2(\mathbb{T}^n)$ por \cref{theo:22boundT}. Además, por la desigualdad de Hardy-Littlewood-Sobolev, se obtiene que $J^{m_1}$ es acotado de $L^p(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ y $J^{m_2}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$. Por lo tanto, 
+		\item[(a)] Sean $m_1 = -n(1/p - 1/2)$ y $m_2=-n(1/2 - 1/q)$. Entonces $m\leq m_1+m_2-n\lambda$ y $J^{-m_2}TJ^{-m_1}$ es acotado en $L^2(\mathbb{T}^n)$ por el Teorema \ref{theo:22boundT}. Además, por la desigualdad de Hardy-Littlewood-Sobolev, se obtiene que $J^{m_1}$ es acotado de $L^p(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ y $J^{m_2}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$. Por lo tanto, 
 		\begin{equation*}
 			\| J^{m_2}(J^{-m_2}TJ^{-m_1})J^{m_1}f \|_{L^q} \lesssim \|(J^{-m_2}TJ^{-m_1})J^{m_1}f  \|_{L^2} \lesssim \| J^{m_1}f \|_{L^2} \lesssim  \| f\|_{L^p}.
 		\end{equation*}
-		Así, se prueba el resultado.\\
-		
+		Así, se prueba el resultado.
 		\item[(b)] Sea $m' = -n(1/p - 1/q)$, de modo que $J^{m'}$ es continuo de  $L^p(\mathbb{T}^n)$ en $L^q(\mathbb{T}^n)$ y $J^{-m'}T$ tiene orden $m-m' \leq -n[(1-\rho)(1/2 - 1/q) + \lambda]$ y es una aplicación continua de $L^p(\mathbb{T}^n)$ en sí mismo. Así, se tiene que
 		\begin{equation*}
 			\| J^{m'}(J^{-m'}T)f \|_{L^q} \lesssim \|(J^{-m'}T)f\|_{L^p} \lesssim \|f\|_{L^p}.
 		\end{equation*}
-		Por lo tanto, se obtiene la estimación deseada.\\
-		
+		Por lo tanto, se obtiene la estimación deseada.
+
 		\item[(c)] Como anteriormente, se define  $m' = -n(1/p - 1/q)$ de modo que $TJ^{-m'}$ aplica continuamente  $L^q(\mathbb{T}^n)$ en sí mismo y
 		\begin{equation*}
 			\|(TJ^{-m'})J^{m'}f\|_{L^q} \lesssim \|J^{m'}f\|_{L^q} \lesssim \|f\|_{L^p}.
@@ -3446,25 +3436,25 @@ Se pueden usar las propiedades de los operadores de potencial de Bessel para ext
 \end{proof}
 Además, se tiene que estos operadores pseudo-diferenciales toroidales son de tipo débil $(1,1)$. Para ello se demuestra el caso vectorial adaptado del caso euclideano de Álvarez y Milman \cite{alvarez-milman}, que fue extendido al caso toroidal con Cardona en \cite{Cardona:Martinez}.
 \begin{theorem}
-	Sea $T$ un operador con núcleo de valor operador, como en la Definición \ref{def:operator-kernel}, que se extiende a un operador acotado de $L^2(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$ y de $L^q(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$ tal que para algunos $\alpha$ y $\beta$:
+	Sea $T$ un operador con kernel valuado en operadores, como en la Definición \ref{def:operator-kernel}, que se extiende a un operador acotado de $L^2(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$ y de $L^q(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$ tal que para algunos $\alpha$ y $\beta$:
 	\begin{equation}
 		\frac{1}{q} = \frac{1}{2} + \frac{\beta}{n} ; \quad (1-\alpha)\frac{n}{2} \leq \beta < \frac{n}{2}.
 		\label{eq:alpha_condition}
 	\end{equation}
 	También se asume que su núcleo $k(x, y)$ satisface la siguiente condición cuando $|y-z|<\sigma$
 	\begin{equation}
-		\int_{|x-z|>c\sigma^\alpha}|k(x, y)-k(x,z)|{\mathcal{B}(X, Y)}\diff x\leq C ;, \quad 0<\sigma < 1,
+		\int_{|x-z|>c\sigma^\alpha}\|k(x, y)-k(x,z)\|_{\mathcal{B}(X, Y)}\diff x\leq C, \quad 0<\sigma < 1,
 		\label{eq:hyp-sigma<1}
 	\end{equation}
 	\begin{equation}
-		\int{|x-z|>c\sigma}|k(x, y)-k(x,z)|_{\mathcal{B}(X, Y)}\diff x \leq C ;, \quad 1 \leq \sigma.
+		\int{|x-z|>c\sigma}\|k(x, y)-k(x,z)\|_{\mathcal{B}(X, Y)}\diff x \leq C , \quad 1 \leq \sigma.
 		\label{eq:hyp-sgima>1}
 	\end{equation}
 	Entonces el operador $T$ se extiende a un operador de tipo débil $(1,1)$.
 	\label{theo:L1-weak}
 \end{theorem}
 \begin{proof}
-	Sea $f \in L^1(\mathbb{T}^n; X)$, sea $\lambda > 0$ y considérese la descomposición de Calderón-Zygmund a nivel $\lambda$. Así
+	Sea $f \in L^1(\mathbb{T}^n; X)$, sea $\lambda > 0$ y considere la descomposición de Calderón-Zygmund a nivel $\lambda$. Así
 	\begin{equation*}
 		\Omega = \{x \in \mathbb{T}^n : \mathrm{M}f(x) > \lambda\} = \bigcup_{j=1}^\infty Q_j,
 	\end{equation*}
@@ -3487,25 +3477,24 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 	\begin{equation*}
 		|\Omega| \leq \frac{C}{\lambda}\|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
-	De \cref{eq:1norm-X} se tiene que $g \in L^2(\mathbb{T}^n; X)$, y también la desigualdad $\|g\|_{L^2(\mathbb{T}^n; X)}^2 \leq C\lambda \|f\|_{L^1(\mathbb{T}^n; X)}$. Entonces, usando la desigualdad de Chebyshev y la acotación $L^2$ de $T$ se obtiene
+	De (\ref{eq:1norm-X}) se tiene que $g \in L^2(\mathbb{T}^n; X)$, y también la desigualdad $\|g\|_{L^2(\mathbb{T}^n; X)}^2 \lesssim \lambda \|f\|_{L^1(\mathbb{T}^n; X)}$. Entonces, usando la desigualdad de Chebyshev y la acotación $L^2$ de $T$ se obtiene
 	\begin{equation*}
-		\lambda^2 |\{x \in \mathbb{T}^n : \|Tg(x)\|_Y > \lambda/2\}| \leq C\|Tg\|_{L^2(\mathbb{T}^n; Y)}^2 \leq C\|g\|_{L^2(\mathbb{T}^n; X)}^2 \leq C\lambda\|f\|_{L^1(\mathbb{T}^n; X)}.
+		\lambda^2 |\{x \in \mathbb{T}^n : \|Tg(x)\|_Y > \lambda/2\}| \lesssim \|Tg\|_{L^2(\mathbb{T}^n; Y)}^2 \lesssim \|g\|_{L^2(\mathbb{T}^n; X)}^2 \lesssim \lambda\|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
 	Por otro lado, si se establece $c\Omega$ como la unión de los cubos $cQ_j$ con el mismo centro y longitud de lado escalada, se obtiene
 	\begin{equation*}
-		|\{ x \in c\Omega : \|Tb(x)\|_Y > \lambda/2  \}| \leq |c\Omega| \leq \frac{C}{\lambda}\|f\|_{L^1(\mathbb{T}^n; X)}.
+		|\{ x \in c\Omega : \|Tb(x)\|_Y > \lambda/2  \}| \leq |c\Omega| \lesssim \frac{1}{\lambda}\|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
 	Sea $\sigma_j$ el diámetro de $Q_j$ y
 	\begin{equation*}
 		F = \sum_{\sigma_j < 1} b_j\;, \quad  \quad G = \sum_{\sigma_j \geq 1}b_j,
 	\end{equation*}
-	entonces para un $c>0$ adecuado y $Q_j$, centrados en $z_j$, se obtiene $|x - z_j| > 4\sigma_j$, cuando $x \in \mathbb{T}^n \setminus c\Omega$. Usando la desigualdad de Chebyshev y \cref{eq:cz-condition} se obtiene por \cref{eq:hyp-sgima>1} las siguientes estimaciones
+	entonces para un $c>0$ adecuado y $Q_j$, centrados en $z_j$, se obtiene $|x - z_j| > 4\sigma_j$, cuando $x \in \mathbb{T}^n \setminus c\Omega$. Usando la desigualdad de Chebyshev y (\ref{eq:cz-condition}) se obtiene por (\ref{eq:hyp-sgima>1}) las siguientes estimaciones
 	\begin{align*}
 		 & \lambda|\{ x \in \mathbb{T}^n \setminus c\Omega : \|TG(x)\|_Y > \lambda/4 \}| \\
-		 &\leq C \int_{\mathbb{T}^n \setminus c\Omega} \|TG(x)\|_Y \diff x \\
-		 &\leq
-		C\sum_{\sigma_j \geq 1} \int_{|x-z_j|>4\sigma_j} \int_{Q_j} \|k(x, y) - k(x, z_j)\|_{\mathcal{B}(X, Y)}\|b_j(y)\|_X \diff y \diff x \\
-		 &\leq C\sum_{\sigma_j \geq 1} \int_{Q_j}\|b_j(y)\|_X \diff y \leq C\|f\|_{L^1(\mathbb{T}^n; X)}.
+		 &\lesssim \int_{\mathbb{T}^n \setminus c\Omega} \|TG(x)\|_Y \diff x \\
+		 &\lesssim \sum_{\sigma_j \geq 1} \int_{|x-z_j|>4\sigma_j} \int_{Q_j} \|k(x, y) - k(x, z_j)\|_{\mathcal{B}}\|b_j(y)\|_X \diff y \diff x \\
+		 &\lesssim \sum_{\sigma_j \geq 1} \int_{Q_j}\|b_j(y)\|_X \diff y \lesssim \|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{align*}
 	Ahora, sea $\varphi$ una función test soportada en $\{x \in \mathbb{T}^n : |x| \leq 1/c\}$ y tal que $\int\varphi(x) \diff x = 1$ con $\varphi \geq 0$. Defínase
 	\begin{equation*}
@@ -3526,21 +3515,21 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 		\label{eq:TF''}
 	\end{equation}
 	\begin{equation*}
-		\leq  C\int_{\mathbb{T}^n \setminus c\Omega}\|TF''(x)\|_Y \diff x
+		\lesssim \int_{\mathbb{T}^n \setminus c\Omega}\|TF''(x)\|_Y \diff x
 	\end{equation*}
 	\begin{equation*}
-		\leq  C \sum_{\sigma_j< 1}\int_{\mathbb{T}^n}\left[\int_{\mathbb{T}^n}\|k(x, y) - k(x, w)\|_{\mathcal{B}(X,Y)}\varphi_j(w-y)\diff w\right] \|b_j(y)\|_X\diff y.
+		\lesssim \sum_{\sigma_j< 1}\int_{\mathbb{T}^n}\left[\int_{\mathbb{T}^n}\|k(x, y) - k(x, w)\|_{\mathcal{B}(X,Y)}\varphi_j(w-y)\diff w\right] \|b_j(y)\|_X\diff y.
 	\end{equation*}
 	Cuando $x \in \mathbb{T}^n \setminus c\Omega$ y $|y - w| < \sigma_j^{1/\alpha}$ se tiene que
 	\begin{equation*}
 		|x-w| \geq |x-z_j| - |z_j - y| - |y - w| > 4\sigma_j - \sigma_j - \sigma_j^{1/\alpha} > 2\sigma_j.
 	\end{equation*}
-	Así que se puede estimar \cref{eq:TF''} por
+	Así que se puede estimar (\ref{eq:TF''}) por
 	\begin{equation*}
 		\sum_{\sigma_j< 1}\int_{Q_j}\left[\int_{|w-y|<\sigma_j^{1/\alpha}}\int_{|x-w|>2\sigma_j}\|k(x, y) - k(x, w)\|_{\mathcal{B}(X,Y)}\diff x \diff w\right] \|b_j(y)\|_X\diff y
 	\end{equation*}
 	\begin{equation*}
-		\leq C\sum_{\sigma_j<1} \int_{Q_j}\|b_j(y)\|_X\diff y  \leq C\|f\|_{L^1(\mathbb{T}^n; X)}.
+		\lesssim \sum_{\sigma_j<1} \int_{Q_j}\|b_j(y)\|_X\diff y  \leq C\|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
 	Ahora, solo queda probar la desigualdad
 	\begin{equation*}
@@ -3550,15 +3539,15 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 	\begin{equation}
 		\|J^{-\beta} F'\|_{L^2(\mathbb{T}^n; X)}^2 \leq A\lambda \|f\|_{L^1(\mathbb{T}^n; X)},
 	\end{equation}
-	donde $J$ es el potencial de Bessel de orden uno. Dado que $\beta$ satisface \cref{eq:alpha_condition} se tiene que $TJ^{\beta}$ es acotado en $L^2(\mathbb{T}^n;Y)$ y
+	donde $J$ es el potencial de Bessel de orden uno. Dado que $\beta$ satisface (\ref{eq:alpha_condition}) se tiene que $TJ^{\beta}$ es acotado en $L^2(\mathbb{T}^n;Y)$ y
 	\begin{equation*}
-		\|T F'\|_{L^2(\mathbb{T}^n; Y)}^2 =\|TJ^{\beta}J^{-\beta }F'\|_{L^2(\mathbb{T}^n; Y)}^2 \leq  C\|J^{-\beta} F'\|_{L^2(\mathbb{T}^n; X)}^2 \leq CA\lambda \|f\|_{L^1(\mathbb{T}^n; X)}.
+		\|T F'\|_{L^2(\mathbb{T}^n; Y)}^2 =\|TJ^{\beta}J^{-\beta }F'\|_{L^2(\mathbb{T}^n; Y)}^2 \lesssim \|J^{-\beta} F'\|_{L^2(\mathbb{T}^n; X)}^2 \lesssim \lambda \|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
 	Por lo tanto, se puede usar la desigualdad de Chebyshev para obtener
 	\begin{equation*}
-		\lambda^2 |\{ x \in \mathbb{T}^n \setminus c\Omega : \|TF'(x)\|_Y > \lambda/8 \}| \leq C \int_{\mathbb{T}^n \setminus c\Omega} \|TF'(x)\|_Y^2\diff x  \leq CA\lambda\|f\|_{L^1(\mathbb{T}^n; X)}.
+		\lambda^2 |\{ x \in \mathbb{T}^n \setminus c\Omega : \|TF'(x)\|_Y > \lambda/8 \}| \lesssim  \int_{\mathbb{T}^n \setminus c\Omega} \|TF'(x)\|_Y^2\diff x  \lesssim \lambda\|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
-	Recuérdese que
+	Recuerde que
 	\begin{equation*}
 		F' = \sum_{\sigma_j < 1}f\chi_{Q_j} * \varphi_j - \sum_{\sigma_j < 1}f_{Q_j}\chi_{Q_j}*\varphi_j.
 	\end{equation*}
@@ -3572,25 +3561,25 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 	\end{equation*}
 	Usando la prueba de Fefferman adaptada a grupos de Lie compactos \cite{cardona-ruzhansky}, se tiene que para $x \nsim Q_j$
 	\begin{equation*}
-		\left\|J^{-\beta} (f\chi_{Q_j} *\varphi_j)(x)\right\|_X \leq CJ^{-\beta} \|f_{Q_j}\|_X (\chi_{Q_j}*\varphi_j)(x).
+		\left\|J^{-\beta} (f\chi_{Q_j} *\varphi_j)(x)\right\|_X \lesssim J^{-\beta} \|f_{Q_j}\|_X (\chi_{Q_j}*\varphi_j)(x).
 	\end{equation*}
-	Por \cref{eq:cz-condition} y el hecho de que $J^{-\beta}$ mapea funciones positivas en funciones positivas se tiene que
+	Por (\ref{eq:cz-condition}) y el hecho de que $J^{-\beta}$ mapea funciones positivas en funciones positivas se tiene que
 	\begin{align*}
 		\left\| F_2(x) - \sum_{\sigma_j<1} f_{Q_j}J^{-\beta}(\chi_{Q_j} * \varphi_j)(x) \right\|_X = & \left\| \sum_{\sigma_j<1} J^{-\beta}[(f\chi_{Q_j} - f_{Q_j}\chi_{Q_j}) * \varphi_j](x) \right\|_X \\
-		\leq & \left\| \sum_{\sigma_j<1} J^{-\beta}(b_j * \varphi_j)(x) \right\|_X \\
-		\leq & C\lambda \sum_{\sigma_j<1} J^{-\beta} (\chi_{Q_j}*\varphi_j)(x)\\
-		\leq & C\lambda \|J^{-\beta}\|_1\left\| \sum_{\sigma_j <1}\chi_{Q_j} *\varphi_j \right\|_{L^\infty(\mathbb{T}^n; X)} \leq C\lambda ,
+		 &\leq \left\| \sum_{\sigma_j<1} J^{-\beta}(b_j * \varphi_j)(x) \right\|_X \\
+		 & \lesssim\lambda \sum_{\sigma_j<1} J^{-\beta} (\chi_{Q_j}*\varphi_j)(x)\\
+		 & \lesssim \lambda \|J^{-\beta}\|_1\left\| \sum_{\sigma_j <1}\chi_{Q_j} *\varphi_j \right\|_{L^\infty(\mathbb{T}^n; X)} \lesssim \lambda ,
 	\end{align*}
 	ya que los soportes de $ \chi_{Q_j} * \varphi_j $ tienen superposición finita. Por otro lado,
 	\begin{align*}
 		\left\| F_2 - \sum_{\sigma_j < 1} J^{-\beta} f_{Q_j}\chi_{Q_j} * \varphi_j \right\|_{L^1(\mathbb{T}^n; X)} \leq & \sum_{\sigma_j<1} \left\|J^{-\beta}[\varphi_j * (f - f_{Q_j})\chi_{Q_j}]\right\|_{L^1(\mathbb{T}^n; X)} \\
-		\leq & C\sum_{\sigma_j < 1}\int_{Q_j}\|f(y)\|_X \diff y \leq C\|f\|_{L^1(\mathbb{T}^n; X)}.
+		 & \lesssim \sum_{\sigma_j < 1}\int_{Q_j}\|f(y)\|_X \diff y \lesssim \|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{align*}
 	Combinando estas dos estimaciones se obtiene
 	\begin{equation*}
 		\left\| F_2 - \sum_{\sigma_j < 1} J^{-\beta} f_{Q_j}\chi_{Q_j} * \varphi_j \right\|_{L^2(\mathbb{T}^n; X)}^2 \leq C\lambda\|f\|_{L^1(\mathbb{T}^n; X)} .
 	\end{equation*}
-	Ahora solo queda probar la desigualdad $\|F_1\|_{L^2(\mathbb{T}^n; X)}^2 \leq C\lambda \|f\|_{L^1(\mathbb{T}^n; X)}$, lo cual puede hacerse como en la prueba de Fefferman, \cite{cardona-ruzhansky}. Para un $x \in \mathbb{T}^n$ fijo, sea
+	Ahora solo queda probar la desigualdad $\|F_1\|_{L^2(\mathbb{T}^n; X)}^2 \lesssim \lambda \|f\|_{L^1(\mathbb{T}^n; X)}$, lo cual puede hacerse como en la prueba de Fefferman, \cite{cardona-ruzhansky}. Para un $x \in \mathbb{T}^n$ fijo, sea
 	\begin{equation*}
 		F_1^j(x) = \begin{cases}
 			J^{-\beta} f\chi_{Q_j}*\varphi_j(x) & \text{si }x \nsim Q_j \\ 0 & \text{si no}.
@@ -3609,11 +3598,11 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 	\end{equation*}
 	Por otro lado, por la identidad de Plancherel y dado que $-2\beta < -n$ se obtiene
 	\begin{equation*}
-		\left\| J^{-\beta} \varphi_j \right\|_{L^2(\mathbb{T}^n; X)}^2 = \sum_{\xi \in \mathbb{Z}^n } \langle\xi\rangle^{-2\beta} \left|(\mathcal{F}_{\mathbb{T}^n} \varphi)\left(\sigma_j^{1/\alpha}\xi\right)\right|^2 \leq     \frac{C}{|Q_j|},
+		\left\| J^{-\beta} \varphi_j \right\|_{L^2(\mathbb{T}^n; X)}^2 = \sum_{\xi \in \mathbb{Z}^n } \langle\xi\rangle^{-2\beta} \left|(\mathcal{F}_{\mathbb{T}^n} \varphi)\left(\sigma_j^{1/\alpha}\xi\right)\right|^2 \lesssim   \frac{1}{|Q_j|},
 	\end{equation*}
 	ya que $|Q_j| \leq 1$. Finalmente
 	\begin{equation*}
-		\|F_1\|_{L^2(\mathbb{T}^n; X)}^2 \leq C\sum_{\sigma_j<1}\frac{1}{|Q_j|} \|f\chi_{Q_j}\|_{L^1(\mathbb{T}^n; X)}^2 \leq C\lambda \|f\|_{L^1(\mathbb{T}^n; X)}.
+		\|F_1\|_{L^2(\mathbb{T}^n; X)}^2 \lesssim \sum_{\sigma_j<1}\frac{1}{|Q_j|} \|f\chi_{Q_j}\|_{L^1(\mathbb{T}^n; X)}^2 \lesssim \lambda \|f\|_{L^1(\mathbb{T}^n; X)}.
 	\end{equation*}
 	Así, se completa la prueba.
 \end{proof}
@@ -3621,7 +3610,7 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, $m \leq - n [(1-\rho)/2 + \lambda] $, entonces $T$ es del tipo débil $(1, 1)$.
 \end{theorem}
 \begin{proof}
-	Note que por el Teorema \ref{theo:22boundT} se puede tomar $q$ como $2/(2-\rho)$ en la hipótesis del Teorema \ref{theo:L1-weak}. Además, tomar $\alpha$ como $\rho$ y $\beta$ como $n(1-\rho)/2$ satisface la condición  \cref{eq:alpha_condition}. Entonces, en vista del Teorema \ref{theo:kernel-estimate-sigma} se obtienen las condiciones necesarias para el resultado
+	Note que por el Teorema \ref{theo:22boundT} se puede tomar $q$ como $2/(2-\rho)$ en la hipótesis del Teorema \ref{theo:L1-weak}. Además, tomar $\alpha$ como $\rho$ y $\beta$ como $n(1-\rho)/2$ satisface la condición  (\ref{eq:alpha_condition}). Entonces, en vista del Teorema \ref{theo:kernel-estimate-sigma} se obtienen las condiciones necesarias para el resultado
 \end{proof}
 \subsection{Continuidad de operadores pseudo-diferenciales en espacios de Lebesgue pesados $L^p(w)$}
 Ahora, se presentan los resultados de continuidad de operadores pseudo-difernciales toroidales para espacios de Lebesgue pesados $L^p(w)$, obtenidos con Cardona en \cite{cardona-martinez-III}. Estos extienden el caso euclideano demostrado por Park y Tomita \cite{park-tomita}.
@@ -3630,7 +3619,7 @@ Sea $\varphi$ una función de Schwartz definida en $\mathbb{R}^n$ tal que su tra
 \begin{equation*}
 	\psi_k(x):=2^{kn}\psi(2^kx).
 \end{equation*}
-Entonces se tiene una partición de la unidad de Littlewood-Paley no homogénea formada por $\varphi$ y $\psi_k$, con $k\in\mathbb{N}$. Además, nótese que 
+Entonces se tiene una partición de la unidad de Littlewood-Paley no homogénea formada por $\varphi$ y $\psi_k$, con $k\in\mathbb{N}$. Además, note que 
 \begin{equation*}
 	\supp \widehat{\psi_k} \subset \left\{\xi \in \mathbb{R}^n : 2^{k-1} \leq |\xi|\leq 2^{k+1}\right\}
 \end{equation*}
@@ -3646,14 +3635,14 @@ por lo que se puede escribir
 \begin{equation*}
 	T_\sigma = \sum_{k\in \mathbb{N}_0} T_{\sigma_k},
 \end{equation*}
-donde $T_{\sigma_k}$ son los operadores pseudo-diferenciales toroidales asociados con $\sigma_k \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n)$. Ahora, se escriben sus núcleos correspondientes (en el sentido de distribuciones discutido en la sección anterior) como
+donde $T_{\sigma_k}$ son los operadores pseudo-diferenciales toroidales asociados con $\sigma_k \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n)$. Ahora, se escriben sus kernels correspondientes (en el sentido de distribuciones) como
 \begin{equation}
 	K_k(y, u) := \sum_{\xi \in \mathbb{Z}^n} \sigma_k(y, \xi)e^{i2\pi u \cdot \xi}.
 	\label{eq:kernel-Kk}
 \end{equation}
-Además, sea $\tilde{\sigma}_k$ la extensión del símbolo $\sigma_k$ definida en $\mathbb{T}^n \times \mathbb{R}^n$. Primero, se demuestran las siguientes estimaciones del núcleo.
+Además, sea $\tilde{\sigma}_k$ la extensión del símbolo $\sigma_k$ definida en $\mathbb{T}^n \times \mathbb{R}^n$. Primero, se demuestran las siguientes estimaciones del kernel.
 \begin{lemma}
-	Sea $0 < \rho \leq 1$ y $m\in \mathbb{R}$. Supóngase que $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ y sea $K_k$ definido como en \cref{eq:kernel-Kk}. Para arbitrario $N\geq 0$ y $1\leq r\leq 2$, se tiene que 
+	Sea $0 < \rho \leq 1$ y $m\in \mathbb{R}$. Supóngase que $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ y sea $K_k$ definido como en (\ref{eq:kernel-Kk}). Para $N\geq 0$ arbitrario, y $1\leq r\leq 2$, se tiene que 
 	\begin{equation*}
 		\left\| (1+2^{k\rho}|u|)^N K_k(y, u)
 		\right\|_{L^{r'}} \lesssim_N 2^{k(m+n/r)},
@@ -3666,7 +3655,7 @@ Además, sea $\tilde{\sigma}_k$ la extensión del símbolo $\sigma_k$ definida e
 		\left\| (1+2^{k\rho}|u|)^N \nabla_u K_k(y, u)
 		\right\|_{L^{r'}} \lesssim_N 2^{k(1+m+n/r)},
 	\end{equation*}
-	como funciones de $u\in\mathbb{R}^n$ uniformemente en $y\in\mathbb{R}^n$.
+	como funciones de $u\in\mathbb{R}^n$, uniformemente en $y\in\mathbb{R}^n$.
 	\label{lem:kernel-estimates}
 \end{lemma}
 \begin{proof}
@@ -3687,7 +3676,7 @@ Además, sea $\tilde{\sigma}_k$ la extensión del símbolo $\sigma_k$ definida e
 		\label{eq:xi-sigma}
 	\end{equation}
 	
-	ya que $\langle\xi\rangle \sim 2^k$. Ahora, se usa la desigualdad de Hausdorff-Young y \cref{eq:partial-sigma} para obtener que
+	ya que $\langle\xi\rangle \sim 2^k$. Ahora, se usa la desigualdad de Hausdorff-Young y (\ref{eq:partial-sigma})para obtener que
 	\begin{align*}
 		\left\| (2^{k\rho}u)^\beta K_k(y, u)
 		\right\|_{L^{r'}} & \lesssim2^{k\rho|\beta|} \left\| 
@@ -3696,7 +3685,7 @@ Además, sea $\tilde{\sigma}_k$ la extensión del símbolo $\sigma_k$ definida e
 		& = 2^{k\rho|\beta|} 2^{k(m-\rho|\beta|)} 2^{kn/r} \\
 		& =  2^{k(m+n/r)},
 	\end{align*}
-	ya que el volumen del soporte de $\tilde{\sigma}_k$ es comparable con $2^{kn}$. Además, aquí la norma $L^{r'}$ se toma con respecto a $u \in \mathbb{R}^n$ y la norma $L^{r}$ se toma con respecto a $\xi\in\mathbb{R}^n$. Esto concluye la demostración de la primera estimación, las estimaciones restantes pueden probarse usando el mismo procedimiento y las estimaciones \cref{eq:nabla-sigma} y \cref{eq:xi-sigma} respectivamente.
+	ya que el volumen del soporte de $\tilde{\sigma}_k$ es comparable con $2^{kn}$. Además, aquí la norma $L^{r'}$ se toma con respecto a $u \in \mathbb{R}^n$ y la norma $L^{r}$ se toma con respecto a $\xi\in\mathbb{R}^n$. Esto concluye la demostración de la primera estimación, las estimaciones restantes pueden probarse usando el mismo procedimiento y las estimaciones (\ref{eq:nabla-sigma}) y (\ref{eq:xi-sigma}) respectivamente.
 \end{proof}
 Ahora, se demuestran algunos lemas de acotamiento útiles.
 \begin{lemma}
@@ -3704,11 +3693,11 @@ Ahora, se demuestran algunos lemas de acotamiento útiles.
 	\label{lem:Lr-Lr/rho-boundedness}
 \end{lemma}
 \begin{proof}
-	Nótese que se tiene $r\leq 2 \leq r/\rho$ y $m$ satisface las condiciones del Teorema \ref{teo:cotas-Lp-Lq}.
+	Note que se tiene $r\leq 2 \leq r/\rho$ y $m$ satisface las condiciones del Teorema \ref{teo:cotas-Lp-Lq}.
 \end{proof}
 Para manejar el caso $\rho > r/2$ que no se considera en el lema anterior, se demuestra lo siguiente.
 \begin{lemma}
-	Sea $1<r<2$, sea $r/2\leq\rho<1$, y sea $m=-n(1-\rho)/r$. Supóngase que $k\in\mathbb{N}_0$ y 
+	Sea $1<r<2$, sea $r/2\leq\rho<1$, y sea $m=-n(1-\rho)/r$. Suponga que $k\in\mathbb{N}_0$ y 
 	\begin{equation*}
 		\frac{2\rho-r}{2-r} < \lambda < \rho.
 	\end{equation*}
@@ -3736,12 +3725,12 @@ Para manejar el caso $\rho > r/2$ que no se considera en el lema anterior, se de
 	\begin{equation*}
 		a_k \in S^{\frac{m}{1-\lambda}}_{ \frac{\rho-\lambda}{1-\lambda} , \frac{\rho-\lambda}{1-\lambda} } (\mathbb{T}^n\times\mathbb{R}^n)
 	\end{equation*}
-	uniformemente en $k$. Nótese que 
+	uniformemente en $k$. Note que 
 	\begin{equation*}
 		0 < \frac{\rho-\lambda}{1-\lambda} < \frac{r}{2} \quad \text{ y } \quad \frac{m}{1-\lambda} = -\frac{n}{r} \left(  1 - \frac{\rho-\lambda}{1-\lambda}
 		\right),
 	\end{equation*}
-	lo que permite emplear \cref{lem:Lr-Lr/rho-boundedness}, y obtener la continuidad $L^r$-$L^\frac{r(1-\lambda)}{\rho-\lambda}$ para los operadores $T_{a_k}$ uniformemente en $k$. Dado que se tiene que 
+	lo que permite emplear el Lema \ref{lem:Lr-Lr/rho-boundedness}, y obtener la continuidad $L^r$-$L^\frac{r(1-\lambda)}{\rho-\lambda}$ para los operadores $T_{a_k}$ uniformemente en $k$. Dado que se tiene que 
 	\begin{equation*}
 		T_{\sigma_k}f(x) = T_{a_k}(f(2^{-\lambda k}\cdot ))(2^{
 			\lambda k
@@ -3768,7 +3757,7 @@ de modo que
 \end{equation*}
 
 \begin{proposition}
-	Sea $0<\rho<1$, sea $1<r\leq2$, y sea $m=-n(1-\rho)/r$. Supóngase que $x\in Q$.
+	Sea $0<\rho<1$, sea $1<r\leq2$, y sea $m=-n(1-\rho)/r$. Suponga que $x\in Q$.
 	
 	\begin{enumerate}
 		\item Sea $0<\rho<r/2$, y sea $k\in\mathbb{N}_0$. Entonces todo símbolo $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ satisface
@@ -3792,7 +3781,7 @@ de modo que
 	
 \end{proposition}
 \begin{proof}
-	Primero, se considera el caso $0<\rho<r/2$. Por la desigualdad de H\"older y \cref{lem:Lr-Lr/rho-boundedness} se tiene que 
+	Primero, se considera el caso $0<\rho<r/2$. Por la desigualdad de H\"older y el Lema \ref{lem:Lr-Lr/rho-boundedness} se tiene que 
 	\begin{align*}
 		\left(
 		\frac{1}{|Q|} \int_Q |T_{\sigma_k}f_0(y)|\diff y
@@ -3801,7 +3790,7 @@ de modo que
 		& \lesssim \left[ \frac{\ell(P)}{\ell(Q)^\rho} 
 		\right]^{n/r} \mathrm{M}_rf(x),
 	\end{align*}
-	ya que $x \in Q \subset P$. Por lo tanto, probando \cref{eq:fo-estimate-rho-less}. Ahora, se asume que $r/2\leq \rho<1$. Por la desigualdad de H\"older y \cref{lem:Lr-lambda-boundedness} se obtiene que 
+	ya que $x \in Q \subset P$. Por lo tanto, probando (\ref{eq:fo-estimate-rho-less}). Ahora, se asume que $r/2\leq \rho<1$. Por la desigualdad de H\"older y (\ref{lem:Lr-lambda-boundedness}) se obtiene que 
 	\begin{align*}
 		\left(
 		\frac{1}{|Q|} \int_Q |T_{\sigma_k}f_0(y)|\diff y
@@ -3814,7 +3803,7 @@ de modo que
 	\end{align*}
 	Así, completando la demostración.
 \end{proof}
-Ahora se demuestran estimaciones para la segunda parte de la descomposición como en \cref{eq:decomposition}.
+Ahora se demuestran estimaciones para la segunda parte de la descomposición como en (\ref{eq:decomposition}).
 \begin{proposition}
 	Sea $0\leq \rho<1$, sea $1\leq r\leq2$, sea $m=-n(1-\rho)/r$, y $k\in\mathbb{N}_0$. Supóngase que $x, y \in Q$. Entonces todo $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ satisface
 	\begin{equation}
@@ -3829,7 +3818,7 @@ Ahora se demuestran estimaciones para la segunda parte de la descomposición com
 	para cualquier $N>n/r$.
 \end{proposition}
 \begin{proof}
-	Primero, se considera \cref{eq:f1-estimate}. Sea $N>n/r$, y sea $y\in Q$. Por la desigualdad de H\"older se obtiene que
+	Primero, se considera (\ref{eq:f1-estimate}). Sea $N>n/r$, y sea $y\in Q$. Por la desigualdad de H\"older se obtiene que
 	\begin{equation*}
 		|T_{\sigma_k}f_1(y)| \leq \int_{\mathbb{T}^n\setminus P} |K_k(y, y-u)||f(u)|\diff u 
 	\end{equation*}
@@ -3838,7 +3827,7 @@ Ahora se demuestran estimaciones para la segunda parte de la descomposición com
 		\right\|_{L^{r'}} \left\| \ell(P)^{-n/r} \left[ \frac{|y-\cdot|}{\ell(P)} \right]^{-N} f\chi_{\mathbb{T}^n\setminus P} 
 		\right\|_{L^r}.
 	\end{equation*}
-	La norma $L^{r'}$ puede estimarse usando \cref{lem:kernel-estimates} por 
+	La norma $L^{r'}$ puede estimarse usando Lema \ref{lem:kernel-estimates} por 
 	\begin{align*}
 		\left\| \ell(P)^{n/r} \left[ \frac{|\cdot|}{\ell(P)} \right]^N K_k(y, \cdot) 
 		\right\|_{L^{r'}} & = \ell(P)^{-(N-n/r)} \left\| |\cdot|^N K_k(y, \cdot)  \right\|_{L^{r'}} \\
@@ -3858,7 +3847,7 @@ Ahora se demuestran estimaciones para la segunda parte de la descomposición com
 	\right)^{1/r} \\
 	& \lesssim\mathrm{M}_rf(x).
 \end{align*}
-Así, se combinan ambas estimaciones para obtener \cref{eq:f1-estimate}. Ahora, se considera \cref{eq:diff-f1} usando una demostración similar al caso anterior, definiendo ahora 
+Así, se combinan ambas estimaciones para obtener (\ref{eq:f1-estimate}). Ahora, se considera (\ref{eq:diff-f1}) usando una demostración similar al caso anterior, definiendo ahora 
 \begin{equation*}
 	H_k(y, x, u) := K_k(y, y-u) - K_k(x, x-u).
 \end{equation*}
@@ -3873,7 +3862,7 @@ Asúmase $x, y \in Q$ y $N>n/r$. Usando la desigualdad de H\"older, se tiene que
 	\right]^{-N} f\chi_{\mathbb{T}^n\setminus P}
 	\right\|_{L^r}.
 \end{equation*}
-Se estima el primer factor usando \cref{lem:kernel-estimates} por
+Se estima el primer factor usando el Lema \ref{lem:kernel-estimates} por
 \begin{equation*}
 	\left\| \ell(P)^{n/r} \left[ \frac{|y-\cdot|}{\ell(P)}
 	\right]^N H_k(y, x, \cdot) \chi_{\mathbb{T}^n\setminus P}
@@ -3897,9 +3886,9 @@ Se estima el primer factor usando \cref{lem:kernel-estimates} por
 \end{equation*}
 donde $y(t) := ty + (1-t)x \in Q$ de modo que $|y-x|\lesssim|y(t)-u|$ para $u \in \mathbb{T}^n\setminus P$. Para el segundo factor, se usa la misma estimación que en el caso anterior, completando la demostración.
 \end{proof}
-Se procede a demostrar el teorema principal de este artículo, del cual se seguirá la continuidad deseada.
+Se procede a demostrar el teorema principal de esta sección, del cual se seguirá la continuidad deseada.
 \begin{theorem}
-Sea $1<r\leq 2$, y sea $0<\rho<1$. Supóngase que $m\leq-n(1-\rho)/r$ y $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n)  $. Entonces se tiene que 
+Sea $1<r\leq 2$, y sea $0<\rho<1$. Suponga que $m\leq-n(1-\rho)/r$ y $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n)  $. Entonces se tiene que 
 \begin{equation*}
 	\mathcal{M}^\#_r(T_\sigma f)(x) \lesssim\mathrm{M}_r f(x)
 \end{equation*}
@@ -3907,14 +3896,14 @@ para $f \in C^\infty(\mathbb{T}^n)$.
 \label{theo:sharp-maximal}
 \end{theorem}
 \begin{proof}
-Nótese que es suficiente probar 
+Note que es suficiente probar 
 \begin{equation}
 	\inf_{c_Q\in \mathbb{C}} \left( 
 	\frac{1}{|Q|} \int_Q|T_\sigma f(y) - c_Q|^r\diff y
 	\right)^{1/r} \lesssim \mathrm{M}_rf(x) ,
 	\label{eq:main-goal}
 \end{equation}
-uniformemente en $Q$ y $x\in \mathbb{T}^n$. Ahora, sea $P_\rho$ una dilatación concéntrica de $Q$ tal que $\ell(P_\rho) = 10\sqrt{n}\ell(Q)^\rho$ y se descompone $f$ como en \cref{eq:decomposition}. Primero se considerará el caso cuando $0<\rho < r/2$. Entonces, el lado izquierdo de \cref{eq:main-goal} es menor que la suma de 
+uniformemente en $Q$ y $x\in \mathbb{T}^n$. Ahora, sea $P_\rho$ una dilatación concéntrica de $Q$ tal que $\ell(P_\rho) = 10\sqrt{n}\ell(Q)^\rho$ y se descompone $f$ como en (\ref{eq:decomposition}). Primero se considerará el caso cuando $0<\rho < r/2$. Entonces, el lado izquierdo de (\ref{eq:main-goal}) es menor que la suma de 
 \begin{equation*}
 	\mathcal{I}_0 := \left( 
 	\frac{1}{|Q|} \int_Q|T_\sigma f_0(y)|^r\diff y
@@ -3925,7 +3914,7 @@ y
 	\mathcal{I}_1 := \inf_{c_Q \in \mathbb{C}} \left(  \frac{1}{|Q|}\int_Q|T_\sigma f_1 - c_Q|^r
 	\right)^{1/r}.
 \end{equation*}
-Usando la desigualdad de H\"older y \cref{lem:Lr-Lr/rho-boundedness} se puede verificar que 
+Usando la desigualdad de H\"older y el Lema \ref{lem:Lr-Lr/rho-boundedness} se puede verificar que 
 \begin{equation*}
 	\mathcal{I}_0 \leq \frac{1}{|Q|^{\rho/r}} \|T_\sigma f_0\|_{L^{r/\rho}} \lesssim\frac{1}{\ell(Q)^{n\rho/r}} \|f\chi_{P_\rho}\|_{L^r} \lesssim\mathrm{M}_rf(x). 
 \end{equation*}
@@ -3938,15 +3927,15 @@ por lo que se tiene que
 \begin{equation*}
 	|T_\sigma f_1(y) - c_Q| \leq \sum_{k:2^k\ell(Q) \geq 1} |T_{\sigma_k}f_1(y)| + \sum_{k:2^k\ell(Q)<1}|T_{\sigma_k} f_1(y) - T_{\sigma_k} f_1(x)|  .
 \end{equation*}
-Primero, se estima la primera suma usando \cref{eq:f1-estimate} por
+Primero, se estima la primera suma usando (\ref{eq:f1-estimate}) por
 \begin{equation*}
 	\sum_{k:2^k\ell(Q) \geq 1} |T_{\sigma_k}f_1(y)| \lesssim \sum_{k:2^k\ell(Q) \geq 1} [2^k\ell(Q)]^{-\rho(N-n/r)} \mathrm{M}_rf(x) \lesssim \mathrm{M}_rf(x),
 \end{equation*}
-ya que $\rho > 0$ y $N > n/r$. Luego, se aplica \cref{eq:diff-f1} para estimar los términos restantes por 
+ya que $\rho > 0$ y $N > n/r$. Luego, se aplica (\ref{eq:diff-f1}) para estimar los términos restantes por 
 \begin{equation*}
 	\sum_{k:2^k\ell(Q)<1}|T_{\sigma_k} f_1(y) - T_{\sigma_k} f_1(x)| \lesssim_N\sum_{k:2^k\ell(Q)<1} [2^k\ell(Q)]^{1-\rho(N-n/r)}\mathrm{M}_r f(x) = C\mathrm{M}_rf(x),
 \end{equation*}
-cuando se elige $N<n/r + 1/\rho$. Así, completando la demostración cuando $0<\rho<r/2 $. Ahora, se considera el caso $r/2\leq \rho<1$. Se puede estimar \cref{eq:main-goal} por la suma de 
+cuando se elige $N<n/r + 1/\rho$. Así, completando la demostración cuando $0<\rho<r/2 $. Ahora, se considera el caso $r/2\leq \rho<1$. Se puede estimar (\ref{eq:main-goal}) por la suma de 
 \begin{equation*}
 	\mathcal{J}_1 := \inf_{c_Q \in \mathbb{C}} \left( \frac{1}{|Q|}\int_Q \left| \sum_{k:2^k\ell(Q)<1} T_{\sigma_k} f(y) - c_Q \right|^r \diff y
 	\right)^{1/r},
@@ -3959,7 +3948,7 @@ cuando se elige $N<n/r + 1/\rho$. Así, completando la demostración cuando $0<\
 	\mathcal{J}_3 := \sum_{k:2^{\rho k} \ell(Q) \geq 1} \left( \frac{1}{|Q|} \int_Q |T_{\sigma_k}f(y)|^r \diff y 
 	\right)^{1/r}.
 \end{equation*}
-Primero, se establece $\frac{2\rho - r}{2-r} < \lambda < \rho$ para el resto de esta demostración. Luego, se usa la misma descomposición por $P_\rho$ como arriba y se usa $c_Q$ como se define en \cref{eq:cQ} para estimar $\mathcal{J}_1$ por
+Primero, se establece $\frac{2\rho - r}{2-r} < \lambda < \rho$ para el resto de esta demostración. Luego, se usa la misma descomposición por $P_\rho$ como arriba y se usa $c_Q$ como se define en (\ref{eq:cQ}) para estimar $\mathcal{J}_1$ por
 \begin{equation*}
 	\sum_{k:2^k\ell(Q)<1} \left[
 	\left(  \frac{1}{|Q|} \int_Q |T_{\sigma_k} f_0 (y)|^r \diff y
@@ -3967,13 +3956,13 @@ Primero, se establece $\frac{2\rho - r}{2-r} < \lambda < \rho$ para el resto de 
 	\right)^{1/r}
 	\right].
 \end{equation*}
-Usando \cref{eq:f0-estimate-rho-greater} se obtiene que 
+Usando (\ref{eq:f0-estimate-rho-greater}) se obtiene que 
 \begin{equation*}
 	\left( 
 	\frac{1}{|Q|} \int_Q |T_{\sigma_k} f_0 (y)|^r \diff y
 	\right)^{1/r} \lesssim [2^k\ell(Q)]^{\lambda n \frac{1-\rho}{r(1-\lambda)}} \mathrm{M}_rf(x).
 \end{equation*}
-Además, se emplea \cref{eq:diff-f1} para obtener que
+Además, se emplea (\ref{eq:diff-f1}) para obtener que
 \begin{equation*}
 	|T_{\sigma_k} f_1(y) - T_{\sigma_k} f_1(x)| \lesssim [2^k\ell(Q)]^{1-\rho(N-n/r)} \mathrm{M}_rf(x).
 \end{equation*}
@@ -3998,20 +3987,20 @@ y $2^{\rho k}\ell(Q) < 1$. Entonces, se considera
 \begin{equation*}
 	f = f\chi_{P_{\varepsilon, k}} + f\chi_{ \mathbb{T}^n\setminus P_{\varepsilon, k}} =: f_{0,k} + f_{1,k}.
 \end{equation*}
-Por lo tanto, por \cref{eq:f0-estimate-rho-greater} se tiene que 
+Por lo tanto, por (\ref{eq:f0-estimate-rho-greater}) se tiene que 
 \begin{align*}
 	\left( \frac{1}{|Q|}\int_Q |T_{\sigma_k} f_{0, k}(y)|^r \diff y 
 	\right)^{1/r} & \lesssim [2^k\ell(Q)]^{\lambda n \frac{1-\rho}{r(1-\lambda)}} \left[ \frac{\ell(P_{\varepsilon, k}) }{\ell(Q)^\rho} \right]^{n/r} \mathrm{M}_rf(x)\\
 	& =  [2^k\ell(Q)]^{-\frac{n}{r}\left(\varepsilon - \lambda \frac{1-\rho}{1-\lambda}\right)} \mathrm{M}_rf(x).
 \end{align*}
-Además, por \cref{eq:f1-estimate} se obtiene que
+Además, por (\ref{eq:f1-estimate}) se obtiene que
 \begin{align*}
 	|T_{\sigma_k}f_{1, k}(y)| & \lesssim [2^{k\rho}\ell(P_{\varepsilon,k})]\mathrm{M}_rf(x)\\
 	& \lesssim\left( 2^{k\rho}\ell(Q)^\rho [2^k\ell(Q)]^{-\varepsilon} 
 	\right)^{-(N-n/r)} \mathrm{M}_rf(x) \\
 	& \leq [2^k\ell(Q)]^{-(\rho-\varepsilon)(N-n/r)}\mathrm{M}_rf(x),        
 \end{align*}
-donde $N>n/r$. Por lo tanto, se tiene una cota uniforme para el segundo término. Ahora, se considera $\mathcal{J}_3$. Para este caso se usará $P$ como la dilatación concéntrica de $Q$ tal que $\ell(P)=10\sqrt{n}\ell(Q)$, y se usa la misma descomposición que en \cref{eq:decomposition}. Nótese que dado que $\langle\xi\rangle \sim 2^k$ en el soporte de $\sigma_k$, entonces se tiene que
+donde $N>n/r$. Por lo tanto, se tiene una cota uniforme para el segundo término. Ahora, se considera $\mathcal{J}_3$. Para este caso se usará $P$ como la dilatación concéntrica de $Q$ tal que $\ell(P)=10\sqrt{n}\ell(Q)$, y se usa la misma descomposición que en (\ref{eq:decomposition}). Note que dado que $\langle\xi\rangle \sim 2^k$ en el soporte de $\sigma_k$, entonces se tiene que
 \begin{equation*}
 	2^{\frac{kn}{2}(1-\rho)}\sigma_k \in S_{\rho, \rho}^{-n(1-\rho)(1/r-1/2)} (\mathbb{T}^n \times \mathbb{Z}^n),
 \end{equation*}
@@ -4022,15 +4011,15 @@ uniformemente en $k$. Por lo tanto, el Teorema \ref{teo:cotas-Lp} implica la aco
 	& \lesssim 2^{-\frac{kn}{2}(1-\rho)} \frac{1}{\ell(Q)^{n/r}} \|f\chi_P\|_{L^r} \\
 	& \lesssim2^{-\frac{kn}{2}(1-\rho)} \mathrm{M}_rf(x).
 \end{align*}
-Por otro lado, se emplea \cref{eq:f1-estimate} para obtener que
+Por otro lado, se emplea (\ref{eq:f1-estimate}) para obtener que
 \begin{equation*}
 	|T_{\sigma_k}f_1(y)| \lesssim[2^{k\rho}\ell(Q)]^{-(N-n/r)} \mathrm{M}_rf(x),
 \end{equation*}
 donde $N>n/r$. Por lo tanto se concluye que $\mathcal{J}_3 \lesssim\mathrm{M}_rf(x)$, y se completa la demostración.
 \end{proof}
-Ahora, se aprovecha el Corolario \cref{cor:muckenhoupt} y el Teorema \ref{theo:sharp-maximal} para obtener el siguiente resultado de continuidad.
+Ahora, se aprovecha el Corolario \ref{cor:muckenhoupt} y el Teorema \ref{theo:sharp-maximal} para obtener el siguiente resultado de continuidad.
 \begin{corollary}
-Sea $0\leq \delta \leq \rho < 1$, sea $0<\rho<1$, sea $1<r\leq 2$, y sea $r\leq p < \infty$. Supóngase que $m\leq -n(1-\rho)/r$ y $\sigma\in S^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$. Si $w \in A_{p/r}$, entonces 
+Sea $0\leq \delta \leq \rho < 1$, sea $0<\rho<1$, sea $1<r\leq 2$, y sea $r\leq p < \infty$. Suponga que $m\leq -n(1-\rho)/r$ y $\sigma\in S^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$. Si $w \in A_{p/r}$, entonces 
 \begin{equation*}
 	\|T_\sigma f\|_{L^p(w)} \lesssim\|f\|_{L^p(w)},
 \end{equation*}
@@ -4053,7 +4042,7 @@ Además, del Teorema \ref{teo:cotas-Lp} se tiene que
 \begin{equation*}
 	\|T_\sigma f\|_{L^{q_1}} \lesssim\|f\|_{L^{q_1}},
 \end{equation*}
-para cualquier $1<q_1<r$, porque $m \leq -n(1-\rho)(1/q_1 - 1/2)$. El resultado deseado se sigue del argumento de interpolación como en \cref{theo:interpolation-Lpw}.
+para cualquier $1<q_1<r$, porque $m \leq -n(1-\rho)(1/q_1 - 1/2)$. El resultado deseado se sigue del argumento de interpolación como en el Teorema \ref{theo:interpolation-Lpw}.
 \end{proof}
 
 \section{Continuidad en espacios de Sobolev}
@@ -4106,7 +4095,7 @@ Sea $s\in\R$, entonces se dice que $f$ pertenece al \textit{espacio de Sobolev} 
 	\|f\|_{W^s_p} := \|J^sf\|_{L^p}.
 \end{equation*} 
 \end{definition}
-Ahora, se extiende el \cref{teo:cotas-Lp-Lq} a espacios de Sobolev.
+Ahora, se extiende el Teorema \ref{teo:cotas-Lp-Lq} a espacios de Sobolev.
 \begin{theorem}
 	Sean $0\leq\delta<1$, $0<\rho\leq 1$, $m\in\mathbb{R}$, y $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$. Entonces, $T$ se extiende a un operador acotado de $W^{s}_p(\mathbb{T}^n)$ en $W^{s-\mu}_q (\mathbb{T}^n)$ donde $1<p\leq q<\infty$, para cualquier $s\in\mathbb{R}$, cuando 
 	\begin{enumerate}
@@ -4133,7 +4122,7 @@ Ahora, se extiende el \cref{teo:cotas-Lp-Lq} a espacios de Sobolev.
 	donde $\lambda := \max\{ 0, (\delta-\rho)/2 \}$. 
 \end{theorem}
 \begin{proof}
-	Se observa que $J^{s-\mu}T J^{-s}$ tiene orden $m-\mu$, que satisface los requisitos del \cref{teo:cotas-Lp-Lq}, implicando su continuidad $L^p$-$L^q$. Por lo tanto, se obtiene que
+	Se observa que $J^{s-\mu}T J^{-s}$ tiene orden $m-\mu$, que satisface los requisitos del Teorema \ref{teo:cotas-Lp-Lq}, implicando su continuidad $L^p$-$L^q$. Por lo tanto, se obtiene que
 	\begin{equation*}
 		\|T f\|_{W^{s-\mu}_q} = \|T J^{-s}J^sf\|_{W^{s-\mu}_q} 
 		= \|J^{s-\mu}T J^{-s}J^sf\|_{L^q}
@@ -4143,20 +4132,31 @@ Ahora, se extiende el \cref{teo:cotas-Lp-Lq} a espacios de Sobolev.
 \end{proof}
 
 \section{Continuidad en espacios de Hardy}
-Aquí se presentan los resultados de continuidad de operadores pseudo-differenciales toroidales desde espacios de Lebesgue $L^p$ hacia espacios de Hardy $H^p$, y de espacios de Hardy $H^p$ en sí mismos, ambos para $p\leq 1$. Estos fueron obtenidos con Cardona \cite{cardona-martinez-II}, y extienden el caso eculideano demostrado por \'Alvarez y Hounie \cite{alvarez-hounie}.
+Aquí se presentan los resultados de continuidad de operadores pseudo-differenciales toroidales desde espacios de Lebesgue $L^p$ hacia espacios de Hardy $H^p$, y de espacios de Hardy $H^p$ en sí mismos, ambos para $p\leq 1$. Estos fueron obtenidos con Cardona \cite{cardona-martinez-II}, y extienden el caso eculideano demostrado por \'Alvarez y Hounie \cite{alvarez-hounie}. En el análisis posterior, se define la siguiente descomposición 'diádica' en los anillos
+\begin{equation}
+	A_j(z, \sigma) = \{ x \in \mathbb{T}^n : 2^j\sigma < |x-z|<2^{j+1}\sigma \} \; , \quad j=1, 2, 3, ...
+\end{equation}
+\begin{remark}
+	Nótese que $\mathbb{T}^n$ está contenido en cualquier bola con radio mayor que $\sqrt{n}/2$. Por lo tanto, para cualquier $\sigma>0$ dado, existe $N_\sigma\in \mathbb{Z}^+$ tal que 
+	\begin{equation}
+		\frac{\sqrt{n}}{2\sigma} < 2^{N_\sigma} \leq \frac{\sqrt{n}}{\sigma}.
+	\end{equation}
+	Así, esta descomposición "diádica" es finita en el caso del toro y $2^{N_\sigma} \sim \sigma^{-1}$.
+	\label{rem:N-sigma}
+\end{remark}
 \subsection{Continuidad de operadores pseudo-diferenciales de $H^p$ en $L^p$}
 \label{section:Hp-Lp}
 Primero, se considera el caso general para operadores con núcleo de valor operador. 
 \begin{theorem}
 	\label{theo:operator-kernel-2j}
-	Sea $T$ un operador con núcleo de valor operador $k:=k(x,y)$ que satisface para algún $0<\omega\leq1$ las estimaciones
+	Sea $T$ un operador con kernel de valuado en operadores $k:=k(x,y)$ que satisface para algún $0<\omega\leq1$ las estimaciones
 	\begin{equation}
 		\int_{A_j(z, \sigma)} \| k(x, y) - k(x, z)\|_{\mathcal{B}(X, Y)} \diff x \leq C2^{-j\omega}, \quad \text{si} \quad \sigma\geq1;
 	\end{equation}
 	\begin{equation}
 		\int_{A_j(z, \sigma^\gamma)} \| k(x, y) - k(x, z)\|_{\mathcal{B}(X,Y)} \diff x \leq C2^{-j\omega/\alpha}\sigma^{\omega(1-\gamma/\alpha)}, \quad \text{si} \quad \sigma<1,
 	\end{equation}
-	para $|y-z|<\sigma$ y cualquier $0<\gamma\leq\alpha\leq1$. Además, supóngase que el operador $T$ se extiende a un operador acotado de $L^2(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$ y de $L^q(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$, donde 
+	para $|y-z|<\sigma$ y cualquier $0<\gamma\leq\alpha\leq1$. Además, suponga que el operador $T$ se extiende a un operador acotado de $L^2(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$ y de $L^q(\mathbb{T}^n; X)$ en $L^2(\mathbb{T}^n; Y)$, donde 
 	\begin{equation}
 		\frac{1}{q} = \frac{1}{2} + \frac{\beta}{n}, \quad \text{para algún} \quad (1-\alpha)\frac{n}{2} \leq \beta < \frac{n}{2}.
 	\end{equation}
@@ -4166,9 +4166,8 @@ Primero, se considera el caso general para operadores con núcleo de valor opera
 	\end{equation*}  
 	y para $1\geq p > p_0=n/(n+\omega)$ cuando $\alpha=1$.
 \end{theorem}
-
 \begin{proof}
-	Se fija $0< p \leq1$ y sea $a$ un átomo $H^{p,\infty}(\mathbb{T}^n;X)$ soportado en la bola $B(z,\sigma)$. Primero, se asume que $\sigma\geq1$, entonces se emplea la descomposición diádica y la propiedad de cancelación de $a$ para obtener
+	Se fija $0< p \leq1$ y sea $a$ un $(p,\infty)$-átomo soportado en la bola $B(z,\sigma)$. Primero, se asume que $\sigma\geq1$, entonces se emplea la descomposición diádica y la propiedad de cancelación de $a$ para obtener
 	\begin{align*}
 		\int_{\mathbb{T}^n}\|Ta(x)\|^p_Y \diff x \leq & \int_{B(z,\sigma)}\|Ta(x)\|^p_Y \diff x \\ 
 		& + \sum_{j=1}^{N_\sigma} \int_{A_j(z,\sigma)}\left( \int_{B(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} \|a(y)\|_X 
@@ -4177,19 +4176,19 @@ Primero, se considera el caso general para operadores con núcleo de valor opera
 	\end{align*}
 	Usando la desigualdad de H\"older con exponente $2/p$, y la continuidad $L^2$ de $T$ se obtiene
 	\begin{align*}
-		I_1 \leq & \left( \int_{\mathbb{T}^n} \|Ta(x)\|_Y^2\diff x \right)^{p/2}\left( \int_{\mathbb{T}^n} \chi_{B(z,\sigma)}(x)\diff x \right)^{(2-p)/2} \\
-		= & \|Ta\|_{L^2(\mathbb{T}^n;Y)}^p|B|^{(2-p)/2} \\
-		\leq & C\|a\|_{L^2(\mathbb{T}^n;Y)}^p |B|^{(2-p)/2} \\
-		\leq & C |B|^{(p-2)/2} |B|^{(2-p)/2}\leq C.
+		I_1  &\leq \left( \int_{\mathbb{T}^n} \|Ta(x)\|_Y^2\diff x \right)^{p/2}\left( \int_{\mathbb{T}^n} \chi_{B(z,\sigma)}(x)\diff x \right)^{(2-p)/2} \\
+		 & =  \|Ta\|_{L^2(\mathbb{T}^n;Y)}^p|B|^{(2-p)/2} \\
+		 &\lesssim \|a\|_{L^2(\mathbb{T}^n;Y)}^p |B|^{(2-p)/2} \\
+		 & \lesssim |B|^{(p-2)/2} |B|^{(2-p)/2}\leq C.
 	\end{align*}
 	Para $I_2$, se usa la desigualdad de H\"older con exponente $1/p$ y las estimaciones del núcleo de la hipótesis para obtener
 	\begin{align*}
-		I_2 \leq & \sum_{j=1}^{N_\sigma}\int_{A_j(z,\sigma)}\left( \int_{B(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} |B|^{-1/p} 
+		I_2  &\leq \sum_{j=1}^{N_\sigma}\int_{A_j(z,\sigma)}\left( \int_{B(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} |B|^{-1/p} 
 		\diff y\right)^p \diff x \\
-		\leq & \sum_{j=1}^{N_\sigma} \left(\int_{B(z,\sigma)} \int_{A_j(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} \diff x\diff y \right)^p \left( \int_{A_j(z,\sigma)} |B|^{-1/(1-p)} \diff x \right)^{1-p} \\
-		\leq &C \sum_{j=1}^{N_\sigma}  2^{-j\omega p}|B|^p \cdot |B|^{-1}|A_j(z, \sigma)|^{1-p} \\
-		\leq &C \sum_{j=1}^{N_\sigma} 2^{-j\omega p}\sigma^{np} \cdot \sigma^{-n}2^{jn(1-p)}\sigma^{n(1-p)}\\
-		= & C\sum_{j=1}^{N_\sigma} 2^{j[n-(n+\omega)p]},
+		 & \leq\sum_{j=1}^{N_\sigma} \left(\int_{B(z,\sigma)} \int_{A_j(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} \diff x\diff y \right)^p \left( \int_{A_j(z,\sigma)} |B|^{-1/(1-p)} \diff x \right)^{1-p} \\
+		 &\lesssim \sum_{j=1}^{N_\sigma}  2^{-j\omega p}|B|^p \cdot |B|^{-1}|A_j(z, \sigma)|^{1-p} \\
+		 &\lesssim \sum_{j=1}^{N_\sigma} 2^{-j\omega p}\sigma^{np} \cdot \sigma^{-n}2^{jn(1-p)}\sigma^{n(1-p)}\\
+		 & =\sum_{j=1}^{N_\sigma} 2^{j[n-(n+\omega)p]},
 	\end{align*}
 	que puede acotarse por una constante $C>0$ siempre que 
 	\begin{equation}
@@ -4205,11 +4204,11 @@ Primero, se considera el caso general para operadores con núcleo de valor opera
 	\end{align*}
 	con $\gamma$ por elegir más tarde.  El primer término puede estimarse usando la desigualdad de H\"older con exponente $2/p$ y la acotación $L^q$-$L^2$ de $T$ para obtener
 	\begin{align*}
-		I_1\leq & \left( \int_{\mathbb{T}^n} \|Ta(x)\|_Y^2\diff x \right)^{p/2}\left( \int_{\mathbb{T}^n} \chi_{B(z,2\sigma^\gamma)}(x)\diff x \right)^{(2-p)/2} \\
-		= & \|Ta\|_{L^2(\mathbb{T}^n;Y)}^p|B(z,2\sigma^\gamma)|^{(2-p)/2} \\
-		\leq & C\|a\|_{L^q(\mathbb{T}^n;X)}^p\sigma^{n\gamma(2-p)/2} \\
-		\leq & C\left( \int_{B(z, \sigma)}|B|^{-q/p} \right)^{p/q}\sigma^{n\gamma(2-p)/2}  \\
-		\leq & C\sigma^{-n}\sigma^{np/q}\sigma^{n\gamma(2-p)/2} = C\sigma^{n[\gamma(1-p/2) +p/q-1]}.
+		I_1 &\leq \left( \int_{\mathbb{T}^n} \|Ta(x)\|_Y^2\diff x \right)^{p/2}\left( \int_{\mathbb{T}^n} \chi_{B(z,2\sigma^\gamma)}(x)\diff x \right)^{(2-p)/2} \\
+		&= \|Ta\|_{L^2(\mathbb{T}^n;Y)}^p|B(z,2\sigma^\gamma)|^{(2-p)/2} \\
+		 & \lesssim\|a\|_{L^q(\mathbb{T}^n;X)}^p\sigma^{n\gamma(2-p)/2} \\
+		 & \lesssim\left( \int_{B(z, \sigma)}|B|^{-q/p} \right)^{p/q}\sigma^{n\gamma(2-p)/2}  \\
+		 & \lesssim\sigma^{-n}\sigma^{np/q}\sigma^{n\gamma(2-p)/2} = \sigma^{n[\gamma(1-p/2) +p/q-1]}.
 	\end{align*}
 	Así, dado que $1/q=1/2+\beta/n$ se puede concluir que $I_1$ estará acotado siempre que 
 	\begin{equation}
@@ -4217,25 +4216,25 @@ Primero, se considera el caso general para operadores con núcleo de valor opera
 		\label{eq:gamma-lowe-bound}
 	\end{equation}
 	que es una función decreciente de $p$ y alcanza $\gamma\geq1-2\beta/n$ cuando $p=1$. De ahí el requisito $\beta \geq (1-\alpha) n/2$.
-	Por otro lado, usando la desigualdad de H\"older con exponente $1/p$ y la estimación del núcleo de la hipótesis, se obtiene 
+	Por otro lado, usando la desigualdad de H\"older con exponente $1/p$ y la estimación del kernel de la hipótesis, se obtiene 
 	\begin{align*}
-		I_2 \leq & \sum_{j=1}^{N_{\sigma^\gamma}}\int_{A_j(z,2\sigma^\gamma)}\left( \int_{B(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} |B|^{-1/p} 
+		I_2  &\leq \sum_{j=1}^{N_{\sigma^\gamma}}\int_{A_j(z,2\sigma^\gamma)}\left( \int_{B(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} |B|^{-1/p} 
 		\diff y\right)^p \diff x \\
-		\leq & \sum_{j=1}^{N_{\sigma^\gamma}} \left(\int_{B(z,\sigma)} \int_{A_j(z,2\sigma^\gamma)} \|k(x, y) - k(x, z)\|_\mathcal{B} \diff x\diff y \right)^p \left( \int_{A_j(z,2\sigma^\gamma)} |B|^{-1/(1-p)} \diff x \right)^{1-p} \\
-		\leq & \sum_{j=1}^{N_{\sigma^\gamma}}  C2^{-j\omega p/\alpha}\sigma^{\omega p(1-\gamma/\alpha)}|B|^p \cdot |B|^{-1}|A_j(z, 2\sigma^\gamma)|^{1-p} \\
-		\leq & \sum_{j=1}^{N_{\sigma^\gamma}} C2^{-j\omega p/\alpha}\sigma^{\omega p(1-\gamma/\alpha)}\sigma^{np} \cdot \sigma^{-n}2^{jn(1-p)}2^{n(1-p)}\sigma^{n\gamma(1-p)}\\
-		= & C\sigma^{-\gamma[p(n+\omega/\alpha)-n] +p(n+\omega)-n} \sum_{j=1}^{N_{\sigma^\gamma}} 2^{j[n-(n+\omega/\alpha)p]}
+		 &\leq \sum_{j=1}^{N_{\sigma^\gamma}} \left(\int_{B(z,\sigma)} \int_{A_j(z,2\sigma^\gamma)} \|k(x, y) - k(x, z)\|_\mathcal{B} \diff x\diff y \right)^p \left( \int_{A_j(z,2\sigma^\gamma)} |B|^{-1/(1-p)} \diff x \right)^{1-p} \\
+		 &\leq \sum_{j=1}^{N_{\sigma^\gamma}}  2^{-j\omega p/\alpha}\sigma^{\omega p(1-\gamma/\alpha)}|B|^p \cdot |B|^{-1}|A_j(z, 2\sigma^\gamma)|^{1-p} \\
+		 &\leq \sum_{j=1}^{N_{\sigma^\gamma}} 2^{-j\omega p/\alpha}\sigma^{\omega p(1-\gamma/\alpha)}\sigma^{np} \cdot \sigma^{-n}2^{jn(1-p)}2^{n(1-p)}\sigma^{n\gamma(1-p)}\\
+		 & = \sigma^{-\gamma[p(n+\omega/\alpha)-n] +p(n+\omega)-n} \sum_{j=1}^{N_{\sigma^\gamma}} 2^{j[n-(n+\omega/\alpha)p]}
 	\end{align*}
-	Ahora, dado que $p$ debe satisfacer \cref{eq:base-p0}, se tiene que $n - (n+\omega/\alpha)p < 0$. Por lo tanto, se puede acotar la suma geométrica por una constante y obtener que
+	Ahora, dado que $p$ debe satisfacer (\ref{eq:base-p0}), se tiene que $n - (n+\omega/\alpha)p < 0$. Por lo tanto, se puede acotar la suma geométrica por una constante y obtener que
 	\begin{align*}
-		I_2 \leq & C\sigma^{-\gamma[p(n+\omega/\alpha)-n] +p(n+\omega)-n},
+		I_2  & \lesssim \sigma^{-\gamma[p(n+\omega/\alpha)-n] +p(n+\omega)-n},
 	\end{align*}
 	que puede estimarse por una constante siempre que 
 	\begin{equation}
 		\gamma \leq \frac{p(n+\omega)-n}{p(n+\omega/\alpha)-n},
 		\label{eq:gamma-upper-bound}
 	\end{equation}
-	que es una función creciente de $p$ que alcanza $\gamma \leq \alpha$ cuando $p=1$. Por lo tanto, el $p_0$ crítico ocurre cuando se igualan los lados derechos de \cref{eq:gamma-lowe-bound} y \cref{eq:gamma-upper-bound}, completando la demostración.
+	que es una función creciente de $p$ que alcanza $\gamma \leq \alpha$ cuando $p=1$. Por lo tanto, el $p_0$ crítico ocurre cuando se igualan los lados derechos de (\ref{eq:gamma-lowe-bound}) y (\ref{eq:gamma-upper-bound}), completando la demostración.
 \end{proof} 
 
 Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenciales toroidales satisfacen las estimaciones del núcleo necesarias para usar el teorema anterior. 
@@ -4268,16 +4267,16 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 	\begin{itemize}
 		\item[a)] Por el Teorema \ref{theo:kernel-properties} y la desigualdad triangular se tiene que 
 		\begin{align*}
-			\int_{A_j(z, \sigma)} |k(y, x) - k(z, x)|\diff x \leq &  \int_{A_j(z, \sigma)} |k(y, x)| \diff x +\int_{A_j(z, \sigma)} |k(z, x)|\diff x\\
-			\leq & C\int_{A_j(z, \sigma)} |x-y|^{-N} \diff x + C\int_{A_j(z, \sigma)} |x-z|^{-N} \diff x,
+			\int_{A_j(z, \sigma)} |k(y, x) - k(z, x)|\diff x  &\leq  \int_{A_j(z, \sigma)} |k(y, x)| \diff x +\int_{A_j(z, \sigma)} |k(z, x)|\diff x\\
+			 & \lesssim \int_{A_j(z, \sigma)} |x-y|^{-N} \diff x + \int_{A_j(z, \sigma)} |x-z|^{-N} \diff x,
 		\end{align*}
 		para algún $N\geq (m+n)/\rho$. Ahora, se tiene que $|x-y| \geq |x-z| - |z-y|>2^j\sigma -\sigma \geq 2^{j-1}\sigma$. Así, dado que el toro tiene volumen uno, se obtiene que 
 		\begin{align*}
-			\int_{A_j(z, \sigma)} |k(y, x) - k(z, x)|\diff x \leq & C(2^{j-1}\sigma)^{-N}  +  C(2^{j}\sigma)^{-N}  \\
-			\leq & C(2^{j} \varepsilon)^{-N} \leq C_\varepsilon 2^{-j}.
+			\int_{A_j(z, \sigma)} |k(y, x) - k(z, x)|\diff x  & \lesssim (2^{j-1}\sigma)^{-N}  +  (2^{j}\sigma)^{-N}  \\
+			 & \leq (2^{j} \varepsilon)^{-N} \leq C_\varepsilon 2^{-j}.
 		\end{align*}
 		
-		\item[b)] Sea $\tilde{p}:=\tilde{p}(x,\xi)$ el símbolo correspondiente de $T$ definido en $\mathbb{T}^n \times \mathbb{R}^n$, ver \cref{theo:equivalence-symbols}.  Sea $\varphi \in C_0^\infty(\mathbb{R})$ soportada en $[1/2, 1]$ tal que  
+		\item[b)] Sea $\tilde{p}:=\tilde{p}(x,\xi)$ el símbolo correspondiente de $T$ definido en $\mathbb{T}^n \times \mathbb{R}^n$, ver el Teorema \ref{theo:equivalence-symbols}.  Sea $\varphi \in C_0^\infty(\mathbb{R})$ soportada en $[1/2, 1]$ tal que  
 		\begin{equation*}
 			\int_0^\infty \varphi(1/t)/t\diff t = \int_1^2 \varphi(1/t)/t\diff t=1.
 		\end{equation*}
@@ -4300,7 +4299,7 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 		\end{equation*}
 		donde $N>n/2$ es un número natural por determinar. En el Teorema  \ref{theo:kernel-estimate-sigma}  se demuestra que el lado izquierdo está dominado por 
 		\begin{equation*}
-			C\sigma t \cdot t^{\rho n/2} \quad \text{si} \quad \sigma t\leq 1. 
+			\sigma t \cdot t^{\rho n/2} \quad \text{si} \quad \sigma t\leq 1. 
 		\end{equation*}
 		De aquí viene la restricción de orden. Para estimar el segundo factor, se define 
 		\begin{equation*}
@@ -4314,15 +4313,15 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 			\leq \left[ \int_{A_j(z, \sigma^\gamma)} \left(1 + t^{2\rho} |x-z|^2\right)^{-N} (t^\rho|x-z|)^{n-1} (t^\rho 2^j \sigma^\gamma)^{1-n} \diff x  \right]^{1/2}
 		\end{equation*}
 		\begin{equation*}
-			\leq C t^{-\rho n/2} F(t^\rho2^j\sigma^\gamma).
+			\lesssim t^{-\rho n/2} F(t^\rho2^j\sigma^\gamma).
 		\end{equation*}
 		Así, se tiene que 
 		\begin{equation*}
-			\int_{A_j(z, \sigma^\gamma)} |k(x, y, t) - k(x, z, t)| \diff x \leq Ct\sigma F(t^\rho 2^j\sigma^\gamma), \quad t\sigma \leq 1.
+			\int_{A_j(z, \sigma^\gamma)} |k(x, y, t) - k(x, z, t)| \diff x \lesssim t\sigma F(t^\rho 2^j\sigma^\gamma), \quad t\sigma \leq 1.
 		\end{equation*}
 		Ahora, se considera el caso $t\sigma>1$. El cálculo hecho en el Teorema \ref{theo:kernel-estimate-sigma} , muestra que 
 		\begin{equation*}
-			\int_{A_j(z, \sigma^\gamma)} |k(x, y, t)| + |k(x, z, t)| \diff x \leq C (t^\rho 2^j \sigma^\gamma )^{n/2 - N}.
+			\int_{A_j(z, \sigma^\gamma)} |k(x, y, t)| + |k(x, z, t)| \diff x \lesssim (t^\rho 2^j \sigma^\gamma )^{n/2 - N}.
 		\end{equation*} 
 		Combinando las dos últimas estimaciones se obtiene que 
 		\begin{equation*}
@@ -4333,14 +4332,13 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 			C \left[  \int_1^{1/\sigma} t\sigma F(t^\rho 2^j \sigma^\gamma )/t\diff t + \int_{1/\sigma}^\infty (t^\rho 2^j \sigma^\gamma )^{n/2 - N}/t \diff t \right].
 			\label{eq:kernel-estimates-sum}
 		\end{equation}
-		Ahora, se elige $N$ de modo que $\rho(N-n/2)>1$, lo que implica que $\smallint F(t^\rho)\diff t < \infty$. Además, de \cref{eq:kernel-estimates-sum} se obtiene que la integral $I_j(y, z, t)$ puede estimarse por
+		Ahora, se elige $N$ de modo que $\rho(N-n/2)>1$, lo que implica que $\smallint F(t^\rho)\diff t < \infty$. Además, de (\ref{eq:kernel-estimates-sum}) se obtiene que la integral $I_j(y, z, t)$ puede estimarse por
 		\begin{equation*}
-			C\left(  2^{-j/\rho} \sigma^{1-\gamma/\rho} + 2^{j(n/2 -N)} \sigma^{(1-\gamma/\rho)\rho(N-n/2)} 
-			\right)  \leq C2^{-j/\rho} \sigma^{1-\gamma/\rho}, \quad 0<\sigma<1.
+			  2^{-j/\rho} \sigma^{1-\gamma/\rho} + 2^{j(n/2 -N)} \sigma^{(1-\gamma/\rho)\rho(N-n/2)} 
+			  \leq 2^{-j/\rho} \sigma^{1-\gamma/\rho}, \quad 0<\sigma<1.
 		\end{equation*}
 		Así, completando la demostración de este caso. 
-		
-		\item[c)] Se puede usar el mismo método que en el caso anterior para estimar \cref{eq:kernel-estimate-c} cuando $t\sigma\leq1$. Además, inspeccionando la demostración del Teorema \ref{theo:kernel-estimate-sigma} se puede ver que se puede estimar como sigue 
+		\item[c)] Se puede usar el mismo método que en el caso anterior para estimar (\ref{eq:kernel-estimate-c}) cuando $t\sigma\leq1$. Además, inspeccionando la demostración del Teorema \ref{theo:kernel-estimate-sigma} se puede ver que se puede estimar como sigue 
 		\begin{equation*}
 			\int_{A_j(z, \sigma^\gamma)} |k(y, x) - k(z, x)|\diff x  
 		\end{equation*}
@@ -4350,7 +4348,7 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 	\end{itemize}
 	Obteniendo el resultado deseado.
 \end{proof}
-Se procede a usar estas estimaciones y \cref{theo:operator-kernel-2j} para obtener la acotación $H^p$-$L^p$ para operadores pseudo-diferenciales toroidales. 
+Se procede a usar estas estimaciones y Teorema \ref{theo:operator-kernel-2j} para obtener la acotación $H^p$-$L^p$ para operadores pseudo-diferenciales toroidales. 
 \begin{theorem}
 	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$. Supóngase que 
 	\begin{equation*}
@@ -4364,12 +4362,12 @@ Se procede a usar estas estimaciones y \cref{theo:operator-kernel-2j} para obten
 	\label{theo:Hp-Lp}
 \end{theorem}
 \begin{proof}
-	Nótese que por \cref{theo:pdo-kernel}, el operador $T$ satisface las estimaciones del núcleo con $\alpha=\rho$ y $\omega=1$. La acotación $L^2$ se demostró en el Teorema \ref{theo:22boundT}, dado que $m\leq -n\lambda$. Así, el único requisito de \cref{theo:operator-kernel-2j} que se necesita probar es la acotación $L^q$-$L^2$. Nótese que $J^{-\beta}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ por la desigualdad de Hardy-Littlewood-Sobolev. Por lo tanto, dado que $J^\beta T$ tiene orden $m+\beta \leq -n\lambda$, se obtiene que 
+	Nótese que por Teorema \ref{theo:pdo-kernel}, el operador $T$ satisface las estimaciones del núcleo con $\alpha=\rho$ y $\omega=1$. La acotación $L^2$ se demostró en el Teorema \ref{theo:22boundT}, dado que $m\leq -n\lambda$. Así, el único requisito del Teorema \ref{theo:operator-kernel-2j} que se necesita probar es la acotación $L^q$-$L^2$. Nótese que $J^{-\beta}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ por la desigualdad de Hardy-Littlewood-Sobolev. Por lo tanto, dado que $J^\beta T$ tiene orden $m+\beta \leq -n\lambda$, se obtiene que 
 	\begin{equation}
-		\|Tf\|_q =    \|J^{-\beta}(J^\beta T)f\|_q \leq C \|(J^\beta T)f\|_2 \leq C\|f\|_2.
+		\|Tf\|_{L^q} =    \|J^{-\beta}(J^\beta T)f\|_{L^q} \lesssim \|(J^\beta T)f\|_{L^2} \lesssim \|f\|_{L^2}.
 		\label{eq:q-2-boundedness}
 	\end{equation}
-	Así, completando los requisitos para obtener el resultado deseado de \cref{theo:operator-kernel-2j}.
+	Así, completando los requisitos para obtener el resultado deseado del Teorema \ref{theo:operator-kernel-2j}.
 \end{proof}
 \begin{remark}
 	Nótese que para $p=1$ y $\beta=n(1-\rho)/2$ se obtiene la continuidad $H^1$-$L^1$ demostrada en el Teorema \ref{theo:L1-H1-L-infty-BMO}.
@@ -4382,21 +4380,21 @@ Ahora, se introduce un objeto con propiedades similares a los átomos en $H^p$.
 		\item Si $\sigma \geq 1$:
 		\begin{itemize}
 			\item[($\mathbf{M_1}$)] \begin{equation*}
-				\int \|M(x)\|_Y^2\diff x \leq C \sigma^{n(1-2/p)}.
+				\int \|M(x)\|_Y^2\diff x \lesssim \sigma^{n(1-2/p)}.
 			\end{equation*}
 			\item[($\mathbf{M_2}$)] Para algún $2n/p-n < \mu < n + (2\omega/\alpha)$, se tiene que
 			\begin{equation*}
-				\int \|M(x)\|_Y^2|x-z|^\mu \diff x \leq C \sigma^{\mu + n(1-2/p)}.
+				\int \|M(x)\|_Y^2|x-z|^\mu \diff x \lesssim \sigma^{\mu + n(1-2/p)}.
 			\end{equation*}
 		\end{itemize}
 		\item Si $\sigma < 1$:
 		\begin{itemize}
 			\item[($\mathbf{M_1'}$)] \begin{equation*}
-				\int \|M(x)\|_Y^2\diff x \leq C \sigma^{n(1/q-2/p)}.
+				\int \|M(x)\|_Y^2\diff x \lesssim \sigma^{n(1/q-2/p)}.
 			\end{equation*}
 			\item[($\mathbf{M_2'}$)] Para algún $2n/p-n < \mu < (2\beta/(1-\theta)) \leq n + (2\omega/\alpha)$, se tiene que
 			\begin{equation*}
-				\int \|M(x)\|_Y^2|x-z|^\mu \diff x \leq C \sigma^{\theta\mu + n(1/q-2/p)}, 
+				\int \|M(x)\|_Y^2|x-z|^\mu \diff x \lesssim \sigma^{\theta\mu + n(1/q-2/p)}, 
 			\end{equation*}
 			donde 
 			\begin{equation*}
@@ -4408,46 +4406,47 @@ Ahora, se introduce un objeto con propiedades similares a los átomos en $H^p$.
 \end{definition}
 Se demostrará que la imagen de un átomo $(p, 2)$ es una molécula adecuada. Por lo tanto, para dar sentido a la propiedad de cancelación de una molécula, se demuestra el siguiente lema.
 \begin{lemma}
-	Cualquier molécula $(p,\theta,\mu)$ $M:=M(x)$ relacionada con una bola $B(z, \sigma)$ es una función absolutamente integrable.
+	Cualquier $(p,\theta,\mu)$-molécula $M:=M(x)$ relacionada con una bola $B(z, \sigma)$ es una función absolutamente integrable.
 \end{lemma}
 \begin{proof}
 	Primero, se asume que $\sigma\geq1$. Entonces, usando la desigualdad de H\"older y ($\mathbf{M}_1$) se tiene que
 	\begin{align*}
-		\int_{B(z,\sigma)}\|M(x)\|_Y \diff x \leq &  \|M(x)\|_{L^2(\mathbb{T}^n;Y)} \|\chi_{B(z,\sigma)}\|_2 \\
-		\leq & C\sigma^{n(1/2-1/p)}\cdot \sigma^{n/2} \leq C|B|^{1-1/p}.
+		\int_{B(z,\sigma)}\|M(x)\|_Y \diff x  &\leq  \|M(x)\|_{L^2(\mathbb{T}^n;Y)} \|\chi_{B(z,\sigma)}\|_{L^2} \\
+		 & \lesssim \sigma^{n(1/2-1/p)}\cdot \sigma^{n/2} \lesssim |B|^{1-1/p}.
 	\end{align*}
 	Por otro lado, por la desigualdad de H\"older y ($\mathbf{M}_2$)
 	\begin{align*}
-		\int_{\mathbb{T}^n\setminus B(z,\sigma)}\|M(x)\|_Y\diff x \leq &  \left\|M(x)|x-z|^{\mu/2} \right\|_{L^2(\mathbb{T}^n;Y)} \left\| |x-z|^{-\mu/2} \chi_{\mathbb{T}^n\setminus B(z,\sigma)}(x) \right\|_2 \\
-		\leq & C \sigma^{\mu/2 + n(1/2-1/p)} \cdot\sigma^{(n-\mu)/2} \\
-		\leq & C \sigma^{n(1-1/p)} \leq C |B|^{1-1/p}.
+		\int_{\mathbb{T}^n\setminus B(z,\sigma)}\|M(x)\|_Y\diff x  &\leq  \left\|M(x)|x-z|^{\mu/2} \right\|_{L^2(\mathbb{T}^n;Y)} \left\| |x-z|^{-\mu/2} \chi_{\mathbb{T}^n\setminus B(z,\sigma)}(x) \right\|_2 \\
+		 & \lesssim \sigma^{\mu/2 + n(1/2-1/p)} \cdot\sigma^{(n-\mu)/2} \\
+		 & \lesssim \sigma^{n(1-1/p)} \lesssim |B|^{1-1/p}.
 	\end{align*}
 	Por lo tanto, $M(x) \in L^1$ cuando $\sigma \geq 1$. Ahora, se asume que $\sigma < 1$. Usando ($\mathbf{M}_1'$) y la desigualdad de H\"older se obtiene que
 	\begin{align*}
-		\int_{B(z,\sigma)}\|M(x)\|_Y \diff x \leq & 
-		\|M(x)\|_{L^2(\mathbb{T}^n;Y)}\|\chi_{B(z,\sigma)}\|_2 \\
-		\leq & C \sigma^{n(1/q - 1/p)} \cdot \sigma^{n/2}\\ \leq & C|B|^{1/q-1/p+1/2} = C|B|^{\beta/n+1-1/p},
+		\int_{B(z,\sigma)}\|M(x)\|_Y \diff x  &\leq 
+		\|M(x)\|_{L^2(\mathbb{T}^n;Y)}\|\chi_{B(z,\sigma)}\|_{L^2} \\
+		 & \lesssim \sigma^{n(1/q - 1/p)} \cdot \sigma^{n/2}\\  
+		 & \lesssim |B|^{1/q-1/p+1/2} = |B|^{\beta/n+1-1/p},
 	\end{align*}
 	donde se usó el hecho de que $1/q=1/2+\beta/n$. Usando ($\mathbf{M}_2'$) se obtiene que
 	\begin{align*}
-		\int_{\mathbb{T}^n\setminus B(z,\sigma)}\|M(x)\|_Y\diff x \leq &  \left\|M(x)|x-z|^{\mu/2} \right\|_{L^2(\mathbb{T}^n;Y)} \left\| |x-z|^{-\mu/2} \chi_{\mathbb{T}^n\setminus B(z,\sigma)}(x) \right\|_2 \\
-		\leq & C\sigma^{\theta\mu/2+n(1/q-1/p)} \cdot\sigma^{(n-\mu)/2} \\
-		= & C|B|^{\beta/n+1-1/p-(1-\theta)\mu/2n}.
+		\int_{\mathbb{T}^n\setminus B(z,\sigma)}\|M(x)\|_Y\diff x  &\leq  \left\|M(x)|x-z|^{\mu/2} \right\|_{L^2(\mathbb{T}^n;Y)} \left\| |x-z|^{-\mu/2} \chi_{\mathbb{T}^n\setminus B(z,\sigma)}(x) \right\|_{L^2} \\
+		 & \lesssim \sigma^{\theta\mu/2+n(1/q-1/p)} \cdot\sigma^{(n-\mu)/2} \\
+		 & \sim |B|^{\beta/n+1-1/p-(1-\theta)\mu/2n}.
 	\end{align*}
 	Así, $M(x) \in L^1$ también cuando $\sigma<1$, completando la demostración.
 \end{proof}
-Ahora, se demuestra que la norma $H^p$ de una molécula solo depende de las constantes relacionadas con ella. Esto será útil al demostrar que la norma $H^p$ de la imagen de un átomo $(p, 2)$ bajo un cierto operador es uniforme.
+Ahora, se demuestra que la norma $H^p$ de una molécula solo depende de las constantes relacionadas con ella. Esto será útil al demostrar que la norma $H^p$ de la imagen de un $(p, 2)$-átomo  bajo un cierto operador es uniforme.
 \begin{lemma}
 	Sea $M:=M(x)$ una molécula $(p, \theta, \mu)$ relacionada con $B(z, \sigma)$. Entonces, 
 	\begin{equation*}
 		M(x)=\sum_{j=0}^{N_\sigma} \lambda_j a_j,
 	\end{equation*}
-	donde $a_j$ es un átomo $H^{p,2}(\mathbb{T}^n;Y)$ soportado en $B(z, 2^{j+1}\sigma)$. Además $\|M\|_{H^p(\mathbb{T}^n; Y)}$ solo depende de las constantes $C$ en \cref{def:molecule}.
+	donde $a_j$ es un $(p, 2)$-átomo soportado en $B(z, 2^{j+1}\sigma)$. Además $\|M\|_{H^p(\mathbb{T}^n; Y)}$ solo depende de las constantes en la Definición \ref{def:molecule}.
 	\label{lem:M-in-Hp}
 \end{lemma}
 
 \begin{proof}
-	Sea $B_j = B(z, 2^{j+1}\sigma)$ y sea $M_j$ el valor promedio de $M(x)$ en $A_j(z, \sigma)$. Nótese que $A_j = B_j - B_{j-1}$. Se define 
+	Sea $B_j = B(z, 2^{j+1}\sigma)$ y sea $M_j$ el valor promedio de $M(x)$ en $A_j(z, \sigma)$. Nótese que $A_j = B_j \setminus B_{j-1}$. Se define 
 	\begin{equation*}
 		\psi_j(x) = [M(x)-M_j]\chi_{A_j}(x),
 	\end{equation*}
@@ -4457,15 +4456,15 @@ Ahora, se demuestra que la norma $H^p$ de una molécula solo depende de las cons
 	\end{equation*}
 	Ahora, se asume $\sigma\geq1$ y se usa ($\mathbf{M}_2$) para obtener
 	\begin{align*}
-		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)}^2 \leq & C \int_{A_j(z,\sigma)}\|M(x)\|_Y^2|x-z|^{\mu} |x-z|^{-\mu} \diff x
+		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)}^2  & \lesssim \int_{A_j(z,\sigma)}\|M(x)\|_Y^2|x-z|^{\mu} |x-z|^{-\mu} \diff x
 		\\
-		\leq & C\sigma^{\mu+n(1-2/p)}\cdot2^{-j\mu} \sigma^{-\mu}
+		 & \lesssim \sigma^{\mu+n(1-2/p)}\cdot2^{-j\mu} \sigma^{-\mu}
 		\\
-		\leq & C 2^{-j[\mu + n(1-2/p)]} |B_j|^{1-2/p}.
+		 & \lesssim 2^{-j[\mu + n(1-2/p)]} |B_j|^{1-2/p}.
 	\end{align*}
 	Por lo tanto, se tiene que 
 	\begin{equation}
-		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)} \leq C 2^{-j[\mu/2 + n(1/2-1/p)]} |B_j|^{1/2-1/p}.
+		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)} \lesssim 2^{-j[\mu/2 + n(1/2-1/p)]} |B_j|^{1/2-1/p}.
 		\label{eq:psi-j}
 	\end{equation}
 	Por otro lado, se tiene que
@@ -4482,47 +4481,34 @@ Ahora, se demuestra que la norma $H^p$ de una molécula solo depende de las cons
 	\end{equation*}
 	donde $\phi_j=\nu_j\left( |A_{j+1}|^{-1}\chi_{A_{j+1}} - |A_{j}|^{-1}\chi_{A_{j}}  \right)$. Se puede notar que cada $\phi_j$ está soportada en $B_{j+1}$ y tiene valor promedio cero. Además, se puede usar el método usado para $\psi_j$ para obtener
 	\begin{equation}
-		\|\phi_j\|_{L^2(\mathbb{T}^n;Y)} \leq C 2^{-j[\mu/2 + n(1/2-1/p)]} |B_{j+1}|^{1/2-1/p}.
+		\|\phi_j\|_{L^2(\mathbb{T}^n;Y)} \lesssim 2^{-j[\mu/2 + n(1/2-1/p)]} |B_{j+1}|^{1/2-1/p}.
 		\label{eq:phi-j}
 	\end{equation}
-	Ahora, se tiene que $\nu_{N_\sigma}=0$ gracias a que $B_{N_\sigma}$ contiene el toro, ver \cref{rem:N-sigma}. Por lo tanto se tiene que 
+	Ahora, se tiene que $\nu_{N_\sigma}=0$ gracias a que $B_{N_\sigma}$ contiene el toro, ver la Nota \ref{rem:N-sigma}. Por lo tanto se tiene que 
 	\begin{equation}
 		M(x)= \psi_0(x)+ \sum_{j=1}^{N_\sigma} \left[\psi_j(x) + \phi_{j-1}(x) \right],
 		\label{eq:psi-phi}
 	\end{equation}
-	donde cada término puede reescribirse como un átomo $H^{p,2}(\mathbb{T}^n; Y) $ por \cref{eq:psi-j} y \cref{eq:phi-j}. Ahora, se asume $\sigma<1$ y se usa ($\mathbf{M}_2'$) para obtener
+	donde cada término puede reescribirse como un$(p,2)$-átomo por (\ref{eq:psi-j}) y (\ref{eq:phi-j}). Ahora, se asume $\sigma<1$ y se usa ($\mathbf{M}_2'$) para obtener
 	\begin{align*}
-		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)}^2 \leq & C \int_{A_j(z,\sigma)}\|M(x)\|_Y^2|x-z|^{\mu} |x-z|^{-\mu} \diff x
+		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)}^2  &\lesssim \int_{A_j(z,\sigma)}\|M(x)\|_Y^2|x-z|^{\mu} |x-z|^{-\mu} \diff x
 		\\
-		\leq & C\sigma^{\theta\mu+2n(1/q-1/p)}\cdot2^{-j\mu} \sigma^{-\mu}
+		 & \lesssim \sigma^{\theta\mu+2n(1/q-1/p)}\cdot2^{-j\mu} \sigma^{-\mu}
 		\\
-		\leq & C 2^{-j[\mu + 2n(1/2-1/p)]} \sigma^{\mu(\theta-1) + 2n(1/q-1/2)} |B_j|^{2(1/2-1/p)}.
+		 &\lesssim 2^{-j[\mu + 2n(1/2-1/p)]} \sigma^{\mu(\theta-1) + 2n(1/q-1/2)} |B_j|^{2(1/2-1/p)}.
 	\end{align*}
 	Por lo tanto, se tiene que 
 	\begin{align*}
-		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)} \leq C 2^{-j[\mu/2 + n(1/2-1/p)]} \sigma^{\mu(\theta-1)/2+n(1/q-1/2)} |B_j|^{1/2-1/p}.
+		\|\psi_j\|_{L^2(\mathbb{T}^n;Y)}  \lesssim 2^{-j[\mu/2 + n(1/2-1/p)]} \sigma^{\mu(\theta-1)/2+n(1/q-1/2)} |B_j|^{1/2-1/p}.
 	\end{align*}
-	
-	El exponente de $\sigma$ se convierte en $\mu(\theta-1)/2 + \beta$, de ahí la restricción $\mu \leq 2\beta/(1-\theta)$. Por otro lado, $\|\phi_j\|_2$ puede estimarse de manera similar para obtener la expresión \cref{eq:psi-phi} para $\sigma<1$. Ahora, se puede considerar la norma $H^p$ de $M$. En este caso, se tiene que
+	El exponente de $\sigma$ se convierte en $\mu(\theta-1)/2 + \beta$, de ahí la restricción $\mu \leq 2\beta/(1-\theta)$. Por otro lado, $\|\phi_j\|_2$ puede estimarse de manera similar para obtener la expresión (\ref{eq:psi-phi}) para $\sigma<1$. Ahora, se puede considerar la norma $H^p$ de $M$. En este caso, se tiene que
 	\begin{equation*}
 		|\lambda_j|^p \leq C 2^{j[ n(1-p/2) -\mu p/2 ]},
 	\end{equation*}
 	Por lo tanto $\|M\|_{H^p(\mathbb{T}^n;Y)} \leq C$ siempre que $\mu > np/2 -n$. Así, completando la demostración.
 \end{proof}
-En el análisis posterior, se define la siguiente descomposición 'diádica' en los anillos
-\begin{equation}
-	A_j(z, \sigma) = \{ x \in \mathbb{T}^n : 2^j\sigma < |x-z|<2^{j+1}\sigma \} \; , \quad j=1, 2, 3, ...
-\end{equation}
-\begin{remark}
-	Nótese que $\mathbb{T}^n$ está contenido en cualquier bola con radio mayor que $\sqrt{n}/2$. Por lo tanto, para cualquier $\sigma>0$ dado, existe $N_\sigma\in \mathbb{Z}^+$ tal que 
-	\begin{equation}
-		\frac{\sqrt{n}}{2\sigma} < 2^{N_\sigma} \leq \frac{\sqrt{n}}{\sigma}.
-	\end{equation}
-	Así, esta descomposición "diádica" es finita en el caso del toro y $2^{N_\sigma} \sim \sigma^{-1}$.
-	\label{rem:N-sigma}
-\end{remark}
 Se procede a definir una condición para operadores con kernel valuado en operadores que será útil para demostrar propiedades de continuidad para estos operadores.
-\begin{definition}[Condición $D_{r,\alpha}$] Sea $1\leq r\leq\infty$ y $0<\alpha\leq1$. Se dice que un operador $T:C^\infty(\mathbb{T}^n;X)\rightarrow C^\infty(\mathbb{T}^n;Y)$ satisface la condición $D_{r,\alpha}$ si su kernel valuado en operadores asociado $k:=k(x,y)$ es continuo fuera de la diagonal de $\mathbb{T}^n\times\mathbb{T}^n$ y existe una sucesión $\{d_j\}\in \ell^1$ tal que para todo $\sigma>0$ se tiene que 
+\begin{definition}[Condición $D_{r,\alpha}$] Sea $1\leq r\leq\infty$ y $0<\alpha\leq1$. Se dice que un operador $T:C^\infty(\mathbb{T}^n;X)\rightarrow C^\infty(\mathbb{T}^n;Y)$ satisface la condición $D_{r,\alpha}$ si su kernel valuado en operadores asociado $k:=k(x,y)$ es continuo fuera de la diagonal de $\mathbb{T}^n\times\mathbb{T}^n$ y existe una sucesión $\{d_j\}\in \ell^1$, tal que para todo $\sigma>0$ se tiene que 
 	\begin{equation*}
 		\left( \int_{A_j(z,\sigma^\alpha)} \|k(x, y) - k(x, z)\|^r_\mathcal{B} \diff x \right)^{1/r} \leq d_j|A_j(z,\sigma^\alpha)|^{-1/r'}, \quad j=1,2,... ,
 	\end{equation*}
@@ -4542,21 +4528,20 @@ Ahora, se demuestra un resultado auxiliar que relaciona la función maximal $p$ 
 \begin{theorem}
 	Sea $T$ un operador que satisface la condición $D_{r,\alpha}$ tal que para $1<p<q\leq\infty$ y $p/q\leq\alpha$ se tiene que
 	\begin{equation}
-		\left( \frac{1}{|B(z, \sigma)|} \int_{B(z, \sigma)} \|Tf(x)\|_Y^q \diff x  \right)^{1/q} \leq C \left( \frac{1}{|B(z, \sigma^\alpha)|} \int \|f(x)\|_X^p \diff x  \right)^{1/p}, 
+		\left( \frac{1}{|B(z, \sigma)|} \int_{B(z, \sigma)} \|Tf(x)\|_Y^q \diff x  \right)^{1/q} \lesssim \left( \frac{1}{|B(z, \sigma^\alpha)|} \int \|f(x)\|_X^p \diff x  \right)^{1/p}, 
 		\label{eq:c-p-q-alpha}
 	\end{equation}
 	para todo $0<\sigma<1$ y 
 	\begin{equation*}
-		\|Tf\|_{L^p(\mathbb{T}^n;Y)} \leq C \|f\|_{L^p(\mathbb{T}^n;X)},
+		\|Tf\|_{L^p(\mathbb{T}^n;Y)} \lesssim \|f\|_{L^p(\mathbb{T}^n;X)},
 	\end{equation*}
 	cuando $\sigma\geq1$, para alguna constante absoluta $C>0$. Entonces, para $s=\max \{ p, r' \}$, se tiene que 
 	\begin{equation}
-		(Tf)^\#(x) \leq CM_sf(x), \quad f\in L^\infty (\mathbb{T}^n; X).
+		(Tf)^\#(x) \lesssim \mathrm{M}_sf(x), \quad f\in L^\infty (\mathbb{T}^n; X).
 		\label{eq:Tf-Msf}
 	\end{equation}
 	\label{theo:Tf-Msf}
 \end{theorem}
-
 \begin{proof}
 	Se fija una bola $B(z, \sigma)$ y se escribe $f=f_1+f_2$, donde 
 	\begin{equation*}
@@ -4582,16 +4567,16 @@ Ahora, se demuestra un resultado auxiliar que relaciona la función maximal $p$ 
 		\leq  d_j |A_j(z,\sigma^\alpha)|^{-1/r'}\left(  \int_{A_j(z,\sigma^\alpha)}  \|f(y)\|_X^{r'} \diff y \right)^{1/r'}.
 	\end{equation*}
 	\begin{equation*}
-		\leq d_j M_{r'}f(z).
+		\leq d_j \mathrm{M}_{r'}f(z).
 	\end{equation*}
 	Por lo tanto, se tiene que 
 	\begin{equation*}
 		\frac{1}{|B(z,\sigma)|}\sum_{j=1}^{N_{\sigma^\alpha}} \int_{B(z,\sigma)}\int_{A_j(z, \sigma^\alpha)} \|k(x,y)-k(z,y)\|_\mathcal{B}\|f(y)\|_X \diff y \diff x
 	\end{equation*}
 	\begin{equation*}
-		\leq CM_{r'}f(z).
+		\lesssim \mathrm{M}_{r'}f(z).
 	\end{equation*}
-	Por otro lado, se asume $\sigma<1$. Entonces, usando la desigualdad de H\"older y \cref{eq:c-p-q-alpha}, se obtiene que
+	Por otro lado, se asume $\sigma<1$. Entonces, usando la desigualdad de H\"older y (\ref{eq:c-p-q-alpha}), se obtiene que
 	\begin{equation*}
 		\frac{1}{|B(z,\sigma)|}\int_{B(z, \sigma)}\|Tf_1(x)\|_Y \diff x 
 	\end{equation*}
@@ -4602,34 +4587,33 @@ Ahora, se demuestra un resultado auxiliar que relaciona la función maximal $p$ 
 		\right)^{1/q'}
 	\end{equation*}
 	\begin{equation*}
-		\leq C \left( \frac{1}{|B(z, \sigma^\alpha)|} \int_{B(z,2\sigma^\alpha)} \|f(x)\|_X^p \diff x  \right)^{1/p} 
+		\lesssim \left( \frac{1}{|B(z, \sigma^\alpha)|} \int_{B(z,2\sigma^\alpha)} \|f(x)\|_X^p \diff x  \right)^{1/p} 
 	\end{equation*}
 	\begin{equation*}
-		\leq C M_pf(z).
+		\lesssim \mathrm{M}_pf(z).
 	\end{equation*}
 	Para el caso $\sigma \geq 1$ se usa la desigualdad de H\"older y la acotación $L^p$ de $T$ para obtener
 	\begin{align*}
-		\frac{1}{|B(z,\sigma)|}\int_{B(z, \sigma)}\|Tf_1(x)\|_Y \diff x  \leq & 
+		\frac{1}{|B(z,\sigma)|}\int_{B(z, \sigma)}\|Tf_1(x)\|_Y \diff x   &\leq 
 		|B(z,\sigma)|^{-1/p} \|Tf_1\|_{L^p(\mathbb{T}^n;Y)} \\
-		\leq & C |B(z,\sigma)|^{-1/p} \|f_1\|_{L^p(\mathbb{T}^n;X)} \\
-		\leq & C M_pf(z).
+		 & \lesssim |B(z,\sigma)|^{-1/p} \|f_1\|_{L^p(\mathbb{T}^n;X)} \\
+		 & \lesssim \mathrm{M}_pf(z).
 	\end{align*}
 	Combinando las estimaciones anteriores se puede concluir que 
 	\begin{equation*}
-		(Tf)^\#(z) \leq C M_sf(z),
+		(Tf)^\#(z) \lesssim \mathrm{M}_sf(z),
 	\end{equation*}
 	terminando la demostración.
 \end{proof}
 Además, cuando el operador satisface la condición $D_{1,\alpha}$ se obtiene el siguiente corolario.
 \begin{corollary}
-	Sea $T$ un operador como en \cref{theo:Tf-Msf}, pero que satisface la condición $D_{1,\alpha}$. Entonces $T$ es un operador continuo de $L^\infty(\mathbb{T}^n;X)$ en $\mathrm{BMO}(\mathbb{T}^n;Y)$.
+	Sea $T$ un operador como en el Teorema \ref{theo:Tf-Msf}, pero que satisface la condición $D_{1,\alpha}$. Entonces $T$ es un operador continuo de $L^\infty(\mathbb{T}^n;X)$ en $\mathrm{BMO}(\mathbb{T}^n;Y)$.
 	\label{cor:L-inf-BMO}
 \end{corollary}
-
 \begin{proof}
-	Nótese que $r=1$ implica que $s=\infty$ y la estimación en \cref{eq:Tf-Msf} se convierte en
+	Note que $r=1$ implica que $s=\infty$ y la estimación en (\ref{eq:Tf-Msf}) se convierte en
 	\begin{equation*}
-		(Tf)^\#(x) \leq C\|f\|_{L^\infty(\mathbb{T}^n;X)},
+		(Tf)^\#(x) \lesssim \|f\|_{L^\infty(\mathbb{T}^n;X)},
 	\end{equation*}
 	probando el resultado.
 \end{proof}
@@ -4639,42 +4623,42 @@ En la hipótesis del siguiente lema se tiene la condición $T^*(\overline{e})$, 
 	\begin{equation}
 		\frac{1}{q} = \frac{1}{2} + \frac{\beta}{n} \quad \text{ para algún } \quad (1-\alpha)\frac{n}{2}\leq \beta<\frac{n}{2}.
 	\end{equation}
-	Además, supóngase que $T^*(\overline{e})=0$ para todo ${e}\in Y'$ y $\overline{e}:\mathbb{T}^n\rightarrow Y'$ dado por $\overline{e}(x)=e$. Sea $a:=a(x)$ un átomo $H^{p,2}(\mathbb{T}^n;X)$ soportado en $B(z,\sigma)$. Entonces, $M(x):=Ta(x)$ es una molécula $(p, \theta, \mu)$ con constantes $C$ que dependen solo de $T$ y sus propiedades de continuidad.
+	Además, supóngase que $T^*(\overline{e})=0$ para todo ${e}\in Y'$ y $\overline{e}:\mathbb{T}^n\rightarrow Y'$ dado por $\overline{e}(x)=e$. Sea $a:=a(x)$ un$(p,2)$-átomo  soportado en $B(z,\sigma)$. Entonces, $M(x):=Ta(x)$ es una molécula $(p, \theta, \mu)$ con constantes que dependen solo de $T$ y sus propiedades de continuidad.
 	\label{lem:Ta-is-molecule}
 \end{lemma}
 
 \begin{proof}
 	Primero, se asume $\sigma \geq 1$. Entonces, por la acotación $L^2$ se obtiene que
 	\begin{equation*}
-		\int\|M(x)\|_Y^2\diff x = \|Ta\|_{L^2(\mathbb{T}^n;Y)}^2 \leq C \|a\|_{L^2(\mathbb{T}^n;Y)}^2 \leq C |B|^{2(1/2-1/p)} \leq C\sigma^{n(1-2/p)},
+		\int\|M(x)\|_Y^2\diff x = \|Ta\|_{L^2(\mathbb{T}^n;Y)}^2 \lesssim \|a\|_{L^2(\mathbb{T}^n;Y)}^2 \lesssim |B|^{2(1/2-1/p)} \lesssim\sigma^{n(1-2/p)},
 	\end{equation*}
 	probando $(\mathbf{M_1})$. Además, se tiene que 
 	\begin{align*}
-		\int \|M(x)\|_Y^2|x-z|^\mu \diff x \leq &
+		\int \|M(x)\|_Y^2|x-z|^\mu \diff x  &\leq
 		\int_{B(z, 2\sigma^\alpha)} \|M(x)\|_Y^2|x-z|^\mu \diff x\\
-		& + \sum_{j=1}^{N_{\sigma^\alpha}} \int_{A_j(z, \sigma^\alpha)} \|M(x)\|_Y^2|x-z|^\mu \diff x \\
-		= & I_1 + I_2.
+		& \quad + \sum_{j=1}^{N_{\sigma^\alpha}} \int_{A_j(z, \sigma^\alpha)} \|M(x)\|_Y^2|x-z|^\mu \diff x \\
+		 &= I_1 + I_2.
 	\end{align*}
 	Por $(\mathbf{M_1})$, se obtiene que
 	\begin{equation*}
-		I_1 \leq C\int\|M(x)\|_Y^2 \sigma^{\alpha\mu} \diff x\leq  C \sigma^{\mu +n(1-2/p)}.
+		I_1 \lesssim\int\|M(x)\|_Y^2 \sigma^{\alpha\mu} \diff x\lesssim  \sigma^{\mu +n(1-2/p)}.
 	\end{equation*}
 	Además, asumiendo $x\in A_j(z, \sigma^\alpha)$, y por la propiedad de cancelación de $a$ se obtiene que
 	\begin{align*}
-		\|M(x)\|_Y^2 \leq & \left[ \int_{B(z, \sigma)} \|k(x, y) - k(x,z)\|_\mathcal{B} \|a(y)\|_X \diff y \right]^2 \\
-		\leq & C\frac{|y-z|^{2\omega}}{|x-z|^{2(n+\omega/\alpha)}} 
+		\|M(x)\|_Y^2  &\leq  \left[ \int_{B(z, \sigma)} \|k(x, y) - k(x,z)\|_\mathcal{B} \|a(y)\|_X \diff y \right]^2 \\
+		 & \lesssim \frac{|y-z|^{2\omega}}{|x-z|^{2(n+\omega/\alpha)}} 
 		\left[ \int_{B(z, \sigma)} \|a(y)\|_X \diff y \right]^2 \\
-		\leq & C \frac{\sigma^{2\omega} \cdot \sigma^{2n(1-1/p)}}{|x-z|^{2(n+\omega/\alpha)}}.
+		 & \lesssim \frac{\sigma^{2\omega} \cdot \sigma^{2n(1-1/p)}}{|x-z|^{2(n+\omega/\alpha)}}.
 	\end{align*}
 	Ahora, dado que $\mu < n + 2\omega/\alpha$ se tiene que
 	\begin{align*}
-		I_2 \leq & \sum_{j=1}^{N_{\sigma^\alpha}} \sigma^{2\omega + 2n(1-1/p)} \cdot (2^j\sigma^\alpha)^{\mu - 2\omega/\alpha - n} \\
-		\leq &  C \sigma^{\alpha\mu + 2n(1-1/p) - n\alpha} \\ 
-		\leq & C \sigma^{\mu + 2n(1-1/p)},
+		I_2  &\leq  \sum_{j=1}^{N_{\sigma^\alpha}} \sigma^{2\omega + 2n(1-1/p)} \cdot (2^j\sigma^\alpha)^{\mu - 2\omega/\alpha - n} \\
+		 &  \lesssim \sigma^{\alpha\mu + 2n(1-1/p) - n\alpha} \\ 
+		 & \lesssim \sigma^{\mu + 2n(1-1/p)},
 	\end{align*}
-	dado que $\mu > n$ y $\alpha \leq 1$, probando $(\mathbf{M_2})$. Ahora, se supone que $\sigma < 1$. Primero, por la acotación $L^q$-$L^2$ de $T$, se obtiene que 
+	dado que $\mu > n$ y $\alpha \leq 1$, probando $(\mathbf{M_2})$. Ahora, se supone que $\sigma < 1$. Primero, por la estimación $L^q$-$L^2$ de $T$, se obtiene que 
 	\begin{equation*}
-		\int\|M(x)\|_Y^2\diff x = \|Ta\|_{L^2(\mathbb{T}^n;Y)}^2 \leq C \|a\|_{L^q(\mathbb{T}^n;Y)}^2 \leq C |B|^{2(1/q-1/p)} \leq C\sigma^{2n(1/q-1/p)},
+		\int\|M(x)\|_Y^2\diff x = \|Ta\|_{L^2(\mathbb{T}^n;Y)}^2 \lesssim \|a\|_{L^q(\mathbb{T}^n;Y)}^2 \leq |B|^{2(1/q-1/p)} \lesssim \sigma^{2n(1/q-1/p)},
 	\end{equation*}
 	probando $(\mathbf{M_1'})$. Por otro lado, se tiene
 	\begin{align*}
@@ -4685,24 +4669,24 @@ En la hipótesis del siguiente lema se tiene la condición $T^*(\overline{e})$, 
 	\end{align*}
 	Como en el caso anterior, se puede usar $(\mathbf{M_1'})$ para estimar 
 	\begin{equation*}
-		I_1 \leq C \sigma^{\theta\mu + 2n(1/q - 1/p)}.
+		I_1 \lesssim \sigma^{\theta\mu + 2n(1/q - 1/p)}.
 	\end{equation*}
 	Además, cuando $x \in A_j(z, \sigma^\theta)$ se tiene una estimación similar a la anterior, a saber que
 	\begin{align*}
-		I_2 \leq & C \sum_{j=1}^{N_{\sigma^\theta}} \sigma^{2\omega + 2n(1 - 1/p) } (2^j\sigma^\theta)^{\mu - n - 2\omega/\alpha} \\
-		\leq & C \sigma^{ 2\omega + 2n(1-1/p) + \theta\mu -\theta(n + 2\omega/\alpha) } \\
-		= & C\sigma^{ \theta\mu + 2n(1/q - 1/p) },
+		I_2  & \lesssim \sum_{j=1}^{N_{\sigma^\theta}} \sigma^{2\omega + 2n(1 - 1/p) } (2^j\sigma^\theta)^{\mu - n - 2\omega/\alpha} \\
+		 &\lesssim \sigma^{ 2\omega + 2n(1-1/p) + \theta\mu -\theta(n + 2\omega/\alpha) } \\
+		 & =\sigma^{ \theta\mu + 2n(1/q - 1/p) },
 	\end{align*}
 	dado que 
 	\begin{equation*}
 		\theta = \frac{n(1-1/q)+\omega}{ n/2 + \omega/\alpha }.
 	\end{equation*}
-	Esto completa la demostración de $(\mathbf{M_2'})$. Solo queda probar que $\int M(x)\diff x=0$. Nótese que $|B|^{-1+1/p}a$  es un átomo $H^{1,2}(\mathbb{T}^n;X)$ y dado $e \in Y'$ se tiene que
+	Esto completa la demostración de $(\mathbf{M_2'})$. Solo queda probar que $\int M(x)\diff x=0$. Nótese que $|B|^{-1+1/p}a$  es un $(1, 2)$-átomo y dado $e \in Y'$ se tiene que
 	\begin{align*}
-		|B|^{-1+1/p}\left\langle e, \int M(x)\diff x \right\rangle =&  \int \left\langle \overline{e}(x) , T\left(  |B|^{-1+1/p}a\right)(x)\right\rangle \diff x \\
-		= & \int \left\langle T^*\overline{e}(x) ,   |B|^{-1+1/p}a(x)\right\rangle \diff x = 0.
+		|B|^{-1+1/p}\left\langle e, \int M(x)\diff x \right\rangle & = \int \left\langle \overline{e}(x) , T\left(  |B|^{-1+1/p}a\right)(x)\right\rangle \diff x \\
+		 &= \int \left\langle T^*\overline{e}(x) ,   |B|^{-1+1/p}a(x)\right\rangle \diff x = 0.
 	\end{align*}
-	Donde se ha usado el hecho de que $T^*$ es continuo en $L^2$ para emplear \cref{cor:L-inf-BMO} y concluir que $T^*$ mapea $L^\infty(\mathbb{T}^n, Y')$ en $\mathrm{BMO}(\mathbb{T}^n; X')$, que es el dual de $H^1(\mathbb{T}^n;X)$, dado que $X$ es reflexivo. Por lo tanto, se demostró que $M(x)$ es una molécula $(p, \theta,\mu)$.
+	Donde se ha usado el hecho de que $T^*$ es continuo en $L^2$ para emplear el Corolario \ref{cor:L-inf-BMO} y concluir que $T^*$ mapea $L^\infty(\mathbb{T}^n, Y')$ en $\mathrm{BMO}(\mathbb{T}^n; X')$, que es el dual de $H^1(\mathbb{T}^n;X)$, dado que $X$ es reflexivo. Por lo tanto, se demostró que $M(x)$ es una molécula $(p, \theta,\mu)$.
 \end{proof}
 Nótese que las constantes relacionadas de la molécula resultante solo dependen del operador $T$. Además, la norma $H^p$ de la molécula solo depende de dichas constantes. Por lo tanto, se procede a combinar los resultados anteriores de esta sección para obtener la acotación $H^p$ para operadores con núcleos de valor operador bajo ciertas condiciones. 
 \begin{theorem}
@@ -4719,7 +4703,7 @@ Nótese que las constantes relacionadas de la molécula resultante solo dependen
 \end{theorem}
 
 \begin{proof}
-	Nótese que por \cref{lem:Ta-is-molecule}, la imagen de todo átomo $H^{p,2}(\mathbb{T}^n;X)$ es una molécula $(p, \theta,\mu)$ con constantes $C$ que dependen solo de $T$, y por \cref{lem:M-in-Hp} se tiene que dichas moléculas tienen normas $H^p$ que dependen solo de dichas constantes. Por lo tanto se tiene una cota uniforme $\|Ta\|_{H^p(\mathbb{T}^n;Y)}\leq C$ para todo átomo $(p,2)$-$a$. Inspeccionando \cref{def:molecule} se puede ver que esto ocurre cuando 
+	Nótese que por el Lema \ref{lem:Ta-is-molecule}, la imagen de todo átomo $H^{p,2}(\mathbb{T}^n;X)$ es una molécula $(p, \theta,\mu)$ con constantes que dependen solo de $T$, y por el Lema \ref{lem:M-in-Hp} se tiene que dichas moléculas tienen normas $H^p$ que dependen solo de dichas constantes. Por lo tanto se tiene una cota uniforme $\|Ta\|_{H^p(\mathbb{T}^n;Y)}\leq C$ para todo átomo $(p,2)$-$a$. Inspeccionando la Definición \ref{def:molecule} se puede ver que esto ocurre cuando 
 	\begin{equation*}
 		2n/p -n < \frac{2\beta}{1-\theta}, \quad \text{ donde } \quad \theta = \frac{n/2+\omega-\beta}{n/2+\omega/\alpha}.
 	\end{equation*}
@@ -4737,6 +4721,6 @@ Ahora, se aplica este resultado en el contexto específico de operadores pseudo-
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	Se puede elegir $\gamma =\rho$ en \cref{theo:pdo-kernel} para obtener la condición $D_{1,\rho}$ para $T$ y $T^*$. Por lo tanto estos operadores satisfacen la condición $D_\rho$  con $\omega=1$ (ver \cref{rem:D-alpha-condition}). Además, $T$ es acotado en $L^2$ en vista del Teorema \ref{teo:cotas-Lp} y la acotación $L^q$-$L^2$ de $T$ se sigue de \cref{eq:q-2-boundedness} en la demostración \cref{theo:Hp-Lp}. Así se ha demostrado que $T$ satisface todas las condiciones para aplicar \cref{theo:Hp-operator}. La demostración del teorema está completa.
+	Se puede elegir $\gamma =\rho$ en el Teorema \ref{theo:pdo-kernel} para obtener la condición $D_{1,\rho}$ para $T$ y $T^*$. Por lo tanto estos operadores satisfacen la condición $D_\rho$  con $\omega=1$ (ver la Nota \ref{rem:D-alpha-condition}). Además, $T$ es acotado en $L^2$ en vista del Teorema \ref{teo:cotas-Lp} y la acotación $L^q$-$L^2$ de $T$ se sigue de( \ref{eq:q-2-boundedness}) en la demostración del Teorema \ref{theo:Hp-Lp}. Así se ha demostrado que $T$ satisface todas las condiciones para aplicar el Teorema \ref{theo:Hp-operator}. Lo que completa la demostración.
 \end{proof}
 
