@@ -234,7 +234,7 @@ de Lebesgue.
     se obtiene la condición indicada para los parametros $p, q, r$. Ahora, 
     se procede a demostrar el primer estimativo de
     (\ref{eq:young-convolution-estimates}). Este se obtiene como resultado de
-    la monotonia de la norma $L^p$, véase la Proposición \ref{prop:monotonia-Lp}.
+    la monotonia de la norma $L^p$, vea la Proposición \ref{prop:monotonia-Lp}.
     En efecto,
     \begin{align*}
         \|f*g\|_{L^p} & = \left\| \int_{\Omega} f(\cdot-y)g(y)\diff y 
@@ -2690,7 +2690,7 @@ A continuación se presentan las definiciones toroidales para símbolos de clase
 	\begin{equation*}
 		T_af(x) := \sum_{\xi\in\Z^n} e^{i2\pi x\cdot\xi} a(x, \xi)\widehat{f}(\xi).
 	\end{equation*}
-	Además, se dice que $T_a\in\Psi^m_{\rho, \delta}(\T^n\times\Z^n)$
+	Además, se dice que $T_a\in\Psi^m_{\rho, \delta}(\T^n\times\Z^n)$.
 \end{definition}
 \begin{proposition}
 	Sea $f\in C^\infty(\T^n)$, entonces $T_af$ está bien definido y $T_af\in C^\infty(\T^n)$. Además, $T_a$ es un operador continuo de $C^\infty(\T^n)$ en sí mismo.
@@ -3072,7 +3072,7 @@ El análogo toroidal de este resultado fue demostrado con Cardona en
 		\partial^\alpha_x \partial^\beta_y k(x, y) = \int_{\mathbb{R}^n} (-i2\pi\xi)^\beta e^{i2\pi(x-y)\cdot \xi} \sum_{\omega \leq \alpha} C_\omega (i2\pi\xi)^{\alpha - \omega} \partial^\omega_x \tilde{p}(x, \xi) \diff\xi,
 		\label{eq:derivada-nucleo}
 	\end{equation}
-	que es el núcleo de un operador con símbolo de orden $m + |\alpha + \beta|$. Entonces, es suficiente probar los resultados cuando $|\alpha + \beta| = 0$.
+	que es el kernel de un operador con símbolo de orden $m + |\alpha + \beta|$. Entonces, es suficiente probar los resultados cuando $|\alpha + \beta| = 0$.
 	\begin{itemize}
 		\item[(a)] La continuidad del kernel $k(x, y)$ se prueba en \cite[Teorema~4.3.6]{ruzhansky-turunen}. Por integración por partes se tiene que
 		\begin{align*}
@@ -3085,7 +3085,7 @@ El análogo toroidal de este resultado fue demostrado con Cardona en
 			|i2\pi|^N|x-y|^N| k(x, y)| \leq & \int_{\mathbb{R}^n} \langle\xi\rangle^{m-\rho N} \diff \xi.
 		\end{align*}
 		La última integral es finita cuando $N > (m + n)/\rho$, probando el resultado.\\
-		\item[(b)] Se observa que el núcleo sería una suma finita de funciones continuas, probando la continuidad de $k(x, y)$. Además, $\tilde{p}$ tendría el mismo soporte de $p$. Por lo tanto, la última integral anterior sería finita sin ninguna restricción sobre $N$.\\
+		\item[(b)] Se observa que el kernel sería una suma finita de funciones continuas, probando la continuidad de $k(x, y)$. Además, $\tilde{p}$ tendría el mismo soporte de $p$. Por lo tanto, la última integral anterior sería finita sin ninguna restricción sobre $N$.\\
 		\item[(c)] Sea $ m < -n$. Entonces, se tiene la serie finita
 		\begin{align*}
 			| k(x, y)| \lesssim &  \sum_{\xi \in \mathbb{Z}^n}\langle\xi\rangle^m,
@@ -3144,7 +3144,7 @@ Ahora, se enuncia un resultado de continuidad en $L^2(\T^n)$, cuya demostración
 	Por lo tanto, se prueba el resultado deseado.
 \end{proof}
 \begin{theorem}	\label{theo:kernel-estimate-sigma}
-	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, con símbolo $p:=p(x, \xi)$ y con núcleo $k:=k(x, y)$. 
+	Sea $T \in \Psi^m_{\rho, \delta}(\mathbb{T}^n \times \mathbb{Z}^n) $, con $0 < \rho \leq 1$, $0 \leq \delta < 1$, con símbolo $p:=p(x, \xi)$ y con kernel $k:=k(x, y)$. 
 	\begin{itemize}
 		\item[(a)] Para cualquier $z \in \mathbb{T}^n$ fijo, y $\sigma \geq \varepsilon > 0$, se tienen las desigualdades para el kernel:
 		\begin{equation}
@@ -3441,7 +3441,7 @@ Además, se tiene que estos operadores pseudo-diferenciales toroidales son de ti
 		\frac{1}{q} = \frac{1}{2} + \frac{\beta}{n} ; \quad (1-\alpha)\frac{n}{2} \leq \beta < \frac{n}{2}.
 		\label{eq:alpha_condition}
 	\end{equation}
-	También se asume que su núcleo $k(x, y)$ satisface la siguiente condición cuando $|y-z|<\sigma$
+	También se asume que su kernel $k(x, y)$ satisface la siguiente condición cuando $|y-z|<\sigma$
 	\begin{equation}
 		\int_{|x-z|>c\sigma^\alpha}\|k(x, y)-k(x,z)\|_{\mathcal{B}(X, Y)}\diff x\leq C, \quad 0<\sigma < 1,
 		\label{eq:hyp-sigma<1}
@@ -3642,7 +3642,7 @@ donde $T_{\sigma_k}$ son los operadores pseudo-diferenciales toroidales asociado
 \end{equation}
 Además, sea $\tilde{\sigma}_k$ la extensión del símbolo $\sigma_k$ definida en $\mathbb{T}^n \times \mathbb{R}^n$. Primero, se demuestran las siguientes estimaciones del kernel.
 \begin{lemma}
-	Sea $0 < \rho \leq 1$ y $m\in \mathbb{R}$. Supóngase que $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ y sea $K_k$ definido como en (\ref{eq:kernel-Kk}). Para $N\geq 0$ arbitrario, y $1\leq r\leq 2$, se tiene que 
+	Sea $0 < \rho \leq 1$ y $m\in \mathbb{R}$. Suponga que $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ y sea $K_k$ definido como en (\ref{eq:kernel-Kk}). Para $N\geq 0$ arbitrario, y $1\leq r\leq 2$, se tiene que 
 	\begin{equation*}
 		\left\| (1+2^{k\rho}|u|)^N K_k(y, u)
 		\right\|_{L^{r'}} \lesssim_N 2^{k(m+n/r)},
@@ -3708,7 +3708,6 @@ Para manejar el caso $\rho > r/2$ que no se considera en el lema anterior, se de
 	para $f\in C^\infty(\mathbb{T}^n)$.
 	\label{lem:Lr-lambda-boundedness}
 \end{lemma}
-
 \begin{proof}
 	Se usa la estrategia de Park y Tomita \cite{park-tomita}. Se define    
 	\begin{equation*}
@@ -3745,7 +3744,6 @@ Para manejar el caso $\rho > r/2$ que no se considera en el lema anterior, se de
 	\end{align*}
 	Así, completando la demostración.
 \end{proof}
-
 Ahora, sea $P$ una dilatación concéntrica de $Q$ con $\ell(P)\geq 10\sqrt{n}\ell(Q)$ y sea $\chi_P$ su función característica. Ahora, se considera 
 \begin{equation}
 	f = f_{\chi_P} + f_{\chi_{\mathbb{T}^n\setminus P}} =: f_0 + f_1,
@@ -3755,7 +3753,6 @@ de modo que
 \begin{equation*}
 	T_{\sigma_k}f = T_{\sigma_k}f_0 + T_{\sigma_k}f_1.
 \end{equation*}
-
 \begin{proposition}
 	Sea $0<\rho<1$, sea $1<r\leq2$, y sea $m=-n(1-\rho)/r$. Suponga que $x\in Q$.
 	
@@ -3775,10 +3772,6 @@ de modo que
 			\label{eq:f0-estimate-rho-greater}
 		\end{equation}
 	\end{enumerate}
-	
-	
-	
-	
 \end{proposition}
 \begin{proof}
 	Primero, se considera el caso $0<\rho<r/2$. Por la desigualdad de H\"older y el Lema \ref{lem:Lr-Lr/rho-boundedness} se tiene que 
@@ -3805,7 +3798,7 @@ de modo que
 \end{proof}
 Ahora se demuestran estimaciones para la segunda parte de la descomposición como en (\ref{eq:decomposition}).
 \begin{proposition}
-	Sea $0\leq \rho<1$, sea $1\leq r\leq2$, sea $m=-n(1-\rho)/r$, y $k\in\mathbb{N}_0$. Supóngase que $x, y \in Q$. Entonces todo $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ satisface
+	Sea $0\leq \rho<1$, sea $1\leq r\leq2$, sea $m=-n(1-\rho)/r$, y $k\in\mathbb{N}_0$. Suponga que $x, y \in Q$. Entonces todo $\sigma \in S^m_{\rho,\rho}(\mathbb{T}^n \times \mathbb{Z}^n) $ satisface
 	\begin{equation}
 		|T_{\sigma_k}f_1(y)| \lesssim_N [2^{k\rho}\ell(P)]^{-(N-n/r)} \mathrm{M}_rf(x),
 		\label{eq:f1-estimate}
@@ -3851,7 +3844,7 @@ Así, se combinan ambas estimaciones para obtener (\ref{eq:f1-estimate}). Ahora,
 \begin{equation*}
 	H_k(y, x, u) := K_k(y, y-u) - K_k(x, x-u).
 \end{equation*}
-Asúmase $x, y \in Q$ y $N>n/r$. Usando la desigualdad de H\"older, se tiene que
+Asuma $x, y \in Q$ y $N>n/r$. Usando la desigualdad de H\"older, se tiene que
 \begin{equation*}
 	|T_{\sigma_k}f_1(y) - T_{\sigma_k}f_1(x)| \leq \int_{\mathbb{T}^n\setminus P} |H_k(y, x, u)||f(y)|\diff u
 \end{equation*}
@@ -3970,7 +3963,7 @@ De nuevo, se elige $N < n/r + 1/\rho$, para obtener una cota uniforme y completa
 \begin{equation*}
 	\lambda \left( \frac{1-\rho}{1-\lambda} \right) < \varepsilon < \rho,
 \end{equation*}
-que se sabe existe ya que $\lambda < \rho$. Ahora, se define $P_{\varepsilon, k}$ como la dilatación concéntrica de $Q$  con $\ell(P_{\varepsilon, k}) = 10 \sqrt{n}\ell(Q)^\rho [2^k\ell(Q)]^{-\varepsilon} $. Nótese que 
+que se sabe existe ya que $\lambda < \rho$. Ahora, se define $P_{\varepsilon, k}$ como la dilatación concéntrica de $Q$  con $\ell(P_{\varepsilon, k}) = 10 \sqrt{n}\ell(Q)^\rho [2^k\ell(Q)]^{-\varepsilon} $. Note que 
 \begin{equation*}
 	10\sqrt{n} \ell(Q) \leq \ell(P_{\varepsilon, k}),
 \end{equation*}
@@ -4137,16 +4130,16 @@ Aquí se presentan los resultados de continuidad de operadores pseudo-differenci
 	A_j(z, \sigma) = \{ x \in \mathbb{T}^n : 2^j\sigma < |x-z|<2^{j+1}\sigma \} \; , \quad j=1, 2, 3, ...
 \end{equation}
 \begin{remark}
-	Nótese que $\mathbb{T}^n$ está contenido en cualquier bola con radio mayor que $\sqrt{n}/2$. Por lo tanto, para cualquier $\sigma>0$ dado, existe $N_\sigma\in \mathbb{Z}^+$ tal que 
+	Note que $\mathbb{T}^n$ está contenido en cualquier bola con radio mayor que $\sqrt{n}/2$. Por lo tanto, para cualquier $\sigma>0$ dado, existe $N_\sigma\in \mathbb{Z}^+$ tal que 
 	\begin{equation}
 		\frac{\sqrt{n}}{2\sigma} < 2^{N_\sigma} \leq \frac{\sqrt{n}}{\sigma}.
 	\end{equation}
-	Así, esta descomposición "diádica" es finita en el caso del toro y $2^{N_\sigma} \sim \sigma^{-1}$.
+	Así, esta descomposición 'diádica' es finita en el caso del toro y $2^{N_\sigma} \sim \sigma^{-1}$.
 	\label{rem:N-sigma}
 \end{remark}
 \subsection{Continuidad de operadores pseudo-diferenciales de $H^p$ en $L^p$}
 \label{section:Hp-Lp}
-Primero, se considera el caso general para operadores con núcleo de valor operador. 
+Primero, se considera el caso general para operadores con kernel valuado en operadores. 
 \begin{theorem}
 	\label{theo:operator-kernel-2j}
 	Sea $T$ un operador con kernel de valuado en operadores $k:=k(x,y)$ que satisface para algún $0<\omega\leq1$ las estimaciones
@@ -4181,7 +4174,7 @@ Primero, se considera el caso general para operadores con núcleo de valor opera
 		 &\lesssim \|a\|_{L^2(\mathbb{T}^n;Y)}^p |B|^{(2-p)/2} \\
 		 & \lesssim |B|^{(p-2)/2} |B|^{(2-p)/2}\leq C.
 	\end{align*}
-	Para $I_2$, se usa la desigualdad de H\"older con exponente $1/p$ y las estimaciones del núcleo de la hipótesis para obtener
+	Para $I_2$, se usa la desigualdad de H\"older con exponente $1/p$ y las estimaciones del kernel de la hipótesis para obtener
 	\begin{align*}
 		I_2  &\leq \sum_{j=1}^{N_\sigma}\int_{A_j(z,\sigma)}\left( \int_{B(z,\sigma)} \|k(x, y) - k(x, z)\|_\mathcal{B} |B|^{-1/p} 
 		\diff y\right)^p \diff x \\
@@ -4237,9 +4230,9 @@ Primero, se considera el caso general para operadores con núcleo de valor opera
 	que es una función creciente de $p$ que alcanza $\gamma \leq \alpha$ cuando $p=1$. Por lo tanto, el $p_0$ crítico ocurre cuando se igualan los lados derechos de (\ref{eq:gamma-lowe-bound}) y (\ref{eq:gamma-upper-bound}), completando la demostración.
 \end{proof} 
 
-Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenciales toroidales satisfacen las estimaciones del núcleo necesarias para usar el teorema anterior. 
+Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenciales toroidales satisfacen las estimaciones del kernel necesarias para usar el teorema anterior. 
 \begin{theorem}
-	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$ con núcleo $k:=k(x, y)$. Entonces, 
+	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$ con kernel $k:=k(x, y)$. Entonces, 
 	\begin{itemize}
 		\item[a)] Si $\sigma \geq \varepsilon>0$, y $j=1,2,3,...$,
 		\begin{equation}
@@ -4254,7 +4247,7 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 			\sup_{|y-z|<\sigma}\int_{A_j(z, \sigma^\gamma)} |k(x, y) - k(x, z)|\diff x \leq C2^{-j/\rho}\sigma^{1-\gamma/\rho}.
 		\end{equation}
 		
-		\item[c)] Si $m\leq -n(1-\rho)/2 $, $0<\gamma\leq1$, $\sigma<1$, and $j=1,2,3,...$, 
+		\item[c)] Si $m\leq -n(1-\rho)/2 $, $0<\gamma\leq1$, $\sigma<1$, y $j=1,2,3,...$, 
 		\begin{equation}
 			\sup_{|y-z|<\sigma}\int_{A_j(z, \sigma^\gamma)} |k(y, x) - k(z, x)|\diff x \leq C2^{-j/\rho}\sigma^{1-\gamma/\rho}.
 			\label{eq:kernel-estimate-c}
@@ -4305,7 +4298,7 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 		\begin{equation*}
 			F(r) = \left[ \int_r^{2r} (1+s^2)^{-N} s^{n-1} \diff s  \right]^{1/2}, \quad 0<r<\infty. 
 		\end{equation*}
-		Nótese que $F$ es una función suave, tal que $F(r) \sim r^{n/2}$ cuando $r\rightarrow 0$ y $F(r)\sim r^{n/2-N}$ cuando $r \rightarrow \infty$. Por lo tanto, se obtiene que
+		Note que $F$ es una función suave, tal que $F(r) \sim r^{n/2}$ cuando $r\rightarrow 0$ y $F(r)\sim r^{n/2-N}$ cuando $r \rightarrow \infty$. Por lo tanto, se obtiene que
 		\begin{equation*}
 			\left[ \int_{A_j(z, \sigma^\gamma)} \left(1 + t^{2\rho} |x-z|^2\right)^{-N}  \right]^{1/2}
 		\end{equation*}
@@ -4350,7 +4343,7 @@ Ahora, se demuestra que bajo ciertas condiciones, los operadores pseudo-diferenc
 \end{proof}
 Se procede a usar estas estimaciones y Teorema \ref{theo:operator-kernel-2j} para obtener la acotación $H^p$-$L^p$ para operadores pseudo-diferenciales toroidales. 
 \begin{theorem}
-	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$. Supóngase que 
+	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$. Suponga que 
 	\begin{equation*}
 		m\leq-\beta-n\lambda \quad  \text{para algún} \quad (1-\rho)\frac{n}{2}\leq\beta< \frac{n}{2}.
 	\end{equation*}
@@ -4362,7 +4355,7 @@ Se procede a usar estas estimaciones y Teorema \ref{theo:operator-kernel-2j} par
 	\label{theo:Hp-Lp}
 \end{theorem}
 \begin{proof}
-	Nótese que por Teorema \ref{theo:pdo-kernel}, el operador $T$ satisface las estimaciones del núcleo con $\alpha=\rho$ y $\omega=1$. La acotación $L^2$ se demostró en el Teorema \ref{theo:22boundT}, dado que $m\leq -n\lambda$. Así, el único requisito del Teorema \ref{theo:operator-kernel-2j} que se necesita probar es la acotación $L^q$-$L^2$. Nótese que $J^{-\beta}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ por la desigualdad de Hardy-Littlewood-Sobolev. Por lo tanto, dado que $J^\beta T$ tiene orden $m+\beta \leq -n\lambda$, se obtiene que 
+	Note que por Teorema \ref{theo:pdo-kernel}, el operador $T$ satisface las estimaciones del kernel con $\alpha=\rho$ y $\omega=1$. La acotación $L^2$ se demostró en el Teorema \ref{theo:22boundT}, dado que $m\leq -n\lambda$. Así, el único requisito del Teorema \ref{theo:operator-kernel-2j} que se necesita probar es la acotación $L^q$-$L^2$. Note que $J^{-\beta}$ es acotado de $L^q(\mathbb{T}^n)$ en $L^2(\mathbb{T}^n)$ por la desigualdad de Hardy-Littlewood-Sobolev. Por lo tanto, dado que $J^\beta T$ tiene orden $m+\beta \leq -n\lambda$, se obtiene que 
 	\begin{equation}
 		\|Tf\|_{L^q} =    \|J^{-\beta}(J^\beta T)f\|_{L^q} \lesssim \|(J^\beta T)f\|_{L^2} \lesssim \|f\|_{L^2}.
 		\label{eq:q-2-boundedness}
@@ -4370,7 +4363,7 @@ Se procede a usar estas estimaciones y Teorema \ref{theo:operator-kernel-2j} par
 	Así, completando los requisitos para obtener el resultado deseado del Teorema \ref{theo:operator-kernel-2j}.
 \end{proof}
 \begin{remark}
-	Nótese que para $p=1$ y $\beta=n(1-\rho)/2$ se obtiene la continuidad $H^1$-$L^1$ demostrada en el Teorema \ref{theo:L1-H1-L-infty-BMO}.
+	Note que para $p=1$ y $\beta=n(1-\rho)/2$ se obtiene la continuidad $H^1$-$L^1$ demostrada en el Teorema \ref{theo:L1-H1-L-infty-BMO}.
 	\end{remark}
 \subsection{Continuidad de operadores pseudo-diferenciales en $H^p$}
 Ahora, se introduce un objeto con propiedades similares a los átomos en $H^p$.
@@ -4446,7 +4439,7 @@ Ahora, se demuestra que la norma $H^p$ de una molécula solo depende de las cons
 \end{lemma}
 
 \begin{proof}
-	Sea $B_j = B(z, 2^{j+1}\sigma)$ y sea $M_j$ el valor promedio de $M(x)$ en $A_j(z, \sigma)$. Nótese que $A_j = B_j \setminus B_{j-1}$. Se define 
+	Sea $B_j = B(z, 2^{j+1}\sigma)$ y sea $M_j$ el valor promedio de $M(x)$ en $A_j(z, \sigma)$. Note que $A_j = B_j \setminus B_{j-1}$. Se define 
 	\begin{equation*}
 		\psi_j(x) = [M(x)-M_j]\chi_{A_j}(x),
 	\end{equation*}
@@ -4619,11 +4612,11 @@ Además, cuando el operador satisface la condición $D_{1,\alpha}$ se obtiene el
 \end{proof}
 En la hipótesis del siguiente lema se tiene la condición $T^*(\overline{e})$, una contraparte vectorial de la condición $T(1)$ famosamente establecida por David y Journ\'e, ver \cite{david-journe}.
 \begin{lemma}
-	Sean $X, Y$ espacios de Banach reflexivos, sean $T$ y  $T^*$ operadores con núcleos que satisfacen la condición $D_\alpha$. También, supóngase que pueden extenderse a operadores acotados de $L^2(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ y de $L^q(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ de modo que 
+	Sean $X, Y$ espacios de Banach reflexivos, sean $T$ y  $T^*$ operadores con kernels que satisfacen la condición $D_\alpha$. También, suponga que pueden extenderse a operadores acotados de $L^2(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ y de $L^q(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ de modo que 
 	\begin{equation}
 		\frac{1}{q} = \frac{1}{2} + \frac{\beta}{n} \quad \text{ para algún } \quad (1-\alpha)\frac{n}{2}\leq \beta<\frac{n}{2}.
 	\end{equation}
-	Además, supóngase que $T^*(\overline{e})=0$ para todo ${e}\in Y'$ y $\overline{e}:\mathbb{T}^n\rightarrow Y'$ dado por $\overline{e}(x)=e$. Sea $a:=a(x)$ un$(p,2)$-átomo  soportado en $B(z,\sigma)$. Entonces, $M(x):=Ta(x)$ es una molécula $(p, \theta, \mu)$ con constantes que dependen solo de $T$ y sus propiedades de continuidad.
+	Además, suponga que $T^*(\overline{e})=0$ para todo ${e}\in Y'$ y $\overline{e}:\mathbb{T}^n\rightarrow Y'$ dado por $\overline{e}(x)=e$. Sea $a:=a(x)$ un$(p,2)$-átomo  soportado en $B(z,\sigma)$. Entonces, $M(x):=Ta(x)$ es una molécula $(p, \theta, \mu)$ con constantes que dependen solo de $T$ y sus propiedades de continuidad.
 	\label{lem:Ta-is-molecule}
 \end{lemma}
 
@@ -4681,20 +4674,20 @@ En la hipótesis del siguiente lema se tiene la condición $T^*(\overline{e})$, 
 	\begin{equation*}
 		\theta = \frac{n(1-1/q)+\omega}{ n/2 + \omega/\alpha }.
 	\end{equation*}
-	Esto completa la demostración de $(\mathbf{M_2'})$. Solo queda probar que $\int M(x)\diff x=0$. Nótese que $|B|^{-1+1/p}a$  es un $(1, 2)$-átomo y dado $e \in Y'$ se tiene que
+	Esto completa la demostración de $(\mathbf{M_2'})$. Solo queda probar que $\int M(x)\diff x=0$. Note que $|B|^{-1+1/p}a$  es un $(1, 2)$-átomo y dado $e \in Y'$ se tiene que
 	\begin{align*}
 		|B|^{-1+1/p}\left\langle e, \int M(x)\diff x \right\rangle & = \int \left\langle \overline{e}(x) , T\left(  |B|^{-1+1/p}a\right)(x)\right\rangle \diff x \\
 		 &= \int \left\langle T^*\overline{e}(x) ,   |B|^{-1+1/p}a(x)\right\rangle \diff x = 0.
 	\end{align*}
 	Donde se ha usado el hecho de que $T^*$ es continuo en $L^2$ para emplear el Corolario \ref{cor:L-inf-BMO} y concluir que $T^*$ mapea $L^\infty(\mathbb{T}^n, Y')$ en $\mathrm{BMO}(\mathbb{T}^n; X')$, que es el dual de $H^1(\mathbb{T}^n;X)$, dado que $X$ es reflexivo. Por lo tanto, se demostró que $M(x)$ es una molécula $(p, \theta,\mu)$.
 \end{proof}
-Nótese que las constantes relacionadas de la molécula resultante solo dependen del operador $T$. Además, la norma $H^p$ de la molécula solo depende de dichas constantes. Por lo tanto, se procede a combinar los resultados anteriores de esta sección para obtener la acotación $H^p$ para operadores con núcleos de valor operador bajo ciertas condiciones. 
+Note que las constantes relacionadas de la molécula resultante solo dependen del operador $T$. Además, la norma $H^p$ de la molécula solo depende de dichas constantes. Por lo tanto, se procede a combinar los resultados anteriores de esta sección para obtener la acotación $H^p$ para operadores con kernels valuados en operadores bajo ciertas condiciones. 
 \begin{theorem}
-	Sean $X, Y$ espacios de Banach reflexivos, sean $T$ y  $T^*$ operadores que satisfacen la condición $D_\alpha$. También, supóngase que pueden extenderse a operadores acotados de $L^2(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ y de $L^q(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ de modo que 
+	Sean $X, Y$ espacios de Banach reflexivos, sean $T$ y  $T^*$ operadores que satisfacen la condición $D_\alpha$. También, suponga que pueden extenderse a operadores acotados de $L^2(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ y de $L^q(\mathbb{T}^n;X)$ en $L^2(\mathbb{T}^n;Y)$ de modo que 
 	\begin{equation}
 		\frac{1}{q} = \frac{1}{2} + \frac{\beta}{n} \quad \text{ para algún } \quad (1-\alpha)\frac{n}{2}\leq \beta<\frac{n}{2}.
 	\end{equation}
-	Además, supóngase que $T^*(\overline{e})=0$ para todo ${e}\in Y'$ y $\overline{e}:\mathbb{T}^n\rightarrow Y'$ dado por $\overline{e}(x)=e$. Sea 
+	Además, suponga que $T^*(\overline{e})=0$ para todo ${e}\in Y'$ y $\overline{e}:\mathbb{T}^n\rightarrow Y'$ dado por $\overline{e}(x)=e$. Sea 
 	\begin{equation}
 		\frac{1}{p_0}=\frac{1}{2} + \frac{\beta(\omega/\alpha+n/2)}{n(\omega/\alpha - \omega +\beta)},
 	\end{equation}
@@ -4703,7 +4696,7 @@ Nótese que las constantes relacionadas de la molécula resultante solo dependen
 \end{theorem}
 
 \begin{proof}
-	Nótese que por el Lema \ref{lem:Ta-is-molecule}, la imagen de todo átomo $H^{p,2}(\mathbb{T}^n;X)$ es una molécula $(p, \theta,\mu)$ con constantes que dependen solo de $T$, y por el Lema \ref{lem:M-in-Hp} se tiene que dichas moléculas tienen normas $H^p$ que dependen solo de dichas constantes. Por lo tanto se tiene una cota uniforme $\|Ta\|_{H^p(\mathbb{T}^n;Y)}\leq C$ para todo átomo $(p,2)$-$a$. Inspeccionando la Definición \ref{def:molecule} se puede ver que esto ocurre cuando 
+	Note que por el Lema \ref{lem:Ta-is-molecule}, la imagen de todo átomo $H^{p,2}(\mathbb{T}^n;X)$ es una molécula $(p, \theta,\mu)$ con constantes que dependen solo de $T$, y por el Lema \ref{lem:M-in-Hp} se tiene que dichas moléculas tienen normas $H^p$ que dependen solo de dichas constantes. Por lo tanto se tiene una cota uniforme $\|Ta\|_{H^p(\mathbb{T}^n;Y)}\leq C$ para todo átomo $(p,2)$-$a$. Inspeccionando la Definición \ref{def:molecule} se puede ver que esto ocurre cuando 
 	\begin{equation*}
 		2n/p -n < \frac{2\beta}{1-\theta}, \quad \text{ donde } \quad \theta = \frac{n/2+\omega-\beta}{n/2+\omega/\alpha}.
 	\end{equation*}
@@ -4711,11 +4704,11 @@ Nótese que las constantes relacionadas de la molécula resultante solo dependen
 \end{proof}
 Ahora, se aplica este resultado en el contexto específico de operadores pseudo-diferenciales toroidales.
 \begin{theorem}
-	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$. Supóngase que
+	Sea $T\in \Psi^m_{\rho,\delta}(\mathbb{T}^n\times\mathbb{Z}^n)$, $0<\rho\leq1$, $0\leq\delta<1$. suponga que
 	\begin{equation}
 		m\leq-\beta-n\lambda \quad  \text{para algún} \quad (1-\rho)\frac{n}{2}\leq\beta\leq \frac{n}{2}, 
 	\end{equation}
-	y que $T^*(1)=0$ en el sentido de BMO. Entonces el operador $T$ es una aplicación continua de $H^p(\mathbb{T}^n)$ en sí mismo para $p_0<p\leq1$ donde 
+	y que $T^*(1)=0$ en el sentido de $\mathrm{BMO}$. Entonces el operador $T$ es una aplicación continua de $H^p(\mathbb{T}^n)$ en sí mismo para $p_0<p\leq1$ donde 
 	\begin{equation}
 		\frac{1}{p_0} = \frac{1}{2}+\frac{\beta(1/\rho + n/2)}{n(1/\rho-1+\beta)}.
 	\end{equation}
